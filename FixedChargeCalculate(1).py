@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#이 코드는 고정된 전하 하나만을 다뤄 V^2를 나타낸다
 class EC:
     def __init__(self, x, y, z, q):
         self.x = x

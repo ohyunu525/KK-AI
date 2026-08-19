@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#이 코드는 여러 전하를 입력받고 그에 대한 V^2를 나타낸다
 class EC:
     def __init__(self, x, y, z, q):
         self.x = x
