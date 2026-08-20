@@ -81,18 +81,19 @@ for sample in range(NUM_SAMPLES):
 
     G05_samples = []
 
-    ix = np.random.randint(gridN)
-    iy = np.random.randint(gridN)
+    for j in range(G05_POINTS):
+        ix = np.random.randint(gridN)
+        iy = np.random.randint(gridN)
 
-    gx = x[ix]
-    gy = y[iy]
+        gx = x[ix]
+        gy = y[iy]
 
-    V_sample = sum(
-        potential(gx, gy, 0, Charges[i], 1)
-        for i in range(N)
-    )
+        V_sample = sum(
+            potential(gx, gy, 0, Charges[i], 1)
+            for i in range(N)
+        )
 
-    G05_samples.append([ix, iy, V_sample])
+        G05_samples.append([ix, iy, V_sample])
 
 
     # -----------------------------
@@ -165,6 +166,9 @@ print("데이터셋 저장 완료")
 
 idx = 0
 
+ix = int(dataset_G05[idx, 0, 0])
+iy = int(dataset_G05[idx, 0, 1])
+
 print("G05:", dataset_G05[idx])
 print("Target:", dataset_target[idx])
 
@@ -175,10 +179,12 @@ plt.imshow(
 )
 
 plt.scatter(
-    dataset_G05[idx, 0, 0],
-    dataset_G05[idx, 0, 1],
+    x[ix],
+    y[iy],
     marker="x"
 )
 
 plt.colorbar(label="G00")
+plt.xlabel("x")
+plt.ylabel("y")
 plt.show()
