@@ -8,7 +8,7 @@ import numpy as np
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 MODELS_DIR = PROJECT_DIR / "Models"
-DEFAULT_OUTPUT_PATH = MODELS_DIR / "charge_dataset.npz"
+DEFAULT_OUTPUT_PATH = MODELS_DIR / "charge_dataset_multipoint_v2.npz"
 
 EPSILON_0 = 1.0
 GRID_SIZE = 32
