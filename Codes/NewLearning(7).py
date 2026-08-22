@@ -50,9 +50,9 @@ def create_spatially_balanced_sensor_order(
 ) -> np.ndarray:
     """Create a deterministic nested maximin ordering of grid cells.
 
-    Each prefix is a spatially dispersed sensor set. This makes the lower G05
-    fractions strict subsets of the higher fractions without changing which
-    samples receive measurements.
+    Each prefix is a spatially dispersed sensor set. This makes lower sensor
+    point counts strict prefixes of higher sensor point counts without changing
+    which samples receive measurements.
     """
     cell_count = grid_size * grid_size
     if not 1 <= point_count <= cell_count:
@@ -92,12 +92,18 @@ def generate_dataset(
     g05_point_count: int = DEFAULT_G05_POINT_COUNT,
     seed: int = DEFAULT_DATASET_SEED,
 ) -> dict[str, np.ndarray]:
-    """Generate G00, multi-point G05, and explicitly documented targets."""
+    """Generate G00 = V**2, signed-V G05 sensor points, and ordered targets.
+
+    G05 stores fixed, spatially balanced nested sensor prefixes. Its point count
+    may be any value from 1 through the number of grid cells.
+    """
     if sample_count < 1:
         raise ValueError("sample_count must be positive")
-    if g05_point_count < 10:
+    cell_count = GRID_SIZE * GRID_SIZE
+    if not 1 <= g05_point_count <= cell_count:
         raise ValueError(
-            "g05_point_count must be at least 10 so a 10% condition is meaningful"
+            f"g05_point_count must be in [1, {cell_count}], "
+            f"received {g05_point_count}"
         )
 
     rng = np.random.default_rng(seed)
@@ -137,7 +143,8 @@ def generate_dataset(
             * rng.uniform(0.3, 1.0, CHARGE_COUNT)
         )
 
-        # The target label is deterministic under charge permutation.
+        # Charges are deterministically ordered by x, then y, then z so that
+        # the target representation is consistent across samples.
         order = np.lexsort(
             (
                 charge_position[:, 2],
