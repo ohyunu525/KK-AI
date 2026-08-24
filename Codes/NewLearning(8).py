@@ -38,7 +38,6 @@ EXPERIMENT_SEEDS = (41, 42, 43)
 G05_FRACTIONS = (0.00, 0.10, 0.25, 0.50, 0.75, 1.00)
 BATCH_SIZE = 128
 MAX_EPOCHS = 300
-PATIENCE = 8
 LEARNING_RATE = 1e-3
 WEIGHT_DECAY = 1e-4
 POSITION_LOSS_WEIGHT = 1.0
@@ -749,7 +748,6 @@ def train_model(
     g05_count: int,
     seed: int,
     max_epochs: int,
-    patience: int,
     metadata: dict[str, object],
 ) -> TrainingResult:
     set_reproducibility(seed)
@@ -787,8 +785,6 @@ def train_model(
     best_magnitude_epoch = 0
     best_global_sign_loss = float("inf") if g05_count > 0 else None
     best_global_sign_epoch: int | None = None
-    epochs_since_structure_improvement = 0
-    epochs_since_sign_improvement = 0
 
     print("\n" + "=" * 88)
     print(
@@ -832,7 +828,6 @@ def train_model(
         if structure_improved:
             best_structure_loss = validation_loss.structure
             best_structure_epoch = epoch
-            epochs_since_structure_improvement = 0
             save_component_checkpoint(
                 structure_path,
                 model,
@@ -843,8 +838,6 @@ def train_model(
                 validation_loss.structure,
                 run_metadata,
             )
-        else:
-            epochs_since_structure_improvement += 1
 
         if validation_loss.position < best_position_loss:
             best_position_loss = validation_loss.position
@@ -878,7 +871,6 @@ def train_model(
             if sign_improved:
                 best_global_sign_loss = validation_loss.global_sign
                 best_global_sign_epoch = epoch
-                epochs_since_sign_improvement = 0
                 assert global_sign_path is not None
                 save_component_checkpoint(
                     global_sign_path,
@@ -890,21 +882,13 @@ def train_model(
                     validation_loss.global_sign,
                     run_metadata,
                 )
-            else:
-                epochs_since_sign_improvement += 1
 
-        structure_stopped = epochs_since_structure_improvement >= patience
-        sign_stopped = (
-            validation_loss.global_sign is None
-            or epochs_since_sign_improvement >= patience
-        )
-        if structure_stopped and sign_stopped:
-            print(
-                f"Early stopping at epoch {epoch}; best structure epoch="
-                f"{best_structure_epoch}, best global-sign epoch="
-                f"{best_global_sign_epoch if best_global_sign_epoch is not None else 'N/A'}"
-            )
-            break
+    print(f"Training completed at max epoch={max_epochs}")
+    print(f"Best structure epoch={best_structure_epoch}")
+    print(
+        "Best global-sign epoch="
+        f"{best_global_sign_epoch if best_global_sign_epoch is not None else 'N/A'}"
+    )
 
     # Different-epoch composition is safe here: the sign component uses only
     # G05 and shares neither parameters nor input features with the G00 component.
@@ -1516,7 +1500,6 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--data", type=Path, default=DEFAULT_DATA_PATH)
     parser.add_argument("--epochs", type=int, default=MAX_EPOCHS)
-    parser.add_argument("--patience", type=int, default=PATIENCE)
     parser.add_argument(
         "--seeds",
         type=lambda value: parse_number_list(value, int),
@@ -1548,8 +1531,8 @@ def main() -> None:
         raise ValueError("At least one seed and fraction are required")
     if tuple(sorted(g05_fractions)) != g05_fractions:
         raise ValueError("Fractions must be sorted")
-    if args.epochs < 1 or args.patience < 1:
-        raise ValueError("epochs and patience must be positive")
+    if args.epochs < 1:
+        raise ValueError("epochs must be positive")
 
     MODELS_DIR.mkdir(parents=True, exist_ok=True)
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -1606,7 +1589,6 @@ def main() -> None:
                 g05_count,
                 seed,
                 args.epochs,
-                args.patience,
                 metadata,
             )
             evaluation = evaluate_model(training.model, test_dataset, stats)
