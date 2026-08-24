@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import csv
+import time
+import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -700,6 +702,27 @@ def full_state_dict(model: ChargeNet) -> dict[str, torch.Tensor]:
     }
 
 
+def save_checkpoint_atomically(
+    checkpoint: dict[str, object],
+    path: Path,
+) -> None:
+    """Write a checkpoint without truncating the previous valid checkpoint."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
+    try:
+        torch.save(checkpoint, temporary_path)
+        for attempt in range(5):
+            try:
+                temporary_path.replace(path)
+                return
+            except PermissionError:
+                if attempt == 4:
+                    raise
+                time.sleep(0.1 * (2**attempt))
+    finally:
+        temporary_path.unlink(missing_ok=True)
+
+
 def save_component_checkpoint(
     path: Path,
     model: ChargeNet,
@@ -710,7 +733,7 @@ def save_component_checkpoint(
     validation_loss: float,
     run_metadata: dict[str, object],
 ) -> None:
-    torch.save(
+    save_checkpoint_atomically(
         {
             "component_state_dict": component_state_dict(model, prefixes),
             "component": component,
@@ -895,7 +918,7 @@ def train_model(
     load_component(model, structure_path)
     if global_sign_path is not None:
         load_component(model, global_sign_path)
-    torch.save(
+    save_checkpoint_atomically(
         {
             "model_state_dict": full_state_dict(model),
             "component_sources": {
@@ -1354,7 +1377,7 @@ def save_canonical_checkpoint(
     metadata: dict[str, object],
 ) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    torch.save(
+    save_checkpoint_atomically(
         {
             "model_state_dict": full_state_dict(training.model),
             "g05_fraction": training.g05_fraction,
