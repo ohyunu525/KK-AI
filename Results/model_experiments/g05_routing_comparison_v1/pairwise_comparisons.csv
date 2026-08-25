@@ -1,0 +1,21 @@
+model_a,model_b,g05_fraction,metric,paired_seed_count,paired_seeds,delta_b_minus_a_mean,delta_b_minus_a_std,improvement_b_over_a_mean,improvement_definition
+g05_sign_only,g05_full_reconstruction,0.0,mean_position_mae,3,"41,42,43",0.0,0.0,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,position_error_1,3,"41,42,43",0.0,0.0,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,position_error_2,3,"41,42,43",0.0,0.0,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,mean_position_3d_error,3,"41,42,43",0.0,0.0,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,charge_mae_q1,3,"41,42,43",0.0,0.0,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,charge_mae_q2,3,"41,42,43",0.0,0.0,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,charge_magnitude_mae,3,"41,42,43",0.0,0.0,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,relative_sign_accuracy,3,"41,42,43",0.0,0.0,0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,mean_position_mae,2,"41,42",0.00516119971871376,0.002094935447014307,-0.00516119971871376,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,position_error_1,2,"41,42",0.013607822358608246,0.012868644572270636,-0.013607822358608246,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,position_error_2,2,"41,42",0.010579049587249756,0.0018873358763178347,-0.010579049587249756,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,mean_position_3d_error,2,"41,42",0.012093435972929,0.0054906543479764005,-0.012093435972929,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,charge_mae_q1,2,"41,42",0.007034833781421182,0.00497005412548304,-0.007034833781421182,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,charge_mae_q2,2,"41,42",-0.0003147047162056077,0.0009839297267233023,0.0003147047162056077,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,charge_magnitude_mae,2,"41,42",0.0019549913704395294,0.001361243108136664,-0.0019549913704395294,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,relative_sign_accuracy,2,"41,42",-0.0010000000000000009,0.0014142135623730963,-0.0010000000000000009,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,global_sign_bce,2,"41,42",0.004866623213787814,0.009308692685800788,-0.004866623213787814,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,global_sign_accuracy,2,"41,42",-0.0025000000000000022,0.004949747468305837,-0.0025000000000000022,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,absolute_sign_accuracy,2,"41,42",-0.0025000000000000022,0.004949747468305837,-0.0025000000000000022,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.1,signed_pair_accuracy,2,"41,42",-0.0030000000000000027,0.005656854249492385,-0.0030000000000000027,positive means model_b is better; sign is reversed for error/loss metrics

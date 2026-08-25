@@ -1,0 +1,5702 @@
+[
+  {
+    "epoch": 1,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.08727633327245712,
+      "position": 0.7832726964950562,
+      "relative_sign": 0.23488350299745797,
+      "structure": 1.1054325380325318,
+      "total": 1.1054325380325318
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.07435986202955246,
+      "position": 0.6184861655235291,
+      "relative_sign": 0.03949250364303589,
+      "structure": 0.7323385334014892,
+      "total": 0.7323385334014892
+    }
+  },
+  {
+    "epoch": 2,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0724162141084671,
+      "position": 0.597853910446167,
+      "relative_sign": 0.03194728998094797,
+      "structure": 0.7022174110412598,
+      "total": 0.7022174110412598
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.07055182033777237,
+      "position": 0.5399345116615295,
+      "relative_sign": 0.050062737464904784,
+      "structure": 0.6605490660667419,
+      "total": 0.6605490660667419
+    }
+  },
+  {
+    "epoch": 3,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.06628349685668945,
+      "position": 0.5300282995700836,
+      "relative_sign": 0.01857529777288437,
+      "structure": 0.6148870959281921,
+      "total": 0.6148870959281921
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0633869304060936,
+      "position": 0.49927354884147646,
+      "relative_sign": 0.011319017380475999,
+      "structure": 0.5739795203208924,
+      "total": 0.5739795203208924
+    }
+  },
+  {
+    "epoch": 4,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0617439404129982,
+      "position": 0.4861693654060364,
+      "relative_sign": 0.01173457666952163,
+      "structure": 0.5596478805541992,
+      "total": 0.5596478805541992
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0596078639626503,
+      "position": 0.4732455909252167,
+      "relative_sign": 0.007869161099195481,
+      "structure": 0.5407226138114929,
+      "total": 0.5407226138114929
+    }
+  },
+  {
+    "epoch": 5,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.05963904559612274,
+      "position": 0.4501055986881256,
+      "relative_sign": 0.007475204436574131,
+      "structure": 0.5172198481559753,
+      "total": 0.5172198481559753
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0593101918399334,
+      "position": 0.44154522752761843,
+      "relative_sign": 0.008838190555572509,
+      "structure": 0.5096935997009278,
+      "total": 0.5096935997009278
+    }
+  },
+  {
+    "epoch": 6,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.05771055519580841,
+      "position": 0.4247000207901001,
+      "relative_sign": 0.006761528885923326,
+      "structure": 0.4891721034049988,
+      "total": 0.4891721034049988
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.056722513526678085,
+      "position": 0.4065790178775787,
+      "relative_sign": 0.013058086663484573,
+      "structure": 0.4763596179485321,
+      "total": 0.4763596179485321
+    }
+  },
+  {
+    "epoch": 7,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.05607201388478279,
+      "position": 0.3972480609416962,
+      "relative_sign": 0.004603357379324735,
+      "structure": 0.45792343354225157,
+      "total": 0.45792343354225157
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.05525932142138481,
+      "position": 0.39296572852134704,
+      "relative_sign": 0.006153410568833351,
+      "structure": 0.4543784568309784,
+      "total": 0.4543784568309784
+    }
+  },
+  {
+    "epoch": 8,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.053812903761863706,
+      "position": 0.3690854687690735,
+      "relative_sign": 0.0034979592789895833,
+      "structure": 0.4263963313102722,
+      "total": 0.4263963313102722
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.055233593732118606,
+      "position": 0.3599582839012146,
+      "relative_sign": 0.005492190860211849,
+      "structure": 0.42068407392501833,
+      "total": 0.42068407392501833
+    }
+  },
+  {
+    "epoch": 9,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.05322515177726746,
+      "position": 0.34853473091125486,
+      "relative_sign": 0.004008499632473104,
+      "structure": 0.40576837968826296,
+      "total": 0.40576837968826296
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.05297191512584686,
+      "position": 0.3311272025108337,
+      "relative_sign": 0.005514277841895818,
+      "structure": 0.3896133964061737,
+      "total": 0.3896133964061737
+    }
+  },
+  {
+    "epoch": 10,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.05259981942176819,
+      "position": 0.32878410172462463,
+      "relative_sign": 0.003125241773668677,
+      "structure": 0.3845091598033905,
+      "total": 0.3845091598033905
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.05285588240623474,
+      "position": 0.37077042055130005,
+      "relative_sign": 0.014573808088898658,
+      "structure": 0.4382000997066498,
+      "total": 0.4382000997066498
+    }
+  },
+  {
+    "epoch": 11,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.051843632251024244,
+      "position": 0.31495839858055114,
+      "relative_sign": 0.003963281720876693,
+      "structure": 0.3707653110027313,
+      "total": 0.3707653110027313
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.051404552072286606,
+      "position": 0.30837073969841006,
+      "relative_sign": 0.006039699053391814,
+      "structure": 0.36581498670578005,
+      "total": 0.36581498670578005
+    }
+  },
+  {
+    "epoch": 12,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.05075237423181534,
+      "position": 0.2936022844314575,
+      "relative_sign": 0.0028658924198243767,
+      "structure": 0.34722055077552794,
+      "total": 0.34722055077552794
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.05519612726569176,
+      "position": 0.316404878616333,
+      "relative_sign": 0.006917036287486553,
+      "structure": 0.3785180423259735,
+      "total": 0.3785180423259735
+    }
+  },
+  {
+    "epoch": 13,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.05014052364230156,
+      "position": 0.28448712253570557,
+      "relative_sign": 0.0026657643229700623,
+      "structure": 0.33729341220855713,
+      "total": 0.33729341220855713
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.05077557387948036,
+      "position": 0.2765155303478241,
+      "relative_sign": 0.009574459571391344,
+      "structure": 0.33686556029319764,
+      "total": 0.33686556029319764
+    }
+  },
+  {
+    "epoch": 14,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.04859456652402878,
+      "position": 0.2623341586589813,
+      "relative_sign": 0.0021649453429272397,
+      "structure": 0.31309367179870606,
+      "total": 0.31309367179870606
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04899869453907013,
+      "position": 0.2739087475538254,
+      "relative_sign": 0.008237080672755838,
+      "structure": 0.33114451718330384,
+      "total": 0.33114451718330384
+    }
+  },
+  {
+    "epoch": 15,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.04796993935108185,
+      "position": 0.24890677070617676,
+      "relative_sign": 0.0022098364566918464,
+      "structure": 0.2990865442752838,
+      "total": 0.2990865442752838
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04885592940449714,
+      "position": 0.25579332172870634,
+      "relative_sign": 0.0052577726151794195,
+      "structure": 0.30990701699256895,
+      "total": 0.30990701699256895
+    }
+  },
+  {
+    "epoch": 16,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.04770142504572868,
+      "position": 0.23820768880844118,
+      "relative_sign": 0.0018732973680598661,
+      "structure": 0.2877824125289917,
+      "total": 0.2877824125289917
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04796314686536789,
+      "position": 0.2591322736740112,
+      "relative_sign": 0.009782584187574685,
+      "structure": 0.31687801218032835,
+      "total": 0.31687801218032835
+    }
+  },
+  {
+    "epoch": 17,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.047285852313041686,
+      "position": 0.23306401884555816,
+      "relative_sign": 0.001779359638749156,
+      "structure": 0.282129230260849,
+      "total": 0.282129230260849
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.048038450837135316,
+      "position": 0.23989926397800446,
+      "relative_sign": 0.005899786323774606,
+      "structure": 0.29383750343322756,
+      "total": 0.29383750343322756
+    }
+  },
+  {
+    "epoch": 18,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.04601263257861137,
+      "position": 0.21378514552116393,
+      "relative_sign": 0.0014315248125931247,
+      "structure": 0.26122930335998534,
+      "total": 0.26122930335998534
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04865447142720222,
+      "position": 0.2330028612613678,
+      "relative_sign": 0.0053228649897500875,
+      "structure": 0.28698019456863405,
+      "total": 0.28698019456863405
+    }
+  },
+  {
+    "epoch": 19,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.04584183692932129,
+      "position": 0.2076899958848953,
+      "relative_sign": 0.0018692262179683893,
+      "structure": 0.2554010584354401,
+      "total": 0.2554010584354401
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04919649249315262,
+      "position": 0.23162365221977235,
+      "relative_sign": 0.01245410613482818,
+      "structure": 0.2932742488384247,
+      "total": 0.2932742488384247
+    }
+  },
+  {
+    "epoch": 20,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.045623924911022185,
+      "position": 0.2020398111343384,
+      "relative_sign": 0.0009904562469746452,
+      "structure": 0.2486541910171509,
+      "total": 0.2486541910171509
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.05001154288649559,
+      "position": 0.21821434116363525,
+      "relative_sign": 0.012754887615563348,
+      "structure": 0.2809807741641998,
+      "total": 0.2809807741641998
+    }
+  },
+  {
+    "epoch": 21,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.04515239229798317,
+      "position": 0.19185747289657593,
+      "relative_sign": 0.0014437945886602392,
+      "structure": 0.23845365989208223,
+      "total": 0.23845365989208223
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04781321677565575,
+      "position": 0.20960277330875396,
+      "relative_sign": 0.005504242508672178,
+      "structure": 0.26292023253440855,
+      "total": 0.26292023253440855
+    }
+  },
+  {
+    "epoch": 22,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.04450819003582001,
+      "position": 0.1849970225095749,
+      "relative_sign": 0.0017837552842102013,
+      "structure": 0.23128896796703338,
+      "total": 0.23128896796703338
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04786537772417068,
+      "position": 0.22385794603824616,
+      "relative_sign": 0.013061075516510754,
+      "structure": 0.28478440713882447,
+      "total": 0.28478440713882447
+    }
+  },
+  {
+    "epoch": 23,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.044219235122203826,
+      "position": 0.18236411142349243,
+      "relative_sign": 0.0013181771613599267,
+      "structure": 0.2279015245437622,
+      "total": 0.2279015245437622
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.046379253655672074,
+      "position": 0.1978208110332489,
+      "relative_sign": 0.007046364840818569,
+      "structure": 0.25124643051624296,
+      "total": 0.25124643051624296
+    }
+  },
+  {
+    "epoch": 24,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.043056267738342285,
+      "position": 0.17181551110744475,
+      "relative_sign": 0.001243117886944674,
+      "structure": 0.21611489701271058,
+      "total": 0.21611489701271058
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04709969294071197,
+      "position": 0.19567009246349334,
+      "relative_sign": 0.0031635501375421884,
+      "structure": 0.2459333325624466,
+      "total": 0.2459333325624466
+    }
+  },
+  {
+    "epoch": 25,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.041951158493757246,
+      "position": 0.16475687420368196,
+      "relative_sign": 0.001244873114701477,
+      "structure": 0.20795290648937226,
+      "total": 0.20795290648937226
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.044802210807800294,
+      "position": 0.19865565073490143,
+      "relative_sign": 0.007143656418193132,
+      "structure": 0.25060151505470274,
+      "total": 0.25060151505470274
+    }
+  },
+  {
+    "epoch": 26,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0420218631029129,
+      "position": 0.16622107315063478,
+      "relative_sign": 0.001450451901589986,
+      "structure": 0.20969338750839234,
+      "total": 0.20969338750839234
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04501022407412529,
+      "position": 0.19428271734714508,
+      "relative_sign": 0.003711060272762552,
+      "structure": 0.24300399875640868,
+      "total": 0.24300399875640868
+    }
+  },
+  {
+    "epoch": 27,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.040900099754333494,
+      "position": 0.15745766770839692,
+      "relative_sign": 0.0011051427735292237,
+      "structure": 0.19946291041374206,
+      "total": 0.19946291041374206
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.044084319740533826,
+      "position": 0.18463780605792998,
+      "relative_sign": 0.0032831319379620252,
+      "structure": 0.23200526118278503,
+      "total": 0.23200526118278503
+    }
+  },
+  {
+    "epoch": 28,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.04070061153173447,
+      "position": 0.15194556868076325,
+      "relative_sign": 0.000768014238536125,
+      "structure": 0.19341419374942778,
+      "total": 0.19341419374942778
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04477045822143555,
+      "position": 0.18919193542003632,
+      "relative_sign": 0.012884952198946848,
+      "structure": 0.24684734582901002,
+      "total": 0.24684734582901002
+    }
+  },
+  {
+    "epoch": 29,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.04039904360473156,
+      "position": 0.14638935494422914,
+      "relative_sign": 0.0009257067838916555,
+      "structure": 0.1877141044139862,
+      "total": 0.1877141044139862
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.043904159545898436,
+      "position": 0.17768122792243957,
+      "relative_sign": 0.005960094913840294,
+      "structure": 0.22754548358917237,
+      "total": 0.22754548358917237
+    }
+  },
+  {
+    "epoch": 30,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.039436924815177916,
+      "position": 0.14455988651514054,
+      "relative_sign": 0.0004009564098232659,
+      "structure": 0.1843977677822113,
+      "total": 0.1843977677822113
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04257855993509293,
+      "position": 0.1727988555431366,
+      "relative_sign": 0.008872989067458547,
+      "structure": 0.224250403881073,
+      "total": 0.224250403881073
+    }
+  },
+  {
+    "epoch": 31,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.039119196563959124,
+      "position": 0.14819504714012147,
+      "relative_sign": 0.0010870515080750919,
+      "structure": 0.18840129470825195,
+      "total": 0.18840129470825195
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.046880644619464874,
+      "position": 0.18499101662635803,
+      "relative_sign": 0.011824689890258014,
+      "structure": 0.2436963484287262,
+      "total": 0.2436963484287262
+    }
+  },
+  {
+    "epoch": 32,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03934668415784836,
+      "position": 0.14574795842170715,
+      "relative_sign": 0.0005160086292307824,
+      "structure": 0.18561064970493316,
+      "total": 0.18561064970493316
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04264274701476097,
+      "position": 0.17633360087871552,
+      "relative_sign": 0.0047158324443735185,
+      "structure": 0.22369217681884765,
+      "total": 0.22369217681884765
+    }
+  },
+  {
+    "epoch": 33,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03877523475885391,
+      "position": 0.14176166796684264,
+      "relative_sign": 0.0014908314922213322,
+      "structure": 0.18202773451805115,
+      "total": 0.18202773451805115
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04255244994163513,
+      "position": 0.16954694020748137,
+      "relative_sign": 0.004111241723992862,
+      "structure": 0.21621062874794006,
+      "total": 0.21621062874794006
+    }
+  },
+  {
+    "epoch": 34,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0372839252948761,
+      "position": 0.13180653524398803,
+      "relative_sign": 0.0003593359173464705,
+      "structure": 0.16944979679584504,
+      "total": 0.16944979679584504
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04125958478450775,
+      "position": 0.1694930020570755,
+      "relative_sign": 0.017903301577316597,
+      "structure": 0.22865588998794556,
+      "total": 0.22865588998794556
+    }
+  },
+  {
+    "epoch": 35,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03804975551366806,
+      "position": 0.13479759979248046,
+      "relative_sign": 0.0011428671682297135,
+      "structure": 0.17399022388458252,
+      "total": 0.17399022388458252
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04807630708813667,
+      "position": 0.18947431683540344,
+      "relative_sign": 0.022990032932837495,
+      "structure": 0.2605406632423401,
+      "total": 0.2605406632423401
+    }
+  },
+  {
+    "epoch": 36,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03700034511089325,
+      "position": 0.1301412353515625,
+      "relative_sign": 0.000653165329262265,
+      "structure": 0.16779474580287934,
+      "total": 0.16779474580287934
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04200334751605988,
+      "position": 0.16453268015384673,
+      "relative_sign": 0.004378672417427879,
+      "structure": 0.21091470098495482,
+      "total": 0.21091470098495482
+    }
+  },
+  {
+    "epoch": 37,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03625105327367783,
+      "position": 0.12435369467735291,
+      "relative_sign": 0.00032149362840573306,
+      "structure": 0.160926242351532,
+      "total": 0.160926242351532
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04301285582780838,
+      "position": 0.1734186294078827,
+      "relative_sign": 0.012469642796670087,
+      "structure": 0.22890113306045531,
+      "total": 0.22890113306045531
+    }
+  },
+  {
+    "epoch": 38,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03613869944214821,
+      "position": 0.11924282932281494,
+      "relative_sign": 0.0008538159015733981,
+      "structure": 0.1562353447675705,
+      "total": 0.1562353447675705
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04021389073133469,
+      "position": 0.15727222073078156,
+      "relative_sign": 0.00394036704505561,
+      "structure": 0.20142647397518157,
+      "total": 0.20142647397518157
+    }
+  },
+  {
+    "epoch": 39,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.035877686873078345,
+      "position": 0.12047211760282517,
+      "relative_sign": 0.0004113211831027002,
+      "structure": 0.15676112377643586,
+      "total": 0.15676112377643586
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.044061646580696105,
+      "position": 0.15626515543460845,
+      "relative_sign": 0.006203353005752433,
+      "structure": 0.20653015565872193,
+      "total": 0.20653015565872193
+    }
+  },
+  {
+    "epoch": 40,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03545640668272972,
+      "position": 0.11783875840902329,
+      "relative_sign": 0.000774021827703109,
+      "structure": 0.1540691874027252,
+      "total": 0.1540691874027252
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04275852590799332,
+      "position": 0.16281077420711518,
+      "relative_sign": 0.010803317196201532,
+      "structure": 0.21637261819839476,
+      "total": 0.21637261819839476
+    }
+  },
+  {
+    "epoch": 41,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03463157352805138,
+      "position": 0.11238891357183456,
+      "relative_sign": 0.00018420275469179615,
+      "structure": 0.14720468866825104,
+      "total": 0.14720468866825104
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04094018888473511,
+      "position": 0.1576514856815338,
+      "relative_sign": 0.006671779255848378,
+      "structure": 0.20526345324516296,
+      "total": 0.20526345324516296
+    }
+  },
+  {
+    "epoch": 42,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.034381298393011094,
+      "position": 0.11234774726629257,
+      "relative_sign": 0.0002996297976424103,
+      "structure": 0.14702867436408998,
+      "total": 0.14702867436408998
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04008809730410576,
+      "position": 0.1538292167186737,
+      "relative_sign": 0.004541499883052893,
+      "structure": 0.19845881032943727,
+      "total": 0.19845881032943727
+    }
+  },
+  {
+    "epoch": 43,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03410780119895935,
+      "position": 0.11216482639312744,
+      "relative_sign": 0.0011157111291067849,
+      "structure": 0.14738833820819855,
+      "total": 0.14738833820819855
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04067717534303665,
+      "position": 0.1563734201192856,
+      "relative_sign": 0.004846002200705698,
+      "structure": 0.2018965984582901,
+      "total": 0.2018965984582901
+    }
+  },
+  {
+    "epoch": 44,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03396833643317223,
+      "position": 0.11049032104015351,
+      "relative_sign": 0.0007179602162868833,
+      "structure": 0.14517661809921265,
+      "total": 0.14517661809921265
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03980414792895317,
+      "position": 0.15232155930995941,
+      "relative_sign": 0.007394948262372054,
+      "structure": 0.19952065241336822,
+      "total": 0.19952065241336822
+    }
+  },
+  {
+    "epoch": 45,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.033241601407527924,
+      "position": 0.10735111248493194,
+      "relative_sign": 0.00022990095177374316,
+      "structure": 0.14082261431217194,
+      "total": 0.14082261431217194
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03960525006055832,
+      "position": 0.1533002185821533,
+      "relative_sign": 0.004135774108843179,
+      "structure": 0.19704123973846435,
+      "total": 0.19704123973846435
+    }
+  },
+  {
+    "epoch": 46,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03282556892931461,
+      "position": 0.10441883641481399,
+      "relative_sign": 0.0005134161247369775,
+      "structure": 0.13775781989097596,
+      "total": 0.13775781989097596
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04014472958445549,
+      "position": 0.17110314345359803,
+      "relative_sign": 0.007554031676874729,
+      "structure": 0.21880190420150758,
+      "total": 0.21880190420150758
+    }
+  },
+  {
+    "epoch": 47,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.033141068428754805,
+      "position": 0.10776102685928345,
+      "relative_sign": 0.0008915324254412554,
+      "structure": 0.1417936280965805,
+      "total": 0.1417936280965805
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03954936268925667,
+      "position": 0.15400668382644653,
+      "relative_sign": 0.0031481593817006795,
+      "structure": 0.19670421135425567,
+      "total": 0.19670421135425567
+    }
+  },
+  {
+    "epoch": 48,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03296291348338127,
+      "position": 0.10304865181446075,
+      "relative_sign": 0.00022050288746868317,
+      "structure": 0.13623206812143326,
+      "total": 0.13623206812143326
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03957245290279388,
+      "position": 0.15811977374553682,
+      "relative_sign": 0.018634646358375903,
+      "structure": 0.21632686936855317,
+      "total": 0.21632686936855317
+    }
+  },
+  {
+    "epoch": 49,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.032393915712833406,
+      "position": 0.10378989577293396,
+      "relative_sign": 0.0003466326829075115,
+      "structure": 0.13653044486045837,
+      "total": 0.13653044486045837
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04364686518907547,
+      "position": 0.1521128956079483,
+      "relative_sign": 0.007362885833659675,
+      "structure": 0.20312264752388,
+      "total": 0.20312264752388
+    }
+  },
+  {
+    "epoch": 50,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03190851436555386,
+      "position": 0.09864651888608933,
+      "relative_sign": 0.0002587605294502282,
+      "structure": 0.1308137937784195,
+      "total": 0.1308137937784195
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0413872178196907,
+      "position": 0.1434141538143158,
+      "relative_sign": 0.00825718851009151,
+      "structure": 0.1930585563182831,
+      "total": 0.1930585563182831
+    }
+  },
+  {
+    "epoch": 51,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03133801844716072,
+      "position": 0.09477896881103516,
+      "relative_sign": 0.00016598756913663236,
+      "structure": 0.1262829736471176,
+      "total": 0.1262829736471176
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04061363711953163,
+      "position": 0.1488312635421753,
+      "relative_sign": 0.0060698272380250275,
+      "structure": 0.1955147262811661,
+      "total": 0.1955147262811661
+    }
+  },
+  {
+    "epoch": 52,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.031112486630678178,
+      "position": 0.09291733765602112,
+      "relative_sign": 0.00010029734621639364,
+      "structure": 0.12413012182712554,
+      "total": 0.12413012182712554
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04168676534295082,
+      "position": 0.145295401096344,
+      "relative_sign": 0.010101927866009646,
+      "structure": 0.1970840939283371,
+      "total": 0.1970840939283371
+    }
+  },
+  {
+    "epoch": 53,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.030950629979372025,
+      "position": 0.09524983268976212,
+      "relative_sign": 0.0002947523336033555,
+      "structure": 0.1264952142238617,
+      "total": 0.1264952142238617
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03845972853899002,
+      "position": 0.13967385578155517,
+      "relative_sign": 0.009432723075471586,
+      "structure": 0.18756630849838257,
+      "total": 0.18756630849838257
+    }
+  },
+  {
+    "epoch": 54,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03026925653219223,
+      "position": 0.09061336261034011,
+      "relative_sign": 8.655900740268408e-05,
+      "structure": 0.12096917855739593,
+      "total": 0.12096917855739593
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038227980583906175,
+      "position": 0.1406737779378891,
+      "relative_sign": 0.009575258230426698,
+      "structure": 0.18847701621055604,
+      "total": 0.18847701621055604
+    }
+  },
+  {
+    "epoch": 55,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03042176106572151,
+      "position": 0.09005947422981263,
+      "relative_sign": 0.00013856894043419744,
+      "structure": 0.1206198046207428,
+      "total": 0.1206198046207428
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03844581922888756,
+      "position": 0.14111146998405458,
+      "relative_sign": 0.004710920126904966,
+      "structure": 0.1842682067155838,
+      "total": 0.1842682067155838
+    }
+  },
+  {
+    "epoch": 56,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02996703742444515,
+      "position": 0.09086860489845276,
+      "relative_sign": 9.636411723477068e-05,
+      "structure": 0.12093200623989105,
+      "total": 0.12093200623989105
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03827399441599846,
+      "position": 0.16293382775783538,
+      "relative_sign": 0.004394812370737782,
+      "structure": 0.20560263442993165,
+      "total": 0.20560263442993165
+    }
+  },
+  {
+    "epoch": 57,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03043723800778389,
+      "position": 0.09092422485351563,
+      "relative_sign": 0.00019130997823413055,
+      "structure": 0.12155277293920518,
+      "total": 0.12155277293920518
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03906540185213089,
+      "position": 0.1390396682024002,
+      "relative_sign": 0.007789776196572348,
+      "structure": 0.18589485096931457,
+      "total": 0.18589485096931457
+    }
+  },
+  {
+    "epoch": 58,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02963215121626854,
+      "position": 0.08857601523399353,
+      "relative_sign": 0.00012486838649056154,
+      "structure": 0.11833303439617157,
+      "total": 0.11833303439617157
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03795701414346695,
+      "position": 0.14051729440689087,
+      "relative_sign": 0.006859958718865528,
+      "structure": 0.1853342661857605,
+      "total": 0.1853342661857605
+    }
+  },
+  {
+    "epoch": 59,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.029138184159994127,
+      "position": 0.08595996963977813,
+      "relative_sign": 0.0004103372555800888,
+      "structure": 0.11550849115848541,
+      "total": 0.11550849115848541
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04407143357396126,
+      "position": 0.14261697793006897,
+      "relative_sign": 0.00782767143752426,
+      "structure": 0.1945160858631134,
+      "total": 0.1945160858631134
+    }
+  },
+  {
+    "epoch": 60,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02956166985630989,
+      "position": 0.0858923487663269,
+      "relative_sign": 0.00022806157555169194,
+      "structure": 0.1156820797920227,
+      "total": 0.1156820797920227
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03735828876495361,
+      "position": 0.1385207141637802,
+      "relative_sign": 0.0025809208491409663,
+      "structure": 0.1784599245786667,
+      "total": 0.1784599245786667
+    }
+  },
+  {
+    "epoch": 61,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02962289524078369,
+      "position": 0.08893955546617507,
+      "relative_sign": 0.0005134952662683646,
+      "structure": 0.1190759459733963,
+      "total": 0.1190759459733963
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03789959511160851,
+      "position": 0.1424690654873848,
+      "relative_sign": 0.013739743111276766,
+      "structure": 0.19410840237140656,
+      "total": 0.19410840237140656
+    }
+  },
+  {
+    "epoch": 62,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.028789710760116577,
+      "position": 0.08386856544017791,
+      "relative_sign": 0.0005522573378148081,
+      "structure": 0.11321053320169448,
+      "total": 0.11321053320169448
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03819110131263733,
+      "position": 0.13281979864835738,
+      "relative_sign": 0.0074157006634923165,
+      "structure": 0.17842659890651702,
+      "total": 0.17842659890651702
+    }
+  },
+  {
+    "epoch": 63,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02847905294597149,
+      "position": 0.07845091617107391,
+      "relative_sign": 0.0002999039204623841,
+      "structure": 0.10722987282276153,
+      "total": 0.10722987282276153
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03949576550722122,
+      "position": 0.13315094846487047,
+      "relative_sign": 0.016563416208373382,
+      "structure": 0.18921013152599334,
+      "total": 0.18921013152599334
+    }
+  },
+  {
+    "epoch": 64,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.028009622305631636,
+      "position": 0.07766795217990875,
+      "relative_sign": 7.503634488148236e-05,
+      "structure": 0.1057526107430458,
+      "total": 0.1057526107430458
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0374998742043972,
+      "position": 0.13129341250658036,
+      "relative_sign": 0.016702017059389618,
+      "structure": 0.1854953031539917,
+      "total": 0.1854953031539917
+    }
+  },
+  {
+    "epoch": 65,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.027802775025367737,
+      "position": 0.07632115116715431,
+      "relative_sign": 5.026773616918945e-05,
+      "structure": 0.10417419379949569,
+      "total": 0.10417419379949569
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03760508412122726,
+      "position": 0.1379855243563652,
+      "relative_sign": 0.006689457326036063,
+      "structure": 0.18228006958961487,
+      "total": 0.18228006958961487
+    }
+  },
+  {
+    "epoch": 66,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02706784278154373,
+      "position": 0.0749703631401062,
+      "relative_sign": 5.425569517592521e-05,
+      "structure": 0.10209246188402175,
+      "total": 0.10209246188402175
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03798805710673332,
+      "position": 0.13549399781227112,
+      "relative_sign": 0.013156805632490432,
+      "structure": 0.18663886272907257,
+      "total": 0.18663886272907257
+    }
+  },
+  {
+    "epoch": 67,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.027115078389644623,
+      "position": 0.07639352175593377,
+      "relative_sign": 6.145495873715845e-05,
+      "structure": 0.10357005548477173,
+      "total": 0.10357005548477173
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03737932732701302,
+      "position": 0.13190816390514373,
+      "relative_sign": 0.009936163164740719,
+      "structure": 0.1792236489057541,
+      "total": 0.1792236489057541
+    }
+  },
+  {
+    "epoch": 68,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.027083574578166007,
+      "position": 0.0762957854270935,
+      "relative_sign": 0.00022859482568674138,
+      "structure": 0.10360795563459396,
+      "total": 0.10360795563459396
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03693524515628815,
+      "position": 0.1281275070309639,
+      "relative_sign": 0.01699577862903243,
+      "structure": 0.18205852890014648,
+      "total": 0.18205852890014648
+    }
+  },
+  {
+    "epoch": 69,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.029930997043848037,
+      "position": 0.09595812541246414,
+      "relative_sign": 0.003988661396677344,
+      "structure": 0.12987778478860856,
+      "total": 0.12987778478860856
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.040618247985839843,
+      "position": 0.13548027819395064,
+      "relative_sign": 0.006103023687552195,
+      "structure": 0.18220155131816865,
+      "total": 0.18220155131816865
+    }
+  },
+  {
+    "epoch": 70,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.026808993071317674,
+      "position": 0.07709509873390198,
+      "relative_sign": 0.0006244627372889226,
+      "structure": 0.10452855455875397,
+      "total": 0.10452855455875397
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.040348149836063385,
+      "position": 0.13934220814704895,
+      "relative_sign": 0.026939312782720663,
+      "structure": 0.2066296696662903,
+      "total": 0.2066296696662903
+    }
+  },
+  {
+    "epoch": 71,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.028012827575206758,
+      "position": 0.08401890170574189,
+      "relative_sign": 0.0014199195122891978,
+      "structure": 0.11345164984464645,
+      "total": 0.11345164984464645
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0374797799885273,
+      "position": 0.1338278990983963,
+      "relative_sign": 0.008894349826165125,
+      "structure": 0.18020203030109405,
+      "total": 0.18020203030109405
+    }
+  },
+  {
+    "epoch": 72,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.026085049092769624,
+      "position": 0.0679934259057045,
+      "relative_sign": 6.88375836234627e-05,
+      "structure": 0.09414731258153916,
+      "total": 0.09414731258153916
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03750077351927757,
+      "position": 0.12603855007886886,
+      "relative_sign": 0.006134956938127289,
+      "structure": 0.16967427718639375,
+      "total": 0.16967427718639375
+    }
+  },
+  {
+    "epoch": 73,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.025638339057564734,
+      "position": 0.0699710521697998,
+      "relative_sign": 4.0149755421225565e-05,
+      "structure": 0.09564954054355622,
+      "total": 0.09564954054355622
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03717345386743545,
+      "position": 0.12718110918998718,
+      "relative_sign": 0.0075359850810637,
+      "structure": 0.171890549659729,
+      "total": 0.171890549659729
+    }
+  },
+  {
+    "epoch": 74,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.025055760711431504,
+      "position": 0.06727733916044235,
+      "relative_sign": 3.7196885259618284e-05,
+      "structure": 0.09237029659748078,
+      "total": 0.09237029659748078
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038825377196073534,
+      "position": 0.13793609738349916,
+      "relative_sign": 0.01133388771902537,
+      "structure": 0.18809536242485048,
+      "total": 0.18809536242485048
+    }
+  },
+  {
+    "epoch": 75,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02553768488764763,
+      "position": 0.0663107887506485,
+      "relative_sign": 5.587690959873726e-05,
+      "structure": 0.09190435099601746,
+      "total": 0.09190435099601746
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03895230135321617,
+      "position": 0.12694076997041703,
+      "relative_sign": 0.01040592036194721,
+      "structure": 0.17629899442195893,
+      "total": 0.17629899442195893
+    }
+  },
+  {
+    "epoch": 76,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.025433035880327224,
+      "position": 0.06643031364679336,
+      "relative_sign": 5.202336157753962e-05,
+      "structure": 0.09191537272930145,
+      "total": 0.09191537272930145
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038524611473083496,
+      "position": 0.13576674008369446,
+      "relative_sign": 0.007162926562523353,
+      "structure": 0.18145427942276002,
+      "total": 0.18145427942276002
+    }
+  },
+  {
+    "epoch": 77,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.024634806469082834,
+      "position": 0.06799532181024551,
+      "relative_sign": 0.00010138425637342152,
+      "structure": 0.09273151236772537,
+      "total": 0.09273151236772537
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037701721161603925,
+      "position": 0.1294926244020462,
+      "relative_sign": 0.005719541523314547,
+      "structure": 0.17291388821601866,
+      "total": 0.17291388821601866
+    }
+  },
+  {
+    "epoch": 78,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.024651393428444864,
+      "position": 0.06645475524663925,
+      "relative_sign": 7.97418695037777e-05,
+      "structure": 0.09118589055538177,
+      "total": 0.09118589055538177
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03637327921390533,
+      "position": 0.13589209109544753,
+      "relative_sign": 0.004246432392741553,
+      "structure": 0.17651180446147918,
+      "total": 0.17651180446147918
+    }
+  },
+  {
+    "epoch": 79,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.024762308493256568,
+      "position": 0.06732762360572815,
+      "relative_sign": 5.163029334380553e-05,
+      "structure": 0.09214156287908554,
+      "total": 0.09214156287908554
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03993992093205452,
+      "position": 0.13122264367341996,
+      "relative_sign": 0.010778955885165488,
+      "structure": 0.1819415180683136,
+      "total": 0.1819415180683136
+    }
+  },
+  {
+    "epoch": 80,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02482513850927353,
+      "position": 0.06774519738554954,
+      "relative_sign": 8.692541055461334e-05,
+      "structure": 0.09265726131200791,
+      "total": 0.09265726131200791
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03678985235095024,
+      "position": 0.12557887518405914,
+      "relative_sign": 0.009816729803715134,
+      "structure": 0.17218545734882354,
+      "total": 0.17218545734882354
+    }
+  },
+  {
+    "epoch": 81,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02463190199434757,
+      "position": 0.06426456296443939,
+      "relative_sign": 3.3770369764170024e-05,
+      "structure": 0.08893023502826691,
+      "total": 0.08893023502826691
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03634904247522354,
+      "position": 0.13133357971906662,
+      "relative_sign": 0.010428477707362617,
+      "structure": 0.1781110988855362,
+      "total": 0.1781110988855362
+    }
+  },
+  {
+    "epoch": 82,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02396199944615364,
+      "position": 0.06262288680672645,
+      "relative_sign": 3.63594724003633e-05,
+      "structure": 0.0866212461590767,
+      "total": 0.0866212461590767
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036357197970151904,
+      "position": 0.12478831392526626,
+      "relative_sign": 0.005714616206798383,
+      "structure": 0.16686012971401215,
+      "total": 0.16686012971401215
+    }
+  },
+  {
+    "epoch": 83,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02369402304291725,
+      "position": 0.06130193364620209,
+      "relative_sign": 4.9254375613145384e-05,
+      "structure": 0.08504521137475968,
+      "total": 0.08504521137475968
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03756951531767845,
+      "position": 0.12552653473615646,
+      "relative_sign": 0.007549137646281451,
+      "structure": 0.1706451840400696,
+      "total": 0.1706451840400696
+    }
+  },
+  {
+    "epoch": 84,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.023194095343351363,
+      "position": 0.05991669648885727,
+      "relative_sign": 5.215086537918978e-05,
+      "structure": 0.08316294360160828,
+      "total": 0.08316294360160828
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036670141518116,
+      "position": 0.12645515936613083,
+      "relative_sign": 0.008488149038952543,
+      "structure": 0.1716134536266327,
+      "total": 0.1716134536266327
+    }
+  },
+  {
+    "epoch": 85,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02359413592517376,
+      "position": 0.05983306908607483,
+      "relative_sign": 4.518840159926185e-05,
+      "structure": 0.08347239291667938,
+      "total": 0.08347239291667938
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035749606430530545,
+      "position": 0.12079177749156952,
+      "relative_sign": 0.011441560434439453,
+      "structure": 0.1679829434156418,
+      "total": 0.1679829434156418
+    }
+  },
+  {
+    "epoch": 86,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.023276044860482216,
+      "position": 0.059943613559007645,
+      "relative_sign": 5.1702351932362946e-05,
+      "structure": 0.08327136117219924,
+      "total": 0.08327136117219924
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036227085441350934,
+      "position": 0.12540020209550856,
+      "relative_sign": 0.0065433523262181555,
+      "structure": 0.16817063999176024,
+      "total": 0.16817063999176024
+    }
+  },
+  {
+    "epoch": 87,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.022788612872362137,
+      "position": 0.05863173547387123,
+      "relative_sign": 3.2807847971525916e-05,
+      "structure": 0.08145315611362457,
+      "total": 0.08145315611362457
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037211978495121,
+      "position": 0.1275419234633446,
+      "relative_sign": 0.007697367748238321,
+      "structure": 0.1724512745141983,
+      "total": 0.1724512745141983
+    }
+  },
+  {
+    "epoch": 88,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.022809014454483988,
+      "position": 0.058121022403240206,
+      "relative_sign": 5.340943621467886e-05,
+      "structure": 0.08098344624042511,
+      "total": 0.08098344624042511
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03647765317559242,
+      "position": 0.12362155175209046,
+      "relative_sign": 0.011356864827463141,
+      "structure": 0.1714560672044754,
+      "total": 0.1714560672044754
+    }
+  },
+  {
+    "epoch": 89,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02327823196351528,
+      "position": 0.05994012644886971,
+      "relative_sign": 7.635408557462143e-05,
+      "structure": 0.08329471278190613,
+      "total": 0.08329471278190613
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03704204535484314,
+      "position": 0.12216505962610245,
+      "relative_sign": 0.005543709959478292,
+      "structure": 0.16475081181526183,
+      "total": 0.16475081181526183
+    }
+  },
+  {
+    "epoch": 90,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02286798766255379,
+      "position": 0.05772388070821762,
+      "relative_sign": 5.670291008846107e-05,
+      "structure": 0.08064857104420661,
+      "total": 0.08064857104420661
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03635815435647965,
+      "position": 0.12282763862609863,
+      "relative_sign": 0.02073923021041992,
+      "structure": 0.17992502629756926,
+      "total": 0.17992502629756926
+    }
+  },
+  {
+    "epoch": 91,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02242368783056736,
+      "position": 0.056649123817682265,
+      "relative_sign": 0.00015648388102044918,
+      "structure": 0.0792292954325676,
+      "total": 0.0792292954325676
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03525544553995132,
+      "position": 0.11790026205778122,
+      "relative_sign": 0.006675567151265568,
+      "structure": 0.15983127558231353,
+      "total": 0.15983127558231353
+    }
+  },
+  {
+    "epoch": 92,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.021929412096738814,
+      "position": 0.056895678460597995,
+      "relative_sign": 3.1962496299911436e-05,
+      "structure": 0.07885705310106278,
+      "total": 0.07885705310106278
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03794383427500725,
+      "position": 0.12582288956642151,
+      "relative_sign": 0.008848837173260108,
+      "structure": 0.17261556339263917,
+      "total": 0.17261556339263917
+    }
+  },
+  {
+    "epoch": 93,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02227011285722256,
+      "position": 0.05843618369102478,
+      "relative_sign": 3.86806937340225e-05,
+      "structure": 0.08074497675895691,
+      "total": 0.08074497675895691
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03651180028915405,
+      "position": 0.1213203067779541,
+      "relative_sign": 0.0069557063629181355,
+      "structure": 0.16478781497478484,
+      "total": 0.16478781497478484
+    }
+  },
+  {
+    "epoch": 94,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02198799541592598,
+      "position": 0.057887737274169924,
+      "relative_sign": 3.653015979898555e-05,
+      "structure": 0.07991226291656495,
+      "total": 0.07991226291656495
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036654297024011614,
+      "position": 0.12055239075422287,
+      "relative_sign": 0.015091868290808634,
+      "structure": 0.17229855978488923,
+      "total": 0.17229855978488923
+    }
+  },
+  {
+    "epoch": 95,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.021388171941041947,
+      "position": 0.053336481153965,
+      "relative_sign": 4.611387542081502e-05,
+      "structure": 0.07477076721191406,
+      "total": 0.07477076721191406
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03759942460060119,
+      "position": 0.12173854833841324,
+      "relative_sign": 0.009448803746810881,
+      "structure": 0.16878677439689635,
+      "total": 0.16878677439689635
+    }
+  },
+  {
+    "epoch": 96,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02127430811524391,
+      "position": 0.051315055787563325,
+      "relative_sign": 2.346278333106966e-05,
+      "structure": 0.07261282646656037,
+      "total": 0.07261282646656037
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03785228317975998,
+      "position": 0.11886568021774292,
+      "relative_sign": 0.008628359964153788,
+      "structure": 0.16534632742404937,
+      "total": 0.16534632742404937
+    }
+  },
+  {
+    "epoch": 97,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02154875746369362,
+      "position": 0.0538695524930954,
+      "relative_sign": 2.6527837776484374e-05,
+      "structure": 0.0754448379278183,
+      "total": 0.0754448379278183
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03769785663485527,
+      "position": 0.1191043831706047,
+      "relative_sign": 0.009747355644409254,
+      "structure": 0.16654959523677826,
+      "total": 0.16654959523677826
+    }
+  },
+  {
+    "epoch": 98,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.021835201852023603,
+      "position": 0.054301324605941774,
+      "relative_sign": 0.0001207661228772281,
+      "structure": 0.07625729256868362,
+      "total": 0.07625729256868362
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035605776309967044,
+      "position": 0.11529715633392335,
+      "relative_sign": 0.010551551755292167,
+      "structure": 0.1614544885158539,
+      "total": 0.1614544885158539
+    }
+  },
+  {
+    "epoch": 99,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.025780994281172753,
+      "position": 0.0715761393904686,
+      "relative_sign": 0.0021043012796362745,
+      "structure": 0.09946143490076065,
+      "total": 0.09946143490076065
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.039594712436199185,
+      "position": 0.123566868185997,
+      "relative_sign": 0.0035206174444174392,
+      "structure": 0.16668219304084778,
+      "total": 0.16668219304084778
+    }
+  },
+  {
+    "epoch": 100,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.021858180284500123,
+      "position": 0.05560102963447571,
+      "relative_sign": 0.0007542236929330102,
+      "structure": 0.0782134337425232,
+      "total": 0.0782134337425232
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04115376481413841,
+      "position": 0.13761610275506972,
+      "relative_sign": 0.019507535032051236,
+      "structure": 0.19827740216255188,
+      "total": 0.19827740216255188
+    }
+  },
+  {
+    "epoch": 101,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.023398596674203874,
+      "position": 0.06695912924408913,
+      "relative_sign": 0.002198575356023866,
+      "structure": 0.09255630141496658,
+      "total": 0.09255630141496658
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03857198339700699,
+      "position": 0.12644964331388472,
+      "relative_sign": 0.023130025559177737,
+      "structure": 0.188151651263237,
+      "total": 0.188151651263237
+    }
+  },
+  {
+    "epoch": 102,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02116199381649494,
+      "position": 0.052720448076725004,
+      "relative_sign": 0.00010663712669975212,
+      "structure": 0.07398907840251923,
+      "total": 0.07398907840251923
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035972542971372604,
+      "position": 0.12133667409420014,
+      "relative_sign": 0.013106308988091769,
+      "structure": 0.17041552639007568,
+      "total": 0.17041552639007568
+    }
+  },
+  {
+    "epoch": 103,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0202531698346138,
+      "position": 0.05008820953965187,
+      "relative_sign": 3.0087932981132325e-05,
+      "structure": 0.07037146726250648,
+      "total": 0.07037146726250648
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036949326157569885,
+      "position": 0.11856926488876343,
+      "relative_sign": 0.009048939607753709,
+      "structure": 0.16456753170490265,
+      "total": 0.16456753170490265
+    }
+  },
+  {
+    "epoch": 104,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.020336561128497122,
+      "position": 0.049489969432353974,
+      "relative_sign": 1.886994475216852e-05,
+      "structure": 0.06984540063142776,
+      "total": 0.06984540063142776
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03575625815987587,
+      "position": 0.1191129977107048,
+      "relative_sign": 0.010345089967660898,
+      "structure": 0.16521434795856477,
+      "total": 0.16521434795856477
+    }
+  },
+  {
+    "epoch": 105,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02031468965113163,
+      "position": 0.04938580957055092,
+      "relative_sign": 1.4536731904854605e-05,
+      "structure": 0.06971503585577012,
+      "total": 0.06971503585577012
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035919423609972,
+      "position": 0.11857499063014984,
+      "relative_sign": 0.009401076758695125,
+      "structure": 0.16389549112319945,
+      "total": 0.16389549112319945
+    }
+  },
+  {
+    "epoch": 106,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.020413173511624336,
+      "position": 0.051525583505630496,
+      "relative_sign": 1.9897824498912086e-05,
+      "structure": 0.07195865470170974,
+      "total": 0.07195865470170974
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03795102363824844,
+      "position": 0.13193803578615187,
+      "relative_sign": 0.01763818184543925,
+      "structure": 0.187527241230011,
+      "total": 0.187527241230011
+    }
+  },
+  {
+    "epoch": 107,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.02067884764075279,
+      "position": 0.049245945364236834,
+      "relative_sign": 2.522676337980556e-05,
+      "structure": 0.06995001977682114,
+      "total": 0.06995001977682114
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03679115834832192,
+      "position": 0.11631645876169204,
+      "relative_sign": 0.012547193380512908,
+      "structure": 0.1656548113822937,
+      "total": 0.1656548113822937
+    }
+  },
+  {
+    "epoch": 108,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.019383891195058824,
+      "position": 0.046627977937459944,
+      "relative_sign": 2.836721518679042e-05,
+      "structure": 0.06604023599624634,
+      "total": 0.06604023599624634
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03757255387306213,
+      "position": 0.12211463350057603,
+      "relative_sign": 0.009602440095608471,
+      "structure": 0.16928962635993958,
+      "total": 0.16928962635993958
+    }
+  },
+  {
+    "epoch": 109,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.019137929007411004,
+      "position": 0.046701021790504456,
+      "relative_sign": 1.92708874994878e-05,
+      "structure": 0.06585822188854218,
+      "total": 0.06585822188854218
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03646459829807282,
+      "position": 0.11457159376144409,
+      "relative_sign": 0.007717124133589095,
+      "structure": 0.15875331854820252,
+      "total": 0.15875331854820252
+    }
+  },
+  {
+    "epoch": 110,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.019273073434829712,
+      "position": 0.04505955523252487,
+      "relative_sign": 2.4167744862552355e-05,
+      "structure": 0.06435679638385773,
+      "total": 0.06435679638385773
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03606303629279137,
+      "position": 0.11531198847293854,
+      "relative_sign": 0.01474259305664964,
+      "structure": 0.16611761879920958,
+      "total": 0.16611761879920958
+    }
+  },
+  {
+    "epoch": 111,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.018953692048788072,
+      "position": 0.045737913191318515,
+      "relative_sign": 1.4575061975165226e-05,
+      "structure": 0.06470618003606796,
+      "total": 0.06470618003606796
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03676254460215569,
+      "position": 0.11543453133106232,
+      "relative_sign": 0.010254790289542143,
+      "structure": 0.16245186614990234,
+      "total": 0.16245186614990234
+    }
+  },
+  {
+    "epoch": 112,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01834961748123169,
+      "position": 0.04384623995423317,
+      "relative_sign": 1.7166209639981388e-05,
+      "structure": 0.06221302330493927,
+      "total": 0.06221302330493927
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03564790147542953,
+      "position": 0.11367615211009979,
+      "relative_sign": 0.01060684869387478,
+      "structure": 0.15993090081214906,
+      "total": 0.15993090081214906
+    }
+  },
+  {
+    "epoch": 113,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0191461184322834,
+      "position": 0.04513199883699417,
+      "relative_sign": 1.0966697080675658e-05,
+      "structure": 0.06428908455371857,
+      "total": 0.06428908455371857
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03709658139944077,
+      "position": 0.11847299045324325,
+      "relative_sign": 0.00824551386821986,
+      "structure": 0.16381508660316468,
+      "total": 0.16381508660316468
+    }
+  },
+  {
+    "epoch": 114,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.019385667502880097,
+      "position": 0.04724508512020111,
+      "relative_sign": 2.1623918099749064e-05,
+      "structure": 0.06665237629413605,
+      "total": 0.06665237629413605
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035189470380544666,
+      "position": 0.11866292095184326,
+      "relative_sign": 0.008538936218346862,
+      "structure": 0.16239132714271545,
+      "total": 0.16239132714271545
+    }
+  },
+  {
+    "epoch": 115,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.018853052228689195,
+      "position": 0.04486728668212891,
+      "relative_sign": 1.2250266683849985e-05,
+      "structure": 0.06373258894681931,
+      "total": 0.06373258894681931
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03681686747074127,
+      "position": 0.11778869223594665,
+      "relative_sign": 0.010631925845422302,
+      "structure": 0.16523748803138733,
+      "total": 0.16523748803138733
+    }
+  },
+  {
+    "epoch": 116,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0186237408220768,
+      "position": 0.04406033036112785,
+      "relative_sign": 1.843536921114719e-05,
+      "structure": 0.06270250701904297,
+      "total": 0.06270250701904297
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03665058583021164,
+      "position": 0.1122926595211029,
+      "relative_sign": 0.009612671485236205,
+      "structure": 0.15855591356754303,
+      "total": 0.15855591356754303
+    }
+  },
+  {
+    "epoch": 117,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.018593111097812653,
+      "position": 0.04240434753894806,
+      "relative_sign": 1.4807692234398928e-05,
+      "structure": 0.06101226645708084,
+      "total": 0.06101226645708084
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03536969646811485,
+      "position": 0.11467154091596603,
+      "relative_sign": 0.008511583552040975,
+      "structure": 0.15855282139778137,
+      "total": 0.15855282139778137
+    }
+  },
+  {
+    "epoch": 118,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.018183861017227174,
+      "position": 0.04462690109014511,
+      "relative_sign": 1.35323737233648e-05,
+      "structure": 0.0628242939710617,
+      "total": 0.0628242939710617
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03774254474043846,
+      "position": 0.1092276885509491,
+      "relative_sign": 0.00968251239973688,
+      "structure": 0.15665274167060853,
+      "total": 0.15665274167060853
+    }
+  },
+  {
+    "epoch": 119,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.018702105671167375,
+      "position": 0.0445011813044548,
+      "relative_sign": 1.668953970079201e-05,
+      "structure": 0.06321997693181038,
+      "total": 0.06321997693181038
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03608291620016098,
+      "position": 0.11500889384746552,
+      "relative_sign": 0.00618923145296867,
+      "structure": 0.15728104341030122,
+      "total": 0.15728104341030122
+    }
+  },
+  {
+    "epoch": 120,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.018105130568146707,
+      "position": 0.04431021201610565,
+      "relative_sign": 2.2238213179662124e-05,
+      "structure": 0.06243758088350296,
+      "total": 0.06243758088350296
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03611843106150627,
+      "position": 0.11585971111059189,
+      "relative_sign": 0.015086149524249777,
+      "structure": 0.16706429648399354,
+      "total": 0.16706429648399354
+    }
+  },
+  {
+    "epoch": 121,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.018160871908068657,
+      "position": 0.043819903165102,
+      "relative_sign": 2.2595754349651998e-05,
+      "structure": 0.06200337079167366,
+      "total": 0.06200337079167366
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03848338270187378,
+      "position": 0.11615047216415406,
+      "relative_sign": 0.011680218282199348,
+      "structure": 0.1663140754699707,
+      "total": 0.1663140754699707
+    }
+  },
+  {
+    "epoch": 122,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.017985428869724273,
+      "position": 0.04343494984507561,
+      "relative_sign": 8.761251060241193e-05,
+      "structure": 0.06150799113512039,
+      "total": 0.06150799113512039
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0384241858124733,
+      "position": 0.11721960008144379,
+      "relative_sign": 0.01306766912133753,
+      "structure": 0.1687114485502243,
+      "total": 0.1687114485502243
+    }
+  },
+  {
+    "epoch": 123,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.017544555842876435,
+      "position": 0.04221326804161072,
+      "relative_sign": 2.288435157947788e-05,
+      "structure": 0.059780708253383635,
+      "total": 0.059780708253383635
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035942729324102404,
+      "position": 0.1093188859820366,
+      "relative_sign": 0.009712262427838141,
+      "structure": 0.15497387671470642,
+      "total": 0.15497387671470642
+    }
+  },
+  {
+    "epoch": 124,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.017707802429795264,
+      "position": 0.04185327011346817,
+      "relative_sign": 1.7717508756959433e-05,
+      "structure": 0.05957879036664963,
+      "total": 0.05957879036664963
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.039544756531715394,
+      "position": 0.11741860812902451,
+      "relative_sign": 0.011912644421357982,
+      "structure": 0.16887600898742675,
+      "total": 0.16887600898742675
+    }
+  },
+  {
+    "epoch": 125,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.018061916574835777,
+      "position": 0.04294784379005432,
+      "relative_sign": 0.00038131149698597257,
+      "structure": 0.06139107215404511,
+      "total": 0.06139107215404511
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038514641493558884,
+      "position": 0.11624186980724335,
+      "relative_sign": 0.007550739687194437,
+      "structure": 0.16230724942684174,
+      "total": 0.16230724942684174
+    }
+  },
+  {
+    "epoch": 126,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.020834970250725747,
+      "position": 0.06076678079366684,
+      "relative_sign": 0.0014582619515877014,
+      "structure": 0.0830600129365921,
+      "total": 0.0830600129365921
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.041941275268793106,
+      "position": 0.13216570341587067,
+      "relative_sign": 0.039887406341338645,
+      "structure": 0.21399438452720643,
+      "total": 0.21399438452720643
+    }
+  },
+  {
+    "epoch": 127,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.020216282978653907,
+      "position": 0.05970389381051064,
+      "relative_sign": 0.0023618560167342367,
+      "structure": 0.0822820329964161,
+      "total": 0.0822820329964161
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036689394503831865,
+      "position": 0.114051837682724,
+      "relative_sign": 0.0026842175778583623,
+      "structure": 0.15342545461654664,
+      "total": 0.15342545461654664
+    }
+  },
+  {
+    "epoch": 128,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.017970654666423797,
+      "position": 0.044752798527479175,
+      "relative_sign": 0.0005131129791911917,
+      "structure": 0.0632365660071373,
+      "total": 0.0632365660071373
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03547803670167923,
+      "position": 0.11111305278539657,
+      "relative_sign": 0.011863788947768626,
+      "structure": 0.15845487928390503,
+      "total": 0.15845487928390503
+    }
+  },
+  {
+    "epoch": 129,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01701562713086605,
+      "position": 0.03999894863367081,
+      "relative_sign": 6.612991297743065e-05,
+      "structure": 0.05708070546388626,
+      "total": 0.05708070546388626
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03514461037516594,
+      "position": 0.10879762983322143,
+      "relative_sign": 0.020647380068028725,
+      "structure": 0.16458961534500122,
+      "total": 0.16458961534500122
+    }
+  },
+  {
+    "epoch": 130,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01677514912188053,
+      "position": 0.03889025005698204,
+      "relative_sign": 2.2228219221688052e-05,
+      "structure": 0.05568762746453285,
+      "total": 0.05568762746453285
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03711729583144188,
+      "position": 0.11119414842128754,
+      "relative_sign": 0.009439763480968396,
+      "structure": 0.15775120663642883,
+      "total": 0.15775120663642883
+    }
+  },
+  {
+    "epoch": 131,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.016774892777204512,
+      "position": 0.04022096262872219,
+      "relative_sign": 1.2630371239538362e-05,
+      "structure": 0.05700848573446274,
+      "total": 0.05700848573446274
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037858190685510634,
+      "position": 0.12008447569608688,
+      "relative_sign": 0.015136225088837819,
+      "structure": 0.17307889127731324,
+      "total": 0.17307889127731324
+    }
+  },
+  {
+    "epoch": 132,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01689482419192791,
+      "position": 0.03918982034921646,
+      "relative_sign": 1.1005110087808134e-05,
+      "structure": 0.05609564942121506,
+      "total": 0.05609564942121506
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035096818387508395,
+      "position": 0.10802147787809371,
+      "relative_sign": 0.009140681939439673,
+      "structure": 0.15225897657871246,
+      "total": 0.15225897657871246
+    }
+  },
+  {
+    "epoch": 133,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.016162147030234338,
+      "position": 0.037303079426288605,
+      "relative_sign": 1.3509808350136154e-05,
+      "structure": 0.05347873657941818,
+      "total": 0.05347873657941818
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035407911479473114,
+      "position": 0.11435541248321533,
+      "relative_sign": 0.0062902625614588035,
+      "structure": 0.15605358695983887,
+      "total": 0.15605358695983887
+    }
+  },
+  {
+    "epoch": 134,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.016549390703439713,
+      "position": 0.03802918839454651,
+      "relative_sign": 1.1279395578185358e-05,
+      "structure": 0.054589858531951904,
+      "total": 0.054589858531951904
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0374354222714901,
+      "position": 0.10885211730003357,
+      "relative_sign": 0.009866382990696365,
+      "structure": 0.15615392112731932,
+      "total": 0.15615392112731932
+    }
+  },
+  {
+    "epoch": 135,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.015947970911860464,
+      "position": 0.037276345670223233,
+      "relative_sign": 1.548565568646154e-05,
+      "structure": 0.05323980215191841,
+      "total": 0.05323980215191841
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03733680552244186,
+      "position": 0.10987989193201066,
+      "relative_sign": 0.01180896988418317,
+      "structure": 0.15902566838264465,
+      "total": 0.15902566838264465
+    }
+  },
+  {
+    "epoch": 136,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.016237306460738184,
+      "position": 0.03790189176797867,
+      "relative_sign": 1.575406123515677e-05,
+      "structure": 0.05415495210886002,
+      "total": 0.05415495210886002
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03539493325352669,
+      "position": 0.10924660116434097,
+      "relative_sign": 0.00963727885384651,
+      "structure": 0.1542788107395172,
+      "total": 0.1542788107395172
+    }
+  },
+  {
+    "epoch": 137,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.015737640976905824,
+      "position": 0.03589554819464683,
+      "relative_sign": 1.7175445791053788e-05,
+      "structure": 0.05165036460757256,
+      "total": 0.05165036460757256
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03577541598677635,
+      "position": 0.10829722386598586,
+      "relative_sign": 0.008135859622494536,
+      "structure": 0.15220850050449372,
+      "total": 0.15220850050449372
+    }
+  },
+  {
+    "epoch": 138,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.016068196833133697,
+      "position": 0.035982823938131334,
+      "relative_sign": 1.0393680581273657e-05,
+      "structure": 0.05206141462922096,
+      "total": 0.05206141462922096
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03679111304879189,
+      "position": 0.11074520778656007,
+      "relative_sign": 0.006070926569580479,
+      "structure": 0.15360724329948425,
+      "total": 0.15360724329948425
+    }
+  },
+  {
+    "epoch": 139,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.015588873878121376,
+      "position": 0.035415685623884204,
+      "relative_sign": 1.0390809419050128e-05,
+      "structure": 0.051014950037002564,
+      "total": 0.051014950037002564
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03599242278933525,
+      "position": 0.112997309923172,
+      "relative_sign": 0.009357945520128851,
+      "structure": 0.1583476802110672,
+      "total": 0.1583476802110672
+    }
+  },
+  {
+    "epoch": 140,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01589772780239582,
+      "position": 0.03631324824690819,
+      "relative_sign": 9.247745168750043e-06,
+      "structure": 0.05222022435069084,
+      "total": 0.05222022435069084
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038280966103076935,
+      "position": 0.11042214125394821,
+      "relative_sign": 0.00871418504129906,
+      "structure": 0.15741728901863097,
+      "total": 0.15741728901863097
+    }
+  },
+  {
+    "epoch": 141,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.015542200222611427,
+      "position": 0.03543143829703331,
+      "relative_sign": 1.134511672694316e-05,
+      "structure": 0.050984983861446384,
+      "total": 0.050984983861446384
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03690139240026474,
+      "position": 0.11462680208683014,
+      "relative_sign": 0.011299305944823573,
+      "structure": 0.16282749950885772,
+      "total": 0.16282749950885772
+    }
+  },
+  {
+    "epoch": 142,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01557056564092636,
+      "position": 0.03584953334927559,
+      "relative_sign": 1.276043898633361e-05,
+      "structure": 0.051432859241962434,
+      "total": 0.051432859241962434
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03909242495894432,
+      "position": 0.1119027819633484,
+      "relative_sign": 0.013408005781479005,
+      "structure": 0.1644032119512558,
+      "total": 0.1644032119512558
+    }
+  },
+  {
+    "epoch": 143,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01604493410885334,
+      "position": 0.03673838216066361,
+      "relative_sign": 1.816130545444139e-05,
+      "structure": 0.052801477164030074,
+      "total": 0.052801477164030074
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03593132448196411,
+      "position": 0.11058392471075058,
+      "relative_sign": 0.012014451650386036,
+      "structure": 0.15852970349788667,
+      "total": 0.15852970349788667
+    }
+  },
+  {
+    "epoch": 144,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.015597115099430084,
+      "position": 0.03754675626754761,
+      "relative_sign": 2.051532577115722e-05,
+      "structure": 0.053164386510848996,
+      "total": 0.053164386510848996
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.039139850705862046,
+      "position": 0.11383312004804612,
+      "relative_sign": 0.011308595865011739,
+      "structure": 0.16428156447410583,
+      "total": 0.16428156447410583
+    }
+  },
+  {
+    "epoch": 145,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.015507874190807342,
+      "position": 0.03620358231663704,
+      "relative_sign": 9.66952603948812e-06,
+      "structure": 0.051721126079559324,
+      "total": 0.051721126079559324
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03657131662964821,
+      "position": 0.10806317526102066,
+      "relative_sign": 0.008747862069416442,
+      "structure": 0.1533823583126068,
+      "total": 0.1533823583126068
+    }
+  },
+  {
+    "epoch": 146,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014962166517972946,
+      "position": 0.03409680247306824,
+      "relative_sign": 1.0204898256688467e-05,
+      "structure": 0.04906917399168015,
+      "total": 0.04906917399168015
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03546203854680061,
+      "position": 0.10839187055826187,
+      "relative_sign": 0.007613638410765816,
+      "structure": 0.1514675499200821,
+      "total": 0.1514675499200821
+    }
+  },
+  {
+    "epoch": 147,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014760277479887009,
+      "position": 0.03259725883603096,
+      "relative_sign": 8.169662252726085e-06,
+      "structure": 0.047365706115961075,
+      "total": 0.047365706115961075
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03714123710989952,
+      "position": 0.10925578290224075,
+      "relative_sign": 0.012786815399336774,
+      "structure": 0.15918383622169494,
+      "total": 0.15918383622169494
+    }
+  },
+  {
+    "epoch": 148,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01480284483730793,
+      "position": 0.0343395618647337,
+      "relative_sign": 1.0644721752214537e-05,
+      "structure": 0.049153051257133484,
+      "total": 0.049153051257133484
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03551698413491249,
+      "position": 0.11182747280597687,
+      "relative_sign": 0.012533300626564596,
+      "structure": 0.15987775909900664,
+      "total": 0.15987775909900664
+    }
+  },
+  {
+    "epoch": 149,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014919778726994992,
+      "position": 0.033343978226184845,
+      "relative_sign": 9.593427040499592e-06,
+      "structure": 0.04827335056662559,
+      "total": 0.04827335056662559
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03585910519957542,
+      "position": 0.11032635825872421,
+      "relative_sign": 0.004531712383117338,
+      "structure": 0.1507171766757965,
+      "total": 0.1507171766757965
+    }
+  },
+  {
+    "epoch": 150,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014853075757622718,
+      "position": 0.03545365872979164,
+      "relative_sign": 1.307375626834073e-05,
+      "structure": 0.05031980863213539,
+      "total": 0.05031980863213539
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04128258964419365,
+      "position": 0.11213293844461442,
+      "relative_sign": 0.007597727054544521,
+      "structure": 0.16101325738430022,
+      "total": 0.16101325738430022
+    }
+  },
+  {
+    "epoch": 151,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.015171710044145584,
+      "position": 0.03278352507948876,
+      "relative_sign": 8.453139281073163e-06,
+      "structure": 0.04796368822455406,
+      "total": 0.04796368822455406
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03592324024438858,
+      "position": 0.10968335551023484,
+      "relative_sign": 0.01203126702156078,
+      "structure": 0.15763785934448243,
+      "total": 0.15763785934448243
+    }
+  },
+  {
+    "epoch": 152,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014461630001664161,
+      "position": 0.03231027191877365,
+      "relative_sign": 1.0197134338113756e-05,
+      "structure": 0.046782099336385725,
+      "total": 0.046782099336385725
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03499401342868805,
+      "position": 0.10491364932060242,
+      "relative_sign": 0.009135551022702202,
+      "structure": 0.14904321467876433,
+      "total": 0.14904321467876433
+    }
+  },
+  {
+    "epoch": 153,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014178562432527542,
+      "position": 0.03237601190805435,
+      "relative_sign": 7.850562021417318e-06,
+      "structure": 0.046562424749135974,
+      "total": 0.046562424749135974
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03675568252801895,
+      "position": 0.10968777322769165,
+      "relative_sign": 0.00992050240640583,
+      "structure": 0.1563639590740204,
+      "total": 0.1563639590740204
+    }
+  },
+  {
+    "epoch": 154,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014330289646983147,
+      "position": 0.032812692403793337,
+      "relative_sign": 1.4552926095120711e-05,
+      "structure": 0.04715753474831581,
+      "total": 0.04715753474831581
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036549323707818986,
+      "position": 0.10857952117919922,
+      "relative_sign": 0.010492860244354233,
+      "structure": 0.15562170493602753,
+      "total": 0.15562170493602753
+    }
+  },
+  {
+    "epoch": 155,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014203389339148999,
+      "position": 0.032789754837751386,
+      "relative_sign": 8.674459167764326e-06,
+      "structure": 0.04700181886553764,
+      "total": 0.04700181886553764
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03672565817832947,
+      "position": 0.10720324194431305,
+      "relative_sign": 0.007262097212846129,
+      "structure": 0.15119099724292756,
+      "total": 0.15119099724292756
+    }
+  },
+  {
+    "epoch": 156,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014883121117949486,
+      "position": 0.033565309345722195,
+      "relative_sign": 8.725978525490063e-06,
+      "structure": 0.04845715659856796,
+      "total": 0.04845715659856796
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036590494632720946,
+      "position": 0.10668027561903,
+      "relative_sign": 0.009137593093713803,
+      "structure": 0.15240836262702942,
+      "total": 0.15240836262702942
+    }
+  },
+  {
+    "epoch": 157,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014387070700526238,
+      "position": 0.03423436531424522,
+      "relative_sign": 7.151017401156423e-06,
+      "structure": 0.048628587126731876,
+      "total": 0.048628587126731876
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035712651759386066,
+      "position": 0.1067408568263054,
+      "relative_sign": 0.006842393812650698,
+      "structure": 0.14929590332508086,
+      "total": 0.14929590332508086
+    }
+  },
+  {
+    "epoch": 158,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01378945617377758,
+      "position": 0.031824426382780074,
+      "relative_sign": 7.485556759093015e-06,
+      "structure": 0.045621367514133454,
+      "total": 0.045621367514133454
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03579943788051605,
+      "position": 0.10705806577205658,
+      "relative_sign": 0.0048990119936870545,
+      "structure": 0.14775651693344116,
+      "total": 0.14775651693344116
+    }
+  },
+  {
+    "epoch": 159,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.013728236943483354,
+      "position": 0.032309365421533585,
+      "relative_sign": 6.598658878488095e-06,
+      "structure": 0.04604420092701912,
+      "total": 0.04604420092701912
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03627630558609962,
+      "position": 0.10802498459815979,
+      "relative_sign": 0.007098116615583422,
+      "structure": 0.1513994096517563,
+      "total": 0.1513994096517563
+    }
+  },
+  {
+    "epoch": 160,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014138857647776604,
+      "position": 0.032339823186397554,
+      "relative_sign": 1.0332055287790354e-05,
+      "structure": 0.04648901271820068,
+      "total": 0.04648901271820068
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03701338031888008,
+      "position": 0.11410911470651626,
+      "relative_sign": 0.003555335714307603,
+      "structure": 0.15467783045768738,
+      "total": 0.15467783045768738
+    }
+  },
+  {
+    "epoch": 161,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.014433501750230789,
+      "position": 0.03492440873384476,
+      "relative_sign": 5.701204444960695e-06,
+      "structure": 0.0493636120557785,
+      "total": 0.0493636120557785
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036716502398252485,
+      "position": 0.1079893479347229,
+      "relative_sign": 0.0025501519989620646,
+      "structure": 0.14725600349903106,
+      "total": 0.14725600349903106
+    }
+  },
+  {
+    "epoch": 162,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.013405447959899902,
+      "position": 0.030848896503448485,
+      "relative_sign": 5.650714722349903e-06,
+      "structure": 0.04425999510288239,
+      "total": 0.04425999510288239
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036927840352058414,
+      "position": 0.10604359740018844,
+      "relative_sign": 0.007379388545619804,
+      "structure": 0.1503508267402649,
+      "total": 0.1503508267402649
+    }
+  },
+  {
+    "epoch": 163,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.013818497613072396,
+      "position": 0.030883319586515426,
+      "relative_sign": 8.345466330638374e-06,
+      "structure": 0.04471016272902489,
+      "total": 0.04471016272902489
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03727071020007133,
+      "position": 0.10942166531085969,
+      "relative_sign": 0.013926456184429298,
+      "structure": 0.16061882996559143,
+      "total": 0.16061882996559143
+    }
+  },
+  {
+    "epoch": 164,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.013063143089413642,
+      "position": 0.0299967450350523,
+      "relative_sign": 6.388991017388434e-06,
+      "structure": 0.04306627741456032,
+      "total": 0.04306627741456032
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03670045593380928,
+      "position": 0.1074773030281067,
+      "relative_sign": 0.0050885425353562825,
+      "structure": 0.1492663037776947,
+      "total": 0.1492663037776947
+    }
+  },
+  {
+    "epoch": 165,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.013603168159723282,
+      "position": 0.03113494038581848,
+      "relative_sign": 6.609868875727898e-06,
+      "structure": 0.04474471813440323,
+      "total": 0.04474471813440323
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0362282629609108,
+      "position": 0.10804344803094863,
+      "relative_sign": 0.006611224237640272,
+      "structure": 0.1508829356431961,
+      "total": 0.1508829356431961
+    }
+  },
+  {
+    "epoch": 166,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012968101114034652,
+      "position": 0.028743139535188676,
+      "relative_sign": 8.810383982051916e-06,
+      "structure": 0.041720051020383835,
+      "total": 0.041720051020383835
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037913519352674487,
+      "position": 0.11240502136945725,
+      "relative_sign": 0.008865965040195078,
+      "structure": 0.15918450474739074,
+      "total": 0.15918450474739074
+    }
+  },
+  {
+    "epoch": 167,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.013058033101260661,
+      "position": 0.029393320530653,
+      "relative_sign": 1.093750905511115e-05,
+      "structure": 0.04246229124069214,
+      "total": 0.04246229124069214
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03717705947160721,
+      "position": 0.10890807980298996,
+      "relative_sign": 0.008349060821341936,
+      "structure": 0.1544342007637024,
+      "total": 0.1544342007637024
+    }
+  },
+  {
+    "epoch": 168,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012890352234244347,
+      "position": 0.027776210963726043,
+      "relative_sign": 4.9168519250315514e-06,
+      "structure": 0.04067148014903069,
+      "total": 0.04067148014903069
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03556289777159691,
+      "position": 0.10562940639257432,
+      "relative_sign": 0.004138779365576283,
+      "structure": 0.1453310842514038,
+      "total": 0.1453310842514038
+    }
+  },
+  {
+    "epoch": 169,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012744407288730145,
+      "position": 0.02839701160788536,
+      "relative_sign": 4.458696922824857e-06,
+      "structure": 0.04114587751030922,
+      "total": 0.04114587751030922
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036548803448677065,
+      "position": 0.10911007755994796,
+      "relative_sign": 0.009064659174898907,
+      "structure": 0.15472354078292846,
+      "total": 0.15472354078292846
+    }
+  },
+  {
+    "epoch": 170,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.013004386901855469,
+      "position": 0.029865535527467728,
+      "relative_sign": 4.169271439195654e-06,
+      "structure": 0.04287409165501595,
+      "total": 0.04287409165501595
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03795946225523949,
+      "position": 0.11181758350133895,
+      "relative_sign": 0.007310947739478479,
+      "structure": 0.157087988615036,
+      "total": 0.157087988615036
+    }
+  },
+  {
+    "epoch": 171,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012421963959932327,
+      "position": 0.02878567749261856,
+      "relative_sign": 4.496885813665585e-06,
+      "structure": 0.0412121385037899,
+      "total": 0.0412121385037899
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03618222990632057,
+      "position": 0.10678129076957703,
+      "relative_sign": 0.008055961303009554,
+      "structure": 0.15101948273181914,
+      "total": 0.15101948273181914
+    }
+  },
+  {
+    "epoch": 172,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01318163013458252,
+      "position": 0.029509138718247414,
+      "relative_sign": 6.79736138295084e-06,
+      "structure": 0.04269756633043289,
+      "total": 0.04269756633043289
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0353329456448555,
+      "position": 0.10484068107604981,
+      "relative_sign": 0.008143415001804898,
+      "structure": 0.1483170372247696,
+      "total": 0.1483170372247696
+    }
+  },
+  {
+    "epoch": 173,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012457044556736947,
+      "position": 0.029278968781232834,
+      "relative_sign": 5.72646848334557e-06,
+      "structure": 0.041741739898920056,
+      "total": 0.041741739898920056
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038894012928009036,
+      "position": 0.10700134456157684,
+      "relative_sign": 0.005333282951589353,
+      "structure": 0.1512286388874054,
+      "total": 0.1512286388874054
+    }
+  },
+  {
+    "epoch": 174,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012909453056752682,
+      "position": 0.028742032036185264,
+      "relative_sign": 6.43145097433262e-06,
+      "structure": 0.041657916456460956,
+      "total": 0.041657916456460956
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03776472160220146,
+      "position": 0.1088597829937935,
+      "relative_sign": 0.008148049765153246,
+      "structure": 0.15477255058288575,
+      "total": 0.15477255058288575
+    }
+  },
+  {
+    "epoch": 175,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012626531161367893,
+      "position": 0.029181253522634506,
+      "relative_sign": 7.487609754178948e-06,
+      "structure": 0.04181527268886566,
+      "total": 0.04181527268886566
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03838237616419792,
+      "position": 0.10952259278297424,
+      "relative_sign": 0.013755241309933353,
+      "structure": 0.16166021049022675,
+      "total": 0.16166021049022675
+    }
+  },
+  {
+    "epoch": 176,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012748387478291988,
+      "position": 0.02854923787713051,
+      "relative_sign": 5.528601867354155e-06,
+      "structure": 0.04130315434932709,
+      "total": 0.04130315434932709
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03941869232058525,
+      "position": 0.10860124456882476,
+      "relative_sign": 0.009508148357242134,
+      "structure": 0.1575280842781067,
+      "total": 0.1575280842781067
+    }
+  },
+  {
+    "epoch": 177,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012324925027787686,
+      "position": 0.029200147420167924,
+      "relative_sign": 3.5954453229578577e-06,
+      "structure": 0.04152866816520691,
+      "total": 0.04152866816520691
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036449702501297,
+      "position": 0.11037617367506027,
+      "relative_sign": 0.008458446293188444,
+      "structure": 0.15528432190418243,
+      "total": 0.15528432190418243
+    }
+  },
+  {
+    "epoch": 178,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012189223788678646,
+      "position": 0.02836257167160511,
+      "relative_sign": 9.527138010440694e-06,
+      "structure": 0.04056132259964943,
+      "total": 0.04056132259964943
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03701672723889351,
+      "position": 0.10582095980644227,
+      "relative_sign": 0.005382339963058939,
+      "structure": 0.14822002708911897,
+      "total": 0.14822002708911897
+    }
+  },
+  {
+    "epoch": 179,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012378025725483894,
+      "position": 0.028140008479356767,
+      "relative_sign": 3.92177099287494e-06,
+      "structure": 0.04052195617556572,
+      "total": 0.04052195617556572
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037346452116966244,
+      "position": 0.10782852184772491,
+      "relative_sign": 0.003379285909540613,
+      "structure": 0.14855425584316254,
+      "total": 0.14855425584316254
+    }
+  },
+  {
+    "epoch": 180,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.013066855601966382,
+      "position": 0.0279765814691782,
+      "relative_sign": 2.3552072970716154e-06,
+      "structure": 0.04104579249024391,
+      "total": 0.04104579249024391
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03864232245087624,
+      "position": 0.10792209708690643,
+      "relative_sign": 0.003949957815841799,
+      "structure": 0.1505143768787384,
+      "total": 0.1505143768787384
+    }
+  },
+  {
+    "epoch": 181,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01242672224342823,
+      "position": 0.02820857471227646,
+      "relative_sign": 4.647764718612279e-06,
+      "structure": 0.04063994513452053,
+      "total": 0.04063994513452053
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.035717006891965865,
+      "position": 0.10797619891166688,
+      "relative_sign": 0.007637885805582527,
+      "structure": 0.1513310935497284,
+      "total": 0.1513310935497284
+    }
+  },
+  {
+    "epoch": 182,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012387405060231685,
+      "position": 0.027762549489736558,
+      "relative_sign": 4.344502231660386e-06,
+      "structure": 0.04015429902076721,
+      "total": 0.04015429902076721
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037187922954559326,
+      "position": 0.1075340011715889,
+      "relative_sign": 0.007083948374354008,
+      "structure": 0.15180587208271026,
+      "total": 0.15180587208271026
+    }
+  },
+  {
+    "epoch": 183,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012204135686159134,
+      "position": 0.027582928240299225,
+      "relative_sign": 5.791710989171861e-06,
+      "structure": 0.03979285562038422,
+      "total": 0.03979285562038422
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036141694575548174,
+      "position": 0.10893501883745194,
+      "relative_sign": 0.0062569464547284495,
+      "structure": 0.1513336579799652,
+      "total": 0.1513336579799652
+    }
+  },
+  {
+    "epoch": 184,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012019257798790931,
+      "position": 0.02688128961622715,
+      "relative_sign": 2.8087704866806007e-06,
+      "structure": 0.0389033562541008,
+      "total": 0.0389033562541008
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03918380320072174,
+      "position": 0.10953089737892151,
+      "relative_sign": 0.004658029480225423,
+      "structure": 0.15337272703647614,
+      "total": 0.15337272703647614
+    }
+  },
+  {
+    "epoch": 185,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012462229304015636,
+      "position": 0.02842198570072651,
+      "relative_sign": 3.169102755776976e-06,
+      "structure": 0.04088738453388214,
+      "total": 0.04088738453388214
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03769773915410042,
+      "position": 0.10915195715427399,
+      "relative_sign": 0.0061074060891812675,
+      "structure": 0.1529570997953415,
+      "total": 0.1529570997953415
+    }
+  },
+  {
+    "epoch": 186,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011890124894678594,
+      "position": 0.026231547981500625,
+      "relative_sign": 3.3535072655785923e-06,
+      "structure": 0.03812502640485763,
+      "total": 0.03812502640485763
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03592818307876587,
+      "position": 0.11189714592695237,
+      "relative_sign": 0.00621952279549032,
+      "structure": 0.1540448489189148,
+      "total": 0.1540448489189148
+    }
+  },
+  {
+    "epoch": 187,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01156312396377325,
+      "position": 0.025936781898140908,
+      "relative_sign": 2.8401733495257984e-06,
+      "structure": 0.03750274613499641,
+      "total": 0.03750274613499641
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03871634843945503,
+      "position": 0.1082277456521988,
+      "relative_sign": 0.006347210644900202,
+      "structure": 0.153291300535202,
+      "total": 0.153291300535202
+    }
+  },
+  {
+    "epoch": 188,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011755104809999466,
+      "position": 0.027657765358686446,
+      "relative_sign": 2.8525022289329626e-06,
+      "structure": 0.03941572266817093,
+      "total": 0.03941572266817093
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03663467563688755,
+      "position": 0.10653951191902161,
+      "relative_sign": 0.011575370642224471,
+      "structure": 0.15474956059455872,
+      "total": 0.15474956059455872
+    }
+  },
+  {
+    "epoch": 189,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011647973150014878,
+      "position": 0.026759607806801797,
+      "relative_sign": 2.730704455750299e-06,
+      "structure": 0.038410311698913575,
+      "total": 0.038410311698913575
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037473394006490704,
+      "position": 0.10862276494503022,
+      "relative_sign": 0.011221478079942698,
+      "structure": 0.1573176357746124,
+      "total": 0.1573176357746124
+    }
+  },
+  {
+    "epoch": 190,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01143519924581051,
+      "position": 0.026046006113290786,
+      "relative_sign": 2.75398102465374e-06,
+      "structure": 0.03748395958542824,
+      "total": 0.03748395958542824
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037746306151151654,
+      "position": 0.11498637515306473,
+      "relative_sign": 0.004226693373923922,
+      "structure": 0.15695937561988832,
+      "total": 0.15695937561988832
+    }
+  },
+  {
+    "epoch": 191,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011456825248897075,
+      "position": 0.02661312660574913,
+      "relative_sign": 2.694704338352949e-06,
+      "structure": 0.038072646349668504,
+      "total": 0.038072646349668504
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036393905639648436,
+      "position": 0.10325845062732697,
+      "relative_sign": 0.008464600361014846,
+      "structure": 0.14811695754528045,
+      "total": 0.14811695754528045
+    }
+  },
+  {
+    "epoch": 192,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011608684957027436,
+      "position": 0.027182144194841384,
+      "relative_sign": 3.2118293071974336e-06,
+      "structure": 0.03879404073953629,
+      "total": 0.03879404073953629
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037497316122055056,
+      "position": 0.11546461999416352,
+      "relative_sign": 0.006940672178195427,
+      "structure": 0.15990260803699494,
+      "total": 0.15990260803699494
+    }
+  },
+  {
+    "epoch": 193,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011582597345113754,
+      "position": 0.027292212650179865,
+      "relative_sign": 2.0609316871116333e-06,
+      "structure": 0.03887687048316002,
+      "total": 0.03887687048316002
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03764239165186882,
+      "position": 0.10573053705692291,
+      "relative_sign": 0.014542570200818318,
+      "structure": 0.15791549789905548,
+      "total": 0.15791549789905548
+    }
+  },
+  {
+    "epoch": 194,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011350619524717331,
+      "position": 0.026812454611063005,
+      "relative_sign": 6.861617925153496e-06,
+      "structure": 0.03816993576288223,
+      "total": 0.03816993576288223
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036934890374541285,
+      "position": 0.10711707133054733,
+      "relative_sign": 0.006669602070094527,
+      "structure": 0.15072156512737275,
+      "total": 0.15072156512737275
+    }
+  },
+  {
+    "epoch": 195,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010965730845928192,
+      "position": 0.024615318849682807,
+      "relative_sign": 3.0997622144681715e-06,
+      "structure": 0.035584149450063704,
+      "total": 0.035584149450063704
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0378025651872158,
+      "position": 0.10765136712789536,
+      "relative_sign": 0.015086709865498734,
+      "structure": 0.160540642619133,
+      "total": 0.160540642619133
+    }
+  },
+  {
+    "epoch": 196,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011276082441210747,
+      "position": 0.02528642275929451,
+      "relative_sign": 4.243357178207674e-06,
+      "structure": 0.036566748291254045,
+      "total": 0.036566748291254045
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03807865771651268,
+      "position": 0.11118752026557922,
+      "relative_sign": 0.010021682316223973,
+      "structure": 0.15928786313533783,
+      "total": 0.15928786313533783
+    }
+  },
+  {
+    "epoch": 197,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011635049253702163,
+      "position": 0.025530311316251754,
+      "relative_sign": 2.55369851657683e-06,
+      "structure": 0.037167914003133774,
+      "total": 0.037167914003133774
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03749161386489868,
+      "position": 0.10668404400348663,
+      "relative_sign": 0.0063909834118010735,
+      "structure": 0.15056663930416106,
+      "total": 0.15056663930416106
+    }
+  },
+  {
+    "epoch": 198,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010822646386921406,
+      "position": 0.025809742480516432,
+      "relative_sign": 2.9120585868271933e-06,
+      "structure": 0.03663530105352402,
+      "total": 0.03663530105352402
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0392659384906292,
+      "position": 0.10458112972974777,
+      "relative_sign": 0.0059619432202066775,
+      "structure": 0.14980901300907135,
+      "total": 0.14980901300907135
+    }
+  },
+  {
+    "epoch": 199,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.011139637418091297,
+      "position": 0.024462154254317282,
+      "relative_sign": 1.328301783686925e-06,
+      "structure": 0.0356031197309494,
+      "total": 0.0356031197309494
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03730546006560326,
+      "position": 0.10327038842439651,
+      "relative_sign": 0.004814145272035546,
+      "structure": 0.1453899917602539,
+      "total": 0.1453899917602539
+    }
+  },
+  {
+    "epoch": 200,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010959449239075185,
+      "position": 0.025141194850206376,
+      "relative_sign": 4.895111347380521e-06,
+      "structure": 0.03610553923249245,
+      "total": 0.03610553923249245
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037504420220851896,
+      "position": 0.10590347111225128,
+      "relative_sign": 0.006259398839660434,
+      "structure": 0.1496672878265381,
+      "total": 0.1496672878265381
+    }
+  },
+  {
+    "epoch": 201,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010713101409375668,
+      "position": 0.024713315933942794,
+      "relative_sign": 2.002859615345187e-06,
+      "structure": 0.03542841988801956,
+      "total": 0.03542841988801956
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03731979447603226,
+      "position": 0.10586451262235641,
+      "relative_sign": 0.012341662620955162,
+      "structure": 0.15552596855163575,
+      "total": 0.15552596855163575
+    }
+  },
+  {
+    "epoch": 202,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010557942904531955,
+      "position": 0.02479074189066887,
+      "relative_sign": 3.110411732873075e-06,
+      "structure": 0.035351795256137845,
+      "total": 0.035351795256137845
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03759179377555847,
+      "position": 0.1125476062297821,
+      "relative_sign": 0.0022136841618920896,
+      "structure": 0.15235308372974396,
+      "total": 0.15235308372974396
+    }
+  },
+  {
+    "epoch": 203,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01063373014330864,
+      "position": 0.02394968992471695,
+      "relative_sign": 2.2871284979064655e-06,
+      "structure": 0.034585706546902656,
+      "total": 0.034585706546902656
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03567094001173973,
+      "position": 0.1069965198636055,
+      "relative_sign": 0.004514808922555119,
+      "structure": 0.14718227124214173,
+      "total": 0.14718227124214173
+    }
+  },
+  {
+    "epoch": 204,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010442751489579677,
+      "position": 0.024355064034461974,
+      "relative_sign": 2.2764561542141237e-06,
+      "structure": 0.034800091832876204,
+      "total": 0.034800091832876204
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03802587658166885,
+      "position": 0.10652878797054291,
+      "relative_sign": 0.006300194201813724,
+      "structure": 0.15085485982894897,
+      "total": 0.15085485982894897
+    }
+  },
+  {
+    "epoch": 205,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010382265657186508,
+      "position": 0.02349862203001976,
+      "relative_sign": 1.1667152942553827e-06,
+      "structure": 0.03388205415010452,
+      "total": 0.03388205415010452
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036320087254047395,
+      "position": 0.10586219608783722,
+      "relative_sign": 0.0052212593527622315,
+      "structure": 0.1474035440683365,
+      "total": 0.1474035440683365
+    }
+  },
+  {
+    "epoch": 206,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010077399775385857,
+      "position": 0.023282584965229034,
+      "relative_sign": 3.065650233938122e-06,
+      "structure": 0.033363049894571305,
+      "total": 0.033363049894571305
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03946081113815308,
+      "position": 0.10908011960983276,
+      "relative_sign": 0.01239491279822937,
+      "structure": 0.1609358434677124,
+      "total": 0.1609358434677124
+    }
+  },
+  {
+    "epoch": 207,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010435352928936482,
+      "position": 0.02447878658771515,
+      "relative_sign": 7.449351229302792e-07,
+      "structure": 0.03491488428413868,
+      "total": 0.03491488428413868
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038560420513153074,
+      "position": 0.10429867297410965,
+      "relative_sign": 0.018781635045793964,
+      "structure": 0.16164072585105896,
+      "total": 0.16164072585105896
+    }
+  },
+  {
+    "epoch": 208,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009947413615882396,
+      "position": 0.02228942921757698,
+      "relative_sign": 2.1131083724892365e-06,
+      "structure": 0.03223895621299744,
+      "total": 0.03223895621299744
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037510943025350574,
+      "position": 0.10922964930534362,
+      "relative_sign": 0.010548577601600783,
+      "structure": 0.15728917121887206,
+      "total": 0.15728917121887206
+    }
+  },
+  {
+    "epoch": 209,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010462215535342694,
+      "position": 0.023398522362112997,
+      "relative_sign": 6.670472510262316e-07,
+      "structure": 0.033861404806375506,
+      "total": 0.033861404806375506
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03810641533136368,
+      "position": 0.1068819591999054,
+      "relative_sign": 0.00943934957058977,
+      "structure": 0.15442772424221038,
+      "total": 0.15442772424221038
+    }
+  },
+  {
+    "epoch": 210,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009785276278853417,
+      "position": 0.023048429280519485,
+      "relative_sign": 1.8241328155674807e-06,
+      "structure": 0.032835529625415805,
+      "total": 0.032835529625415805
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037818538218736646,
+      "position": 0.10899499082565307,
+      "relative_sign": 0.01069079370532097,
+      "structure": 0.1575043216943741,
+      "total": 0.1575043216943741
+    }
+  },
+  {
+    "epoch": 211,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01048366191983223,
+      "position": 0.024076620370149612,
+      "relative_sign": 2.1393902485877803e-06,
+      "structure": 0.03456242150068283,
+      "total": 0.03456242150068283
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03926321265101433,
+      "position": 0.10805997037887573,
+      "relative_sign": 0.008373702965385917,
+      "structure": 0.15569688427448272,
+      "total": 0.15569688427448272
+    }
+  },
+  {
+    "epoch": 212,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010399104438722134,
+      "position": 0.024648337289690972,
+      "relative_sign": 2.4552222263536373e-06,
+      "structure": 0.0350498968064785,
+      "total": 0.0350498968064785
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03741512787342072,
+      "position": 0.1058416536450386,
+      "relative_sign": 0.0030555538735177238,
+      "structure": 0.14631233513355255,
+      "total": 0.14631233513355255
+    }
+  },
+  {
+    "epoch": 213,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010393734734505415,
+      "position": 0.02396245038509369,
+      "relative_sign": 1.2639056441193648e-06,
+      "structure": 0.03435744881629944,
+      "total": 0.03435744881629944
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04107184439897537,
+      "position": 0.1127526621222496,
+      "relative_sign": 0.01033164891746199,
+      "structure": 0.1641561586856842,
+      "total": 0.1641561586856842
+    }
+  },
+  {
+    "epoch": 214,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010278111599385738,
+      "position": 0.023814184233546257,
+      "relative_sign": 1.3211721974941414e-06,
+      "structure": 0.034093616902828215,
+      "total": 0.034093616902828215
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03832077512145043,
+      "position": 0.10659412461519241,
+      "relative_sign": 0.006851102306683444,
+      "structure": 0.15176600503921509,
+      "total": 0.15176600503921509
+    }
+  },
+  {
+    "epoch": 215,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010049022398889065,
+      "position": 0.023217019975185393,
+      "relative_sign": 1.4984514216833112e-06,
+      "structure": 0.03326754081249237,
+      "total": 0.03326754081249237
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03716627556085587,
+      "position": 0.10427097338438034,
+      "relative_sign": 0.008496775197087856,
+      "structure": 0.1499340250492096,
+      "total": 0.1499340250492096
+    }
+  },
+  {
+    "epoch": 216,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009942654125392436,
+      "position": 0.0236332368850708,
+      "relative_sign": 2.6123319111155397e-06,
+      "structure": 0.03357850304245949,
+      "total": 0.03357850304245949
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03845701414346695,
+      "position": 0.10520001202821731,
+      "relative_sign": 0.010843272646801438,
+      "structure": 0.15450029826164247,
+      "total": 0.15450029826164247
+    }
+  },
+  {
+    "epoch": 217,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009767305567860603,
+      "position": 0.022613468766212463,
+      "relative_sign": 1.0509150971685922e-06,
+      "structure": 0.032381825268268584,
+      "total": 0.032381825268268584
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.039876100689172744,
+      "position": 0.10954141455888748,
+      "relative_sign": 0.019999269639071393,
+      "structure": 0.1694167890548706,
+      "total": 0.1694167890548706
+    }
+  },
+  {
+    "epoch": 218,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009670316480100154,
+      "position": 0.022174412488937378,
+      "relative_sign": 2.8193555480449107e-06,
+      "structure": 0.03184754827618599,
+      "total": 0.03184754827618599
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038631797462701796,
+      "position": 0.1090713739991188,
+      "relative_sign": 0.004204457171683529,
+      "structure": 0.15190762996673585,
+      "total": 0.15190762996673585
+    }
+  },
+  {
+    "epoch": 219,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009443947449326515,
+      "position": 0.021897809863090516,
+      "relative_sign": 2.9313893461855312e-06,
+      "structure": 0.03134468846023083,
+      "total": 0.03134468846023083
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037384341716766356,
+      "position": 0.10687244033813477,
+      "relative_sign": 0.006781594225057972,
+      "structure": 0.15103837752342225,
+      "total": 0.15103837752342225
+    }
+  },
+  {
+    "epoch": 220,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.00947675584256649,
+      "position": 0.02223961679637432,
+      "relative_sign": 2.117136389366836e-06,
+      "structure": 0.031718489393591884,
+      "total": 0.031718489393591884
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03850083875656128,
+      "position": 0.11047958147525787,
+      "relative_sign": 0.009722821820789644,
+      "structure": 0.1587032437324524,
+      "total": 0.1587032437324524
+    }
+  },
+  {
+    "epoch": 221,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009796555548906327,
+      "position": 0.021822204321622848,
+      "relative_sign": 1.838982618768359e-06,
+      "structure": 0.031620598942041396,
+      "total": 0.031620598942041396
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03770733541250229,
+      "position": 0.10522954416275024,
+      "relative_sign": 0.011631006480217991,
+      "structure": 0.15456788849830627,
+      "total": 0.15456788849830627
+    }
+  },
+  {
+    "epoch": 222,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009636256657540799,
+      "position": 0.021976468712091447,
+      "relative_sign": 1.1255815447381857e-06,
+      "structure": 0.031613850742578505,
+      "total": 0.031613850742578505
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038186772167682646,
+      "position": 0.10787303429841995,
+      "relative_sign": 0.012193607527712175,
+      "structure": 0.15825341188907624,
+      "total": 0.15825341188907624
+    }
+  },
+  {
+    "epoch": 223,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009154412239789963,
+      "position": 0.021195756047964098,
+      "relative_sign": 1.2866177175542074e-06,
+      "structure": 0.030351454928517343,
+      "total": 0.030351454928517343
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037109553873538974,
+      "position": 0.10369214099645614,
+      "relative_sign": 0.009518444884675504,
+      "structure": 0.1503201401233673,
+      "total": 0.1503201401233673
+    }
+  },
+  {
+    "epoch": 224,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009009984254837036,
+      "position": 0.020424876242876054,
+      "relative_sign": 4.594546624249185e-07,
+      "structure": 0.0294353199750185,
+      "total": 0.0294353199750185
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03782536548376084,
+      "position": 0.1065523208975792,
+      "relative_sign": 0.0020048442973143493,
+      "structure": 0.14638253140449525,
+      "total": 0.14638253140449525
+    }
+  },
+  {
+    "epoch": 225,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009553659118711949,
+      "position": 0.0226380834877491,
+      "relative_sign": 1.7881859162011128e-06,
+      "structure": 0.03219353076815605,
+      "total": 0.03219353076815605
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038728776961565015,
+      "position": 0.10477653992176056,
+      "relative_sign": 0.012527204423421097,
+      "structure": 0.15603251898288728,
+      "total": 0.15603251898288728
+    }
+  },
+  {
+    "epoch": 226,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009484666518867016,
+      "position": 0.021905722677707674,
+      "relative_sign": 8.263281782731891e-07,
+      "structure": 0.03139121544361115,
+      "total": 0.03139121544361115
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037850832551717756,
+      "position": 0.10564336442947388,
+      "relative_sign": 0.008036221212038555,
+      "structure": 0.15153041338920592,
+      "total": 0.15153041338920592
+    }
+  },
+  {
+    "epoch": 227,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010549671128392219,
+      "position": 0.02430970349907875,
+      "relative_sign": 2.620075797321042e-06,
+      "structure": 0.03486199429631233,
+      "total": 0.03486199429631233
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03828557100892067,
+      "position": 0.1039101641178131,
+      "relative_sign": 0.006350633832785448,
+      "structure": 0.14854636645317076,
+      "total": 0.14854636645317076
+    }
+  },
+  {
+    "epoch": 228,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009490858316421508,
+      "position": 0.022897756412625314,
+      "relative_sign": 6.543237630977084e-07,
+      "structure": 0.03238926899433136,
+      "total": 0.03238926899433136
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037138196915388104,
+      "position": 0.11054306912422181,
+      "relative_sign": 0.00464081774102575,
+      "structure": 0.15232208740711212,
+      "total": 0.15232208740711212
+    }
+  },
+  {
+    "epoch": 229,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009476473227143288,
+      "position": 0.022494163423776626,
+      "relative_sign": 6.059252847061538e-07,
+      "structure": 0.031971242368221284,
+      "total": 0.031971242368221284
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03804116573929787,
+      "position": 0.11075293427705765,
+      "relative_sign": 0.004564979696237032,
+      "structure": 0.15335908150672914,
+      "total": 0.15335908150672914
+    }
+  },
+  {
+    "epoch": 230,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009636347413063049,
+      "position": 0.021986502885818483,
+      "relative_sign": 1.6042165085253802e-06,
+      "structure": 0.03162445440888405,
+      "total": 0.03162445440888405
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.039445098847150806,
+      "position": 0.10742805552482605,
+      "relative_sign": 0.003031123134687842,
+      "structure": 0.14990427601337433,
+      "total": 0.14990427601337433
+    }
+  },
+  {
+    "epoch": 231,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009198503747582435,
+      "position": 0.021641321375966072,
+      "relative_sign": 2.7773010203935543e-06,
+      "structure": 0.03084260243177414,
+      "total": 0.03084260243177414
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03770368576049805,
+      "position": 0.10943252837657928,
+      "relative_sign": 0.003602929310508344,
+      "structure": 0.15073914456367493,
+      "total": 0.15073914456367493
+    }
+  },
+  {
+    "epoch": 232,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009153181493282318,
+      "position": 0.021101722851395607,
+      "relative_sign": 1.9916080814297978e-06,
+      "structure": 0.03025689586997032,
+      "total": 0.03025689586997032
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03841226121783257,
+      "position": 0.11242369961738587,
+      "relative_sign": 0.007567213637390211,
+      "structure": 0.15840317690372466,
+      "total": 0.15840317690372466
+    }
+  },
+  {
+    "epoch": 233,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0100618781670928,
+      "position": 0.02529873138666153,
+      "relative_sign": 1.1904722734468048e-06,
+      "structure": 0.035361799970269205,
+      "total": 0.035361799970269205
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037822030812501906,
+      "position": 0.1062131428718567,
+      "relative_sign": 0.0069153191684191454,
+      "structure": 0.15095049142837524,
+      "total": 0.15095049142837524
+    }
+  },
+  {
+    "epoch": 234,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009400615364313126,
+      "position": 0.021782290548086166,
+      "relative_sign": 1.0381796124797476e-06,
+      "structure": 0.031183944165706634,
+      "total": 0.031183944165706634
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03922037073969841,
+      "position": 0.10654119235277176,
+      "relative_sign": 0.00755891308877989,
+      "structure": 0.15332047820091246,
+      "total": 0.15332047820091246
+    }
+  },
+  {
+    "epoch": 235,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009550941817462444,
+      "position": 0.022068000376224518,
+      "relative_sign": 5.142379242976114e-07,
+      "structure": 0.03161945627629757,
+      "total": 0.03161945627629757
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03819109728932381,
+      "position": 0.10962381881475448,
+      "relative_sign": 0.005965132713469245,
+      "structure": 0.15378005170822143,
+      "total": 0.15378005170822143
+    }
+  },
+  {
+    "epoch": 236,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009719470612704754,
+      "position": 0.02367252615094185,
+      "relative_sign": 1.3381590270450523e-06,
+      "structure": 0.03339333489537239,
+      "total": 0.03339333489537239
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037273154631257056,
+      "position": 0.10777566224336624,
+      "relative_sign": 0.006082748831296783,
+      "structure": 0.1511315687894821,
+      "total": 0.1511315687894821
+    }
+  },
+  {
+    "epoch": 237,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009427444249391556,
+      "position": 0.020429316371679305,
+      "relative_sign": 5.541285414510655e-07,
+      "structure": 0.029857314705848695,
+      "total": 0.029857314705848695
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.039071400851011275,
+      "position": 0.10848772859573365,
+      "relative_sign": 0.014417927116848857,
+      "structure": 0.16197705602645873,
+      "total": 0.16197705602645873
+    }
+  },
+  {
+    "epoch": 238,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010536799337714911,
+      "position": 0.024402013823390006,
+      "relative_sign": 9.470637133017388e-05,
+      "structure": 0.035033519312739375,
+      "total": 0.035033519312739375
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038616321593523024,
+      "position": 0.10619708514213562,
+      "relative_sign": 0.007035527897348883,
+      "structure": 0.15184893715381623,
+      "total": 0.15184893715381623
+    }
+  },
+  {
+    "epoch": 239,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.012792296707630157,
+      "position": 0.0363127318918705,
+      "relative_sign": 0.0033504088136117084,
+      "structure": 0.05245543733239174,
+      "total": 0.05245543733239174
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04759556472301483,
+      "position": 0.15963744819164277,
+      "relative_sign": 0.04267912535263804,
+      "structure": 0.24991213381290436,
+      "total": 0.24991213381290436
+    }
+  },
+  {
+    "epoch": 240,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.03681567873060703,
+      "position": 0.1443890613913536,
+      "relative_sign": 0.01619256693515581,
+      "structure": 0.19739730763435365,
+      "total": 0.19739730763435365
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04282936406135559,
+      "position": 0.14501816952228547,
+      "relative_sign": 0.013864360259362002,
+      "structure": 0.20171189498901368,
+      "total": 0.20171189498901368
+    }
+  },
+  {
+    "epoch": 241,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.018780795335769655,
+      "position": 0.05444642835855484,
+      "relative_sign": 0.0010250675968675295,
+      "structure": 0.07425229126214981,
+      "total": 0.07425229126214981
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036252222508192065,
+      "position": 0.10814594054222107,
+      "relative_sign": 0.0032801224076429206,
+      "structure": 0.14767828798294066,
+      "total": 0.14767828798294066
+    }
+  },
+  {
+    "epoch": 242,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.01238897569477558,
+      "position": 0.03116500386595726,
+      "relative_sign": 0.00048155516454488634,
+      "structure": 0.044035534381866456,
+      "total": 0.044035534381866456
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03632804802060127,
+      "position": 0.10683344447612762,
+      "relative_sign": 0.003588295063851547,
+      "structure": 0.14674978995323182,
+      "total": 0.14674978995323182
+    }
+  },
+  {
+    "epoch": 243,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.010373232886195183,
+      "position": 0.023726369559764864,
+      "relative_sign": 7.459860559060871e-05,
+      "structure": 0.034174200624227526,
+      "total": 0.034174200624227526
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037738404750823976,
+      "position": 0.10347892701625824,
+      "relative_sign": 0.003387170958874776,
+      "structure": 0.14460450518131257,
+      "total": 0.14460450518131257
+    }
+  },
+  {
+    "epoch": 244,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.009267422273755073,
+      "position": 0.020327302232384683,
+      "relative_sign": 1.4013894880690715e-05,
+      "structure": 0.029608738392591476,
+      "total": 0.029608738392591476
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03641479972004891,
+      "position": 0.10193615186214447,
+      "relative_sign": 0.0037539433623533115,
+      "structure": 0.14210489630699158,
+      "total": 0.14210489630699158
+    }
+  },
+  {
+    "epoch": 245,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008674653522670269,
+      "position": 0.01989321218430996,
+      "relative_sign": 1.3997057592519014e-05,
+      "structure": 0.02858186236023903,
+      "total": 0.02858186236023903
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036718803465366365,
+      "position": 0.10253948450088501,
+      "relative_sign": 0.003160114187307954,
+      "structure": 0.14241840314865112,
+      "total": 0.14241840314865112
+    }
+  },
+  {
+    "epoch": 246,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008535582222044468,
+      "position": 0.018578267976641655,
+      "relative_sign": 1.0896741363012552e-05,
+      "structure": 0.027124746754765512,
+      "total": 0.027124746754765512
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03677518236637115,
+      "position": 0.10298510283231735,
+      "relative_sign": 0.003664790511029423,
+      "structure": 0.14342507469654084,
+      "total": 0.14342507469654084
+    }
+  },
+  {
+    "epoch": 247,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008253493033349515,
+      "position": 0.0189694092720747,
+      "relative_sign": 7.278589626139364e-06,
+      "structure": 0.027230180755257606,
+      "total": 0.027230180755257606
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03636960810422897,
+      "position": 0.10224583941698075,
+      "relative_sign": 0.006354955640223124,
+      "structure": 0.1449704018831253,
+      "total": 0.1449704018831253
+    }
+  },
+  {
+    "epoch": 248,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008171082880347968,
+      "position": 0.018265622943639755,
+      "relative_sign": 5.935974307178071e-06,
+      "structure": 0.026442641660571097,
+      "total": 0.026442641660571097
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0362713232934475,
+      "position": 0.10076024287939071,
+      "relative_sign": 0.0058028901469083394,
+      "structure": 0.1428344600200653,
+      "total": 0.1428344600200653
+    }
+  },
+  {
+    "epoch": 249,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007847471375018358,
+      "position": 0.017912638649344444,
+      "relative_sign": 6.740543706996505e-06,
+      "structure": 0.025766850471496582,
+      "total": 0.025766850471496582
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03718281427025795,
+      "position": 0.10585869932174682,
+      "relative_sign": 0.0039131587203851265,
+      "structure": 0.1469546753168106,
+      "total": 0.1469546753168106
+    }
+  },
+  {
+    "epoch": 250,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008112161174416542,
+      "position": 0.01839441666007042,
+      "relative_sign": 4.991821788678407e-06,
+      "structure": 0.02651156973838806,
+      "total": 0.02651156973838806
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038635662376880646,
+      "position": 0.10466873490810394,
+      "relative_sign": 0.0038402768138491865,
+      "structure": 0.1471446760892868,
+      "total": 0.1471446760892868
+    }
+  },
+  {
+    "epoch": 251,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0078008842766284945,
+      "position": 0.017812761455774307,
+      "relative_sign": 7.533823008770924e-06,
+      "structure": 0.02562117940187454,
+      "total": 0.02562117940187454
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03714731052517891,
+      "position": 0.10310740953683853,
+      "relative_sign": 0.003005848562287156,
+      "structure": 0.143260568857193,
+      "total": 0.143260568857193
+    }
+  },
+  {
+    "epoch": 252,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007448361895978451,
+      "position": 0.016933611750602724,
+      "relative_sign": 5.017335300010473e-06,
+      "structure": 0.024386990934610366,
+      "total": 0.024386990934610366
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0376604260802269,
+      "position": 0.10044234144687653,
+      "relative_sign": 0.0031458571123807815,
+      "structure": 0.14124862217903136,
+      "total": 0.14124862217903136
+    }
+  },
+  {
+    "epoch": 253,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007863065354526043,
+      "position": 0.01759889443218708,
+      "relative_sign": 5.634483351855124e-06,
+      "structure": 0.025467594176530838,
+      "total": 0.025467594176530838
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.036904252767562866,
+      "position": 0.10255852508544921,
+      "relative_sign": 0.004775788731427838,
+      "structure": 0.14423857247829439,
+      "total": 0.14423857247829439
+    }
+  },
+  {
+    "epoch": 254,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.00783557079359889,
+      "position": 0.017532108277082445,
+      "relative_sign": 7.285834542358316e-06,
+      "structure": 0.02537496504187584,
+      "total": 0.02537496504187584
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038117435425519944,
+      "position": 0.10183184945583343,
+      "relative_sign": 0.00580378466277557,
+      "structure": 0.14575307381153108,
+      "total": 0.14575307381153108
+    }
+  },
+  {
+    "epoch": 255,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007677445311099291,
+      "position": 0.017495964258909227,
+      "relative_sign": 5.64835930879326e-06,
+      "structure": 0.025179057866334915,
+      "total": 0.025179057866334915
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03725293803215027,
+      "position": 0.10217966538667679,
+      "relative_sign": 0.004078425412896195,
+      "structure": 0.143511026263237,
+      "total": 0.143511026263237
+    }
+  },
+  {
+    "epoch": 256,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007597363106906414,
+      "position": 0.017003579281270505,
+      "relative_sign": 5.040547779856297e-06,
+      "structure": 0.024605982944369317,
+      "total": 0.024605982944369317
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03708366693556309,
+      "position": 0.1010885956287384,
+      "relative_sign": 0.004685147578056785,
+      "structure": 0.14285740947723388,
+      "total": 0.14285740947723388
+    }
+  },
+  {
+    "epoch": 257,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007948248751461506,
+      "position": 0.017538587778806687,
+      "relative_sign": 4.447858548445538e-06,
+      "structure": 0.02549128445982933,
+      "total": 0.02549128445982933
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03738449195027351,
+      "position": 0.10488329541683197,
+      "relative_sign": 0.0029493170847508738,
+      "structure": 0.1452171015739441,
+      "total": 0.1452171015739441
+    }
+  },
+  {
+    "epoch": 258,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008346664048731326,
+      "position": 0.01789913373440504,
+      "relative_sign": 5.305527684811295e-06,
+      "structure": 0.026251103341579436,
+      "total": 0.026251103341579436
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.038635009407997134,
+      "position": 0.1028159745335579,
+      "relative_sign": 0.0032043275082114632,
+      "structure": 0.14465531659126282,
+      "total": 0.14465531659126282
+    }
+  },
+  {
+    "epoch": 259,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007694810282438993,
+      "position": 0.017063216507434843,
+      "relative_sign": 5.253003832606851e-06,
+      "structure": 0.02476327981054783,
+      "total": 0.02476327981054783
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03726988604664803,
+      "position": 0.1074078431725502,
+      "relative_sign": 0.0035690200824940346,
+      "structure": 0.1482467507123947,
+      "total": 0.1482467507123947
+    }
+  },
+  {
+    "epoch": 260,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007836845561861991,
+      "position": 0.0180865334123373,
+      "relative_sign": 6.742558703535906e-06,
+      "structure": 0.02593012151122093,
+      "total": 0.02593012151122093
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03834529423713684,
+      "position": 0.11009547972679139,
+      "relative_sign": 0.006071295588730209,
+      "structure": 0.15451206934452058,
+      "total": 0.15451206934452058
+    }
+  },
+  {
+    "epoch": 261,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007884841583669186,
+      "position": 0.018187612771987913,
+      "relative_sign": 4.289751785336193e-06,
+      "structure": 0.026076743945479392,
+      "total": 0.026076743945479392
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03797409051656723,
+      "position": 0.10367028719186783,
+      "relative_sign": 0.0031233735119064934,
+      "structure": 0.14476774895191194,
+      "total": 0.14476774895191194
+    }
+  },
+  {
+    "epoch": 262,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007535175099968911,
+      "position": 0.017665852800011636,
+      "relative_sign": 4.846934367435551e-06,
+      "structure": 0.025205874755978585,
+      "total": 0.025205874755978585
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03983244395256042,
+      "position": 0.1058542110323906,
+      "relative_sign": 0.004519134285412975,
+      "structure": 0.15020579206943513,
+      "total": 0.15020579206943513
+    }
+  },
+  {
+    "epoch": 263,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008164354346692562,
+      "position": 0.01843490906059742,
+      "relative_sign": 4.819814553940205e-06,
+      "structure": 0.026604083240032196,
+      "total": 0.026604083240032196
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03819014164805412,
+      "position": 0.10386144840717315,
+      "relative_sign": 0.00372590278591224,
+      "structure": 0.1457774943113327,
+      "total": 0.1457774943113327
+    }
+  },
+  {
+    "epoch": 264,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007549831081181764,
+      "position": 0.017593238934874536,
+      "relative_sign": 4.4118043677769945e-06,
+      "structure": 0.02514748187363148,
+      "total": 0.02514748187363148
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03791456171870232,
+      "position": 0.10494574564695358,
+      "relative_sign": 0.004257239819588449,
+      "structure": 0.14711754643917083,
+      "total": 0.14711754643917083
+    }
+  },
+  {
+    "epoch": 265,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007297040663659573,
+      "position": 0.016670527964830397,
+      "relative_sign": 5.996447686641204e-06,
+      "structure": 0.023973564922809602,
+      "total": 0.023973564922809602
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03799899959564209,
+      "position": 0.10407697325944901,
+      "relative_sign": 0.0057671439197933974,
+      "structure": 0.14784311759471894,
+      "total": 0.14784311759471894
+    }
+  },
+  {
+    "epoch": 266,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008058878891170025,
+      "position": 0.018876877650618552,
+      "relative_sign": 3.203922248516733e-06,
+      "structure": 0.02693896020948887,
+      "total": 0.02693896020948887
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03663206014037132,
+      "position": 0.10196822446584701,
+      "relative_sign": 0.003191522990924341,
+      "structure": 0.14179180771112443,
+      "total": 0.14179180771112443
+    }
+  },
+  {
+    "epoch": 267,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007335089214146137,
+      "position": 0.01753918808698654,
+      "relative_sign": 6.77025366047701e-06,
+      "structure": 0.024881047606468202,
+      "total": 0.024881047606468202
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03890954756736755,
+      "position": 0.10472936868667602,
+      "relative_sign": 0.004667313284194961,
+      "structure": 0.14830623269081117,
+      "total": 0.14830623269081117
+    }
+  },
+  {
+    "epoch": 268,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007768708430230618,
+      "position": 0.017994476079940796,
+      "relative_sign": 4.369837263368482e-06,
+      "structure": 0.02576755429804325,
+      "total": 0.02576755429804325
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0371631490290165,
+      "position": 0.10744145303964615,
+      "relative_sign": 0.0034099481124517297,
+      "structure": 0.14801455390453339,
+      "total": 0.14801455390453339
+    }
+  },
+  {
+    "epoch": 269,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008249369081109762,
+      "position": 0.01990113340318203,
+      "relative_sign": 5.340764057095271e-06,
+      "structure": 0.028155843272805212,
+      "total": 0.028155843272805212
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0372084566950798,
+      "position": 0.10653033989667893,
+      "relative_sign": 0.004154718840703481,
+      "structure": 0.1478935158252716,
+      "total": 0.1478935158252716
+    }
+  },
+  {
+    "epoch": 270,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007357112132012844,
+      "position": 0.01667637649178505,
+      "relative_sign": 3.8726584992332395e-06,
+      "structure": 0.02403736115992069,
+      "total": 0.02403736115992069
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037671568065881726,
+      "position": 0.10430553770065308,
+      "relative_sign": 0.0031440197594588427,
+      "structure": 0.14512112712860106,
+      "total": 0.14512112712860106
+    }
+  },
+  {
+    "epoch": 271,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007875483617186546,
+      "position": 0.0177775347083807,
+      "relative_sign": 3.5487359490957713e-06,
+      "structure": 0.025656567156314848,
+      "total": 0.025656567156314848
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0388602509200573,
+      "position": 0.10491005182266236,
+      "relative_sign": 0.003769251377307228,
+      "structure": 0.14753955459594725,
+      "total": 0.14753955459594725
+    }
+  },
+  {
+    "epoch": 272,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008965176448225975,
+      "position": 0.02238457489013672,
+      "relative_sign": 7.348319144114157e-06,
+      "structure": 0.031357099741697314,
+      "total": 0.031357099741697314
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03763802354037762,
+      "position": 0.10784866338968277,
+      "relative_sign": 0.007918105513285355,
+      "structure": 0.15340479290485382,
+      "total": 0.15340479290485382
+    }
+  },
+  {
+    "epoch": 273,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.008447375614196062,
+      "position": 0.02086133897304535,
+      "relative_sign": 5.1904212215276855e-06,
+      "structure": 0.02931390489637852,
+      "total": 0.02931390489637852
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03749238103628159,
+      "position": 0.10513227283954621,
+      "relative_sign": 0.004902143644997977,
+      "structure": 0.14752679538726807,
+      "total": 0.14752679538726807
+    }
+  },
+  {
+    "epoch": 274,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007308810595422983,
+      "position": 0.016875013038516046,
+      "relative_sign": 5.031124629665928e-06,
+      "structure": 0.024188854679465292,
+      "total": 0.024188854679465292
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03914604875445366,
+      "position": 0.10345435601472855,
+      "relative_sign": 0.007983728595994763,
+      "structure": 0.150584135055542,
+      "total": 0.150584135055542
+    }
+  },
+  {
+    "epoch": 275,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.00718369672819972,
+      "position": 0.016859711050987245,
+      "relative_sign": 3.21731707808226e-06,
+      "structure": 0.024046625107526778,
+      "total": 0.024046625107526778
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.037969005197286604,
+      "position": 0.10809325248003006,
+      "relative_sign": 0.0035573307280149036,
+      "structure": 0.14961958491802216,
+      "total": 0.14961958491802216
+    }
+  },
+  {
+    "epoch": 276,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0074071306064724925,
+      "position": 0.017465811789035796,
+      "relative_sign": 3.0736418738399605e-06,
+      "structure": 0.02487601609528065,
+      "total": 0.02487601609528065
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03848137921094894,
+      "position": 0.10824433940649032,
+      "relative_sign": 0.006523297757216369,
+      "structure": 0.1532490167617798,
+      "total": 0.1532490167617798
+    }
+  },
+  {
+    "epoch": 277,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007294693134725094,
+      "position": 0.01731492340564728,
+      "relative_sign": 2.998075416968504e-06,
+      "structure": 0.024612614557147024,
+      "total": 0.024612614557147024
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03920863890647888,
+      "position": 0.10368848538398742,
+      "relative_sign": 0.006728472491693992,
+      "structure": 0.14962560164928437,
+      "total": 0.14962560164928437
+    }
+  },
+  {
+    "epoch": 278,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.00690597016736865,
+      "position": 0.016555006250739097,
+      "relative_sign": 2.3456745652268297e-06,
+      "structure": 0.023463322043418885,
+      "total": 0.023463322043418885
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03875088375806809,
+      "position": 0.10414425879716874,
+      "relative_sign": 0.006668446683875572,
+      "structure": 0.14956359255313872,
+      "total": 0.14956359255313872
+    }
+  },
+  {
+    "epoch": 279,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006805467311292886,
+      "position": 0.015658154144883155,
+      "relative_sign": 2.8902528015919416e-06,
+      "structure": 0.022466511741280556,
+      "total": 0.022466511741280556
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03793470773100853,
+      "position": 0.1061236394047737,
+      "relative_sign": 0.003969277633089405,
+      "structure": 0.1480276287794113,
+      "total": 0.1480276287794113
+    }
+  },
+  {
+    "epoch": 280,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007099859230220318,
+      "position": 0.016449350267648696,
+      "relative_sign": 3.565525102203537e-06,
+      "structure": 0.023552774891257285,
+      "total": 0.023552774891257285
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03709668400883675,
+      "position": 0.10281514894962311,
+      "relative_sign": 0.0072591104474977325,
+      "structure": 0.14717094826698304,
+      "total": 0.14717094826698304
+    }
+  },
+  {
+    "epoch": 281,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006790701791644096,
+      "position": 0.016156449839472772,
+      "relative_sign": 3.8040861615940003e-06,
+      "structure": 0.022950955763459204,
+      "total": 0.022950955763459204
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03804923918843269,
+      "position": 0.1064668720960617,
+      "relative_sign": 0.007098822011646462,
+      "structure": 0.15161493039131166,
+      "total": 0.15161493039131166
+    }
+  },
+  {
+    "epoch": 282,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0071149604320526125,
+      "position": 0.017811589419841765,
+      "relative_sign": 2.65681344734503e-06,
+      "structure": 0.024929206520318985,
+      "total": 0.024929206520318985
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03767862221598625,
+      "position": 0.10950424110889435,
+      "relative_sign": 0.005171646057644011,
+      "structure": 0.15235451197624206,
+      "total": 0.15235451197624206
+    }
+  },
+  {
+    "epoch": 283,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0068899340629577635,
+      "position": 0.01628553606569767,
+      "relative_sign": 5.383861779080235e-06,
+      "structure": 0.023180853873491288,
+      "total": 0.023180853873491288
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03746948371827603,
+      "position": 0.1054310137629509,
+      "relative_sign": 0.005387498311577474,
+      "structure": 0.14828799951076507,
+      "total": 0.14828799951076507
+    }
+  },
+  {
+    "epoch": 284,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006703845761716366,
+      "position": 0.01593858414888382,
+      "relative_sign": 2.179719770751376e-06,
+      "structure": 0.022644609689712523,
+      "total": 0.022644609689712523
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03999852377176285,
+      "position": 0.10499421721696854,
+      "relative_sign": 0.00496921948334375,
+      "structure": 0.14996195948123933,
+      "total": 0.14996195948123933
+    }
+  },
+  {
+    "epoch": 285,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007100338321179151,
+      "position": 0.01662733720242977,
+      "relative_sign": 2.076962422847828e-06,
+      "structure": 0.023729752376675607,
+      "total": 0.023729752376675607
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03756283363699913,
+      "position": 0.10922896659374237,
+      "relative_sign": 0.004366323574699436,
+      "structure": 0.15115812158584593,
+      "total": 0.15115812158584593
+    }
+  },
+  {
+    "epoch": 286,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.00726327395439148,
+      "position": 0.01779856324195862,
+      "relative_sign": 3.106815661226392e-06,
+      "structure": 0.02506494402885437,
+      "total": 0.02506494402885437
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.039072822988033294,
+      "position": 0.10454122847318649,
+      "relative_sign": 0.012199649883810252,
+      "structure": 0.15581370210647583,
+      "total": 0.15581370210647583
+    }
+  },
+  {
+    "epoch": 287,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.00698178619146347,
+      "position": 0.01711540162563324,
+      "relative_sign": 2.759442474566498e-06,
+      "structure": 0.024099947348237036,
+      "total": 0.024099947348237036
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.039040397346019745,
+      "position": 0.10681732147932052,
+      "relative_sign": 0.006828482155859547,
+      "structure": 0.15268620085716247,
+      "total": 0.15268620085716247
+    }
+  },
+  {
+    "epoch": 288,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006799717970192433,
+      "position": 0.016231132864952088,
+      "relative_sign": 2.3080614272288356e-06,
+      "structure": 0.023033158764243125,
+      "total": 0.023033158764243125
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03852727964520455,
+      "position": 0.10609935873746872,
+      "relative_sign": 0.00396032323790314,
+      "structure": 0.14858696126937868,
+      "total": 0.14858696126937868
+    }
+  },
+  {
+    "epoch": 289,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006826044265180826,
+      "position": 0.015929579973220826,
+      "relative_sign": 4.014391979978882e-06,
+      "structure": 0.022759638726711273,
+      "total": 0.022759638726711273
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03907567909359932,
+      "position": 0.1058736497759819,
+      "relative_sign": 0.0062465290781678956,
+      "structure": 0.15119586193561554,
+      "total": 0.15119586193561554
+    }
+  },
+  {
+    "epoch": 290,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0069642791859805585,
+      "position": 0.016511850610375405,
+      "relative_sign": 2.7685172130418323e-06,
+      "structure": 0.023478898227214814,
+      "total": 0.023478898227214814
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03738007670640946,
+      "position": 0.10389673352241516,
+      "relative_sign": 0.006217793056430765,
+      "structure": 0.14749460315704346,
+      "total": 0.14749460315704346
+    }
+  },
+  {
+    "epoch": 291,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.00680395669490099,
+      "position": 0.01570862179994583,
+      "relative_sign": 3.4183128868789935e-06,
+      "structure": 0.02251599706709385,
+      "total": 0.02251599706709385
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04019652333855629,
+      "position": 0.1037600280046463,
+      "relative_sign": 0.006599597286060088,
+      "structure": 0.1505561513900757,
+      "total": 0.1505561513900757
+    }
+  },
+  {
+    "epoch": 292,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006754764962941408,
+      "position": 0.016404876083135605,
+      "relative_sign": 2.1334475537173605e-06,
+      "structure": 0.023161774411797523,
+      "total": 0.023161774411797523
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.039504917234182355,
+      "position": 0.10572991508245468,
+      "relative_sign": 0.005009929928278325,
+      "structure": 0.15024476432800293,
+      "total": 0.15024476432800293
+    }
+  },
+  {
+    "epoch": 293,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006482397899031639,
+      "position": 0.015280986025929451,
+      "relative_sign": 4.277465818518067e-06,
+      "structure": 0.021767661407589914,
+      "total": 0.021767661407589914
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03757328236103058,
+      "position": 0.10569937437772751,
+      "relative_sign": 0.006191525730073409,
+      "structure": 0.1494641809463501,
+      "total": 0.1494641809463501
+    }
+  },
+  {
+    "epoch": 294,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.00675749745965004,
+      "position": 0.016286609306931495,
+      "relative_sign": 3.3949716581389566e-06,
+      "structure": 0.02304750180244446,
+      "total": 0.02304750180244446
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.0381800337433815,
+      "position": 0.10419723528623581,
+      "relative_sign": 0.005595046881468079,
+      "structure": 0.14797231447696685,
+      "total": 0.14797231447696685
+    }
+  },
+  {
+    "epoch": 295,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0068524288088083266,
+      "position": 0.016564126178622247,
+      "relative_sign": 1.9913597094074474e-06,
+      "structure": 0.02341854651272297,
+      "total": 0.02341854651272297
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03862782907485962,
+      "position": 0.10665103960037231,
+      "relative_sign": 0.008145387300459788,
+      "structure": 0.15342425286769867,
+      "total": 0.15342425286769867
+    }
+  },
+  {
+    "epoch": 296,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006839251726865768,
+      "position": 0.017058741509914398,
+      "relative_sign": 1.6395045023855914e-06,
+      "structure": 0.02389963296055794,
+      "total": 0.02389963296055794
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.04108649232983589,
+      "position": 0.10676512253284455,
+      "relative_sign": 0.0030232468886733843,
+      "structure": 0.15087485992908478,
+      "total": 0.15087485992908478
+    }
+  },
+  {
+    "epoch": 297,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006442131340503692,
+      "position": 0.015554620698094369,
+      "relative_sign": 1.8838940646901393e-06,
+      "structure": 0.02199863587319851,
+      "total": 0.02199863587319851
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03801767227053642,
+      "position": 0.10630660736560822,
+      "relative_sign": 0.005551256343393561,
+      "structure": 0.14987553429603576,
+      "total": 0.14987553429603576
+    }
+  },
+  {
+    "epoch": 298,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.0066319965198636055,
+      "position": 0.015609688885509967,
+      "relative_sign": 2.186992311493441e-06,
+      "structure": 0.022243872433900833,
+      "total": 0.022243872433900833
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03727241249382496,
+      "position": 0.10344175535440445,
+      "relative_sign": 0.006161219405901193,
+      "structure": 0.14687538588047028,
+      "total": 0.14687538588047028
+    }
+  },
+  {
+    "epoch": 299,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.006689945206046105,
+      "position": 0.016350082010030745,
+      "relative_sign": 2.2917717648507365e-06,
+      "structure": 0.023042319059371947,
+      "total": 0.023042319059371947
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03884778025746345,
+      "position": 0.10646301108598709,
+      "relative_sign": 0.00924113384268685,
+      "structure": 0.15455192613601684,
+      "total": 0.15455192613601684
+    }
+  },
+  {
+    "epoch": 300,
+    "train": {
+      "global_sign": null,
+      "magnitude": 0.007082090839743614,
+      "position": 0.017719338670372963,
+      "relative_sign": 1.9031116779473222e-06,
+      "structure": 0.024803332567214967,
+      "total": 0.024803332567214967
+    },
+    "validation": {
+      "global_sign": null,
+      "magnitude": 0.03848728486895561,
+      "position": 0.1062000760436058,
+      "relative_sign": 0.008062905081017107,
+      "structure": 0.15275026631355285,
+      "total": 0.15275026631355285
+    }
+  }
+]

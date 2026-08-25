@@ -1,0 +1,157 @@
+{
+  "created_or_verified_at": "2026-08-25T04:31:16.970107+00:00",
+  "protocol": {
+    "code": {
+      "model_experiment_sha256": "d9d66b8be8f232e1f5880cfe59bd9d3310cf79e6ca11c2fafc5e924d518ed15d",
+      "physics_protocol_path": "C:\\Users\\COM\\Documents\\KK-AI\\Codes\\NewLearning8.py",
+      "physics_protocol_sha256": "48cc66f662e1f775820e7eb875b6e0e7b8d8f9148b4be81855d30fed56d9c229"
+    },
+    "data_split": {
+      "seed": 42,
+      "test_count": 1000,
+      "test_indices_sha256": "89c18b81fd4f2662ef60cf1f14298a431c99fc3401eca3a616dd052909b68e74",
+      "train_count": 8000,
+      "train_indices_sha256": "0296980c4ac198a518f4898c1d92ebcfa14de62ff5c2cf535b220110a6b0e4eb",
+      "validation_count": 1000,
+      "validation_indices_sha256": "505cbf4a643a65f490c9169ca8ab591b8a8dade85a4fc988d26a5172061318ff"
+    },
+    "dataset": {
+      "g00_shape": [
+        10000,
+        32,
+        32
+      ],
+      "g05_fields": [
+        "grid_x_index",
+        "grid_y_index",
+        "signed_potential"
+      ],
+      "g05_shape": [
+        10000,
+        32,
+        3
+      ],
+      "global_sign_anchor": "q1 after deterministic target ordering",
+      "path": "C:\\Users\\COM\\Documents\\KK-AI\\Models\\charge_dataset_multipoint_v2.npz",
+      "physical_equations": "G00=V^2 and G05=V",
+      "sample_count": 10000,
+      "sha256": "897e5ecc3141920a63268d98989b9e3e8b917a12ccca9604cffcdb951bebda60",
+      "target_fields": [
+        "x1",
+        "y1",
+        "z1",
+        "q1",
+        "x2",
+        "y2",
+        "z2",
+        "q2"
+      ],
+      "target_ordering": "lexicographic x, then y, then z",
+      "target_shape": [
+        10000,
+        8
+      ]
+    },
+    "evaluation": {
+      "g05_zero_global_sign_metrics": "N/A",
+      "metrics": [
+        "mean_position_mae",
+        "position_error_1",
+        "position_error_2",
+        "mean_position_3d_error",
+        "charge_mae_q1",
+        "charge_mae_q2",
+        "charge_magnitude_mae",
+        "relative_sign_accuracy",
+        "global_sign_bce",
+        "global_sign_accuracy",
+        "absolute_sign_accuracy",
+        "signed_pair_accuracy"
+      ],
+      "multi_seed_std": "sample standard deviation (ddof=1)",
+      "test_set_used_once_after_validation selection": true,
+      "unobserved_charge_mae": "oracle aligned over the global +/- symmetry"
+    },
+    "fairness_constraints": {
+      "cross_epoch_component_composition": false,
+      "default_pair_only_route_difference": "G05 access to structural outputs",
+      "default_pair_same_parameter_count": true,
+      "same_data_split_normalization_training_loss_and_evaluation": true,
+      "same_seed_means_same_initial_state_and_batch_order": true
+    },
+    "normalization": {
+      "charge_scale": 0.6773707966668702,
+      "fit_scope": "training split only; shared by all models and G05 fractions",
+      "g00_mean": 0.0025210613384842873,
+      "g00_std": 0.005517034081200361,
+      "g05_value_scale": 0.04853062214089394,
+      "position_mean": [
+        -0.5046025514602661,
+        -0.004739541094750166,
+        0.7930794954299927,
+        0.486690878868103,
+        -0.0026649869978427887,
+        0.8037482500076294
+      ],
+      "position_std": [
+        0.7020108699798584,
+        0.861521303653717,
+        0.40179184079170227,
+        0.7062991857528687,
+        0.8596574664115906,
+        0.4036659896373749
+      ]
+    },
+    "protocol_version": "model-experiment-v1",
+    "reproducibility": {
+      "cuda_limitation": "warn_only permits unsupported CUDA kernels; exact bitwise reproducibility can still depend on GPU, driver, and PyTorch",
+      "cudnn": 91900,
+      "deterministic_algorithms": "enabled with warn_only=True",
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 3070",
+      "numpy": "2.4.4",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+      "torch": "2.11.0+cu128",
+      "torch_cuda": "12.8"
+    },
+    "training": {
+      "batch_size": 128,
+      "learning_rate": 0.001,
+      "loss_weights": {
+        "global_sign": 1.0,
+        "magnitude": 1.0,
+        "position": 1.0,
+        "relative_sign": 1.0
+      },
+      "max_epochs": 300,
+      "model_selection": "minimum validation total loss at one epoch",
+      "optimizer": "AdamW",
+      "shuffle": "seeded per run; generator state is checkpointed",
+      "weight_decay": 0.0001
+    }
+  },
+  "protocol_fingerprint": "9e8ef46f7ef59a29439b0ca779b84bc615eb2d17ef8c26a289eb14742b6328b8",
+  "registered_models": [
+    {
+      "description": "G00 restores ordered positions, magnitudes, and relative sign; G05 is restricted to the q1-anchored global-sign prediction.",
+      "input_policy": {
+        "global_sign": "G05 only",
+        "magnitude": "G00 only",
+        "position": "G00 only",
+        "relative_sign": "G00 only"
+      },
+      "name": "g05_sign_only"
+    },
+    {
+      "description": "G05 context is available to position, magnitude, and relative-sign restoration as well as the q1-anchored global-sign prediction.",
+      "input_policy": {
+        "global_sign": "G05 only",
+        "magnitude": "G00 + masked G05",
+        "position": "G00 + masked G05",
+        "relative_sign": "G00 + masked G05"
+      },
+      "name": "g05_full_reconstruction"
+    }
+  ]
+}

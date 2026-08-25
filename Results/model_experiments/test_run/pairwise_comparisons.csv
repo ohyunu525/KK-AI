@@ -1,0 +1,13 @@
+model_a,model_b,g05_fraction,metric,paired_seed_count,paired_seeds,delta_b_minus_a_mean,delta_b_minus_a_std,improvement_b_over_a_mean,improvement_definition
+g05_sign_only,g05_full_reconstruction,0.5,mean_position_mae,1,42,-0.004151493310928345,,0.004151493310928345,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,position_error_1,1,42,-0.011757433414459229,,0.011757433414459229,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,position_error_2,1,42,-0.004162251949310303,,0.004162251949310303,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,mean_position_3d_error,1,42,-0.007959842681884766,,0.007959842681884766,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,charge_mae_q1,1,42,0.0015340388417244,,-0.0015340388417244,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,charge_mae_q2,1,42,-0.0015625932812690646,,0.0015625932812690646,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,charge_magnitude_mae,1,42,0.000951126217842102,,-0.000951126217842102,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,relative_sign_accuracy,1,42,0.0020000000000000018,,0.0020000000000000018,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,global_sign_bce,1,42,-8.54047434276084e-05,,8.54047434276084e-05,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,global_sign_accuracy,1,42,-0.0020000000000000018,,-0.0020000000000000018,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,absolute_sign_accuracy,1,42,-0.0010000000000000009,,-0.0010000000000000009,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.5,signed_pair_accuracy,1,42,0.0,,0.0,positive means model_b is better; sign is reversed for error/loss metrics
