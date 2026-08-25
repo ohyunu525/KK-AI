@@ -1,0 +1,8 @@
+{
+  "best_epoch": 299,
+  "best_validation_loss": 0.20593406860530378,
+  "result_path": "C:\\Users\\COM\\Documents\\KK-AI\\Results\\model_experiments\\ModelTest_V1\\runs\\g05_sign_only__g05_100pct__seed_42__f7ba742d70c1\\result.json",
+  "run_id": "g05_sign_only__g05_100pct__seed_42__f7ba742d70c1",
+  "status": "completed",
+  "updated_at": "2026-08-25T05:28:01.557441+00:00"
+}
