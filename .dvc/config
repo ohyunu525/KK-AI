@@ -1,2 +1,5 @@
 [core]
     site_cache_dir = .dvc/site-cache
+    remote = model-storage
+['remote "model-storage"']
+    url = gdrive://1QrOBLr-vDAkJNy_lPo7tMoci3Pkimwhs

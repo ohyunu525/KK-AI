@@ -3,3 +3,4 @@ numpy==2.5.2
 matplotlib
 torch
 dvc==3.67.1
+dvc-gdrive
