@@ -1,9 +1,8 @@
 {
-  "best_epoch": 145,
-  "best_validation_loss": 0.29341737592220307,
-  "next_epoch": 146,
-  "resumed": false,
+  "best_epoch": 300,
+  "best_validation_loss": 0.2781160014867783,
+  "result_path": "C:\\Users\\COM\\Documents\\KK-AI\\Results\\model_experiments\\g05_routing_comparison_v2\\runs\\g05_sign_only__g05_010pct__seed_42__5a2a9b248717\\result.json",
   "run_id": "g05_sign_only__g05_010pct__seed_42__5a2a9b248717",
-  "status": "running",
-  "updated_at": "2026-08-26T03:02:31.475105+00:00"
+  "status": "completed",
+  "updated_at": "2026-08-26T03:04:23.755821+00:00"
 }

@@ -1,0 +1,8 @@
+{
+  "best_epoch": 300,
+  "best_validation_loss": 0.19504472902417183,
+  "result_path": "C:\\Users\\COM\\Documents\\KK-AI\\Results\\model_experiments\\g05_routing_comparison_v2\\runs\\g05_sign_only__g05_050pct__seed_42__3699bf8d716a\\result.json",
+  "run_id": "g05_sign_only__g05_050pct__seed_42__3699bf8d716a",
+  "status": "completed",
+  "updated_at": "2026-08-26T03:11:36.767443+00:00"
+}

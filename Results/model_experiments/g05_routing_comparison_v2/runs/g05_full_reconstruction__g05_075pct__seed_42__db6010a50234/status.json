@@ -1,0 +1,8 @@
+{
+  "best_epoch": 294,
+  "best_validation_loss": 0.19634837940335273,
+  "result_path": "C:\\Users\\COM\\Documents\\KK-AI\\Results\\model_experiments\\g05_routing_comparison_v2\\runs\\g05_full_reconstruction__g05_075pct__seed_42__db6010a50234\\result.json",
+  "run_id": "g05_full_reconstruction__g05_075pct__seed_42__db6010a50234",
+  "status": "completed",
+  "updated_at": "2026-08-26T03:22:34.052516+00:00"
+}

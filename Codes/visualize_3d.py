@@ -9,8 +9,9 @@ or preprocessing pipeline. It supports the checkpoint formats produced by
 
 Targets are ordered lexicographically by (x, y, z), and current evaluation does
 not perform a charge permutation. This file therefore keeps direct q1->q1 and
-q2->q2 correspondence. Only evaluation's global +/- sign alignment is reused
-when G05 has zero observed points, where sign is unidentifiable from G00=V**2.
+q2->q2 correspondence. Evaluation's global +/- sign alignment is retained for
+numeric parity, but G05=0 figures display the prediction as a +/- equivalence
+class so an oracle-aligned sign is never presented as an absolute prediction.
 """
 
 import argparse
@@ -27,8 +28,13 @@ import torch
 from torch.utils.data import DataLoader
 
 
-PROJECT_DIR = Path(__file__).resolve().parent
-CODES_DIR = PROJECT_DIR / "Codes"
+SCRIPT_DIR = Path(__file__).resolve().parent
+if (SCRIPT_DIR / "NewLearning8.py").is_file():
+    PROJECT_DIR = SCRIPT_DIR.parent
+    CODES_DIR = SCRIPT_DIR
+else:
+    PROJECT_DIR = SCRIPT_DIR
+    CODES_DIR = PROJECT_DIR / "Codes"
 if str(CODES_DIR) not in sys.path:
     sys.path.insert(0, str(CODES_DIR))
 
@@ -59,13 +65,14 @@ class RuntimeContext:
     arrays: physics.DatasetArrays
     stats: physics.NormalizationStats
     test_indices: np.ndarray
-    split_seed: int
+    split_seed: int | None
     seed: int | None
     g05_fraction: float
     g05_count: int
     g05_candidate_count: int
     align_global_charge_sign: Callable[[np.ndarray, np.ndarray], np.ndarray]
     notes: tuple[str, ...]
+    figure_warnings: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -91,6 +98,11 @@ class SelectedSample:
     predicted_charges: np.ndarray
     position_errors: np.ndarray
     mean_position_error: float
+    error_rank: int
+    error_percentile: float
+    test_count: int
+    test_mean_position_error: float
+    test_median_position_error: float
     g05_mask: np.ndarray
     global_sign_aligned: bool
 
@@ -244,6 +256,28 @@ def indices_sha256(indices: np.ndarray) -> str:
     return hashlib.sha256(np.ascontiguousarray(indices).tobytes()).hexdigest()
 
 
+def canonical_source_sha256(path: Path) -> str:
+    """Hash source text after normalizing CRLF/CR to LF."""
+    try:
+        content = path.read_bytes()
+    except OSError as error:
+        raise RuntimeError(f"Could not hash source file: {path}") from error
+    canonical = content.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(canonical).hexdigest()
+
+
+def source_hash_matches(recorded_hash: str, path: Path) -> bool:
+    """Accept either the exact bytes or the newline-canonical source bytes."""
+    expected = recorded_hash.strip().lower()
+    if not expected:
+        return False
+    current_hashes = {
+        experiment.file_sha256(path).lower(),
+        canonical_source_sha256(path).lower(),
+    }
+    return expected in current_hashes
+
+
 def resolve_dataset_path(
     recorded_path: str | None, override_path: Path | None
 ) -> Path:
@@ -275,6 +309,112 @@ def resolve_dataset_path(
         "Could not locate the dataset recorded by the checkpoint. Tried:\n  "
         f"{attempted}\nPass the exact file with --data."
     )
+
+
+def model_experiment_research_issues(
+    checkpoint_path: Path,
+    checkpoint: Mapping[str, Any],
+    config_path: Path,
+    config: Mapping[str, Any],
+    run_fingerprint: str,
+) -> list[str]:
+    """Return reasons a checkpoint is not the completed, reported best model."""
+    issues: list[str] = []
+    run_dir = config_path.parent
+    run_id = run_dir.name
+    if checkpoint_path.name.lower() != "best.pt":
+        issues.append("the selected checkpoint is not best.pt")
+    if checkpoint_path.parent.name != run_id:
+        issues.append("the checkpoint directory does not match the saved run id")
+
+    status_path = run_dir / "status.json"
+    result_path = run_dir / "result.json"
+    status: dict[str, Any] | None = None
+    result: dict[str, Any] | None = None
+    if status_path.is_file():
+        try:
+            status = load_json(status_path)
+        except (RuntimeError, TypeError) as error:
+            issues.append(f"status.json is unreadable ({error})")
+    else:
+        issues.append("status.json is missing")
+    if result_path.is_file():
+        try:
+            result = load_json(result_path)
+        except (RuntimeError, TypeError) as error:
+            issues.append(f"result.json is unreadable ({error})")
+    else:
+        issues.append("result.json is missing")
+
+    if status is not None:
+        if str(status.get("run_id", "")) != run_id:
+            raise ValueError("status.json belongs to a different run")
+        if status.get("status") != "completed":
+            issues.append(f"run status is {status.get('status')!r}, not 'completed'")
+    if result is not None:
+        if str(result.get("run_id", "")) != run_id:
+            raise ValueError("result.json belongs to a different run")
+        if result.get("run_fingerprint") != run_fingerprint:
+            raise ValueError("result.json fingerprint differs from the checkpoint")
+        result_config = result.get("configuration")
+        if not isinstance(result_config, Mapping):
+            raise TypeError("result.json is missing its run configuration")
+        if experiment.object_fingerprint(result_config) != run_fingerprint:
+            raise ValueError("result.json run configuration fingerprint is invalid")
+        if dict(result_config) != dict(config):
+            raise ValueError("result.json and config.json run configurations differ")
+        if result.get("status") != "completed":
+            issues.append("result.json is not marked completed")
+
+    checkpoint_epoch = checkpoint.get("epoch")
+    if checkpoint_epoch is None:
+        issues.append("the checkpoint does not record its epoch")
+    else:
+        checkpoint_epoch = int(checkpoint_epoch)
+
+    status_best_epoch: int | None = None
+    if status is not None:
+        if status.get("best_epoch") is None:
+            issues.append("status.json does not record best_epoch")
+        else:
+            status_best_epoch = int(status["best_epoch"])
+
+    result_best_epoch: int | None = None
+    if result is not None:
+        training_result = result.get("training_result")
+        if not isinstance(training_result, Mapping) or training_result.get(
+            "best_epoch"
+        ) is None:
+            issues.append("result.json does not record training_result.best_epoch")
+        else:
+            result_best_epoch = int(training_result["best_epoch"])
+        artifacts = result.get("artifacts")
+        if isinstance(artifacts, Mapping) and artifacts.get("best_checkpoint"):
+            recorded_best = Path(str(artifacts["best_checkpoint"]))
+            if recorded_best.name.lower() != "best.pt" or recorded_best.parent.name != run_id:
+                raise ValueError("result.json points to a best checkpoint from another run")
+        else:
+            issues.append("result.json does not identify the reported best checkpoint")
+
+    if (
+        status_best_epoch is not None
+        and result_best_epoch is not None
+        and status_best_epoch != result_best_epoch
+    ):
+        raise ValueError("status.json and result.json disagree on best_epoch")
+    expected_best_epoch = (
+        result_best_epoch if result_best_epoch is not None else status_best_epoch
+    )
+    if (
+        checkpoint_epoch is not None
+        and expected_best_epoch is not None
+        and checkpoint_epoch != expected_best_epoch
+    ):
+        issues.append(
+            f"checkpoint epoch {checkpoint_epoch} is not reported best_epoch "
+            f"{expected_best_epoch}"
+        )
+    return issues
 
 
 def assert_dataset_metadata(
@@ -352,6 +492,7 @@ def load_model_experiment_context(
     state_dict: Mapping[str, torch.Tensor],
     data_override: Path | None,
     device: torch.device,
+    exploratory: bool = False,
 ) -> RuntimeContext:
     run_fingerprint = str(checkpoint["run_fingerprint"])
     config_path = find_model_experiment_config(run_fingerprint, checkpoint_path)
@@ -385,6 +526,17 @@ def load_model_experiment_context(
     if model_name not in experiment.MODEL_REGISTRY:
         raise KeyError(
             f"Checkpoint model {model_name!r} is not registered in ModelExperiment.py"
+        )
+    model_spec = experiment.MODEL_REGISTRY[model_name]
+    verification_issues = model_experiment_research_issues(
+        checkpoint_path, checkpoint, config_path, config, run_fingerprint
+    )
+    saved_input_policy = model_metadata.get("input_policy")
+    if not isinstance(saved_input_policy, Mapping):
+        verification_issues.append("the run config does not record model.input_policy")
+    elif dict(saved_input_policy) != dict(model_spec.input_policy):
+        verification_issues.append(
+            "the current model registry input policy differs from the saved policy"
         )
 
     dataset_metadata = protocol.get("dataset")
@@ -446,28 +598,52 @@ def load_model_experiment_context(
     if g05_count != expected_g05_count:
         raise ValueError("Checkpoint G05 count is inconsistent with its fraction")
 
-    model = experiment.MODEL_REGISTRY[model_name].factory().to(device)
+    notes: list[str] = []
+    source_paths = {
+        "model_experiment_sha256": Path(experiment.__file__).resolve(),
+        "physics_protocol_sha256": Path(physics.__file__).resolve(),
+    }
+    if not isinstance(code_metadata, Mapping):
+        verification_issues.append("the protocol does not record source hashes")
+    else:
+        config_code_hash = str(config.get("code_sha256", ""))
+        protocol_code_hash = str(code_metadata.get("model_experiment_sha256", ""))
+        if config_code_hash and protocol_code_hash:
+            if config_code_hash.lower() != protocol_code_hash.lower():
+                raise ValueError(
+                    "Run config and protocol disagree on the training source hash"
+                )
+        elif not config_code_hash:
+            verification_issues.append("the run config does not record code_sha256")
+
+        for key, source_path in source_paths.items():
+            saved_hash = str(code_metadata.get(key, ""))
+            if not saved_hash:
+                verification_issues.append(f"the protocol does not record {key}")
+            elif not source_hash_matches(saved_hash, source_path):
+                verification_issues.append(
+                    f"current {source_path.name} semantics are unverified because "
+                    f"{key} differs"
+                )
+
+    figure_warnings: tuple[str, ...] = ()
+    if verification_issues:
+        issue_text = "; ".join(dict.fromkeys(verification_issues))
+        if not exploratory:
+            raise RuntimeError(
+                "Research checkpoint verification failed: "
+                f"{issue_text}. Use --exploratory only for a clearly labeled, "
+                "non-reporting visualization."
+            )
+        notes.append(f"Exploratory checkpoint accepted: {issue_text}.")
+        figure_warnings = (
+            "EXPLORATORY / UNVERIFIED MODEL",
+            "Not the verified completed best checkpoint used for reported test metrics",
+        )
+
+    model = model_spec.factory().to(device)
     load_state_dict_strict(model, state_dict, checkpoint_path)
     model.eval()
-
-    notes: list[str] = []
-    if isinstance(code_metadata, Mapping):
-        current_hashes = {
-            "model_experiment_sha256": experiment.file_sha256(Path(experiment.__file__)),
-            "physics_protocol_sha256": experiment.file_sha256(Path(physics.__file__)),
-        }
-        mismatched_hashes: list[str] = []
-        for key, current_hash in current_hashes.items():
-            saved_hash = str(code_metadata.get(key, ""))
-            if saved_hash and saved_hash.lower() != current_hash.lower():
-                mismatched_hashes.append(key)
-        if mismatched_hashes:
-            notes.append(
-                "Current source hashes differ from the checkpoint-recorded training "
-                f"sources ({', '.join(mismatched_hashes)}); strict state_dict, saved "
-                "routing config, split, normalization, and dataset hash were still "
-                "verified."
-            )
 
     return RuntimeContext(
         checkpoint_path=checkpoint_path,
@@ -488,6 +664,7 @@ def load_model_experiment_context(
         g05_candidate_count=candidate_count,
         align_global_charge_sign=experiment.align_global_charge_sign,
         notes=tuple(dict.fromkeys(notes)),
+        figure_warnings=figure_warnings,
     )
 
 
@@ -497,14 +674,28 @@ def load_v3_context(
     state_dict: Mapping[str, torch.Tensor],
     data_override: Path | None,
     device: torch.device,
+    allow_unverifiable_v3: bool = False,
 ) -> RuntimeContext:
     if checkpoint.get("model_architecture") != V3_ARCHITECTURE:
         raise ValueError("Checkpoint is not a recognized NewLearning8 v3 full model")
 
-    recorded_data_path = checkpoint.get("dataset_path")
+    dataset_metadata = checkpoint.get("dataset")
+    if not isinstance(dataset_metadata, Mapping):
+        dataset_metadata = {}
+    recorded_data_path = checkpoint.get("dataset_path", dataset_metadata.get("path"))
     dataset_path = resolve_dataset_path(
         None if recorded_data_path is None else str(recorded_data_path), data_override
     )
+    expected_data_hash = str(
+        checkpoint.get("dataset_sha256", dataset_metadata.get("sha256", ""))
+    ).strip()
+    if expected_data_hash:
+        actual_data_hash = experiment.file_sha256(dataset_path)
+        if actual_data_hash.lower() != expected_data_hash.lower():
+            raise ValueError(
+                f"Dataset SHA-256 mismatch for {dataset_path}; refusing to infer on "
+                "a dataset different from the v3 checkpoint"
+            )
     arrays = physics.load_dataset(dataset_path)
     expected_grid_shape = checkpoint.get("grid_shape")
     if expected_grid_shape is not None and tuple(expected_grid_shape) != tuple(
@@ -519,11 +710,93 @@ def load_v3_context(
     if tuple(checkpoint.get("g05_fields", ())) != tuple(physics.G05_FIELDS):
         raise ValueError("Checkpoint G05 field order is incompatible with the project")
 
-    split_seed = int(checkpoint.get("data_split_seed", physics.DATA_SPLIT_SEED))
-    split = physics.create_data_split(arrays.g00.shape[0], split_seed)
-    train, _, test = validate_split(
-        split.train, split.validation, split.test, arrays.g00.shape[0]
+    split_metadata = checkpoint.get("data_split")
+    if not isinstance(split_metadata, Mapping):
+        split_metadata = {}
+    split_seed_value = checkpoint.get(
+        "data_split_seed", split_metadata.get("seed")
     )
+    split_seed = None if split_seed_value is None else int(split_seed_value)
+
+    split_indices = checkpoint.get("split_indices")
+    if not isinstance(split_indices, Mapping):
+        split_indices = {}
+    exact_values: dict[str, Any] = {}
+    for name in ("train", "validation", "test"):
+        if name in split_indices:
+            exact_values[name] = split_indices[name]
+        elif f"{name}_indices" in split_metadata:
+            exact_values[name] = split_metadata[f"{name}_indices"]
+        elif f"{name}_indices" in checkpoint:
+            exact_values[name] = checkpoint[f"{name}_indices"]
+    if exact_values and len(exact_values) != 3:
+        raise ValueError("v3 checkpoint stores only part of the exact data split")
+
+    if len(exact_values) == 3:
+        train, validation, test = validate_split(
+            exact_values["train"],
+            exact_values["validation"],
+            exact_values["test"],
+            arrays.g00.shape[0],
+        )
+        has_exact_split = True
+    else:
+        if split_seed is None:
+            split_seed = int(physics.DATA_SPLIT_SEED)
+        split = physics.create_data_split(arrays.g00.shape[0], split_seed)
+        train, validation, test = validate_split(
+            split.train, split.validation, split.test, arrays.g00.shape[0]
+        )
+        has_exact_split = False
+
+    expected_split_hashes: dict[str, str] = {}
+    for name in ("train", "validation", "test"):
+        key = f"{name}_indices_sha256"
+        value = split_metadata.get(key, checkpoint.get(key, ""))
+        if value:
+            expected_split_hashes[name] = str(value).lower()
+    if expected_split_hashes and len(expected_split_hashes) != 3:
+        raise ValueError("v3 checkpoint stores only part of the split hash metadata")
+    if len(expected_split_hashes) == 3:
+        for name, indices in (
+            ("train", train),
+            ("validation", validation),
+            ("test", test),
+        ):
+            if indices_sha256(indices) != expected_split_hashes[name]:
+                raise ValueError(
+                    f"v3 {name} split does not match its checkpoint SHA-256"
+                )
+    has_verified_split = has_exact_split or (
+        split_seed_value is not None and len(expected_split_hashes) == 3
+    )
+
+    missing_provenance: list[str] = []
+    if not expected_data_hash:
+        missing_provenance.append("dataset SHA-256")
+    if not has_verified_split:
+        missing_provenance.append("exact split indices or seed plus all split hashes")
+    notes: list[str] = []
+    figure_warnings: tuple[str, ...] = ()
+    if missing_provenance:
+        missing_text = ", ".join(missing_provenance)
+        if not allow_unverifiable_v3:
+            raise RuntimeError(
+                "Legacy v3 checkpoint provenance is incomplete "
+                f"({missing_text}). Refusing research/PPT output by default. "
+                "Use --allow-unverifiable-v3 only when the warning watermark is "
+                "acceptable."
+            )
+        notes.append(
+            "Legacy v3 provenance override: missing "
+            f"{missing_text}; the selected dataset and split seed were accepted only "
+            "after train-only normalization matched."
+        )
+        figure_warnings = (
+            "UNVERIFIED LEGACY V3 PROVENANCE",
+            "Dataset identity and/or exact held-out split were not recorded",
+        )
+
     saved_stats = normalization_from_mapping(checkpoint, str(checkpoint_path))
     recalculated_stats = physics.calculate_normalization_stats(arrays, train)
     assert_normalization_matches(saved_stats, recalculated_stats, str(checkpoint_path))
@@ -537,12 +810,6 @@ def load_v3_context(
     model = physics.ChargeNet().to(device)
     load_state_dict_strict(model, state_dict, checkpoint_path)
     model.eval()
-    notes = (
-        "The v3 checkpoint does not save split_indices.npz or a dataset hash; "
-        f"the current v3 split seed ({split_seed}) and default/overridden dataset "
-        "were accepted only after checkpoint normalization matched recalculated "
-        "train-only statistics.",
-    )
     return RuntimeContext(
         checkpoint_path=checkpoint_path,
         checkpoint_family="NewLearning8 physics-separated v3",
@@ -561,12 +828,17 @@ def load_v3_context(
         g05_count=g05_count,
         g05_candidate_count=arrays.g05.shape[1],
         align_global_charge_sign=physics.align_global_charge_sign,
-        notes=notes,
+        notes=tuple(notes),
+        figure_warnings=figure_warnings,
     )
 
 
 def restore_runtime_context(
-    checkpoint_path: Path, data_override: Path | None, device: torch.device
+    checkpoint_path: Path,
+    data_override: Path | None,
+    device: torch.device,
+    exploratory: bool = False,
+    allow_unverifiable_v3: bool = False,
 ) -> RuntimeContext:
     checkpoint_path = checkpoint_path.expanduser().resolve()
     if not checkpoint_path.is_file():
@@ -576,17 +848,28 @@ def restore_runtime_context(
 
     if "run_fingerprint" in checkpoint:
         return load_model_experiment_context(
-            checkpoint_path, checkpoint, state_dict, data_override, device
+            checkpoint_path,
+            checkpoint,
+            state_dict,
+            data_override,
+            device,
+            exploratory,
         )
     if checkpoint.get("model_architecture") == V3_ARCHITECTURE:
         return load_v3_context(
-            checkpoint_path, checkpoint, state_dict, data_override, device
+            checkpoint_path,
+            checkpoint,
+            state_dict,
+            data_override,
+            device,
+            allow_unverifiable_v3,
         )
     raise ValueError(
         "Unsupported checkpoint format. This script accepts current "
-        "ModelExperiment best/latest checkpoints and complete/composed "
+        "verified ModelExperiment best checkpoints and complete/composed "
         "NewLearning8 v3 checkpoints. Legacy v1/v2 checkpoints use different "
-        "architectures and preprocessing and are intentionally not guessed."
+        "architectures and preprocessing and are intentionally not guessed. "
+        "Non-reporting ModelExperiment checkpoints require --exploratory."
     )
 
 
@@ -696,20 +979,21 @@ def select_sample(
     batch_size: int,
 ) -> SelectedSample:
     test_count = len(context.test_indices)
+    if test_count == 0:
+        raise ValueError("The saved test split is empty")
+    dataset_indices = context.test_indices
+    batch = infer_indices(context, dataset_indices, device, batch_size)
+    per_charge_errors, mean_errors = sample_errors(batch)
+
     if sample_index is not None:
         if not 0 <= sample_index < test_count:
             raise IndexError(
                 f"--sample-index is test-local and must be in [0, {test_count - 1}]"
             )
-        dataset_indices = np.asarray([context.test_indices[sample_index]], dtype=np.int64)
-        batch = infer_indices(context, dataset_indices, device, batch_size)
-        selected_batch_index = 0
+        selected_batch_index = sample_index
         selected_test_index = sample_index
         mode = "index"
     else:
-        dataset_indices = context.test_indices
-        batch = infer_indices(context, dataset_indices, device, batch_size)
-        _, mean_errors = sample_errors(batch)
         if sample_mode == "best":
             selected_batch_index = int(np.argmin(mean_errors))
         elif sample_mode == "worst":
@@ -722,8 +1006,12 @@ def select_sample(
         selected_test_index = selected_batch_index
         mode = sample_mode
 
-    per_charge_errors, mean_errors = sample_errors(batch)
     index = selected_batch_index
+    selected_error = float(mean_errors[index])
+    error_rank = int(np.count_nonzero(mean_errors < selected_error)) + 1
+    error_percentile = 100.0 * float(
+        np.count_nonzero(mean_errors <= selected_error)
+    ) / test_count
     return SelectedSample(
         mode=mode,
         test_index=selected_test_index,
@@ -734,7 +1022,12 @@ def select_sample(
         raw_predicted_charges=batch.raw_charges[index].copy(),
         predicted_charges=batch.displayed_charges[index].copy(),
         position_errors=per_charge_errors[index].copy(),
-        mean_position_error=float(mean_errors[index]),
+        mean_position_error=selected_error,
+        error_rank=error_rank,
+        error_percentile=error_percentile,
+        test_count=test_count,
+        test_mean_position_error=float(np.mean(mean_errors)),
+        test_median_position_error=float(np.median(mean_errors)),
         g05_mask=batch.masks[index, :, 0].astype(bool, copy=True),
         global_sign_aligned=bool(batch.global_sign_aligned[index]),
     )
@@ -759,6 +1052,12 @@ def print_console_summary(
     print(f"Sample index: {sample.test_index} (test-local)")
     print(f"Dataset index: {sample.dataset_index}")
     print(f"Sample mode: {sample.mode}")
+    print(f"Provenance: synthetic held-out test sample ({sample.test_count} total)")
+    print(
+        "Selection criterion: mean of q1/q2 direct-pair 3D position errors; "
+        f"rank={sample.error_rank}/{sample.test_count}, "
+        f"empirical percentile={sample.error_percentile:.1f}%"
+    )
     print(
         f"G05 fraction: {context.g05_fraction:.3f} "
         f"({context.g05_count}/{context.g05_candidate_count} points)"
@@ -774,9 +1073,12 @@ def print_console_summary(
         print(f"True q        : {sample.true_charges[charge_index]: .6f}")
         if sample.global_sign_aligned:
             print(
-                f"Pred q        : {sample.predicted_charges[charge_index]: .6f} "
-                "(evaluation-aligned global sign; "
-                f"raw={sample.raw_predicted_charges[charge_index]: .6f})"
+                f"Raw model q   : {sample.raw_predicted_charges[charge_index]: .6f} "
+                "(one representative of the +/- equivalence class)"
+            )
+            print(
+                f"Eval-only q   : {sample.predicted_charges[charge_index]: .6f} "
+                "(ground-truth oracle-aligned global sign)"
             )
         else:
             print(f"Pred q        : {sample.predicted_charges[charge_index]: .6f}")
@@ -784,6 +1086,10 @@ def print_console_summary(
 
     print("")
     print(f"Mean 3D position error: {sample.mean_position_error: .6f}")
+    print(
+        f"Full test mean/median: {sample.test_mean_position_error: .6f} / "
+        f"{sample.test_median_position_error: .6f}"
+    )
     print("=" * 60)
 
 
@@ -833,8 +1139,9 @@ def charge_color(charge: float) -> str:
     return "#616161"
 
 
-def marker_size(charge: float) -> float:
-    return float(np.clip(95.0 + 65.0 * abs(charge), 95.0, 175.0))
+def marker_size(_charge: float) -> float:
+    """Use a fixed size; charge magnitude is reported numerically, not by area."""
+    return 130.0
 
 
 def build_output_path(
@@ -872,15 +1179,21 @@ def render_plot(
             "matplotlib is required in the same Python environment as PyTorch."
         ) from error
 
-    figure = plt.figure(figsize=(13.5, 8.2), facecolor="white")
+    figure = plt.figure(figsize=(14.2, 8.8), facecolor="white")
     axis = figure.add_subplot(111, projection="3d")
-    figure.subplots_adjust(left=0.02, right=0.69, bottom=0.08, top=0.90)
+    banner_line_count = len(context.figure_warnings) + int(
+        sample.global_sign_aligned
+    )
+    axes_top = max(0.76, 0.90 - 0.04 * banner_line_count)
+    figure.subplots_adjust(left=0.02, right=0.69, bottom=0.08, top=axes_top)
 
     grid_x, grid_y = np.meshgrid(context.arrays.grid_x, context.arrays.grid_y)
     plane_z = np.zeros_like(grid_x)
     if show_g00:
         g00 = context.arrays.g00[sample.dataset_index]
-        minimum, maximum = float(np.min(g00)), float(np.max(g00))
+        # A dataset-wide scale keeps color intensity comparable across figures.
+        minimum = float(np.min(context.arrays.g00))
+        maximum = float(np.max(context.arrays.g00))
         if maximum <= minimum:
             maximum = minimum + 1.0
         normalization = colors.Normalize(vmin=minimum, vmax=maximum)
@@ -906,7 +1219,7 @@ def render_plot(
             pad=0.025,
             fraction=0.035,
         )
-        colorbar.set_label("Observed G00", fontsize=11)
+        colorbar.set_label("Observed G00 (dataset-wide scale)", fontsize=11)
         colorbar.ax.tick_params(labelsize=9)
     else:
         axis.plot_surface(
@@ -947,7 +1260,17 @@ def render_plot(
         true_position = sample.true_positions[index]
         predicted_position = sample.predicted_positions[index]
         true_charge = float(sample.true_charges[index])
-        predicted_charge = float(sample.predicted_charges[index])
+        raw_predicted_charge = float(sample.raw_predicted_charges[index])
+        if sample.global_sign_aligned:
+            plotted_predicted_charge = raw_predicted_charge
+            predicted_color = "#757575"
+            predicted_label = (
+                f"Pred |q{index + 1}|={abs(raw_predicted_charge):.3f} (± pair)"
+            )
+        else:
+            plotted_predicted_charge = float(sample.predicted_charges[index])
+            predicted_color = charge_color(plotted_predicted_charge)
+            predicted_label = f"Pred q{index + 1}={plotted_predicted_charge:+.3f}"
         axis.plot(
             (true_position[0], predicted_position[0]),
             (true_position[1], predicted_position[1]),
@@ -969,8 +1292,8 @@ def render_plot(
         axis.scatter(
             *predicted_position,
             marker="^",
-            s=marker_size(predicted_charge),
-            c=charge_color(predicted_charge),
+            s=marker_size(plotted_predicted_charge),
+            c=predicted_color,
             edgecolors="black",
             linewidths=1.0,
             depthshade=False,
@@ -987,7 +1310,7 @@ def render_plot(
             predicted_position[0] - horizontal_offset,
             predicted_position[1],
             predicted_position[2] + prediction_annotation_offset,
-            f"Pred q{index + 1}={predicted_charge:+.3f}",
+            predicted_label,
             fontsize=10.5,
             horizontalalignment="right",
         )
@@ -1031,14 +1354,21 @@ def render_plot(
     for pane in (axis.xaxis.pane, axis.yaxis.pane, axis.zaxis.pane):
         pane.set_alpha(0.045)
 
+    predicted_legend_label = (
+        "Predicted position / ± charge class"
+        if sample.global_sign_aligned
+        else "Predicted position"
+    )
+    predicted_legend_color = "#757575" if sample.global_sign_aligned else "white"
     legend_handles = [
         Line2D(
             [0], [0], marker="o", color="none", markerfacecolor="white",
             markeredgecolor="black", markersize=9, label="True position"
         ),
         Line2D(
-            [0], [0], marker="^", color="none", markerfacecolor="white",
-            markeredgecolor="black", markersize=9, label="Predicted position"
+            [0], [0], marker="^", color="none",
+            markerfacecolor=predicted_legend_color,
+            markeredgecolor="black", markersize=9, label=predicted_legend_label
         ),
         Line2D(
             [0], [0], marker="o", color="none", markerfacecolor=charge_color(1.0),
@@ -1071,8 +1401,15 @@ def render_plot(
     epoch_text = (
         "N/A" if context.checkpoint_epoch is None else str(context.checkpoint_epoch)
     )
-    prediction_suffix = "*" if sample.global_sign_aligned else ""
     info_lines = [
+        "Synthetic held-out test sample",
+        f"Selection: {sample.mode} among {sample.test_count} test samples",
+        "Criterion: mean(q1/q2 direct-pair 3D errors)",
+        f"Error rank/percentile: {sample.error_rank}/{sample.test_count} "
+        f"({sample.error_percentile:.1f}%)",
+        f"Full test mean/median: {sample.test_mean_position_error:.5f} / "
+        f"{sample.test_median_position_error:.5f}",
+        "",
         f"Sample index: {sample.test_index} (dataset {sample.dataset_index})",
         f"G05 fraction: {context.g05_fraction:.3f} "
         f"({context.g05_count}/{context.g05_candidate_count})",
@@ -1081,25 +1418,40 @@ def render_plot(
         f"Model: {context.model_name}",
         "",
         f"True q1: {sample.true_charges[0]:+.4f}",
-        f"Pred q1{prediction_suffix}: {sample.predicted_charges[0]:+.4f}",
-        "",
         f"True q2: {sample.true_charges[1]:+.4f}",
-        f"Pred q2{prediction_suffix}: {sample.predicted_charges[1]:+.4f}",
-        "",
-        f"Charge 1 position error: {sample.position_errors[0]:.5f}",
-        f"Charge 2 position error: {sample.position_errors[1]:.5f}",
-        f"Mean 3D position error: {sample.mean_position_error:.5f}",
     ]
     if sample.global_sign_aligned:
-        info_lines.extend(("", "* G05=0: global sign aligned", "  exactly as in evaluation."))
+        info_lines.extend(
+            (
+                "Predicted charge class:",
+                f"  ±({sample.raw_predicted_charges[0]:+.4f}, "
+                f"{sample.raw_predicted_charges[1]:+.4f})",
+                "Absolute/global sign: unidentifiable (N/A)",
+            )
+        )
+    else:
+        info_lines.extend(
+            (
+                f"Pred q1: {sample.predicted_charges[0]:+.4f}",
+                f"Pred q2: {sample.predicted_charges[1]:+.4f}",
+            )
+        )
+    info_lines.extend(
+        (
+            "",
+            f"Charge 1 position error: {sample.position_errors[0]:.5f}",
+            f"Charge 2 position error: {sample.position_errors[1]:.5f}",
+            f"Mean 3D position error: {sample.mean_position_error:.5f}",
+        )
+    )
     figure.text(
         0.75,
-        0.53,
+        0.50,
         "\n".join(info_lines),
         ha="left",
         va="center",
-        fontsize=11.2,
-        linespacing=1.35,
+        fontsize=10.1,
+        linespacing=1.22,
         family="sans-serif",
         bbox={
             "boxstyle": "round,pad=0.65",
@@ -1108,6 +1460,43 @@ def render_plot(
             "alpha": 0.97,
         },
     )
+
+    banner_lines = list(context.figure_warnings)
+    if sample.global_sign_aligned:
+        banner_lines.append(
+            "G05=0: ABSOLUTE GLOBAL SIGN UNIDENTIFIABLE — "
+            "gray predictions are a ± equivalence class"
+        )
+    if banner_lines:
+        figure.text(
+            0.5,
+            0.965,
+            "\n".join(banner_lines),
+            ha="center",
+            va="top",
+            fontsize=11.5,
+            weight="bold",
+            color="#8d1b1b",
+            bbox={
+                "boxstyle": "round,pad=0.45",
+                "facecolor": "#fff3e0",
+                "edgecolor": "#d84315",
+                "alpha": 0.98,
+            },
+        )
+    if context.figure_warnings:
+        figure.text(
+            0.36,
+            0.45,
+            context.figure_warnings[0],
+            ha="center",
+            va="center",
+            fontsize=23,
+            weight="bold",
+            color="#b71c1c",
+            alpha=0.14,
+            rotation=24,
+        )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(output_path, dpi=dpi, bbox_inches="tight", facecolor="white")
@@ -1156,6 +1545,22 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     parser.add_argument(
+        "--exploratory",
+        action="store_true",
+        help=(
+            "Allow a non-best, incomplete, or source-drifted ModelExperiment "
+            "checkpoint and add an unverified watermark"
+        ),
+    )
+    parser.add_argument(
+        "--allow-unverifiable-v3",
+        action="store_true",
+        help=(
+            "Allow a legacy v3 checkpoint without dataset/split provenance and "
+            "add a warning watermark"
+        ),
+    )
+    parser.add_argument(
         "--no-show",
         action="store_true",
         help="Save the PNG without opening an interactive window",
@@ -1184,7 +1589,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         matplotlib.use("Agg", force=True)
 
     device = resolve_device(args.device)
-    context = restore_runtime_context(args.checkpoint, args.data, device)
+    context = restore_runtime_context(
+        args.checkpoint,
+        args.data,
+        device,
+        exploratory=args.exploratory,
+        allow_unverifiable_v3=args.allow_unverifiable_v3,
+    )
     sample = select_sample(
         context, args.sample_index, args.sample_mode, device, args.batch_size
     )
