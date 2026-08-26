@@ -449,10 +449,14 @@ def atomic_torch_save(value: Mapping[str, Any], path: Path) -> None:
 
 
 def load_torch_checkpoint(path: Path, device: torch.device) -> dict[str, Any]:
+    # Checkpoints also contain CPU-only RNG state tensors.  Loading the whole
+    # mapping onto CUDA makes Generator.set_state()/torch.set_rng_state() fail.
+    # Model parameters are copied by load_state_dict, and optimizer tensors are
+    # moved explicitly by optimizer_to_device after loading.
     try:
-        checkpoint = torch.load(path, map_location=device, weights_only=False)
+        checkpoint = torch.load(path, map_location="cpu", weights_only=False)
     except TypeError:
-        checkpoint = torch.load(path, map_location=device)
+        checkpoint = torch.load(path, map_location="cpu")
     if not isinstance(checkpoint, dict):
         raise TypeError(f"Checkpoint is not a mapping: {path}")
     return checkpoint

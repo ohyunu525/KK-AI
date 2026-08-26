@@ -1,9 +1,9 @@
 {
-  "best_epoch": 151,
-  "best_validation_loss": 0.2901430506706238,
-  "next_epoch": 235,
-  "resumed": false,
+  "error_message": "RNG state must be a torch.ByteTensor",
+  "error_type": "TypeError",
+  "recovery": "Re-run the same command. The latest complete epoch checkpoint will be resumed and completed results will be skipped.",
   "run_id": "g05_sign_only__g05_010pct__seed_43__83f9012b447a",
-  "status": "running",
-  "updated_at": "2026-08-25T02:57:57.979657+00:00"
+  "status": "failed",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\COM\\Documents\\KK-AI\\Codes\\ModelExperiment.py\", line 1915, in main\n    _, was_skipped = train_and_evaluate_run(\n                     ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\COM\\Documents\\KK-AI\\Codes\\ModelExperiment.py\", line 976, in train_and_evaluate_run\n    shuffle_generator.set_state(checkpoint[\"shuffle_generator_state\"])\nTypeError: RNG state must be a torch.ByteTensor\n",
+  "updated_at": "2026-08-26T00:29:38.518211+00:00"
 }
