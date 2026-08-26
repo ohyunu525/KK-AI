@@ -1,0 +1,115 @@
+판정: **수정 후 사용 가능**입니다. 직접적인 P0 오류는 찾지 못했지만, 연구 결과·PPT에 일반적으로 사용하기 전 해결해야 할 P1 문제가 있습니다.
+
+## 주요 발견 사항
+
+### [P1] v3 체크포인트는 동일 test split을 증명하지 못함
+
+위치: [visualize_3d.py:494](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py:494>), [NewLearning8.py:643](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/Codes/NewLearning8.py:643>)
+
+`NewLearning8` 체크포인트에는 dataset SHA-256, split indices/hash, dataset path, split seed가 저장되지 않습니다. 그런데 시각화 코드는 존재하지 않는 `dataset_path`, `data_split_seed`를 읽으려 한 뒤 현재 기본 dataset과 `DATA_SPLIT_SEED`로 대체합니다.
+
+train normalization 일치는 강한 간접 증거지만 정확한 test membership/order를 보장하지 않습니다. 예를 들어 train 부분은 그대로 두고 validation/test 샘플만 재배열한 dataset도 통과할 수 있습니다.
+
+현재 기본 dataset과 seed 42로 재계산한 값은 `normalization_stats_v3.npz`와 모두 일치하므로 현재 artifact가 같은 split일 가능성은 높지만, 확정할 metadata가 없습니다.
+
+수정 방법:
+
+- 모든 v3 체크포인트에 dataset SHA-256과 exact split indices/hash를 저장
+- 누락된 legacy v3는 기본적으로 거부
+- 필요하면 `--allow-unverifiable-v3`에서만 경고와 figure watermark를 붙여 허용
+
+::code-comment{title="[P1] v3 split provenance is inferred" body="v3 checkpoints do not store a dataset hash or exact split. Falling back to the current default dataset and split constant means normalization can match while validation/test membership or ordering differs. Save and verify the dataset SHA-256 and exact split indices, or require an explicit legacy override." file="C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py" start=504 end=529 priority=1}
+
+### [P1] 보고된 평가 모델이 아닌 `latest.pt`나 미완료 run도 허용됨
+
+위치: [visualize_3d.py:568](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py:568>), [ModelExperiment.py:1079](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/Codes/ModelExperiment.py:1079>)
+
+기존 test evaluation은 학습 완료 후 `best.pt`를 불러 평가합니다. 반면 시각화는 run fingerprint만 있으면 `best.pt`, `latest.pt`, 진행 중 run의 체크포인트를 모두 허용합니다.
+
+실제 완료된 로컬 run 30개 중 23개는 `best_epoch != final/latest epoch`였습니다. 또한 현재 `status="running"`인 run에도 best/latest 체크포인트가 존재합니다. 따라서 `latest.pt`를 선택하면 기존 `result.json`의 성능과 다른 모델을 보여주거나, 학습 종료 전에 test set을 들여다보게 됩니다.
+
+수정 방법:
+
+- 연구/PPT 모드에서는 완료된 run의 `best.pt`만 허용
+- `status.json == completed`, `result.json` 존재, checkpoint epoch와 `best_epoch` 일치를 확인
+- latest/in-progress 모델은 별도 `--exploratory` 옵션과 명확한 표시가 있을 때만 허용
+
+::code-comment{title="[P1] Non-final checkpoints are accepted" body="The reported test evaluation reloads best.pt after training, but this dispatcher also accepts latest.pt and checkpoints from unfinished runs. Require completed status plus a best-epoch match for research figures; allow other checkpoints only in an explicitly labeled exploratory mode." file="C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py" start=577 end=589 priority=1}
+
+### [P1] 실제 source drift가 발생해도 경고만 하고 계속 실행함
+
+위치: [visualize_3d.py:449](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py:449>), [ModelExperiment.py:181](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/Codes/ModelExperiment.py:181>)
+
+strict `state_dict` 복원만으로 forward semantics까지 검증되지는 않습니다. 특히 두 `RoutedChargeNet`은 tensor 구조가 같고 `allow_g05_for_structure`라는 Python boolean routing만 다릅니다. 소스가 의미적으로 바뀌어도 state dict는 정상 로드될 수 있습니다.
+
+현재 artifact에 대해서는 저장된 두 source hash가 현재 파일을 LF로 정규화한 hash와 정확히 일치했고, 31개 config의 input policy도 현재 registry와 모두 일치했습니다. 즉 현재 보이는 mismatch 경고는 CRLF/LF 차이이며 실제 semantic drift는 확인되지 않았습니다.
+
+수정 방법:
+
+- 줄바꿈을 정규화한 source hash 또는 Git commit을 기록·비교
+- 저장된 `input_policy`와 현재 registry policy도 비교
+- 진짜 source mismatch는 기본적으로 중단
+
+::code-comment{title="[P1] Semantic code drift only warns" body="A strict state-dict load cannot detect changes to Python-side routing or forward semantics. Canonicalize source hashes, validate the saved input policy against the current registry, and reject genuine mismatches unless the user explicitly opts into an unverified run." file="C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py" start=449 end=470 priority=1}
+
+### [P1] G05=0에서 ground truth로 정렬한 전하를 ‘예측’ marker로 표시함
+
+위치: [visualize_3d.py:665](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py:665>), [visualize_3d.py:949](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py:949>)
+
+G05=0에서는 target을 사용해 전역 부호를 oracle alignment한 뒤, 그 값을 predicted marker의 색과 label에 사용합니다. 기존 평가는 이 정렬을 sign-invariant charge MAE에만 사용하고 absolute/global sign 성능은 N/A로 둡니다.
+
+현재 footnote가 있기는 하지만, PPT에서는 빨강/파랑 marker가 실제 절대 부호 복원처럼 보일 수 있습니다. 위치 성능 및 best/median/worst 선택에는 영향이 없습니다.
+
+수정 방법:
+
+- 기본 figure에는 raw predicted sign을 표시하거나
+- `±(q1,q2)` equivalence class로 회색/이중 marker를 표시
+- 정렬값을 쓴다면 “ground-truth oracle-aligned, absolute sign unidentifiable”를 제목 수준으로 표시
+
+::code-comment{title="[P1] Oracle-aligned sign is drawn as a prediction" body="For G05=0 the displayed charge is selected using the target and then controls the predicted marker color and label. This is valid only as a representative of the ± symmetry class, not as recovered absolute sign; show the raw sign or mark the equivalence class prominently." file="C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py" start=665 end=672 priority=1}
+
+### [P1] figure 자체에 best/median/worst 선택 방식이 표시되지 않음
+
+위치: [visualize_3d.py:1029](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py:1029>), [visualize_3d.py:1075](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py:1075>)
+
+선택 mode는 콘솔과 파일명에만 있고 PNG 내부에는 없습니다. 따라서 best sample을 PPT에 넣으면 대표적인 test 성능으로 오해될 수 있습니다. 또한 synthetic held-out sample이라는 점도 figure에는 없습니다.
+
+수정 방법:
+
+- `Selection: median/best/worst among N held-out test samples`
+- 선택 기준과 해당 error percentile
+- `Synthetic held-out test sample`
+- 가능하면 전체 test mean/median도 함께 표시
+
+::code-comment{title="[P1] Sample selection is hidden in the figure" body="sample.mode is present in the console and filename but omitted from the PNG. A best or worst example can therefore appear representative when copied into a slide. Put the selection mode, test-set size/percentile, and synthetic held-out provenance directly in the figure." file="C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py" start=1075 end=1092 priority=1}
+
+### [P1] 현재 저장된 Python 환경으로는 재현 실행 불가
+
+위치: [KK/pyvenv.cfg:1](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/KK/pyvenv.cfg:1>)
+
+가상환경이 이전 사용자 `C:\Users\COM\...`의 Python을 가리키며 현재 환경에는 PyTorch도 없습니다. 따라서 이번 검토에서는 syntax compile, dataset/hash/split/normalization 검산은 수행했지만 실제 Torch forward와 PNG 렌더링은 실행하지 못했습니다.
+
+수정 방법은 새 환경을 만들고 PyTorch·NumPy·Matplotlib 버전을 requirements/lock 파일로 고정한 뒤, 최소 한 개의 `best.pt`와 v3 composed checkpoint에 대해 end-to-end 회귀 테스트를 추가하는 것입니다.
+
+### [P2] figure 간 G00 색상과 charge marker 크기를 직접 비교하기 어려움
+
+위치: [visualize_3d.py:882](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py:882>), [visualize_3d.py:836](<C:/Users/5252x/OneDrive/바탕 화면/2026AISW대회/KK-AI/visualize_3d.py:836>)
+
+G00 color scale이 샘플마다 min/max로 재설정되므로 여러 그림의 색 강도를 직접 비교할 수 없습니다. marker 크기도 `|q|`를 encoding하지만 크기 범례가 없습니다.
+
+수정 방법은 공통 color normalization을 사용하거나 “per-sample auto-scaled”를 표시하고, marker 크기를 고정하거나 magnitude scale 범례를 추가하는 것입니다.
+
+## 확인된 정상 동작
+
+- ModelExperiment 계열은 현재 dataset SHA-256, 저장 split, seed 42 재생성 split, 세 split hash가 모두 정확히 일치했습니다.
+- target 해석은 `[x1,y1,z1,q1,x2,y2,z2,q2] → position=[x1,y1,z1,x2,y2,z2], charge=[q1,q2]`로 정확합니다.
+- 입력 정규화와 position/charge 역정규화는 기존 평가와 같고, raw target 복원 assertion도 있습니다.
+- G00/G05 preprocessing과 nested-prefix mask는 `physics.prepare_dataset()`을 그대로 재사용합니다.
+- `model.eval()`, `torch.no_grad()`, device 이동, `map_location` 처리는 올바릅니다.
+- G00 heatmap과 G05 위치는 모두 선택된 `sample.dataset_index`의 raw dataset 값을 사용하며 x/y indexing 방향도 맞습니다.
+- 축은 관측 grid와 예측치를 모두 포함하고 `set_box_aspect`로 물리적 비율을 유지합니다. marker의 true=`o`, predicted=`^` 대응과 q1/q2 label도 맞습니다.
+- best/median/worst 기준은 각 샘플의 `0.5 × (charge1 3D error + charge2 3D error)`로 계산되어 기존 aggregate metric과 일치합니다.
+
+Permutation에 대해서는 두 코드 모두 matching을 하지 않고 lexicographically ordered slot을 identity 대응합니다. 따라서 기존 평가와는 일치하지만 “matching 후 error”라는 표현은 문자 그대로는 맞지 않습니다. 연구 metric을 unordered-set reconstruction으로 정의하려는 경우에는 direct/swapped assignment 중 작은 값을 선택하도록 기존 evaluation과 시각화 모두 수정하고 결과를 재산출해야 합니다.
+
+최종 판정은 **수정 후 사용 가능**입니다. 제한적으로는 완료된 ModelExperiment의 `best.pt`, G05>0, median sample을 사용하고 선택 방식을 PPT에 명시하면 현재 수치 경로는 일관됩니다. 일반 연구·발표 도구로 쓰려면 위 P1 문제를 먼저 해결해야 합니다.
