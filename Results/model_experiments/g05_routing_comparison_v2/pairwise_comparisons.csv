@@ -1,0 +1,9 @@
+model_a,model_b,g05_fraction,metric,paired_seed_count,paired_seeds,delta_b_minus_a_mean,delta_b_minus_a_std,improvement_b_over_a_mean,improvement_definition
+g05_sign_only,g05_full_reconstruction,0.0,mean_position_mae,1,42,0.0,,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,position_error_1,1,42,0.0,,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,position_error_2,1,42,0.0,,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,mean_position_3d_error,1,42,0.0,,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,charge_mae_q1,1,42,0.0,,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,charge_mae_q2,1,42,0.0,,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,charge_magnitude_mae,1,42,0.0,,-0.0,positive means model_b is better; sign is reversed for error/loss metrics
+g05_sign_only,g05_full_reconstruction,0.0,relative_sign_accuracy,1,42,0.0,,0.0,positive means model_b is better; sign is reversed for error/loss metrics

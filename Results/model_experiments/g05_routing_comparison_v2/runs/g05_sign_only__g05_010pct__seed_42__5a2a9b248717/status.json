@@ -1,0 +1,9 @@
+{
+  "best_epoch": 145,
+  "best_validation_loss": 0.29341737592220307,
+  "next_epoch": 146,
+  "resumed": false,
+  "run_id": "g05_sign_only__g05_010pct__seed_42__5a2a9b248717",
+  "status": "running",
+  "updated_at": "2026-08-26T03:02:31.475105+00:00"
+}
