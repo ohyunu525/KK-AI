@@ -1,0 +1,4 @@
+# Project runtime dependencies (Python 3.11)
+numpy==2.5.2
+matplotlib
+torch
