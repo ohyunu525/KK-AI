@@ -1,0 +1,8 @@
+{
+  "best_epoch": 285,
+  "best_validation_loss": 0.19438092812895774,
+  "result_path": "C:\\Users\\COM\\Documents\\KK-AI\\Results\\model_experiments\\g05_cuda_seed41_6fractions_v1\\runs\\g05_full_reconstruction__g05_050pct__seed_41__1b036cfb55e8\\result.json",
+  "run_id": "g05_full_reconstruction__g05_050pct__seed_41__1b036cfb55e8",
+  "status": "completed",
+  "updated_at": "2026-08-27T03:14:03.719651+00:00"
+}
