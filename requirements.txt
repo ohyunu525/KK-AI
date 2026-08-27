@@ -1,6 +1,8 @@
-# Project runtime dependencies (Python 3.11)
+# Project runtime dependencies (Python 3.12+)
+# NVIDIA GPU build for the installed CUDA 12.6 driver
+--extra-index-url https://download.pytorch.org/whl/cu126
 numpy==2.5.2
 matplotlib
-torch
+torch==2.7.0+cu126
 dvc==3.67.1
 dvc-gdrive
