@@ -1,0 +1,91 @@
+{
+  "artifacts": {
+    "best_checkpoint": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\model_experiments\\g05_seed42_six_fractions\\g05_full_reconstruction__g05_000pct__seed_42__eae3936917d9\\best.pt",
+    "config": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\model_experiments\\g05_seed42_six_fractions\\runs\\g05_full_reconstruction__g05_000pct__seed_42__eae3936917d9\\config.json",
+    "history": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\model_experiments\\g05_seed42_six_fractions\\runs\\g05_full_reconstruction__g05_000pct__seed_42__eae3936917d9\\history.json",
+    "latest_checkpoint": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\model_experiments\\g05_seed42_six_fractions\\g05_full_reconstruction__g05_000pct__seed_42__eae3936917d9\\latest.pt"
+  },
+  "completed_at": "2026-08-27T01:35:17.566510+00:00",
+  "configuration": {
+    "code_sha256": "6de78d2c5f861e91f577f6089d7cdf26190008c1e1b8cf93f308055048fb94a4",
+    "model": {
+      "description": "G05 context is available to position, magnitude, and relative-sign restoration as well as the q1-anchored global-sign prediction.",
+      "input_policy": {
+        "global_sign": "G05 only",
+        "magnitude": "G00 + masked G05",
+        "position": "G00 + masked G05",
+        "relative_sign": "G00 + masked G05"
+      },
+      "name": "g05_full_reconstruction"
+    },
+    "observation": {
+      "candidate_count": 32,
+      "full_fraction_note": null,
+      "g05_count_per_sample": 0,
+      "g05_fraction": 0.0,
+      "name": "g05_000pct",
+      "selection": "fixed spatially-balanced nested prefix"
+    },
+    "protocol_fingerprint": "20f64f4641dacb82b95033c69bdbbbec0c56c57432340466a3fbecb77edc1eb6",
+    "protocol_version": "model-experiment-v1",
+    "training": {
+      "batch_size": 128,
+      "checkpoint_selection": "single epoch minimizing validation total loss for every model",
+      "learning_rate": 0.001,
+      "loss_weights": {
+        "global_sign": 1.0,
+        "magnitude": 1.0,
+        "position": 1.0,
+        "relative_sign": 1.0
+      },
+      "max_epochs": 300,
+      "optimizer": "AdamW",
+      "seed": 42,
+      "weight_decay": 0.0001
+    }
+  },
+  "parameter_count": {
+    "total": 211946,
+    "trainable": 211946
+  },
+  "run_fingerprint": "eae3936917d9df61c342cc0780fab21a2ffa75e59790cd3b3df073029d97adc4",
+  "run_id": "g05_full_reconstruction__g05_000pct__seed_42__eae3936917d9",
+  "status": "completed",
+  "test_metrics": {
+    "absolute_sign_accuracy": null,
+    "charge_error_sign_policy": "oracle global-sign alignment only for samples with no observed G05",
+    "charge_mae": [
+      0.10259667788445949,
+      0.10386610861122608
+    ],
+    "charge_mae_q1": 0.10259667788445949,
+    "charge_mae_q2": 0.10386610861122608,
+    "charge_magnitude_mae": 0.10238705575466156,
+    "global_sign_accuracy": null,
+    "global_sign_bce": null,
+    "mean_position_3d_error": 0.25515852868556976,
+    "mean_position_mae": 0.12456133961677551,
+    "observations_per_sample": 0.0,
+    "observed_sample_fraction": 0.0,
+    "position_error_1": 0.2553708851337433,
+    "position_error_2": 0.25494617223739624,
+    "position_mae": [
+      0.09895758330821991,
+      0.16825905442237854,
+      0.10514898598194122,
+      0.10526884347200394,
+      0.1596512347459793,
+      0.11008239537477493
+    ],
+    "relative_sign_accuracy": 0.997,
+    "signed_pair_accuracy": null
+  },
+  "training_result": {
+    "best_epoch": 294,
+    "best_validation_loss": 0.1403784396648407,
+    "elapsed_seconds": 175.05359379993752,
+    "epochs_completed": 300,
+    "resumed": false,
+    "selection_note": "One complete model state from the epoch with minimum validation total loss; no cross-epoch component composition."
+  }
+}
