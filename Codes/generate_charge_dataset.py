@@ -23,6 +23,16 @@ TARGET_FIELDS = ("x1", "y1", "z1", "q1", "x2", "y2", "z2", "q2")
 G05_FIELDS = ("grid_x_index", "grid_y_index", "signed_potential")
 
 
+def target_fields_for_charge_count(charge_count: int) -> tuple[str, ...]:
+    if not isinstance(charge_count, int) or isinstance(charge_count, bool) or charge_count < 1:
+        raise ValueError("charge_count must be a positive integer")
+    return tuple(
+        f"{field}{index}"
+        for index in range(1, charge_count + 1)
+        for field in ("x", "y", "z", "q")
+    )
+
+
 def coulomb_potential(
     observation_x: np.ndarray,
     observation_y: np.ndarray,
@@ -91,12 +101,16 @@ def generate_dataset(
     sample_count: int = DEFAULT_SAMPLE_COUNT,
     g05_point_count: int = DEFAULT_G05_POINT_COUNT,
     seed: int = DEFAULT_DATASET_SEED,
+    charge_count: int = CHARGE_COUNT,
 ) -> dict[str, np.ndarray]:
     """Generate G00 = V**2, signed-V G05 sensor points, and ordered targets.
 
     G05 stores fixed, spatially balanced nested sensor prefixes. Its point count
     may be any value from 1 through the number of grid cells.
+    The default remains two charges for existing experiments. Five-charge
+    experiments should use charge_count=5 and a separate output path.
     """
+    target_fields = target_fields_for_charge_count(charge_count)
     if sample_count < 1:
         raise ValueError("sample_count must be positive")
     cell_count = GRID_SIZE * GRID_SIZE
@@ -126,21 +140,21 @@ def generate_dataset(
         dtype=np.float32,
     )
     dataset_target = np.empty(
-        (sample_count, len(TARGET_FIELDS)),
+        (sample_count, len(target_fields)),
         dtype=np.float32,
     )
 
     for sample_index in range(sample_count):
         charge_position = np.column_stack(
             (
-                rng.uniform(-1.5, 1.5, CHARGE_COUNT),
-                rng.uniform(-1.5, 1.5, CHARGE_COUNT),
-                rng.uniform(0.1, 1.5, CHARGE_COUNT),
+                rng.uniform(-1.5, 1.5, charge_count),
+                rng.uniform(-1.5, 1.5, charge_count),
+                rng.uniform(0.1, 1.5, charge_count),
             )
         )
         charge_value = (
-            rng.choice(np.array([-1.0, 1.0]), CHARGE_COUNT)
-            * rng.uniform(0.3, 1.0, CHARGE_COUNT)
+            rng.choice(np.array([-1.0, 1.0]), charge_count)
+            * rng.uniform(0.3, 1.0, charge_count)
         )
 
         # Charges are deterministically ordered by x, then y, then z so that
@@ -183,7 +197,8 @@ def generate_dataset(
         "G00": dataset_g00,
         "G05": dataset_g05,
         "target": dataset_target,
-        "target_fields": np.asarray(TARGET_FIELDS),
+        "target_fields": np.asarray(target_fields),
+        "charge_count": np.asarray(charge_count, dtype=np.int64),
         "g05_fields": np.asarray(G05_FIELDS),
         "sensor_grid_indices": sensor_indices,
         "grid_x": grid_axis,
@@ -203,12 +218,16 @@ def save_dataset(dataset: dict[str, np.ndarray], output_path: Path) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Generate the two-charge G00/G05 inverse-problem dataset."
+        description="Generate a configurable-charge-count G00/G05 dataset."
     )
     parser.add_argument("--samples", type=int, default=DEFAULT_SAMPLE_COUNT)
     parser.add_argument("--g05-points", type=int, default=DEFAULT_G05_POINT_COUNT)
     parser.add_argument("--seed", type=int, default=DEFAULT_DATASET_SEED)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT_PATH)
+    parser.add_argument("--charges", type=int, default=CHARGE_COUNT)
+    parser.add_argument(
+        "--output", type=Path,
+        help="Defaults to the legacy path for 2 charges, otherwise a separate count-specific path.",
+    )
     return parser.parse_args()
 
 
@@ -218,9 +237,14 @@ def main() -> None:
         sample_count=args.samples,
         g05_point_count=args.g05_points,
         seed=args.seed,
+        charge_count=args.charges,
     )
-    save_dataset(dataset, args.output)
-    print("Dataset:", args.output.resolve())
+    output_path = args.output or (
+        DEFAULT_OUTPUT_PATH if args.charges == CHARGE_COUNT
+        else MODELS_DIR / f"charge_dataset_{args.charges}charges_v9.npz"
+    )
+    save_dataset(dataset, output_path)
+    print("Dataset:", output_path.resolve())
     print("G00:", dataset["G00"].shape)
     print("G05:", dataset["G05"].shape)
     print("target:", dataset["target"].shape)
