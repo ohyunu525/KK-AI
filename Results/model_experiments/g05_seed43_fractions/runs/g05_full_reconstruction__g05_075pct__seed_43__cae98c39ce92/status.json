@@ -1,0 +1,8 @@
+{
+  "best_epoch": 279,
+  "best_validation_loss": 0.19573676586151123,
+  "result_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\model_experiments\\g05_seed43_fractions\\runs\\g05_full_reconstruction__g05_075pct__seed_43__cae98c39ce92\\result.json",
+  "run_id": "g05_full_reconstruction__g05_075pct__seed_43__cae98c39ce92",
+  "status": "completed",
+  "updated_at": "2026-08-27T03:33:16.135260+00:00"
+}

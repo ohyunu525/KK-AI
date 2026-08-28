@@ -1,0 +1,8 @@
+{
+  "best_epoch": 237,
+  "best_validation_loss": 0.21051019826531409,
+  "result_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\model_experiments\\g05_seed43_fractions\\runs\\g05_sign_only__g05_075pct__seed_43__0b43ba7cb80d\\result.json",
+  "run_id": "g05_sign_only__g05_075pct__seed_43__0b43ba7cb80d",
+  "status": "completed",
+  "updated_at": "2026-08-27T03:29:02.421671+00:00"
+}
