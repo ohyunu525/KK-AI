@@ -3,7 +3,9 @@ from __future__ import annotations
 import contextlib
 import csv
 import io
+import importlib.util
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,7 +13,14 @@ from unittest import mock
 
 import torch
 
-import ModelExperiment as experiment
+# The experiment filename includes a dot, so it is not an importable module name.
+_spec = importlib.util.spec_from_file_location(
+    "model_experiment_checkpoint_tests", Path(__file__).with_name("ModelExperiment8.5.py")
+)
+assert _spec is not None and _spec.loader is not None
+experiment = importlib.util.module_from_spec(_spec)
+sys.modules[_spec.name] = experiment
+_spec.loader.exec_module(experiment)
 import NewLearning9 as five_charge
 import generate_charge_dataset as generator
 

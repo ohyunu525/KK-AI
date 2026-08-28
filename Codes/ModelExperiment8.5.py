@@ -15,6 +15,15 @@ is whether the masked G05 representation may enter the position, magnitude,
 and relative-sign heads.  Both models use G05 for the identifiable global-sign
 head.  With zero observed G05 points their forward outputs are identical.
 
+Checkpoint selection
+--------------------
+Each training trajectory saves two complete, single-epoch model states:
+``best_total.pt`` minimizes validation total loss, and ``best_structure.pt``
+minimizes validation structure loss without global-sign loss in the selection
+objective.  Both are evaluated on the same held-out test set only after
+training.  Reports always distinguish the two ``checkpoint_selection`` values.
+``latest.pt`` is the atomic resume authority, including both best snapshots.
+
 Adding a model
 --------------
 Register a no-argument factory with ``@register_model``.  The returned module
@@ -31,6 +40,7 @@ import os
 import platform
 import random
 import sys
+import tempfile
 import time
 import traceback
 import uuid
@@ -49,7 +59,7 @@ try:
     import NewLearning8 as physics
 except ModuleNotFoundError as error:
     raise ModuleNotFoundError(
-        "ModelExperiment.py must remain beside Codes/NewLearning8.py so the "
+        "ModelExperiment8.5.py must remain beside Codes/NewLearning8.py so the "
         "validated project physics protocol can be imported."
     ) from error
 
@@ -58,9 +68,15 @@ PROJECT_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_DATA_PATH = physics.DEFAULT_DATA_PATH
 DEFAULT_RESULTS_ROOT = PROJECT_DIR / "Results" / "model_experiments"
 DEFAULT_CHECKPOINT_ROOT = PROJECT_DIR / "Models" / "model_experiments"
-DEFAULT_EXPERIMENT_NAME = "g05_routing_comparison_v1"
+DEFAULT_EXPERIMENT_NAME = "g05_routing_dual_selection_v2"
 DEFAULT_MODELS = ("g05_sign_only", "g05_full_reconstruction")
-PROTOCOL_VERSION = "model-experiment-v1"
+PROTOCOL_VERSION = "model-experiment-v2-dual-selection"
+CHECKPOINT_SCHEMA_VERSION = 2
+RESULT_SCHEMA_VERSION = 2
+CHECKPOINT_SELECTIONS = ("total", "structure")
+POSITION_MAE_NAMES = tuple(
+    f"position_mae_{coordinate}" for coordinate in ("x1", "y1", "z1", "x2", "y2", "z2")
+)
 METRIC_NAMES = (
     "mean_position_mae",
     "position_error_1",
@@ -74,6 +90,16 @@ METRIC_NAMES = (
     "global_sign_accuracy",
     "absolute_sign_accuracy",
     "signed_pair_accuracy",
+    *POSITION_MAE_NAMES,
+)
+STRUCTURE_METRIC_NAMES = (
+    "mean_position_mae",
+    *POSITION_MAE_NAMES,
+    "position_error_1",
+    "position_error_2",
+    "mean_position_3d_error",
+    "charge_magnitude_mae",
+    "relative_sign_accuracy",
 )
 LOWER_IS_BETTER = {
     "mean_position_mae",
@@ -84,6 +110,7 @@ LOWER_IS_BETTER = {
     "charge_mae_q2",
     "charge_magnitude_mae",
     "global_sign_bce",
+    *POSITION_MAE_NAMES,
 }
 
 
@@ -396,7 +423,7 @@ def atomic_write_json(path: Path, value: Any) -> None:
 
 
 def atomic_write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
-    if not rows:
+    if not rows and not path.exists():
         return
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary_path = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
@@ -407,6 +434,10 @@ def atomic_write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
             if key not in seen:
                 fieldnames.append(key)
                 seen.add(key)
+    if not rows:
+        # Clear stale rows without changing an existing report's columns.
+        with path.open("r", encoding="utf-8", newline="") as handle:
+            fieldnames = next(csv.reader(handle), [])
     try:
         with temporary_path.open("w", encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=fieldnames)
@@ -744,6 +775,7 @@ def evaluate_model(
     target_relative_sign = np.sign(charge_target[:, 0] * charge_target[:, 1])
     metrics: dict[str, Any] = {
         "position_mae": position_mae,
+        **{name: float(value) for name, value in zip(POSITION_MAE_NAMES, position_mae)},
         "mean_position_mae": float(position_mae.mean()),
         "position_error_1": position_error_1,
         "position_error_2": position_error_2,
@@ -863,9 +895,13 @@ def run_configuration(
             "learning_rate": settings.learning_rate,
             "weight_decay": settings.weight_decay,
             "loss_weights": asdict(settings.loss_weights),
-            "checkpoint_selection": (
-                "single epoch minimizing validation total loss for every model"
-            ),
+            "checkpoint_selection": {
+                selection: selection_policy(
+                    selection, g05_count=g05_count,
+                    global_sign_weight=settings.loss_weights.global_sign,
+                )
+                for selection in CHECKPOINT_SELECTIONS
+            },
         },
     }
 
@@ -879,6 +915,233 @@ def run_id_for(config: Mapping[str, Any]) -> str:
         f"{model_name}__g05_{fraction_label(fraction)}__seed_{seed}"
         f"__{fingerprint[:12]}"
     )
+
+
+def selection_policy(
+    selection: str, *, g05_count: int | None = None, global_sign_weight: float = 1.0,
+) -> dict[str, Any]:
+    """A null total inclusion flag means the shared protocol has no run G05 count."""
+    if selection not in CHECKPOINT_SELECTIONS:
+        raise ValueError(f"Unknown checkpoint selection: {selection!r}")
+    is_structure = selection == "structure"
+    includes_global_sign: bool | None = False
+    if not is_structure and global_sign_weight != 0.0:
+        includes_global_sign = None if g05_count is None else g05_count > 0
+    return {
+        "checkpoint_selection": selection,
+        "selection_objective": f"validation_loss.{selection}",
+        "selection_note": (
+            f"One complete model state minimizing validation {selection} loss; "
+            "no cross-epoch component composition. Equal losses keep the first epoch."
+        ),
+        "primary_metrics": STRUCTURE_METRIC_NAMES if is_structure else METRIC_NAMES,
+        "global_sign_in_selection_objective": includes_global_sign,
+        "global_sign_metrics_note": (
+            "Global-sign performance was not optimized by checkpoint selection. "
+            "Global/absolute/signed-pair sign metrics and signed charge MAE are "
+            "secondary diagnostics; training still uses the unchanged total loss."
+            if is_structure
+            else "Selection includes global-sign loss only when G05 is observed and "
+            "its loss weight is nonzero, together with structure loss; "
+            "it does not optimize global sign alone."
+        ),
+    }
+
+
+def run_metadata(run_config: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "run_id": run_id_for(run_config),
+        "run_fingerprint": object_fingerprint(run_config),
+        "protocol_fingerprint": run_config["protocol_fingerprint"],
+        "protocol_version": run_config["protocol_version"],
+        "model_name": run_config["model"]["name"],
+        "g05_fraction": run_config["observation"]["g05_fraction"],
+        "g05_count_per_sample": run_config["observation"]["g05_count_per_sample"],
+        "seed": run_config["training"]["seed"],
+    }
+
+
+def run_checkpoint_paths(checkpoint_run_dir: Path) -> dict[str, Path]:
+    return {
+        "latest": checkpoint_run_dir / "latest.pt",
+        **{
+            selection: checkpoint_run_dir / f"best_{selection}.pt"
+            for selection in CHECKPOINT_SELECTIONS
+        },
+    }
+
+
+def copy_model_state(model: nn.Module) -> dict[str, torch.Tensor]:
+    # Best snapshots survive subsequent optimizer steps, including CPU training.
+    return {
+        name: value.detach().cpu().clone() for name, value in model.state_dict().items()
+    }
+
+
+def update_best_checkpoints(
+    best_checkpoints: dict[str, dict[str, Any]],
+    *,
+    run_config: Mapping[str, Any],
+    epoch: int,
+    validation_loss: EpochLoss,
+    model_state: dict[str, torch.Tensor],
+) -> tuple[str, ...]:
+    """Select each objective independently from the same complete epoch state."""
+
+    updated: list[str] = []
+    for selection in CHECKPOINT_SELECTIONS:
+        value = float(getattr(validation_loss, selection))
+        if not np.isfinite(value):
+            raise FloatingPointError(f"Non-finite validation {selection} loss")
+        previous = best_checkpoints.get(selection)
+        if previous is not None and value >= previous["selected_validation_loss"]:
+            continue
+        best_checkpoints[selection] = {
+            "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
+            "checkpoint_kind": "selected",
+            **run_metadata(run_config),
+            **run_config["training"]["checkpoint_selection"][selection],
+            "selected_epoch": epoch,
+            "selected_validation_loss": value,
+            "validation_losses": epoch_loss_dict(validation_loss),
+            # Preserve familiar scalar fields, scoped by checkpoint_selection.
+            "epoch": epoch,
+            "validation_loss": value,
+            "model_state_dict": model_state,
+        }
+        updated.append(selection)
+    return tuple(updated)
+
+
+def best_tracking_fields(
+    best_checkpoints: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    fields: dict[str, Any] = {}
+    for selection in CHECKPOINT_SELECTIONS:
+        checkpoint = best_checkpoints.get(selection, {})
+        fields[f"best_{selection}_loss"] = checkpoint.get("selected_validation_loss")
+        fields[f"best_{selection}_epoch"] = checkpoint.get("selected_epoch")
+    # Legacy resume/status aliases always refer to total selection.
+    fields["best_validation_loss"] = fields["best_total_loss"]
+    fields["best_epoch"] = fields["best_total_epoch"]
+    return fields
+
+
+def make_resume_checkpoint(
+    *,
+    run_config: Mapping[str, Any],
+    epoch: int,
+    model_state: dict[str, torch.Tensor],
+    optimizer: torch.optim.Optimizer,
+    shuffle_generator: torch.Generator,
+    best_checkpoints: dict[str, dict[str, Any]],
+    history: list[dict[str, Any]],
+    elapsed_seconds: float,
+) -> dict[str, Any]:
+    if set(best_checkpoints) != set(CHECKPOINT_SELECTIONS):
+        raise RuntimeError("Resume state requires both total and structure checkpoints")
+    return {
+        "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
+        "checkpoint_kind": "latest",
+        **run_metadata(run_config),
+        "checkpoint_selection": "latest",
+        "selection_objective": "latest completed epoch for resuming training only",
+        "selected_epoch": epoch,
+        "selected_validation_loss": None,  # No minimization objective for latest.
+        "validation_losses": history[-1]["validation"],
+        "epoch": epoch,
+        "model_state_dict": model_state,
+        "optimizer_state_dict": optimizer.state_dict(),
+        "shuffle_generator_state": shuffle_generator.get_state(),
+        "rng_state": capture_rng_state(),
+        **best_tracking_fields(best_checkpoints),
+        # A single atomic commit covers training state AND both best snapshots.
+        # The standalone best files can be rebuilt after an interrupted publish.
+        "best_checkpoints": best_checkpoints,
+        "elapsed_seconds": elapsed_seconds,
+        "history": history,
+    }
+
+
+def validate_selected_checkpoint(
+    checkpoint: Mapping[str, Any],
+    *,
+    run_config: Mapping[str, Any],
+    selection: str,
+    expected_epoch: int,
+    expected_loss: float,
+) -> None:
+    expected = {
+        "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
+        "checkpoint_kind": "selected",
+        **run_metadata(run_config),
+        **run_config["training"]["checkpoint_selection"][selection],
+        "selected_epoch": expected_epoch,
+        "selected_validation_loss": expected_loss,
+        "epoch": expected_epoch,
+        "validation_loss": expected_loss,
+    }
+    for key, value in expected.items():
+        if canonical_json(checkpoint.get(key)) != canonical_json(value):
+            raise RuntimeError(f"Invalid {selection} checkpoint metadata: {key}")
+    if checkpoint.get("validation_losses", {}).get(selection) != expected_loss:
+        raise RuntimeError(f"Invalid {selection} checkpoint validation loss")
+    state = checkpoint.get("model_state_dict")
+    if not isinstance(state, Mapping) or not state:
+        raise RuntimeError(f"Missing complete model state in {selection} checkpoint")
+
+
+def validate_resume_checkpoint(
+    checkpoint: Mapping[str, Any], run_config: Mapping[str, Any]
+) -> None:
+    if (
+        checkpoint.get("checkpoint_schema_version") != CHECKPOINT_SCHEMA_VERSION
+        or checkpoint.get("checkpoint_kind") != "latest"
+    ):
+        raise RuntimeError(
+            "This is not a dual-selection latest checkpoint. Legacy best.pt/latest.pt "
+            "cannot recover an unsaved historical structure optimum. Keep the legacy "
+            "run unchanged and use a new --experiment-name for dual selection."
+        )
+    for key, value in run_metadata(run_config).items():
+        if checkpoint.get(key) != value:
+            raise RuntimeError(f"Latest checkpoint metadata mismatch: {key}")
+    required = {
+        "epoch", "model_state_dict", "optimizer_state_dict", "rng_state",
+        "shuffle_generator_state", "history", "best_checkpoints", "elapsed_seconds",
+        "best_total_loss", "best_total_epoch", "best_structure_loss", "best_structure_epoch",
+    }
+    missing = required.difference(checkpoint)
+    if missing:
+        raise RuntimeError(f"Incomplete resume state: {sorted(missing)}")
+    epoch = int(checkpoint["epoch"])
+    history = checkpoint["history"]
+    if (
+        not 1 <= epoch <= int(run_config["training"]["max_epochs"])
+        or len(history) != epoch
+        or [row["epoch"] for row in history] != list(range(1, epoch + 1))
+    ):
+        raise RuntimeError("Latest checkpoint epoch/history mismatch")
+    best_checkpoints = checkpoint["best_checkpoints"]
+    if set(best_checkpoints) != set(CHECKPOINT_SELECTIONS):
+        raise RuntimeError("Latest checkpoint must contain both selection snapshots")
+    for key, value in best_tracking_fields(best_checkpoints).items():
+        if checkpoint.get(key) != value:
+            raise RuntimeError(f"Latest checkpoint best tracker mismatch: {key}")
+    for selection in CHECKPOINT_SELECTIONS:
+        best_row = min(history, key=lambda row: row["validation"][selection])
+        best = best_checkpoints[selection]
+        validate_selected_checkpoint(
+            best,
+            run_config=run_config,
+            selection=selection,
+            expected_epoch=int(best_row["epoch"]),
+            expected_loss=float(best_row["validation"][selection]),
+        )
+        if best["validation_losses"] != best_row["validation"]:
+            raise RuntimeError(f"{selection} checkpoint does not match its history epoch")
+        if best["model_state_dict"].keys() != checkpoint["model_state_dict"].keys():
+            raise RuntimeError(f"{selection} checkpoint is not a complete model state")
 
 
 def save_status(
@@ -920,14 +1183,49 @@ def train_and_evaluate_run(
     status_path = result_run_dir / "status.json"
     history_path = result_run_dir / "history.json"
     result_path = result_run_dir / "result.json"
-    latest_path = checkpoint_run_dir / "latest.pt"
-    best_path = checkpoint_run_dir / "best.pt"
+    checkpoint_paths = run_checkpoint_paths(checkpoint_run_dir)
+    latest_path = checkpoint_paths["latest"]
 
     if result_path.exists():
         with result_path.open("r", encoding="utf-8") as handle:
             existing_result = json.load(handle)
         if existing_result.get("run_fingerprint") != run_fingerprint:
             raise RuntimeError(f"Result fingerprint mismatch: {result_path}")
+        completed_result_evaluations(existing_result)
+        completed_evaluations = existing_result["evaluations"]
+        recovery_checkpoint = None
+        for selection in CHECKPOINT_SELECTIONS:
+            best_path = checkpoint_paths[selection]
+            needs_restore = not best_path.exists()
+            if needs_restore:
+                if recovery_checkpoint is None:
+                    try:
+                        recovery_checkpoint = load_torch_checkpoint(latest_path, device)
+                    except FileNotFoundError as error:
+                        raise RuntimeError(
+                            f"Cannot restore {best_path.name}; latest checkpoint is missing: {latest_path}"
+                        ) from error
+                    validate_resume_checkpoint(recovery_checkpoint, run_config)
+                    if recovery_checkpoint["epoch"] != run_config["training"]["max_epochs"]:
+                        raise RuntimeError("Cannot restore a completed run from an unfinished latest checkpoint")
+                best = recovery_checkpoint["best_checkpoints"][selection]
+            else:
+                best = load_torch_checkpoint(best_path, device)
+            evaluation = completed_evaluations[selection]
+            validate_selected_checkpoint(
+                best, run_config=run_config, selection=selection,
+                expected_epoch=evaluation["selected_epoch"],
+                expected_loss=evaluation["selected_validation_loss"],
+            )
+            if best["validation_losses"] != evaluation["validation_losses"]:
+                raise RuntimeError(f"{selection} checkpoint losses differ from the completed result")
+            if needs_restore:
+                atomic_torch_save(best, best_path)
+        save_status(
+            status_path, status="completed", run_id=run_id,
+            **best_tracking_fields(completed_evaluations),
+            result_path=str(result_path.resolve()),
+        )
         print(f"SKIP completed: {run_id}")
         return existing_result, True
 
@@ -965,26 +1263,27 @@ def train_and_evaluate_run(
     )
 
     start_epoch = 1
-    best_validation_loss = float("inf")
-    best_epoch = 0
+    best_checkpoints: dict[str, dict[str, Any]] = {}
     history: list[dict[str, Any]] = []
     elapsed_before_resume = 0.0
     resumed = False
     if latest_path.exists():
         checkpoint = load_torch_checkpoint(latest_path, device)
-        if checkpoint.get("run_fingerprint") != run_fingerprint:
-            raise RuntimeError(f"Latest checkpoint fingerprint mismatch: {latest_path}")
+        validate_resume_checkpoint(checkpoint, run_config)
         model.load_state_dict(checkpoint["model_state_dict"])
         optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
         optimizer_to_device(optimizer, device)
         shuffle_generator.set_state(checkpoint["shuffle_generator_state"])
         restore_rng_state(checkpoint["rng_state"])
         start_epoch = int(checkpoint["epoch"]) + 1
-        best_validation_loss = float(checkpoint["best_validation_loss"])
-        best_epoch = int(checkpoint["best_epoch"])
-        history = list(checkpoint.get("history", []))
+        best_checkpoints = dict(checkpoint["best_checkpoints"])
+        history = list(checkpoint["history"])
         elapsed_before_resume = float(checkpoint.get("elapsed_seconds", 0.0))
         resumed = True
+        # latest.pt is authoritative if publishing either best file was interrupted.
+        for selection in CHECKPOINT_SELECTIONS:
+            atomic_torch_save(best_checkpoints[selection], checkpoint_paths[selection])
+        atomic_write_json(history_path, history)
 
     save_status(
         status_path,
@@ -992,7 +1291,7 @@ def train_and_evaluate_run(
         run_id=run_id,
         resumed=resumed,
         next_epoch=start_epoch,
-        best_epoch=best_epoch or None,
+        **best_tracking_fields(best_checkpoints),
     )
     print(
         f"\nRUN {run_id} | device={device} | "
@@ -1023,41 +1322,32 @@ def train_and_evaluate_run(
             "validation": epoch_loss_dict(validation_loss),
         }
         history.append(epoch_row)
-        if validation_loss.total < best_validation_loss:
-            best_validation_loss = validation_loss.total
-            best_epoch = epoch
-            atomic_torch_save(
-                {
-                    "run_fingerprint": run_fingerprint,
-                    "epoch": epoch,
-                    "validation_loss": validation_loss.total,
-                    "model_state_dict": {
-                        name: value.detach().cpu()
-                        for name, value in model.state_dict().items()
-                    },
-                },
-                best_path,
-            )
+        epoch_state = copy_model_state(model)
+        updated_selections = update_best_checkpoints(
+            best_checkpoints,
+            run_config=run_config,
+            epoch=epoch,
+            validation_loss=validation_loss,
+            model_state=epoch_state,
+        )
 
         elapsed_seconds = elapsed_before_resume + (time.perf_counter() - started_at)
         atomic_torch_save(
-            {
-                "run_fingerprint": run_fingerprint,
-                "epoch": epoch,
-                "model_state_dict": {
-                    name: value.detach().cpu()
-                    for name, value in model.state_dict().items()
-                },
-                "optimizer_state_dict": optimizer.state_dict(),
-                "shuffle_generator_state": shuffle_generator.get_state(),
-                "rng_state": capture_rng_state(),
-                "best_validation_loss": best_validation_loss,
-                "best_epoch": best_epoch,
-                "elapsed_seconds": elapsed_seconds,
-                "history": history,
-            },
+            make_resume_checkpoint(
+                run_config=run_config,
+                epoch=epoch,
+                model_state=epoch_state,
+                optimizer=optimizer,
+                shuffle_generator=shuffle_generator,
+                best_checkpoints=best_checkpoints,
+                history=history,
+                elapsed_seconds=elapsed_seconds,
+            ),
             latest_path,
         )
+        # Publish selected files only after the resume state commits atomically.
+        for selection in updated_selections:
+            atomic_torch_save(best_checkpoints[selection], checkpoint_paths[selection])
         atomic_write_json(history_path, history)
         save_status(
             status_path,
@@ -1065,8 +1355,7 @@ def train_and_evaluate_run(
             run_id=run_id,
             resumed=resumed,
             next_epoch=epoch + 1,
-            best_epoch=best_epoch,
-            best_validation_loss=best_validation_loss,
+            **best_tracking_fields(best_checkpoints),
         )
         global_text = (
             "N/A"
@@ -1077,47 +1366,78 @@ def train_and_evaluate_run(
             f"  epoch={epoch:03d} train={train_loss.total:.6f} "
             f"val={validation_loss.total:.6f} "
             f"val_structure={validation_loss.structure:.6f} "
-            f"val_global={global_text} best={best_validation_loss:.6f}@{best_epoch}"
+            f"val_global={global_text} "
+            + " ".join(
+                f"best_{selection}={best_checkpoints[selection]['selected_validation_loss']:.6f}"
+                f"@{best_checkpoints[selection]['selected_epoch']}"
+                for selection in CHECKPOINT_SELECTIONS
+            )
         )
 
-    if not best_path.exists():
-        raise RuntimeError(f"No valid best checkpoint was produced: {run_id}")
-    best_checkpoint = load_torch_checkpoint(best_path, device)
-    if best_checkpoint.get("run_fingerprint") != run_fingerprint:
-        raise RuntimeError(f"Best checkpoint fingerprint mismatch: {best_path}")
-    model.load_state_dict(best_checkpoint["model_state_dict"])
-    metrics = evaluate_model(
-        model,
-        test_dataset,
-        stats,
-        batch_size=settings.batch_size,
-        device=device,
-    )
+    # Test data has no role in training or either checkpoint selection.
+    evaluations: dict[str, dict[str, Any]] = {}
+    for selection in CHECKPOINT_SELECTIONS:
+        best_path = checkpoint_paths[selection]
+        if not best_path.exists():
+            raise RuntimeError(f"No valid {selection} checkpoint was produced: {run_id}")
+        best_checkpoint = load_torch_checkpoint(best_path, device)
+        validate_selected_checkpoint(
+            best_checkpoint,
+            run_config=run_config,
+            selection=selection,
+            expected_epoch=best_checkpoints[selection]["selected_epoch"],
+            expected_loss=best_checkpoints[selection]["selected_validation_loss"],
+        )
+        model.load_state_dict(best_checkpoint["model_state_dict"])
+        metrics = evaluate_model(
+            model,
+            test_dataset,
+            stats,
+            batch_size=settings.batch_size,
+            device=device,
+        )
+        evaluations[selection] = {
+            key: value for key, value in best_checkpoint.items() if key != "model_state_dict"
+        }
+        evaluations[selection].update(
+            checkpoint_path=str(best_path.resolve()),
+            test_metrics=metrics,
+        )
+        print(
+            f"  TEST selection={selection} "
+            f"epoch={best_checkpoint['selected_epoch']} | "
+            f"position_mae={metrics['mean_position_mae']:.6f} | "
+            f"position_3d={metrics['mean_position_3d_error']:.6f} | "
+            f"magnitude_mae={metrics['charge_magnitude_mae']:.6f}"
+        )
     elapsed_seconds = elapsed_before_resume + (time.perf_counter() - started_at)
     result = {
-        "run_id": run_id,
-        "run_fingerprint": run_fingerprint,
+        "result_schema_version": RESULT_SCHEMA_VERSION,
+        **run_metadata(run_config),
         "status": "completed",
         "completed_at": utc_now(),
         "configuration": run_config,
         "parameter_count": parameter_counts(model),
         "training_result": {
-            "best_epoch": best_epoch,
-            "best_validation_loss": best_validation_loss,
+            **best_tracking_fields(best_checkpoints),
+            "legacy_best_fields_selection": "total",
             "epochs_completed": settings.max_epochs,
             "elapsed_seconds": elapsed_seconds,
             "resumed": resumed,
             "selection_note": (
-                "One complete model state from the epoch with minimum validation "
-                "total loss; no cross-epoch component composition."
+                "See evaluations.total and evaluations.structure; "
+                "both use complete epoch states."
             ),
         },
-        "test_metrics": metrics,
+        "evaluations": evaluations,
         "artifacts": {
             "config": str(config_path.resolve()),
             "history": str(history_path.resolve()),
             "latest_checkpoint": str(latest_path.resolve()),
-            "best_checkpoint": str(best_path.resolve()),
+            **{
+                f"best_{selection}_checkpoint": str(checkpoint_paths[selection].resolve())
+                for selection in CHECKPOINT_SELECTIONS
+            },
         },
     }
     atomic_write_json(result_path, result)
@@ -1125,19 +1445,56 @@ def train_and_evaluate_run(
         status_path,
         status="completed",
         run_id=run_id,
-        best_epoch=best_epoch,
-        best_validation_loss=best_validation_loss,
+        **best_tracking_fields(best_checkpoints),
         result_path=str(result_path.resolve()),
     )
-    print(
-        f"DONE {run_id} | best={best_validation_loss:.6f}@{best_epoch} | "
-        f"position_mae={metrics['mean_position_mae']:.6f} | "
-        f"magnitude_mae={metrics['charge_magnitude_mae']:.6f}"
-    )
+    print(f"DONE {run_id} | total and structure evaluations saved")
     return result, False
 
 
+def completed_result_evaluations(result: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Flatten a complete dual-evaluation run without interpreting legacy results."""
+
+    if (
+        result.get("result_schema_version") != RESULT_SCHEMA_VERSION
+        or result.get("status") != "completed"
+        or set(result.get("evaluations", {})) != set(CHECKPOINT_SELECTIONS)
+    ):
+        raise RuntimeError(
+            "Expected a completed dual-selection result with both evaluations; "
+            "legacy total-only results must stay in their original experiment."
+        )
+    config = result["configuration"]
+    metadata = run_metadata(config)
+    for key, value in metadata.items():
+        if result.get(key) != value:
+            raise RuntimeError(f"Result metadata mismatch: {key}")
+    records: list[dict[str, Any]] = []
+    common = {key: value for key, value in result.items() if key != "evaluations"}
+    for selection in CHECKPOINT_SELECTIONS:
+        evaluation = result["evaluations"][selection]
+        expected = {
+            **metadata,
+            **config["training"]["checkpoint_selection"][selection],
+            "selected_epoch": result["training_result"][f"best_{selection}_epoch"],
+            "selected_validation_loss": result["training_result"][f"best_{selection}_loss"],
+        }
+        for key, value in expected.items():
+            if canonical_json(evaluation.get(key)) != canonical_json(value):
+                raise RuntimeError(f"Invalid {selection} result metadata: {key}")
+        if evaluation.get("validation_losses", {}).get(selection) != expected["selected_validation_loss"]:
+            raise RuntimeError(f"Invalid {selection} result validation loss")
+        if (
+            not isinstance(evaluation.get("test_metrics"), Mapping)
+            or not evaluation.get("checkpoint_path")
+        ):
+            raise RuntimeError(f"Missing {selection} test metrics/checkpoint path")
+        records.append({**common, **evaluation})
+    return records
+
+
 def result_to_row(result: Mapping[str, Any]) -> dict[str, Any]:
+    """Convert one explicitly selected evaluation, not a whole training run."""
     config = result["configuration"]
     model = config["model"]
     observation = config["observation"]
@@ -1146,6 +1503,17 @@ def result_to_row(result: Mapping[str, Any]) -> dict[str, Any]:
     metrics = result["test_metrics"]
     return {
         "run_id": result["run_id"],
+        "run_fingerprint": result["run_fingerprint"],
+        "protocol_fingerprint": result["protocol_fingerprint"],
+        "checkpoint_selection": result["checkpoint_selection"],
+        "selection_objective": result["selection_objective"],
+        "selected_epoch": result["selected_epoch"],
+        "selected_validation_loss": result["selected_validation_loss"],
+        "selected_validation_total_loss": result["validation_losses"]["total"],
+        "selected_validation_structure_loss": result["validation_losses"]["structure"],
+        "global_sign_in_selection_objective": result["global_sign_in_selection_objective"],
+        "global_sign_metrics_note": result["global_sign_metrics_note"],
+        "primary_metrics": canonical_json(result["primary_metrics"]),
         "model": model["name"],
         "model_description": model["description"],
         "input_policy": canonical_json(model["input_policy"]),
@@ -1154,18 +1522,13 @@ def result_to_row(result: Mapping[str, Any]) -> dict[str, Any]:
         "seed": training["seed"],
         "parameter_count": result["parameter_count"]["total"],
         **{name: metrics.get(name) for name in METRIC_NAMES},
-        "position_mae_x1": metrics["position_mae"][0],
-        "position_mae_y1": metrics["position_mae"][1],
-        "position_mae_z1": metrics["position_mae"][2],
-        "position_mae_x2": metrics["position_mae"][3],
-        "position_mae_y2": metrics["position_mae"][4],
-        "position_mae_z2": metrics["position_mae"][5],
         "observed_sample_fraction": metrics["observed_sample_fraction"],
         "observations_per_sample": metrics["observations_per_sample"],
-        "best_validation_loss": training_result["best_validation_loss"],
-        "best_epoch": training_result["best_epoch"],
+        # Keep old CSV column names as aliases for THIS row's selection.
+        "best_validation_loss": result["selected_validation_loss"],
+        "best_epoch": result["selected_epoch"],
         "elapsed_seconds": training_result["elapsed_seconds"],
-        "best_checkpoint": result["artifacts"]["best_checkpoint"],
+        "best_checkpoint": result["checkpoint_path"],
     }
 
 
@@ -1187,21 +1550,56 @@ def finite_metric_values(
     return values
 
 
-def build_summary_rows(results: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
-    grouped: dict[tuple[str, float], list[Mapping[str, Any]]] = {}
-    for result in results:
-        config = result["configuration"]
-        key = (
-            str(config["model"]["name"]),
-            float(config["observation"]["g05_fraction"]),
+def comparison_key(result: Mapping[str, Any]) -> tuple[str, str, str, float, int]:
+    config = result["configuration"]
+    selection = str(result["checkpoint_selection"])
+    if selection not in CHECKPOINT_SELECTIONS:
+        raise ValueError(f"Missing or invalid report selection: {selection!r}")
+    return (
+        str(config["protocol_fingerprint"]),
+        selection,
+        str(config["model"]["name"]),
+        float(config["observation"]["g05_fraction"]),
+        int(config["training"]["seed"]),
+    )
+
+
+def selected_metadata_by_seed(results: Sequence[Mapping[str, Any]]) -> dict[str, str]:
+    return {
+        column: canonical_json({
+            str(item["configuration"]["training"]["seed"]): item[field]
+            for item in results
+        })
+        for column, field in (
+            ("run_fingerprints_by_seed", "run_fingerprint"),
+            ("selected_epochs_by_seed", "selected_epoch"),
+            ("selected_validation_losses_by_seed", "selected_validation_loss"),
         )
-        grouped.setdefault(key, []).append(result)
+    }
+
+
+def build_summary_rows(results: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, str, str, float], list[Mapping[str, Any]]] = {}
+    seen: set[tuple[str, str, str, float, int]] = set()
+    for result in results:
+        key = comparison_key(result)
+        if key in seen:
+            raise RuntimeError(f"Duplicate seed/selection in summary: {key}")
+        seen.add(key)
+        grouped.setdefault(key[:-1], []).append(result)
 
     rows: list[dict[str, Any]] = []
-    for (model_name, fraction), group in sorted(grouped.items()):
+    for (protocol_fingerprint, selection, model_name, fraction), group in sorted(grouped.items()):
         group = sorted(group, key=lambda item: int(item["configuration"]["training"]["seed"]))
         first = group[0]
         row: dict[str, Any] = {
+            "protocol_fingerprint": protocol_fingerprint,
+            "checkpoint_selection": selection,
+            "selection_objective": first["selection_objective"],
+            "global_sign_in_selection_objective": first["global_sign_in_selection_objective"],
+            "global_sign_metrics_note": first["global_sign_metrics_note"],
+            "primary_metrics": canonical_json(first["primary_metrics"]),
+            **selected_metadata_by_seed(group),
             "model": model_name,
             "model_description": first["configuration"]["model"]["description"],
             "input_policy": canonical_json(
@@ -1231,17 +1629,17 @@ def build_summary_rows(results: Sequence[Mapping[str, Any]]) -> list[dict[str, A
 def build_pairwise_rows(
     results: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
-    by_key: dict[tuple[str, float, int], Mapping[str, Any]] = {}
+    by_key: dict[tuple[str, str, str, float, int], Mapping[str, Any]] = {}
     discovered_model_names: set[str] = set()
-    fractions: set[float] = set()
+    contexts: set[tuple[str, str, float]] = set()
     for result in results:
-        config = result["configuration"]
-        model_name = str(config["model"]["name"])
-        fraction = float(config["observation"]["g05_fraction"])
-        seed = int(config["training"]["seed"])
-        by_key[(model_name, fraction, seed)] = result
+        key = comparison_key(result)
+        if key in by_key:
+            raise RuntimeError(f"Duplicate seed/selection in paired comparison: {key}")
+        protocol_fingerprint, selection, model_name, fraction, _ = key
+        by_key[key] = result
         discovered_model_names.add(model_name)
-        fractions.add(fraction)
+        contexts.add((protocol_fingerprint, selection, fraction))
 
     default_order = {name: index for index, name in enumerate(DEFAULT_MODELS)}
     model_names = sorted(
@@ -1251,34 +1649,38 @@ def build_pairwise_rows(
 
     rows: list[dict[str, Any]] = []
     for model_a, model_b in itertools.combinations(model_names, 2):
-        for fraction in sorted(fractions):
+        for protocol_fingerprint, selection, fraction in sorted(contexts):
             seeds_a = {
                 seed
-                for name, current_fraction, seed in by_key
-                if name == model_a and current_fraction == fraction
+                for protocol, policy, name, current_fraction, seed in by_key
+                if (protocol, policy, name, current_fraction)
+                == (protocol_fingerprint, selection, model_a, fraction)
             }
             seeds_b = {
                 seed
-                for name, current_fraction, seed in by_key
-                if name == model_b and current_fraction == fraction
+                for protocol, policy, name, current_fraction, seed in by_key
+                if (protocol, policy, name, current_fraction)
+                == (protocol_fingerprint, selection, model_b, fraction)
             }
             common_seeds = sorted(seeds_a.intersection(seeds_b))
             for metric_name in METRIC_NAMES:
                 deltas: list[float] = []
                 used_seeds: list[int] = []
+                used_a: list[Mapping[str, Any]] = []
+                used_b: list[Mapping[str, Any]] = []
                 for seed in common_seeds:
-                    value_a = by_key[(model_a, fraction, seed)]["test_metrics"].get(
-                        metric_name
-                    )
-                    value_b = by_key[(model_b, fraction, seed)]["test_metrics"].get(
-                        metric_name
-                    )
+                    result_a = by_key[(protocol_fingerprint, selection, model_a, fraction, seed)]
+                    result_b = by_key[(protocol_fingerprint, selection, model_b, fraction, seed)]
+                    value_a = result_a["test_metrics"].get(metric_name)
+                    value_b = result_b["test_metrics"].get(metric_name)
                     if value_a is None or value_b is None:
                         continue
                     if not (np.isfinite(float(value_a)) and np.isfinite(float(value_b))):
                         continue
                     deltas.append(float(value_b) - float(value_a))
                     used_seeds.append(seed)
+                    used_a.append(result_a)
+                    used_b.append(result_b)
                 if not deltas:
                     continue
                 delta_mean = float(np.mean(deltas))
@@ -1287,15 +1689,37 @@ def build_pairwise_rows(
                 )
                 rows.append(
                     {
+                        "protocol_fingerprint": protocol_fingerprint,
+                        "checkpoint_selection": selection,
+                        "selection_objective": used_a[0]["selection_objective"],
+                        "global_sign_in_selection_objective": used_a[0]["global_sign_in_selection_objective"],
+                        "global_sign_metrics_note": used_a[0]["global_sign_metrics_note"],
                         "model_a": model_a,
                         "model_b": model_b,
                         "g05_fraction": fraction,
+                        "g05_count_per_sample": used_a[0]["configuration"]["observation"][
+                            "g05_count_per_sample"
+                        ],
                         "metric": metric_name,
+                        "metric_role": (
+                            "primary" if metric_name in used_a[0]["primary_metrics"]
+                            else "secondary"
+                        ),
+                        "primary_research_metric": (
+                            selection == "structure"
+                            and metric_name in {"mean_position_mae", "mean_position_3d_error"}
+                        ),
                         "paired_seed_count": len(deltas),
                         "paired_seeds": ",".join(map(str, used_seeds)),
+                        **{f"{key}_a": value for key, value in selected_metadata_by_seed(used_a).items()},
+                        **{f"{key}_b": value for key, value in selected_metadata_by_seed(used_b).items()},
                         "delta_b_minus_a_mean": delta_mean,
                         "delta_b_minus_a_std": sample_std(deltas),
                         "improvement_b_over_a_mean": improvement,
+                        "improvement_b_over_a_by_seed": canonical_json({
+                            str(seed): -delta if metric_name in LOWER_IS_BETTER else delta
+                            for seed, delta in zip(used_seeds, deltas)
+                        }),
                         "improvement_definition": (
                             "positive means model_b is better; sign is reversed for "
                             "error/loss metrics"
@@ -1318,14 +1742,14 @@ def load_completed_results(
             with result_path.open("r", encoding="utf-8") as handle:
                 result = json.load(handle)
         except (OSError, json.JSONDecodeError) as error:
-            print(f"WARNING: ignoring unreadable result {result_path}: {error}")
-            continue
+            print(f"WARNING: reports unchanged; unreadable result {result_path}: {error}")
+            raise
         if (
             result.get("status") == "completed"
             and result.get("configuration", {}).get("protocol_fingerprint")
             == protocol_fingerprint
         ):
-            results.append(result)
+            results.extend(completed_result_evaluations(result))
     return results
 
 
@@ -1333,21 +1757,22 @@ def refresh_reports(
     experiment_results_dir: Path,
     protocol_fingerprint: str,
 ) -> None:
-    results = load_completed_results(experiment_results_dir, protocol_fingerprint)
-    if not results:
+    try:
+        results = load_completed_results(experiment_results_dir, protocol_fingerprint)
+    except (OSError, json.JSONDecodeError):
         return
     run_rows = sorted(
         (result_to_row(result) for result in results),
-        key=lambda row: (row["model"], row["g05_fraction"], row["seed"]),
+        key=lambda row: (row["model"], row["g05_fraction"], row["seed"], row["checkpoint_selection"]),
     )
-    atomic_write_csv(experiment_results_dir / "runs.csv", run_rows)
-    atomic_write_csv(
-        experiment_results_dir / "summary.csv",
-        build_summary_rows(results),
+    # Build all tables before publishing any; empty tables clear existing rows.
+    reports = (
+        ("runs.csv", run_rows),
+        ("summary.csv", build_summary_rows(results)),
+        ("pairwise_comparisons.csv", build_pairwise_rows(results)),
     )
-    pairwise_rows = build_pairwise_rows(results)
-    if pairwise_rows:
-        atomic_write_csv(experiment_results_dir / "pairwise_comparisons.csv", pairwise_rows)
+    for name, rows in reports:
+        atomic_write_csv(experiment_results_dir / name, rows)
 
 
 def state_dicts_are_identical(first: nn.Module, second: nn.Module) -> bool:
@@ -1385,6 +1810,82 @@ def validate_model_output(
             raise RuntimeError(
                 f"Model {model_name!r} returned invalid {name}: {actual} != {shape}"
             )
+
+
+def run_checkpoint_smoke_tests(spec: ModelSpec, candidate_count: int) -> None:
+    """Exercise the real save/resume helpers without running training epochs."""
+
+    settings = TrainingSettings(
+        batch_size=4,
+        max_epochs=3,
+        learning_rate=physics.LEARNING_RATE,
+        weight_decay=physics.WEIGHT_DECAY,
+        loss_weights=LossWeights(),
+    )
+    config = run_configuration(
+        protocol_fingerprint="smoke-protocol",
+        code_sha256="smoke-code",
+        spec=spec,
+        fraction=0.75,
+        g05_count=physics.g05_count_for_fraction(0.75, candidate_count),
+        candidate_count=candidate_count,
+        seed=93,
+        settings=settings,
+    )
+    set_reproducibility(93)
+    model = spec.factory().cpu()
+    optimizer = torch.optim.AdamW(
+        model.parameters(), lr=settings.learning_rate, weight_decay=settings.weight_decay,
+    )
+    shuffle_generator = torch.Generator().manual_seed(93)
+    torch.randperm(8, generator=shuffle_generator)
+    best_checkpoints: dict[str, dict[str, Any]] = {}
+    history: list[dict[str, Any]] = []
+    snapshots: dict[int, dict[str, torch.Tensor]] = {}
+    # Total wins at epoch 1; structure wins at epoch 2. Epoch 3 tests ties.
+    for epoch, (structure, global_sign) in enumerate(((2.0, 0.1), (1.0, 2.0), (1.0, 2.0)), 1):
+        with torch.no_grad():
+            next(model.parameters()).add_(0.01)
+        loss = EpochLoss(structure + global_sign, structure, structure, 0.0, 0.0, global_sign)
+        snapshots[epoch] = copy_model_state(model)
+        history.append({"epoch": epoch, "train": epoch_loss_dict(loss), "validation": epoch_loss_dict(loss)})
+        update_best_checkpoints(
+            best_checkpoints, run_config=config, epoch=epoch,
+            validation_loss=loss, model_state=snapshots[epoch],
+        )
+    resume = make_resume_checkpoint(
+        run_config=config, epoch=3, model_state=snapshots[3], optimizer=optimizer,
+        shuffle_generator=shuffle_generator, best_checkpoints=best_checkpoints,
+        history=history, elapsed_seconds=0.0,
+    )
+    validate_resume_checkpoint(resume, config)
+    if (resume["best_total_epoch"], resume["best_structure_epoch"]) != (1, 2):
+        raise RuntimeError("Independent checkpoint selection/tie handling failed")
+    with tempfile.TemporaryDirectory(prefix="model-experiment-checkpoints-") as directory:
+        paths = run_checkpoint_paths(Path(directory))
+        if len(set(paths.values())) != 3:
+            raise RuntimeError("Latest/total/structure checkpoint paths collide")
+        atomic_torch_save(resume, paths["latest"])
+        loaded = load_torch_checkpoint(paths["latest"], torch.device("cpu"))
+        validate_resume_checkpoint(loaded, config)
+        if not torch.equal(loaded["shuffle_generator_state"], shuffle_generator.get_state()):
+            raise RuntimeError("Shuffle generator did not survive checkpoint roundtrip")
+        # Simulate a stop after latest committed but before either best file exists.
+        for selection in CHECKPOINT_SELECTIONS:
+            best = loaded["best_checkpoints"][selection]
+            atomic_torch_save(best, paths[selection])
+            restored = load_torch_checkpoint(paths[selection], torch.device("cpu"))
+            validate_selected_checkpoint(
+                restored, run_config=config, selection=selection,
+                expected_epoch=best["selected_epoch"], expected_loss=best["selected_validation_loss"],
+            )
+            expected_state = snapshots[best["selected_epoch"]]
+            if not all(
+                torch.equal(value, restored["model_state_dict"][name])
+                for name, value in expected_state.items()
+            ):
+                raise RuntimeError(f"{selection} checkpoint does not contain its full epoch state")
+    print("  distinct checkpoint paths, independent selection, and complete resume state: OK")
 
 
 def run_smoke_tests(
@@ -1501,7 +2002,39 @@ def run_smoke_tests(
                     f"Unexpected structural G05 gradient route in {model_name}: "
                     f"{reaches_g05}"
                 )
+            # The real final projection starts at zero: on the first backward,
+            # only that projection can receive structural G05-route gradients.
+            # Warm up this disposable model once, then check the encoder AND
+            # observed G05 input values using the actual structure loss.
+            model.zero_grad(set_to_none=True)
+            warmup_output = model(*positive_tensors[:3])
+            calculate_losses(
+                warmup_output, positive_tensors[3], positive_tensors[4],
+                positive_tensors[2], LossWeights(),
+            ).structure.backward()
+            torch.optim.SGD(model.parameters(), lr=0.01).step()
+            model.zero_grad(set_to_none=True)
+            input_g05 = positive_tensors[1].detach().clone().requires_grad_(True)
+            output = model(positive_tensors[0], input_g05, positive_tensors[2])
+            calculate_losses(
+                output, positive_tensors[3], positive_tensors[4],
+                positive_tensors[2], LossWeights(),
+            ).structure.backward()
+            reaches_input = (
+                input_g05.grad is not None
+                and bool(torch.any(input_g05.grad[:, :, 2] != 0).item())
+            )
+            reaches_encoder = has_nonzero_gradient(model, ("g05_encoder.",))
+            if reaches_input != should_reach_g05 or reaches_encoder != should_reach_g05:
+                raise RuntimeError(f"Unexpected structure-loss G05 input/encoder gradient in {model_name}")
+            if has_nonzero_gradient(model, ("global_sign_head.",)):
+                raise RuntimeError("Structure loss reached the global-sign head")
+            if input_g05.grad is not None:
+                masked_gradient = input_g05.grad * (1.0 - positive_tensors[2])
+                if torch.any(masked_gradient != 0).item():
+                    raise RuntimeError("Structure loss reached an unobserved G05 point")
         print("  matched initialization/capacity and G05 routing: OK")
+    run_checkpoint_smoke_tests(MODEL_REGISTRY[model_names[0]], arrays.g05.shape[1])
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
 
@@ -1569,11 +2102,23 @@ def build_protocol(
             "learning_rate": settings.learning_rate,
             "weight_decay": settings.weight_decay,
             "loss_weights": asdict(settings.loss_weights),
-            "model_selection": "minimum validation total loss at one epoch",
+            "model_selection": {
+                selection: selection_policy(
+                    selection, global_sign_weight=settings.loss_weights.global_sign,
+                )
+                for selection in CHECKPOINT_SELECTIONS
+            },
+            "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
+            "resume_authority": "atomic latest.pt includes both complete best snapshots",
             "shuffle": "seeded per run; generator state is checkpointed",
         },
         "evaluation": {
-            "test_set_used_once_after_validation selection": True,
+            "test_set_used_only_after_validation_selection": True,
+            "test_evaluations_per_run": len(CHECKPOINT_SELECTIONS),
+            "same_test_dataset_for_both_selections": True,
+            "result_schema_version": RESULT_SCHEMA_VERSION,
+            "report_grouping": "protocol, checkpoint_selection, model, G05 fraction; pair equal seeds",
+            "structure_primary_metrics": STRUCTURE_METRIC_NAMES,
             "g05_zero_global_sign_metrics": "N/A",
             "unobserved_charge_mae": "oracle aligned over the global +/- symmetry",
             "multi_seed_std": "sample standard deviation (ddof=1)",
@@ -1604,6 +2149,8 @@ def build_protocol(
             "default_pair_same_parameter_count": True,
             "default_pair_only_route_difference": "G05 access to structural outputs",
             "cross_epoch_component_composition": False,
+            "global_sign_excluded_from_structure_checkpoint_selection": True,
+            "training_objective_remains_total_loss": True,
         },
     }
 
