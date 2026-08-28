@@ -1,0 +1,10 @@
+{
+  "best_structure_epoch": 31,
+  "best_structure_loss": 0.5999058632850647,
+  "best_total_epoch": 31,
+  "best_total_loss": 0.9594545781612396,
+  "result_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\result.json",
+  "run_id": "g05_sign_only__g05_025pct__seed_43__559b9cd8371e",
+  "status": "completed",
+  "updated_at": "2026-08-28T07:59:52.549711+00:00"
+}
