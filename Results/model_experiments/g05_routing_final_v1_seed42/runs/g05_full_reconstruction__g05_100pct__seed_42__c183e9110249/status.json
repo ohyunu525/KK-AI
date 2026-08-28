@@ -1,0 +1,8 @@
+{
+  "best_epoch": 273,
+  "best_validation_loss": 0.21181920105218888,
+  "result_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\model_experiments\\g05_routing_final_v1\\runs\\g05_full_reconstruction__g05_100pct__seed_42__c183e9110249\\result.json",
+  "run_id": "g05_full_reconstruction__g05_100pct__seed_42__c183e9110249",
+  "status": "completed",
+  "updated_at": "2026-08-28T00:47:33.427364+00:00"
+}
