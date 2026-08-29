@@ -1,0 +1,10 @@
+{
+  "best_structure_epoch": 33,
+  "best_structure_loss": 0.5948610897064209,
+  "best_total_epoch": 41,
+  "best_total_loss": 0.9489210312366486,
+  "result_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\result.json",
+  "run_id": "g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502",
+  "status": "completed",
+  "updated_at": "2026-08-28T08:14:09.210132+00:00"
+}
