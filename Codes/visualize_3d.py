@@ -1,21 +1,20 @@
 from __future__ import annotations
 
-"""Visualize a real test-set reconstruction from a trained checkpoint.
+"""학습된 체크포인트로 실제 시험 세트 복원 결과를 하나 이상 시각화한다.
 
-The script reuses the current training code instead of defining a second model
-or preprocessing pipeline. It supports the checkpoint formats produced by
-``Codes/ModelExperiment.py`` and complete/composed v3 checkpoints produced by
-``Codes/NewLearning8.py``.
+별도의 모델이나 전처리 파이프라인을 만들지 않고 현재 학습 코드를 그대로
+재사용한다. ``Codes/ModelExperiment.py`` 형식과 ``Codes/NewLearning8.py``가
+만드는 완전/composed v3 체크포인트를 지원한다.
 
-Targets are ordered lexicographically by (x, y, z), and current evaluation does
-not perform a charge permutation. This file therefore keeps direct q1->q1 and
-q2->q2 correspondence. Evaluation's global +/- sign alignment is retained for
-numeric parity, but G05=0 figures display the prediction as a +/- equivalence
-class so an oracle-aligned sign is never presented as an absolute prediction.
+정답은 (x, y, z) 사전식 순서로 정렬되며 현재 평가는 전하 순열 매칭을 하지
+않는다. 따라서 이 파일은 q1→q1, q2→q2의 직접 대응을 유지한다. 수치 비교를
+위한 전체 ± 부호 정렬은 유지하지만, G05=0 그림은 oracle 정렬 부호를 절대 부호
+예측처럼 보이지 않게 ± 동치류로 표시한다.
 """
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import re
 import sys
@@ -40,11 +39,36 @@ if str(CODES_DIR) not in sys.path:
 
 try:
     import NewLearning8 as physics
-    import ModelExperiment as experiment
 except ModuleNotFoundError as error:
     raise ModuleNotFoundError(
         "visualize_3d.py must remain in the project root beside Codes/."
     ) from error
+
+
+def load_model_experiment_module() -> Any:
+    """원본 파일명을 바꾸지 않고 현재 실험 구현체를 불러온다."""
+    legacy_path = CODES_DIR / "ModelExperiment.py"
+    if legacy_path.is_file():
+        import ModelExperiment as legacy_experiment
+        return legacy_experiment
+
+    current_path = CODES_DIR / "ModelExperiment8.5.py"
+    if not current_path.is_file():
+        raise ModuleNotFoundError(
+            "Neither Codes/ModelExperiment.py nor Codes/ModelExperiment8.5.py exists."
+        )
+    specification = importlib.util.spec_from_file_location(
+        "model_experiment_v2", current_path
+    )
+    if specification is None or specification.loader is None:
+        raise ImportError(f"Could not load {current_path}")
+    module = importlib.util.module_from_spec(specification)
+    sys.modules[specification.name] = module
+    specification.loader.exec_module(module)
+    return module
+
+
+experiment = load_model_experiment_module()
 
 
 V3_ARCHITECTURE = "physics-separated G00 structure + G05 global-sign v3"
@@ -291,8 +315,8 @@ def resolve_dataset_path(
     if recorded_path:
         recorded = Path(recorded_path).expanduser()
         candidates.append(recorded)
-        # The repository was relocated. The caller verifies the exact saved
-        # SHA-256 before accepting this filename in the current Models folder.
+        # 저장소가 다른 경로로 옮겨졌을 수 있다. 현재 Models 폴더의 같은 파일명은
+        # 호출자가 저장된 정확한 SHA-256을 확인한 뒤에만 받아들인다.
         candidates.append(PROJECT_DIR / "Models" / recorded.name)
     candidates.append(Path(physics.DEFAULT_DATA_PATH))
 
@@ -322,7 +346,16 @@ def model_experiment_research_issues(
     issues: list[str] = []
     run_dir = config_path.parent
     run_id = run_dir.name
-    if checkpoint_path.name.lower() != "best.pt":
+    selection = checkpoint.get("checkpoint_selection")
+    is_dual_selection = checkpoint.get("checkpoint_schema_version") == 2
+    if is_dual_selection:
+        if selection not in ("total", "structure"):
+            issues.append("the checkpoint does not identify a valid selection")
+        elif checkpoint_path.name.lower() != f"best_{selection}.pt":
+            issues.append(f"the selected checkpoint is not best_{selection}.pt")
+        if checkpoint.get("checkpoint_kind") != "selected":
+            issues.append("the selected checkpoint is not a selected best checkpoint")
+    elif checkpoint_path.name.lower() != "best.pt":
         issues.append("the selected checkpoint is not best.pt")
     if checkpoint_path.parent.name != run_id:
         issues.append("the checkpoint directory does not match the saved run id")
@@ -374,24 +407,35 @@ def model_experiment_research_issues(
 
     status_best_epoch: int | None = None
     if status is not None:
-        if status.get("best_epoch") is None:
-            issues.append("status.json does not record best_epoch")
+        status_epoch_key = (
+            f"best_{selection}_epoch" if is_dual_selection and selection in ("total", "structure")
+            else "best_epoch"
+        )
+        if status.get(status_epoch_key) is None:
+            issues.append(f"status.json does not record {status_epoch_key}")
         else:
-            status_best_epoch = int(status["best_epoch"])
+            status_best_epoch = int(status[status_epoch_key])
 
     result_best_epoch: int | None = None
     if result is not None:
         training_result = result.get("training_result")
-        if not isinstance(training_result, Mapping) or training_result.get(
-            "best_epoch"
-        ) is None:
-            issues.append("result.json does not record training_result.best_epoch")
+        result_epoch_key = (
+            f"best_{selection}_epoch" if is_dual_selection and selection in ("total", "structure")
+            else "best_epoch"
+        )
+        if not isinstance(training_result, Mapping) or training_result.get(result_epoch_key) is None:
+            issues.append(f"result.json does not record training_result.{result_epoch_key}")
         else:
-            result_best_epoch = int(training_result["best_epoch"])
+            result_best_epoch = int(training_result[result_epoch_key])
         artifacts = result.get("artifacts")
-        if isinstance(artifacts, Mapping) and artifacts.get("best_checkpoint"):
-            recorded_best = Path(str(artifacts["best_checkpoint"]))
-            if recorded_best.name.lower() != "best.pt" or recorded_best.parent.name != run_id:
+        artifact_key = (
+            f"best_{selection}_checkpoint" if is_dual_selection and selection in ("total", "structure")
+            else "best_checkpoint"
+        )
+        if isinstance(artifacts, Mapping) and artifacts.get(artifact_key):
+            recorded_best = Path(str(artifacts[artifact_key]))
+            expected_name = f"best_{selection}.pt" if is_dual_selection else "best.pt"
+            if recorded_best.name.lower() != expected_name or recorded_best.parent.name != run_id:
                 raise ValueError("result.json points to a best checkpoint from another run")
         else:
             issues.append("result.json does not identify the reported best checkpoint")
@@ -647,7 +691,11 @@ def load_model_experiment_context(
 
     return RuntimeContext(
         checkpoint_path=checkpoint_path,
-        checkpoint_family="ModelExperiment v1",
+        checkpoint_family=(
+            "ModelExperiment v2 dual-selection"
+            if checkpoint.get("checkpoint_schema_version") == 2
+            else "ModelExperiment v1"
+        ),
         checkpoint_id=run_fingerprint[:12],
         checkpoint_epoch=(
             int(checkpoint["epoch"]) if checkpoint.get("epoch") is not None else None
@@ -879,6 +927,12 @@ def infer_indices(
     device: torch.device,
     batch_size: int,
 ) -> InferenceBatch:
+    """고정된 데이터 인덱스 집합에 대해 추론을 한 번만 수행한다.
+
+    호출자는 한 샘플이 아닌 모든 예측을 받는다. ``best``, ``median``,
+    ``worst`` 대표 사례는 동일한 홀드아웃 시험 분포에서 골라야 하며, 모드별로
+    이 함수를 다시 실행하면 같은 CNN 추론을 불필요하게 반복하게 된다.
+    """
     dataset = physics.prepare_dataset(
         context.arrays, dataset_indices, context.stats, context.g05_fraction
     )
@@ -897,7 +951,8 @@ def infer_indices(
     target_charges: list[np.ndarray] = []
     masks: list[np.ndarray] = []
 
-    # Keep no_grad explicit as required by the visualization contract.
+    # 시각화는 읽기 전용이다. gradient를 끄면 의도치 않은 파라미터 갱신을
+    # 막고, 전체 시험 세트에서 대표 사례를 고르는 비용도 줄일 수 있다.
     with torch.no_grad():
         for g00, g05, g05_mask, position_target, charge_target in loader:
             output = context.model(
@@ -949,6 +1004,9 @@ def infer_indices(
     displayed_charges = raw_charge_prediction.copy()
     global_sign_aligned = ~observed
     if np.any(global_sign_aligned):
+        # G05 관측이 없으면 두 전하를 동시에 뒤집은 상태는 물리적으로 구별할
+        # 수 없다. 그림에는 원래 예측을 유지하고, 비교 가능한 오차 지표에만
+        # oracle 정렬 복사본을 사용한다.
         displayed_charges[global_sign_aligned] = context.align_global_charge_sign(
             raw_charge_prediction[global_sign_aligned],
             charge_target[global_sign_aligned],
@@ -971,42 +1029,16 @@ def sample_errors(batch: InferenceBatch) -> tuple[np.ndarray, np.ndarray]:
     return per_charge, per_charge.mean(axis=1)
 
 
-def select_sample(
-    context: RuntimeContext,
-    sample_index: int | None,
-    sample_mode: str,
-    device: torch.device,
-    batch_size: int,
+def make_selected_sample(
+    batch: InferenceBatch,
+    dataset_indices: np.ndarray,
+    per_charge_errors: np.ndarray,
+    mean_errors: np.ndarray,
+    index: int,
+    mode: str,
 ) -> SelectedSample:
-    test_count = len(context.test_indices)
-    if test_count == 0:
-        raise ValueError("The saved test split is empty")
-    dataset_indices = context.test_indices
-    batch = infer_indices(context, dataset_indices, device, batch_size)
-    per_charge_errors, mean_errors = sample_errors(batch)
-
-    if sample_index is not None:
-        if not 0 <= sample_index < test_count:
-            raise IndexError(
-                f"--sample-index is test-local and must be in [0, {test_count - 1}]"
-            )
-        selected_batch_index = sample_index
-        selected_test_index = sample_index
-        mode = "index"
-    else:
-        if sample_mode == "best":
-            selected_batch_index = int(np.argmin(mean_errors))
-        elif sample_mode == "worst":
-            selected_batch_index = int(np.argmax(mean_errors))
-        elif sample_mode == "median":
-            median_error = float(np.median(mean_errors))
-            selected_batch_index = int(np.argmin(np.abs(mean_errors - median_error)))
-        else:
-            raise ValueError(f"Unknown sample mode: {sample_mode}")
-        selected_test_index = selected_batch_index
-        mode = sample_mode
-
-    index = selected_batch_index
+    """공유된 전체 시험 추론 결과에서 선택한 한 사례를 복사한다."""
+    test_count = len(dataset_indices)
     selected_error = float(mean_errors[index])
     error_rank = int(np.count_nonzero(mean_errors < selected_error)) + 1
     error_percentile = 100.0 * float(
@@ -1014,7 +1046,9 @@ def select_sample(
     ) / test_count
     return SelectedSample(
         mode=mode,
-        test_index=selected_test_index,
+        # ``index``는 의도적으로 시험 분할 내부 인덱스다. dataset_indices가
+        # 이를 PNG 파일명에 기록할 원본 데이터 행 번호로 되돌려 준다.
+        test_index=index,
         dataset_index=int(dataset_indices[index]),
         true_positions=batch.target_positions[index].reshape(2, 3).copy(),
         predicted_positions=batch.positions[index].reshape(2, 3).copy(),
@@ -1031,6 +1065,58 @@ def select_sample(
         g05_mask=batch.masks[index, :, 0].astype(bool, copy=True),
         global_sign_aligned=bool(batch.global_sign_aligned[index]),
     )
+
+
+def select_samples(
+    context: RuntimeContext,
+    sample_index: int | None,
+    sample_modes: Sequence[str],
+    device: torch.device,
+    batch_size: int,
+) -> list[SelectedSample]:
+    """한 인덱스 사례 또는 여러 대표 사례를 한 번의 추론으로 선택한다.
+
+    ``--sample-mode all``은 여기에서 ``best``, ``median``, ``worst``로
+    전달된다. 따라서 세 PNG는 같은 체크포인트·정규화·시험 분할을 설명하며,
+    CNN 추론과 오차 계산은 한 번만 수행한다.
+    """
+    test_count = len(context.test_indices)
+    if test_count == 0:
+        raise ValueError("The saved test split is empty")
+    dataset_indices = context.test_indices
+    batch = infer_indices(context, dataset_indices, device, batch_size)
+    per_charge_errors, mean_errors = sample_errors(batch)
+
+    if sample_index is not None:
+        if not 0 <= sample_index < test_count:
+            raise IndexError(
+                f"--sample-index is test-local and must be in [0, {test_count - 1}]"
+            )
+        return [
+            make_selected_sample(
+                batch, dataset_indices, per_charge_errors, mean_errors,
+                sample_index, "index",
+            )
+        ]
+
+    selected: list[SelectedSample] = []
+    for sample_mode in sample_modes:
+        if sample_mode == "best":
+            index = int(np.argmin(mean_errors))
+        elif sample_mode == "worst":
+            index = int(np.argmax(mean_errors))
+        elif sample_mode == "median":
+            median_error = float(np.median(mean_errors))
+            index = int(np.argmin(np.abs(mean_errors - median_error)))
+        else:
+            raise ValueError(f"Unknown sample mode: {sample_mode}")
+        selected.append(
+            make_selected_sample(
+                batch, dataset_indices, per_charge_errors, mean_errors,
+                index, sample_mode,
+            )
+        )
+    return selected
 
 
 def format_position(position: np.ndarray) -> str:
@@ -1179,6 +1265,9 @@ def render_plot(
             "matplotlib is required in the same Python environment as PyTorch."
         ) from error
 
+    # 각 대표 사례는 별도 그림으로 렌더링한다. PNG를 분리하면 라벨을 읽기
+    # 쉬우며, 독립적인 3D 장면 세 개를 하나의 작은 캔버스에 억지로 넣지 않고
+    # best/median/worst 사례를 보고서에 사용할 수 있다.
     figure = plt.figure(figsize=(14.2, 8.8), facecolor="white")
     axis = figure.add_subplot(111, projection="3d")
     banner_line_count = len(context.figure_warnings) + int(
@@ -1191,7 +1280,7 @@ def render_plot(
     plane_z = np.zeros_like(grid_x)
     if show_g00:
         g00 = context.arrays.g00[sample.dataset_index]
-        # A dataset-wide scale keeps color intensity comparable across figures.
+        # 데이터셋 전체 범위의 색상 스케일을 써야 여러 그림의 색 농도를 비교할 수 있다.
         minimum = float(np.min(context.arrays.g00))
         maximum = float(np.max(context.arrays.g00))
         if maximum <= minimum:
@@ -1335,8 +1424,8 @@ def render_plot(
     )
     axis.set_xlabel("x", fontsize=13, labelpad=10)
     axis.set_ylabel("y", fontsize=13, labelpad=10)
-    # Axes3D can place the native z label behind an adjacent colorbar. A 2D
-    # axes-relative label remains visible in both the plain-plane and G00 views.
+    # Axes3D의 기본 z 라벨은 옆 colorbar 뒤에 가려질 수 있다. 축 상대 좌표의 2D
+    # 라벨을 쓰면 평면 보기와 G00 보기 모두에서 z가 계속 보인다.
     axis.set_zlabel("")
     axis.text2D(
         0.975,
@@ -1515,7 +1604,7 @@ def resolve_device(name: str) -> torch.device:
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Compare true and inferred 3D charges for one real test sample."
+        description="Compare true and inferred 3D charges for representative test samples."
     )
     parser.add_argument("--checkpoint", type=Path, required=True)
     selection = parser.add_mutually_exclusive_group()
@@ -1524,9 +1613,12 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     )
     selection.add_argument(
         "--sample-mode",
-        choices=("best", "median", "worst"),
-        default=None,
-        help="Select by mean per-sample 3D position error over the full test set",
+        choices=("best", "median", "worst", "all"),
+        default="median",
+        help=(
+            "Select by mean per-sample 3D position error over the full test set; "
+            "use all to save best, median, and worst PNGs in one run"
+        ),
     )
     parser.add_argument(
         "--data",
@@ -1572,8 +1664,6 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         parser.error("--batch-size must be positive")
     if not 72 <= args.dpi <= 600:
         parser.error("--dpi must be between 72 and 600")
-    if args.sample_mode is None:
-        args.sample_mode = "median"
     return args
 
 
@@ -1596,21 +1686,30 @@ def main(argv: Sequence[str] | None = None) -> int:
         exploratory=args.exploratory,
         allow_unverifiable_v3=args.allow_unverifiable_v3,
     )
-    sample = select_sample(
-        context, args.sample_index, args.sample_mode, device, args.batch_size
+    # ``all``은 네 번째 선택 규칙이 아니라 여기에서 세 규칙으로 펼친다.
+    # 이 방식이면 --sample-index가 모든 자동 선택 모드와 상호 배타적으로
+    # 유지된다.
+    sample_modes = (
+        ("best", "median", "worst")
+        if args.sample_mode == "all"
+        else (args.sample_mode,)
     )
-    print_console_summary(context, sample, device)
-    output_path = build_output_path(args.output_dir, context, sample)
-    render_plot(
-        context,
-        sample,
-        output_path,
-        show_g00=args.show_g00,
-        show_g05=args.show_g05,
-        dpi=args.dpi,
-        show_window=not args.no_show,
+    samples = select_samples(
+        context, args.sample_index, sample_modes, device, args.batch_size
     )
-    print(f"Saved PNG: {output_path}")
+    for sample in samples:
+        print_console_summary(context, sample, device)
+        output_path = build_output_path(args.output_dir, context, sample)
+        render_plot(
+            context,
+            sample,
+            output_path,
+            show_g00=args.show_g00,
+            show_g05=args.show_g05,
+            dpi=args.dpi,
+            show_window=not args.no_show,
+        )
+        print(f"Saved PNG: {output_path}")
     return 0
 
 

@@ -1,34 +1,33 @@
 from __future__ import annotations
 
-"""Fair, resumable model experiments for the two-charge inverse problem.
+"""2전하 역문제를 위한 공정하고 재개 가능한 모델 실험 코드.
 
-The data semantics, normalization, split, loss targets, and non-identifiability
-handling are inherited from ``NewLearning8.py``.  This file supplies the parts
-that should vary in a model study: a model registry, explicit input-routing
-policies, a common training loop, durable per-run state, and multi-seed reports.
+데이터 의미·정규화·분할·손실 정답·비식별성 처리는 ``NewLearning8.py``를
+그대로 따른다. 이 파일은 모델 연구에서 달라져야 하는 부분, 즉 모델 registry,
+명시적 입력 라우팅 정책, 공통 학습 loop, 실행별 영속 상태, 다중 seed 보고서를
+제공한다.
 
-Default research comparison
----------------------------
-``g05_sign_only`` and ``g05_full_reconstruction`` have identical parameters
-and identical initial states for a given seed.  The only architectural switch
-is whether the masked G05 representation may enter the position, magnitude,
-and relative-sign heads.  Both models use G05 for the identifiable global-sign
-head.  With zero observed G05 points their forward outputs are identical.
-
-Checkpoint selection
---------------------
-Each training trajectory saves two complete, single-epoch model states:
-``best_total.pt`` minimizes validation total loss, and ``best_structure.pt``
-minimizes validation structure loss without global-sign loss in the selection
-objective.  Both are evaluated on the same held-out test set only after
-training.  Reports always distinguish the two ``checkpoint_selection`` values.
-``latest.pt`` is the atomic resume authority, including both best snapshots.
-
-Adding a model
+기본 연구 비교
 --------------
-Register a no-argument factory with ``@register_model``.  The returned module
-must implement ``forward(g00, g05, g05_mask) -> ModelOutput``.  No data,
-training, evaluation, checkpoint, or reporting code needs to change.
+``g05_sign_only``와 ``g05_full_reconstruction``은 같은 seed에서 파라미터와
+초기 상태가 동일하다. 구조적 차이는 마스킹된 G05 표현을 위치·크기·상대 부호
+head에 넣을 수 있는지뿐이다. 두 모델 모두 식별 가능한 전체 부호 head에는 G05를
+사용한다. 관측 G05가 0개이면 두 모델의 순전파 출력은 같다.
+
+체크포인트 선택
+--------------
+각 학습 궤적은 완전한 단일 epoch 모델 상태 두 개를 저장한다. ``best_total.pt``는
+검증 total loss를 최소화하고, ``best_structure.pt``는 선택 목적에서 전체 부호
+손실을 제외한 검증 structure loss를 최소화한다. 두 모델은 학습이 끝난 뒤에만
+동일한 홀드아웃 시험 세트에서 평가한다. 보고서는 두 ``checkpoint_selection``
+값을 항상 구분한다. ``latest.pt``에는 두 최적 스냅샷까지 포함되어 재개의 원자적
+기준이 된다.
+
+모델 추가
+---------
+인자 없는 factory를 ``@register_model``로 등록한다. 반환 module은
+``forward(g00, g05, g05_mask) -> ModelOutput``을 구현해야 한다. 데이터·학습·
+평가·체크포인트·보고 코드 자체를 바꿀 필요는 없다.
 """
 
 import argparse
@@ -196,18 +195,20 @@ def register_model(
 
 
 class RoutedChargeNet(nn.Module):
-    """Capacity-matched network with an explicit G05-to-structure route.
+    """G05→구조 경로를 명시적으로 제어하는 동일 용량 네트워크.
 
-    Module construction order preserves the existing separated model's common
-    parameter initialization.  ``structure_context`` is present in both model
-    variants, so parameter count and the full initialized state are identical.
-    Its final projection starts at zero, making the variants' initial outputs
-    identical even when G05 is present.
+    module 생성 순서는 기존 분리 모델과 공통 파라미터 초기화를 유지한다.
+    ``structure_context``는 두 모델 모두에 존재하므로 파라미터 수와 전체 초기
+    상태가 같다. 마지막 projection은 0으로 시작하여 G05가 있어도 두 모델의
+    초기 출력이 동일하게 만든다.
     """
 
     def __init__(self, *, allow_g05_for_structure: bool) -> None:
         super().__init__()
         self.allow_g05_for_structure = allow_g05_for_structure
+        # G00는 조밀한 2차원 전위 기반 지도이므로, 작은 CNN으로 국소 공간
+        # 패턴을 먼저 추출한다. 두 라우팅 모델은 이 백본을 완전히 공유하여
+        # 성능 차이가 파라미터 수가 아니라 G05 입력 경로에서만 생기게 한다.
         self.g00_cnn = nn.Sequential(
             nn.Conv2d(1, 16, kernel_size=3, padding=1),
             nn.ReLU(),
@@ -224,6 +225,9 @@ class RoutedChargeNet(nn.Module):
             nn.Linear(64 * 4 * 4, 128),
             nn.ReLU(),
         )
+        # 하나의 G00 임베딩을 모든 구조 출력이 공유한다. 위치·크기·상대 부호
+        # 헤드는 분리해 각 손실에 맞게 학습시키되, 은닉 특징에 전하 번호의
+        # 고정된 의미를 강제하지 않는다.
         self.position_head = nn.Sequential(
             nn.Linear(128, 64),
             nn.ReLU(),
@@ -239,6 +243,9 @@ class RoutedChargeNet(nn.Module):
             nn.ReLU(),
             nn.Linear(32, 1),
         )
+        # G05는 조밀한 이미지가 아니라 (x 인덱스, y 인덱스, 부호 있는 V)의
+        # 가변 길이 관측 목록이다. 각 후보점을 독립적으로 인코딩한 뒤, 아래의
+        # 마스크 인식 요약으로 관측 센서 수와 무관한 고정 길이 표현을 만든다.
         self.g05_encoder = nn.Sequential(
             nn.Linear(3, 32),
             nn.ReLU(),
@@ -251,8 +258,8 @@ class RoutedChargeNet(nn.Module):
             nn.Linear(64, 1),
         )
 
-        # The route exists in both variants.  No bias and explicit observation
-        # gating ensure G05=0 contributes exactly zero structural context.
+        # 이 경로는 두 모델에 모두 존재한다. bias를 없애고 관측 여부를 명시적으로
+        # 곱해 G05=0일 때 구조 문맥이 정확히 0이 되도록 한다.
         self.structure_context = nn.Sequential(
             nn.Linear(32 * 3, 128),
             nn.ReLU(),
@@ -267,6 +274,13 @@ class RoutedChargeNet(nn.Module):
         point_features: torch.Tensor,
         g05_mask: torch.Tensor,
     ) -> tuple[torch.Tensor, torch.Tensor]:
+        """관측된 G05 특징을 평균·최댓값·표준편차로 요약한다.
+
+        입력에만 마스크를 적용하지 않고 모든 통계량 계산에 적용한다. 따라서
+        결측 센서의 대체값이 요약값에 섞이지 않으며, G05가 전혀 없는 샘플은
+        명시적으로 영벡터가 된다. 반환하는 불리언은 계층의 bias 때문에
+        미관측 샘플에 구조용 G05 문맥이 생기는 일을 막는 데도 사용한다.
+        """
         mask = g05_mask.to(dtype=point_features.dtype)
         observed_count = mask.sum(dim=1).clamp_min(1.0)
         mean = (point_features * mask).sum(dim=1) / observed_count
@@ -295,6 +309,10 @@ class RoutedChargeNet(nn.Module):
         if g05.shape[:2] != g05_mask.shape[:2] or g05_mask.shape[-1] != 1:
             raise ValueError(f"G05/mask shape mismatch: {g05.shape}, {g05_mask.shape}")
 
+        # 두 모델에서 두 분기를 모두 계산한다. 실험에서 바뀌는 것은 인코딩된
+        # G05 요약을 구조 특징에 더할지뿐이다. 따라서 sign-only와 full
+        # reconstruction의 차이는 다른 구조나 파라미터 수가 아닌 입력 경로의
+        # 차이로 해석할 수 있다.
         structure_features = self.g00_encoder(self.g00_cnn(g00))
         point_features = self.g05_encoder(g05)
         g05_summary, has_observation = self._masked_g05_summary(
@@ -306,6 +324,8 @@ class RoutedChargeNet(nn.Module):
             context = context * has_observation[:, None].to(context.dtype)
             structure_features = structure_features + context
 
+        # Softplus로 |q| >= 0이라는 물리 제약을 만족시킨다. 상대·전체 부호는
+        # 수치적으로 안정적인 손실 계산을 위해 logit 상태로 유지한다.
         return ModelOutput(
             position=self.position_head(structure_features),
             magnitude=F.softplus(self.magnitude_head(structure_features)),
@@ -435,7 +455,7 @@ def atomic_write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
                 fieldnames.append(key)
                 seen.add(key)
     if not rows:
-        # Clear stale rows without changing an existing report's columns.
+        # 기존 보고서의 열 구성을 바꾸지 않으면서 오래된 행만 비운다.
         with path.open("r", encoding="utf-8", newline="") as handle:
             fieldnames = next(csv.reader(handle), [])
     try:
@@ -480,10 +500,10 @@ def atomic_torch_save(value: Mapping[str, Any], path: Path) -> None:
 
 
 def load_torch_checkpoint(path: Path, device: torch.device) -> dict[str, Any]:
-    # Checkpoints also contain CPU-only RNG state tensors.  Loading the whole
-    # mapping onto CUDA makes Generator.set_state()/torch.set_rng_state() fail.
-    # Model parameters are copied by load_state_dict, and optimizer tensors are
-    # moved explicitly by optimizer_to_device after loading.
+    # 체크포인트에는 CPU 전용 RNG 상태 tensor도 있다. 전체 mapping을 CUDA로
+    # 불러오면 Generator.set_state()/torch.set_rng_state()가 실패한다. 모델
+    # 파라미터는 load_state_dict가 복사하고, optimizer tensor는 불러온 뒤
+    # optimizer_to_device로 명시적으로 옮긴다.
     try:
         checkpoint = torch.load(path, map_location="cpu", weights_only=False)
     except TypeError:
@@ -604,6 +624,13 @@ def run_epoch(
     weights: LossWeights,
     optimizer: torch.optim.Optimizer | None = None,
 ) -> EpochLoss:
+    """학습 또는 검증 epoch 한 번을 실행하고 비교 가능한 손실로 집계한다.
+
+    optimizer가 있으면 gradient 계산과 파라미터 갱신을 수행하고, 없으면 같은
+    순전파·손실 경로로 검증만 수행한다. 구조 손실은 모든 샘플로 평균내지만,
+    전체 부호 손실은 실제 G05가 관측된 샘플만으로 평균낸다. 이렇게 해야
+    부호를 식별할 수 없는 G05=0 사례가 부호 성능 지표를 희석하지 않는다.
+    """
     is_training = optimizer is not None
     model.train(mode=is_training)
     sums = {
@@ -623,6 +650,8 @@ def run_epoch(
         position_target = position_target.to(device, non_blocking=True)
         charge_target = charge_target.to(device, non_blocking=True)
         if optimizer is not None:
+            # set_to_none은 불필요한 0 기록을 줄이고, 이전의 0 tensor를 남기는
+            # 방식보다 누락된 gradient를 더 명확하게 드러낸다.
             optimizer.zero_grad(set_to_none=True)
         with torch.set_grad_enabled(is_training):
             output = model(g00, g05, g05_mask)
@@ -644,6 +673,8 @@ def run_epoch(
         sums["magnitude"] += losses.magnitude.item() * current_batch_size
         sums["relative_sign"] += losses.relative_sign.item() * current_batch_size
         if losses.global_sign is not None:
+            # 이 지표의 분모는 관측 샘플 수여야 한다. 배치 BCE도 바로 이
+            # 샘플들에 대해서만 계산했기 때문이다.
             current_observed = int((g05_mask.sum(dim=(1, 2)) > 0).sum().item())
             observed_sample_count += current_observed
             sums["global_sign"] += losses.global_sign.item() * current_observed
@@ -687,6 +718,13 @@ def evaluate_model(
     batch_size: int,
     device: torch.device,
 ) -> dict[str, Any]:
+    """선택된 체크포인트를 갱신 없이 홀드아웃 분할에서 평가한다.
+
+    예측은 정규화된 좌표로 모은 뒤, 실행과 함께 저장한 훈련 분할 통계로 원래
+    단위로 되돌린다. G05가 없는 샘플은 절대 전하 방향을 식별할 수 없으므로,
+    전역 부호 정렬은 명시된 전하 오차 지표에만 적용하며 절대 부호 예측으로
+    취급하지 않는다.
+    """
     loader = make_loader(
         dataset,
         batch_size=batch_size,
@@ -750,6 +788,8 @@ def evaluate_model(
     )
     evaluated_charge_prediction = charge_prediction.copy()
     if np.any(~observed):
+        # 두 예측 전하를 함께 뒤집는 것만 허용되는 oracle 연산이다. q1/q2를
+        # 따로 뒤집으면 상대 부호 오류를 숨기게 된다.
         evaluated_charge_prediction[~observed] = align_global_charge_sign(
             charge_prediction[~observed],
             charge_target[~observed],
@@ -866,6 +906,13 @@ def run_configuration(
     seed: int,
     settings: TrainingSettings,
 ) -> dict[str, Any]:
+    """하나의 학습 실행을 식별하는 불변 fingerprint 설정을 만든다.
+
+    경로는 의도적으로 제외한다. 서로 다른 컴퓨터에서도 저장 위치만 다르게
+    같은 실험을 재현할 수 있어야 하기 때문이다. 모델 가중치나 해석에 영향을
+    줄 수 있는 요소는 모두 포함해 JSON fingerprint를 체크포인트·결과 파일·
+    재개 검증·시각화 출처 확인의 안전한 키로 사용한다.
+    """
     return {
         "protocol_version": PROTOCOL_VERSION,
         "protocol_fingerprint": protocol_fingerprint,
@@ -972,7 +1019,7 @@ def run_checkpoint_paths(checkpoint_run_dir: Path) -> dict[str, Path]:
 
 
 def copy_model_state(model: nn.Module) -> dict[str, torch.Tensor]:
-    # Best snapshots survive subsequent optimizer steps, including CPU training.
+    # CPU 학습을 포함한 이후 optimizer step에서도 최적 스냅샷이 유지되어야 한다.
     return {
         name: value.detach().cpu().clone() for name, value in model.state_dict().items()
     }
@@ -986,7 +1033,13 @@ def update_best_checkpoints(
     validation_loss: EpochLoss,
     model_state: dict[str, torch.Tensor],
 ) -> tuple[str, ...]:
-    """Select each objective independently from the same complete epoch state."""
+    """같은 완전한 epoch 상태에서 두 목적함수의 최적 모델을 독립 선택한다.
+
+    ``total``과 ``structure``는 서로 다른 epoch를 선택할 수 있다. 각 저장
+    항목에는 구조 헤드와 부호 헤드를 다른 epoch에서 섞지 않고, 해당 epoch의
+    전체 모델 상태를 넣는다. 따라서 체크포인트는 즉시 실행 가능하며 검증·
+    시험 지표의 근거를 추적할 수 있다.
+    """
 
     updated: list[str] = []
     for selection in CHECKPOINT_SELECTIONS:
@@ -996,6 +1049,8 @@ def update_best_checkpoints(
         previous = best_checkpoints.get(selection)
         if previous is not None and value >= previous["selected_validation_loss"]:
             continue
+        # model_state는 이 epoch 직후 CPU에 복사했다. 이후 optimizer step이
+        # 진행되어도 이 최적 스냅샷은 바뀌지 않는다.
         best_checkpoints[selection] = {
             "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
             "checkpoint_kind": "selected",
@@ -1004,7 +1059,7 @@ def update_best_checkpoints(
             "selected_epoch": epoch,
             "selected_validation_loss": value,
             "validation_losses": epoch_loss_dict(validation_loss),
-            # Preserve familiar scalar fields, scoped by checkpoint_selection.
+            # 익숙한 스칼라 필드는 유지하되 현재 checkpoint_selection 범위로 한정한다.
             "epoch": epoch,
             "validation_loss": value,
             "model_state_dict": model_state,
@@ -1021,7 +1076,7 @@ def best_tracking_fields(
         checkpoint = best_checkpoints.get(selection, {})
         fields[f"best_{selection}_loss"] = checkpoint.get("selected_validation_loss")
         fields[f"best_{selection}_epoch"] = checkpoint.get("selected_epoch")
-    # Legacy resume/status aliases always refer to total selection.
+    # 구형 재개/상태 필드 별칭은 항상 total 선택을 가리킨다.
     fields["best_validation_loss"] = fields["best_total_loss"]
     fields["best_epoch"] = fields["best_total_epoch"]
     return fields
@@ -1038,6 +1093,13 @@ def make_resume_checkpoint(
     history: list[dict[str, Any]],
     elapsed_seconds: float,
 ) -> dict[str, Any]:
+    """매 epoch 뒤 저장하는 단일 복구 기준 체크포인트를 만든다.
+
+    최신 학습 가능 상태뿐 아니라 두 최적 스냅샷도 함께 보관한다. 독립적인
+    ``best_*.pt`` 저장이 중단되어도 다음 실행에서 원자적으로 저장된 이 재개
+    체크포인트로 복원할 수 있으므로, epoch를 다시 실행하거나 선택 모델을
+    바꾸지 않는다.
+    """
     if set(best_checkpoints) != set(CHECKPOINT_SELECTIONS):
         raise RuntimeError("Resume state requires both total and structure checkpoints")
     return {
@@ -1047,7 +1109,7 @@ def make_resume_checkpoint(
         "checkpoint_selection": "latest",
         "selection_objective": "latest completed epoch for resuming training only",
         "selected_epoch": epoch,
-        "selected_validation_loss": None,  # No minimization objective for latest.
+        "selected_validation_loss": None,  # latest에는 최소화 선택 목적이 없다.
         "validation_losses": history[-1]["validation"],
         "epoch": epoch,
         "model_state_dict": model_state,
@@ -1055,8 +1117,8 @@ def make_resume_checkpoint(
         "shuffle_generator_state": shuffle_generator.get_state(),
         "rng_state": capture_rng_state(),
         **best_tracking_fields(best_checkpoints),
-        # A single atomic commit covers training state AND both best snapshots.
-        # The standalone best files can be rebuilt after an interrupted publish.
+        # 한 번의 원자적 저장으로 학습 상태와 두 최적 스냅샷을 함께 보관한다.
+        # 독립 best 파일 저장이 중단돼도 다음 실행에서 다시 만들 수 있다.
         "best_checkpoints": best_checkpoints,
         "elapsed_seconds": elapsed_seconds,
         "history": history,
@@ -1175,6 +1237,13 @@ def train_and_evaluate_run(
     settings: TrainingSettings,
     device: torch.device,
 ) -> tuple[dict[str, Any], bool]:
+    """모델·G05 비율·seed 한 조합을 학습/재개하고 감사 기록을 남긴다.
+
+    학습과 검증에서 두 체크포인트 선택을 갱신하고, 시험 데이터는 두 선택이
+    확정될 때까지 의도적으로 사용하지 않는다. 이후 각각의 완전한 선택 모델을
+    한 번씩 평가한다. 완료된 실행은 결과를 조용히 덮어쓰지 않고, 기존 산출물을
+    검증해 재사용하므로 같은 호출을 여러 번 해도 결과가 변하지 않는다.
+    """
     run_id = run_id_for(run_config)
     run_fingerprint = object_fingerprint(run_config)
     result_run_dir = experiment_results_dir / "runs" / run_id
@@ -1186,6 +1255,8 @@ def train_and_evaluate_run(
     checkpoint_paths = run_checkpoint_paths(checkpoint_run_dir)
     latest_path = checkpoint_paths["latest"]
 
+    # 완료된 result는 영구적인 완료 표식이다. 건너뛰기 전에 선택된 산출물을
+    # 검증하여, 일부만 기록된 디스크 상태가 완료 실험으로 보이지 않게 한다.
     if result_path.exists():
         with result_path.open("r", encoding="utf-8") as handle:
             existing_result = json.load(handle)
@@ -1267,6 +1338,9 @@ def train_and_evaluate_run(
     history: list[dict[str, Any]] = []
     elapsed_before_resume = 0.0
     resumed = False
+    # 재개 시 가중치뿐 아니라 optimizer·난수 상태·DataLoader 셔플 상태도
+    # 복원한다. 가중치만 복원하면 다음 mini-batch가 달라져 저장 epoch부터의
+    # 결정론적 연속 학습이 깨진다.
     if latest_path.exists():
         checkpoint = load_torch_checkpoint(latest_path, device)
         validate_resume_checkpoint(checkpoint, run_config)
@@ -1280,7 +1354,7 @@ def train_and_evaluate_run(
         history = list(checkpoint["history"])
         elapsed_before_resume = float(checkpoint.get("elapsed_seconds", 0.0))
         resumed = True
-        # latest.pt is authoritative if publishing either best file was interrupted.
+        # best 파일 중 하나의 저장이 중단되었을 때 latest.pt가 기준 복구본이다.
         for selection in CHECKPOINT_SELECTIONS:
             atomic_torch_save(best_checkpoints[selection], checkpoint_paths[selection])
         atomic_write_json(history_path, history)
@@ -1345,7 +1419,7 @@ def train_and_evaluate_run(
             ),
             latest_path,
         )
-        # Publish selected files only after the resume state commits atomically.
+        # 재개 상태가 원자적으로 저장된 뒤에만 선택된 파일을 별도로 공개한다.
         for selection in updated_selections:
             atomic_torch_save(best_checkpoints[selection], checkpoint_paths[selection])
         atomic_write_json(history_path, history)
@@ -1374,7 +1448,8 @@ def train_and_evaluate_run(
             )
         )
 
-    # Test data has no role in training or either checkpoint selection.
+    # 시험 데이터는 학습이나 두 체크포인트 선택에 전혀 관여하지 않는다. 최종
+    # 검증 선택 체크포인트가 모두 준비된 뒤에만 여기로 도달한다.
     evaluations: dict[str, dict[str, Any]] = {}
     for selection in CHECKPOINT_SELECTIONS:
         best_path = checkpoint_paths[selection]
@@ -1524,7 +1599,7 @@ def result_to_row(result: Mapping[str, Any]) -> dict[str, Any]:
         **{name: metrics.get(name) for name in METRIC_NAMES},
         "observed_sample_fraction": metrics["observed_sample_fraction"],
         "observations_per_sample": metrics["observations_per_sample"],
-        # Keep old CSV column names as aliases for THIS row's selection.
+        # 구형 CSV 열 이름은 이 행의 선택 결과를 가리키는 별칭으로만 유지한다.
         "best_validation_loss": result["selected_validation_loss"],
         "best_epoch": result["selected_epoch"],
         "elapsed_seconds": training_result["elapsed_seconds"],
@@ -1765,7 +1840,7 @@ def refresh_reports(
         (result_to_row(result) for result in results),
         key=lambda row: (row["model"], row["g05_fraction"], row["seed"], row["checkpoint_selection"]),
     )
-    # Build all tables before publishing any; empty tables clear existing rows.
+    # 표를 모두 만든 뒤 한꺼번에 공개한다. 빈 표도 기존 행을 비우는 의미가 있다.
     reports = (
         ("runs.csv", run_rows),
         ("summary.csv", build_summary_rows(results)),
@@ -1842,7 +1917,7 @@ def run_checkpoint_smoke_tests(spec: ModelSpec, candidate_count: int) -> None:
     best_checkpoints: dict[str, dict[str, Any]] = {}
     history: list[dict[str, Any]] = []
     snapshots: dict[int, dict[str, torch.Tensor]] = {}
-    # Total wins at epoch 1; structure wins at epoch 2. Epoch 3 tests ties.
+    # total은 epoch 1, structure는 epoch 2가 최적이며 epoch 3에서는 동률을 검사한다.
     for epoch, (structure, global_sign) in enumerate(((2.0, 0.1), (1.0, 2.0), (1.0, 2.0)), 1):
         with torch.no_grad():
             next(model.parameters()).add_(0.01)
@@ -1870,7 +1945,7 @@ def run_checkpoint_smoke_tests(spec: ModelSpec, candidate_count: int) -> None:
         validate_resume_checkpoint(loaded, config)
         if not torch.equal(loaded["shuffle_generator_state"], shuffle_generator.get_state()):
             raise RuntimeError("Shuffle generator did not survive checkpoint roundtrip")
-        # Simulate a stop after latest committed but before either best file exists.
+        # latest 저장 뒤 두 best 파일이 생기기 전에 중단된 상황을 모의한다.
         for selection in CHECKPOINT_SELECTIONS:
             best = loaded["best_checkpoints"][selection]
             atomic_torch_save(best, paths[selection])
@@ -2002,10 +2077,9 @@ def run_smoke_tests(
                     f"Unexpected structural G05 gradient route in {model_name}: "
                     f"{reaches_g05}"
                 )
-            # The real final projection starts at zero: on the first backward,
-            # only that projection can receive structural G05-route gradients.
-            # Warm up this disposable model once, then check the encoder AND
-            # observed G05 input values using the actual structure loss.
+            # 실제 최종 projection은 0으로 시작하므로 첫 역전파에서는 그 층만
+            # 구조용 G05 경로 gradient를 받을 수 있다. 일회용 모델을 한 번
+            # 워밍업한 뒤 실제 구조 손실로 encoder와 관측 G05 입력값을 함께 검사한다.
             model.zero_grad(set_to_none=True)
             warmup_output = model(*positive_tensors[:3])
             calculate_losses(
@@ -2505,7 +2579,7 @@ def main() -> None:
                     skipped += 1
                 else:
                     completed_now += 1
-                # Reports are durable after every individual run.
+                # 개별 실행이 끝날 때마다 보고서를 영속 저장한다.
                 refresh_reports(experiment_results_dir, protocol_fingerprint)
         del train_dataset, validation_dataset, test_dataset
         if device.type == "cuda":

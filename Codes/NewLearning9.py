@@ -1,21 +1,21 @@
-"""Five-charge set prediction with strictly separated G05 sign-only routing.
+"""G05 sign-only 경로를 엄격히 분리한 5전하 집합 예측 모델.
 
-Run: python Codes/NewLearning9.py --generate-data
-Check without a full training run: add --smoke-only.
+실행: python Codes/NewLearning9.py --generate-data
+전체 학습 없이 검사: --smoke-only를 추가한다.
 
-Each output slot contains a position, |q|, and a relative-sign logit. Labels
-may have ANY charge order. The loss finds the exact one-to-one assignment
-among 5! = 120 permutations on the current torch device (no SciPy required).
-Position normalization is shared by all slots, not fitted per charge index.
+각 출력 슬롯은 위치, |q|, 상대 부호 logit을 가진다. 정답 전하의 저장 순서는
+어떠해도 되며, 손실은 현재 torch 장치에서 5! = 120개 순열을 모두 비교해 정확한
+일대일 대응을 찾는다(SciPy 불필요). 위치 정규화는 전하 번호별이 아니라 모든
+슬롯이 공유한다.
 
-For five nonzero charges, g = product(sign(q_i)) is a permutation-invariant
-global sign. Define r_i = sign(q_i) * g. Then product(r_i) = +1, and r_i is
-unchanged by reversing ALL charges. G00 predicts positions, magnitudes and
-r_i; G05 predicts ONLY g. The sign decoder and likelihood both enforce the
-16 valid relative-sign configurations. No charge slot is a special anchor.
+0이 아닌 다섯 전하에 대해 g = product(sign(q_i))를 순서 불변 전체 부호로 두고,
+r_i = sign(q_i) * g로 정의한다. 그러면 product(r_i) = +1이며 모든 전하의 부호를
+함께 반전해도 r_i는 변하지 않는다. G00은 위치·크기·r_i만 예측하고, G05는 g만
+예측한다. 부호 디코더와 우도는 가능한 16개 상대 부호 조합만 허용하며, 특정 전하
+슬롯을 기준점으로 삼지 않는다.
 
-G00 alone cannot determine g. Absolute-sign metrics are therefore N/A for
-samples with no observed G05. sign-only does NOT mean fixing |q| to one.
+G00만으로는 g를 알 수 없다. 따라서 G05가 관측되지 않은 샘플의 절대 부호 지표는
+N/A이며, sign-only는 |q|를 1로 고정한다는 뜻이 아니다.
 """
 
 from __future__ import annotations
@@ -35,7 +35,8 @@ from typing import Sequence
 
 import numpy as np
 
-# Configure cuBLAS before the first CUDA matrix multiplication in this process.
+# 이 프로세스의 첫 CUDA 행렬 곱 전에 cuBLAS 작업 공간을 고정해, 가능한 범위에서
+# GPU 연산의 재현성을 높인다.
 os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 
 import torch
@@ -72,7 +73,7 @@ GLOBAL_SIGN_PREFIXES = ("g05_encoder.", "global_sign_head.")
 class DatasetArrays:
     g00: np.ndarray
     g05: np.ndarray
-    target: np.ndarray  # [sample, unordered charge, (x, y, z, q)]
+    target: np.ndarray  # [샘플, 순서 없는 전하, (x, y, z, q)]
     grid_x: np.ndarray
     grid_y: np.ndarray
     epsilon_0: float = 1.0
@@ -92,8 +93,8 @@ class NormalizationStats:
     g00_mean: float
     g00_std: float
     g05_value_scale: float
-    position_mean: np.ndarray  # [3], shared by ALL five charge slots
-    position_std: np.ndarray   # [3], shared by ALL five charge slots
+    position_mean: np.ndarray  # [3], 다섯 전하 슬롯 전체가 공유하는 축별 평균
+    position_std: np.ndarray   # [3], 다섯 전하 슬롯 전체가 공유하는 축별 표준편차
     charge_scale: float
 
     def to_dict(self) -> dict[str, object]:
@@ -105,10 +106,10 @@ class NormalizationStats:
 
 @dataclass(frozen=True)
 class ModelOutput:
-    position: torch.Tensor              # [B, 5, 3], normalized
-    magnitude: torch.Tensor             # [B, 5], normalized |q|
-    relative_sign_logit: torch.Tensor   # [B, 5], product of decoded signs = +1
-    global_sign_logit: torch.Tensor     # [B], sign(product(q))
+    position: torch.Tensor              # [B, 5, 3], 정규화된 위치
+    magnitude: torch.Tensor             # [B, 5], 정규화된 |q|
+    relative_sign_logit: torch.Tensor   # [B, 5], 복호화 부호의 곱이 +1
+    global_sign_logit: torch.Tensor     # [B], sign(product(q))에 대한 logit
 
 
 @dataclass(frozen=True)
@@ -127,7 +128,7 @@ class BatchLoss:
     magnitude: torch.Tensor
     relative_sign: torch.Tensor
     global_sign: torch.Tensor | None
-    assignment: torch.Tensor  # prediction slot -> target slot
+    assignment: torch.Tensor  # 예측 슬롯 -> 정답 슬롯의 일대일 대응
 
 
 @dataclass(frozen=True)
@@ -169,6 +170,12 @@ def set_reproducibility(seed: int) -> None:
 
 
 def load_dataset(path: Path) -> DatasetArrays:
+    """5전하 데이터와 메타데이터를 읽고 형상·물리 일관성을 함께 검증한다.
+
+    이후 학습 코드가 G00=V², G05=V, 전하 수 5개라는 전제를 안전하게 사용할 수
+    있도록, 단순한 파일 존재 여부가 아니라 배열 형식과 일부 샘플의 물리식까지
+    확인한다. 잘못된 2전하 데이터나 다른 생성 규칙의 파일을 조기에 막는다.
+    """
     if not path.is_file():
         raise FileNotFoundError(
             f"Five-charge dataset not found: {path}. "
@@ -245,7 +252,7 @@ def validate_dataset(arrays: DatasetArrays) -> None:
         raise ValueError("Candidate G05 locations must be fixed across samples")
     if np.unique(coordinates[0], axis=0).shape[0] != g05.shape[1]:
         raise ValueError("Candidate G05 locations contain duplicates")
-    # Deliberately NO lexicographic-order validation: charges form a set.
+    # 전하는 순서가 없는 집합이므로 의도적으로 사전식 정렬을 요구하지 않는다.
 
 
 def verify_physical_consistency(arrays: DatasetArrays, sample_count: int = 16) -> None:
@@ -270,6 +277,8 @@ def verify_physical_consistency(arrays: DatasetArrays, sample_count: int = 16) -
 def create_data_split(sample_count: int, seed: int = DATA_SPLIT_SEED) -> DataSplit:
     if sample_count < 10:
         raise ValueError("At least 10 samples are required for the 80/10/10 split")
+    # 하나의 고정 순열을 80/10/10으로 자르면, 재실행과 모든 G05 비율에서 같은
+    # 훈련·검증·시험 샘플을 사용하게 된다.
     indices = np.random.default_rng(seed).permutation(sample_count)
     return DataSplit(
         train=indices[:int(sample_count * 0.8)],
@@ -281,6 +290,8 @@ def create_data_split(sample_count: int, seed: int = DATA_SPLIT_SEED) -> DataSpl
 def calculate_normalization_stats(arrays: DatasetArrays, train_indices: np.ndarray) -> NormalizationStats:
     if len(train_indices) == 0:
         raise ValueError("Cannot fit normalization on an empty training split")
+    # 정규화 통계는 반드시 훈련 분할만으로 맞춘다. 특히 위치 통계는 전하 번호별
+    # 다섯 세트를 합쳐 축마다 하나씩 계산하므로, 임의의 슬롯 순서에 의존하지 않는다.
     positions = arrays.target[train_indices, :, :3].astype(np.float64)
     charges = arrays.target[train_indices, :, 3].astype(np.float64)
     g00 = arrays.g00[train_indices].astype(np.float64)
@@ -303,6 +314,8 @@ def g05_count_for_fraction(fraction: float, candidate_count: int) -> int:
 
 def create_g05_mask(sample_count: int, candidate_count: int, fraction: float) -> np.ndarray:
     mask = np.zeros((sample_count, candidate_count, 1), dtype=np.float32)
+    # 모든 샘플에서 같은 후보 목록의 앞부분을 사용한다. 비율이 커질수록 이전
+    # 관측을 포함하는 nested prefix이므로 G05 조건 간 비교가 공정하다.
     mask[:, :g05_count_for_fraction(fraction, candidate_count), 0] = 1
     return mask
 
@@ -310,6 +323,12 @@ def create_g05_mask(sample_count: int, candidate_count: int, fraction: float) ->
 def prepare_dataset(
     arrays: DatasetArrays, indices: np.ndarray, stats: NormalizationStats, fraction: float,
 ) -> TensorDataset:
+    """원시 배열을 모델 입력/정답 tensor로 바꾼다.
+
+    G00은 채널 하나짜리 2D CNN 입력으로 정규화하고, G05의 격자 인덱스는 [-1, 1]
+    좌표로 바꾼다. 위치와 전하도 훈련 분할 통계로만 정규화하며, 마스크는 G05
+    값 자체를 지우지 않고 모델이 관측 여부를 판단하도록 별도로 전달한다.
+    """
     g00 = ((arrays.g00[indices] - stats.g00_mean) / stats.g00_std)[:, None]
     g05 = arrays.g05[indices].copy()
     g05[:, :, 0] = 2 * g05[:, :, 0] / (arrays.g00.shape[2] - 1) - 1
@@ -334,14 +353,14 @@ def create_data_loader(
 
 
 class SpatialAveragePool(nn.Module):
-    """Adaptive 4x4 averages without nondeterministic CUDA adaptive-pool backward."""
+    """비결정적 CUDA adaptive-pool 역전파 없이 4×4 평균 풀링을 수행한다."""
 
     def forward(self, features: torch.Tensor) -> torch.Tensor:
         height, width = features.shape[-2:]
         if height % 4 == 0 and width % 4 == 0:
             return F.avg_pool2d(features, kernel_size=(height // 4, width // 4))
-        # Match adaptive pooling's floor/ceil bins for other grid sizes. Each
-        # mean has a deterministic backward; overlapping bins add in graph order.
+        # 다른 격자 크기에서도 adaptive pooling의 floor/ceil bin 정의를 따른다.
+        # 각 평균의 역전파는 결정론적이며, 겹치는 bin의 gradient는 그래프 순서로 더해진다.
         rows = []
         for row in range(4):
             top, bottom = row * height // 4, ((row + 1) * height + 3) // 4
@@ -354,19 +373,31 @@ class SpatialAveragePool(nn.Module):
 
 
 class ChargeNet(nn.Module):
-    """G05 has neither a forward path nor a gradient path into structure."""
+    """G00 구조 분기와 G05 전체 부호 분기를 완전히 분리한 5전하 모델.
+
+    G00 CNN은 다섯 전하의 위치·크기·상대 부호를 예측한다. G05는 전체 부호만
+    예측하며 구조 특징으로 들어가는 순전파·gradient 경로가 전혀 없다. 따라서
+    G05를 얼마나 관측했는지가 구조 복원 결과를 바꾸지 않는다.
+    """
 
     def __init__(self) -> None:
         super().__init__()
+        # G00은 전위 제곱의 2차원 격자이므로 3×3 합성곱과 풀링으로 공간 특징을
+        # 추출한다. 마지막 4×4 요약은 입력 격자 크기가 달라도 MLP 입력 크기를
+        # 고정한다.
         self.g00_cnn = nn.Sequential(
             nn.Conv2d(1, 16, 3, padding=1), nn.ReLU(), nn.MaxPool2d(2),
             nn.Conv2d(16, 32, 3, padding=1), nn.ReLU(), nn.MaxPool2d(2),
             nn.Conv2d(32, 64, 3, padding=1), nn.ReLU(), SpatialAveragePool(),
         )
+        # 하나의 G00 임베딩에서 전하 5개에 대한 구조 출력 세 종류를 분리한다.
+        # 위치 15개(5×3), 크기 5개, 상대 부호 logit 5개가 한 슬롯의 대응을 유지한다.
         self.g00_encoder = nn.Sequential(nn.Flatten(), nn.Linear(64 * 4 * 4, 256), nn.ReLU())
         self.position_head = nn.Sequential(nn.Linear(256, 128), nn.ReLU(), nn.Linear(128, 15))
         self.magnitude_head = nn.Sequential(nn.Linear(256, 64), nn.ReLU(), nn.Linear(64, 5))
         self.relative_sign_head = nn.Sequential(nn.Linear(256, 64), nn.ReLU(), nn.Linear(64, 5))
+        # G05는 (정규화 x, 정규화 y, 부호 있는 V) 후보점 목록이다. 각 점을 MLP로
+        # 인코딩한 후 관측된 점의 통계량만 요약해 전체 부호를 판별한다.
         self.g05_encoder = nn.Sequential(nn.Linear(3, 32), nn.ReLU(), nn.Linear(32, 32), nn.ReLU())
         self.global_sign_head = nn.Sequential(
             nn.Linear(32 * 3, 64), nn.ReLU(), nn.Linear(64, 1, bias=False),
@@ -374,6 +405,12 @@ class ChargeNet(nn.Module):
 
     @staticmethod
     def _masked_summary(features: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
+        """관측된 G05 특징의 평균·최댓값·표준편차를 고정 길이 벡터로 만든다.
+
+        결측값은 모든 통계량에서 제외하고, 관측이 전혀 없으면 영벡터를 반환한다.
+        이 규칙 덕분에 G05=0은 임의의 결측 대체값이 아니라 ``부호를 알 수 없음``
+        이라는 명시적인 입력 상태가 된다.
+        """
         mask = mask.to(features.dtype)
         count = mask.sum(dim=1).clamp_min(1)
         mean = (features * mask).sum(dim=1) / count
@@ -385,24 +422,31 @@ class ChargeNet(nn.Module):
         return torch.cat((mean, maximum, deviation), dim=1) * has_observation[:, None]
 
     def forward_global_sign(self, g05: torch.Tensor, g05_mask: torch.Tensor) -> torch.Tensor:
-        """Evaluate G05 alone, so reusing structure also avoids its forward cost."""
+        """G05만으로 전체 부호 logit을 계산한다.
+
+        구조 분기를 재사용할 때에도 이 함수만 따로 학습할 수 있다. 또한 V를 모두
+        반전하면 전하 전체 부호도 반전되어야 한다는 물리 대칭을 계산식에 강제한다.
+        """
         if (g05.ndim != 3 or g05.shape[-1] != 3 or g05.shape[1] < 1
                 or g05_mask.shape != (*g05.shape[:2], 1)):
             raise ValueError(f"G05/mask shape mismatch: {g05.shape}, {g05_mask.shape}")
-        # Mask before the encoder, so even extreme missing values cannot leak.
+        # encoder 앞에서 마스크를 적용해 결측 자리에 어떤 큰 값이 있어도 특징으로
+        # 새어 들어가지 못하게 한다.
         observed_g05 = g05.masked_fill(~g05_mask.bool(), 0)
         reversed_g05 = observed_g05 * observed_g05.new_tensor((1, 1, -1))
         both = torch.cat((observed_g05, reversed_g05), dim=0)
         both_mask = torch.cat((g05_mask, g05_mask), dim=0)
         summary = self._masked_summary(self.g05_encoder(both), both_mask)
         positive_score, negative_score = self.global_sign_head(summary).squeeze(-1).chunk(2)
-        # Exact physical symmetry: reversing measured V reverses the logit.
+        # 정확한 물리 대칭: 측정 V를 반전하면 전체 부호 logit도 반전되어야 한다.
         return (positive_score - negative_score) * 0.5
 
     def forward(self, g00: torch.Tensor, g05: torch.Tensor, g05_mask: torch.Tensor) -> ModelOutput:
         if (g05.ndim != 3 or g05.shape[-1] != 3 or g05.shape[1] < 1
                 or g05_mask.shape != (*g05.shape[:2], 1) or g05.shape[0] != g00.shape[0]):
             raise ValueError(f"G00/G05/mask shape mismatch: {g00.shape}, {g05.shape}, {g05_mask.shape}")
+        # 구조 예측은 G00만 통과한다. 아래의 G05 함수는 별도의 전체 부호 출력만
+        # 만들므로, 두 손실 사이에 공유 특징이나 gradient 경로가 생기지 않는다.
         structure = self.g00_encoder(self.g00_cnn(g00))
         global_logit = self.forward_global_sign(g05, g05_mask)
         return ModelOutput(
@@ -425,7 +469,12 @@ def relative_sign_patterns(device: torch.device, dtype: torch.dtype) -> torch.Te
 
 
 def canonical_sign_targets(charges: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
-    """Return relative and global binary targets, invariant to target order."""
+    """순서와 전체 부호 반전에 강한 상대 부호·전체 부호 정답을 만든다.
+
+    g는 다섯 부호의 곱이므로 전하 순서에 무관하다. r_i = sign(q_i)·g는 모든
+    전하 부호를 함께 뒤집어도 변하지 않고 그 곱은 +1이다. 따라서 슬롯 하나를
+    임의의 기준 전하로 정하지 않아도 5전하 부호 구성을 표현할 수 있다.
+    """
     signs = torch.where(charges > 0, torch.ones_like(charges), -torch.ones_like(charges))
     global_sign = signs.prod(dim=1)
     relative_sign = signs * global_sign[:, None]
@@ -438,31 +487,39 @@ def relative_pattern_scores(logits: torch.Tensor) -> torch.Tensor:
 
 
 def relative_sign_nll(logits: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
-    """Per-sample conditional NLL / 5 over the 16 valid sign patterns."""
+    """곱이 +1인 16개 상대 부호 패턴에 대한 샘플별 조건부 NLL/5를 계산한다."""
     patterns = (relative_sign_patterns(logits.device, logits.dtype) + 1) * 0.5
     target_index = (target[:, None, :] == patterns[None, :, :]).all(dim=-1).long().argmax(dim=1)
     return F.cross_entropy(relative_pattern_scores(logits), target_index, reduction="none") / CHARGE_COUNT
 
 
 def decode_relative_signs(logits: torch.Tensor) -> torch.Tensor:
-    """Maximum-likelihood valid signs. Exact ties select one optimal pattern."""
+    """가능한 상대 부호 패턴 중 우도가 가장 큰 것을 복호화한다.
+
+    logit을 각 전하마다 독립 임계값으로 자르면 부호 곱이 -1이 될 수 있다. 여기서는
+    16개 유효 조합만 비교하므로 항상 물리적으로 일관된 다섯 부호를 반환한다.
+    """
     index = relative_pattern_scores(logits).argmax(dim=1)
     return relative_sign_patterns(logits.device, logits.dtype)[index]
 
 
 def reconstruct_charges(output: ModelOutput) -> torch.Tensor:
-    """Normalized q in predicted slot order; no-G05 global sign is arbitrary +1."""
+    """예측 슬롯 순서의 정규화된 전하를 재구성한다.
+
+    G05가 없는 경우 전체 부호는 원리적으로 식별할 수 없으므로 logit 0의 tie는
+    +1 대표값으로 정한다. 이는 절대 부호를 알아냈다는 뜻이 아니다.
+    """
     global_sign = torch.where(output.global_sign_logit >= 0, 1.0, -1.0)
     return output.magnitude * decode_relative_signs(output.relative_sign_logit) * global_sign[:, None]
 
 
 @torch.no_grad()
 def minimum_cost_assignment(pair_cost: torch.Tensor) -> torch.Tensor:
-    """Exact bijection for each sample; every target is used exactly once.
+    """샘플별로 정답을 한 번씩만 쓰는 정확한 일대일 대응을 찾는다.
 
-    For five charges, enumerating all 120 permutations is small and keeps the
-    operation on-device. This solves the same assignment objective as Hungarian
-    matching without a CPU/SciPy round trip. It is not a nearest-neighbor loss.
+    전하가 5개이므로 120개 순열을 모두 열거해도 작고, 계산을 장치 안에서 끝낼
+    수 있다. 이는 CPU/SciPy 왕복 없이 Hungarian 할당과 같은 최소 비용 목표를
+    푸는 방법이며, 여러 예측이 같은 정답을 고르는 최근접점 손실이 아니다.
     """
     if pair_cost.ndim != 3 or pair_cost.shape[1:] != (CHARGE_COUNT, CHARGE_COUNT):
         raise ValueError(f"Expected pair cost [B,5,5], received {pair_cost.shape}")
@@ -481,9 +538,9 @@ def matching_cost(
     magnitude = (output.magnitude[:, :, None] - charge_target.abs()[:, None, :]).square()
     logits = output.relative_sign_logit[:, :, None]
     relative = F.softplus(logits) - logits * relative_target[:, None, :]
-    # Conditional sign NLL differs from these BCE costs only by a per-sample
-    # partition constant, so this assignment minimizes the actual structure loss.
-    # G05/global sign is deliberately excluded: it cannot change structure training.
+    # 조건부 상대 부호 NLL은 이 BCE 비용과 샘플별 분할 상수만 다르므로, 이 대응이
+    # 실제 구조 손실도 최소화한다. G05/전체 부호 비용은 의도적으로 제외한다.
+    # 전체 부호가 위치·크기·상대 부호의 구조 학습을 바꾸면 안 되기 때문이다.
     return weights.position * position + weights.magnitude * magnitude + weights.relative_sign * relative
 
 
@@ -500,6 +557,13 @@ def calculate_losses(
     output: ModelOutput, position_target: torch.Tensor, charge_target: torch.Tensor,
     g05_mask: torch.Tensor, weights: LossWeights = LossWeights(),
 ) -> BatchLoss:
+    """순열 불변 구조 손실과 관측된 G05의 전체 부호 손실을 계산한다.
+
+    먼저 gradient 없이 최소 비용 일대일 대응을 고정하고, 그 대응으로 위치 MSE·
+    크기 MSE·상대 부호 NLL을 계산한다. 전체 부호 BCE는 G05 관측이 있는 샘플에만
+    추가한다. 대응 선택에 전체 부호 비용을 넣지 않아 두 분기가 다시 연결되는 일을
+    방지한다.
+    """
     with torch.no_grad():
         assignment = minimum_cost_assignment(matching_cost(output, position_target, charge_target, weights))
         aligned_position, aligned_charge = matched_targets(position_target, charge_target, assignment)
@@ -521,6 +585,12 @@ def run_epoch(
     model: ChargeNet, loader: DataLoader, optimizer: torch.optim.Optimizer | None = None,
     weights: LossWeights = LossWeights(),
 ) -> EpochLoss:
+    """구조와 전체 부호를 함께 학습하거나 검증하는 한 epoch을 실행한다.
+
+    구조 손실은 모든 샘플에 대해 계산하지만, 전체 부호 BCE는 G05가 관측된 샘플에
+    대해서만 계산한다. 두 분기는 파라미터·특징을 공유하지 않으므로 total loss로
+    역전파해도 G05 부호 gradient가 G00 구조 branch로 들어가지 않는다.
+    """
     model.train(optimizer is not None)
     device = next(model.parameters()).device
     sums = dict.fromkeys(("structure", "position", "magnitude", "relative_sign"), 0.0)
@@ -536,8 +606,8 @@ def run_epoch(
                 raise FloatingPointError("Non-finite training/validation loss")
             if optimizer is not None:
                 losses.total.backward()
-                # No joint gradient clipping or total-loss scheduler: either
-                # would let G05 alter the independent structure optimization.
+                # 공동 gradient clipping이나 total-loss scheduler는 쓰지 않는다.
+                # 그런 연산은 독립된 G05와 구조 최적화를 다시 연결할 수 있다.
                 optimizer.step()
         count = len(g00)
         sample_count += count
@@ -559,7 +629,12 @@ def run_global_sign_epoch(
     model: ChargeNet, loader: DataLoader, optimizer: torch.optim.Optimizer | None = None,
     loss_weight: float = 1.0,
 ) -> float | None:
-    """Fit/evaluate only G05; global targets do not require charge-slot matching."""
+    """G05 전체 부호 분기만 따로 학습/검증한다.
+
+    전체 부호는 전하 부호의 곱이므로 슬롯별 정답 대응을 구할 필요가 없다. 구조
+    체크포인트를 재사용하는 G05 비율에서는 이 함수만 호출해 G00 CNN의 순전파와
+    역전파를 모두 생략한다.
+    """
     model.train(optimizer is not None)
     device = next(model.parameters()).device
     sample_count = observed_count = 0
@@ -572,7 +647,7 @@ def run_global_sign_epoch(
             optimizer.zero_grad(set_to_none=True)
         if not torch.any(observed):
             continue
-        # The product of charge signs is unchanged by the structure assignment.
+        # 전하 부호의 곱은 구조 슬롯 대응을 바꿔도 변하지 않는다.
         _, global_target = canonical_sign_targets(charge)
         with torch.set_grad_enabled(optimizer is not None):
             logits = model.forward_global_sign(g05, mask)
@@ -627,7 +702,8 @@ def checkpoint_metadata(
 
 
 def copy_state(model: nn.Module, prefixes: tuple[str, ...] | None = None) -> dict[str, torch.Tensor]:
-    # clone is essential on CPU: best snapshots must not alias live parameters.
+    # CPU clone은 필수다. 최적 스냅샷이 계속 학습되는 현재 파라미터를 참조하면
+    # 이후 optimizer step으로 과거 최적 모델까지 바뀌기 때문이다.
     return {name: value.detach().cpu().clone() for name, value in model.state_dict().items()
             if prefixes is None or name.startswith(prefixes)}
 
@@ -675,7 +751,7 @@ def fraction_label(fraction: float) -> str:
 
 
 def create_run_directories(checkpoint_root: Path, results_root: Path) -> tuple[str, Path, Path]:
-    """Keep every invocation's artifacts together without touching earlier runs."""
+    """이전 실행을 건드리지 않고, 이번 실행의 산출물을 같은 run ID로 묶는다."""
     run_id = f"run_{time.strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:12]}"
     checkpoint_dir = checkpoint_root / run_id
     results_dir = results_root / run_id
@@ -692,7 +768,13 @@ def train_model(
     settings: TrainingSettings = TrainingSettings(), weights: LossWeights = LossWeights(),
     device: torch.device = DEVICE, structure_source: Path | None = None,
 ) -> TrainingResult:
-    """Train once into a new directory, optionally reusing a compatible G00 snapshot."""
+    """한 G05 비율·seed 조건을 새 폴더에 학습하고 최적 분기를 합성한다.
+
+    첫 조건에서는 G00 구조와 G05 전체 부호를 함께 학습한다. 이후 같은 seed의
+    다른 G05 비율은 검증된 G00 구조 스냅샷을 재사용하고 G05 branch만 학습한다.
+    구조/전체 부호는 각각 최적 검증 epoch를 선택한 뒤 하나의 추론용 체크포인트로
+    합성한다.
+    """
     if settings.max_epochs < 1 or settings.batch_size < 1:
         raise ValueError("epochs and batch_size must be positive")
     set_reproducibility(seed)
@@ -710,6 +792,8 @@ def train_model(
     best_structure: dict[str, torch.Tensor] | None = None
     best_global: dict[str, torch.Tensor] | None = None
     if structure_source is not None:
+        # 구조 재사용은 seed·정규화·데이터 분할·학습 설정이 같은 경우에만 허용한다.
+        # 하나라도 다르면 서로 다른 실험의 G00 구조를 섞게 되므로 즉시 중단한다.
         source = torch.load(structure_source, map_location="cpu", weights_only=True)
         mismatches = [key for key, value in run_metadata.items()
                       if key not in ("g05_fraction", "structure_source") and source.get(key) != value]
@@ -723,8 +807,8 @@ def train_model(
         best_structure_epoch = int(source["epoch"])
         if not math.isfinite(best_structure_loss) or not 1 <= best_structure_epoch <= settings.max_epochs:
             raise ValueError("Invalid best structure loss or epoch in checkpoint")
-        # Initialize the entire model with the same seed BEFORE loading only
-        # structure, preserving the independent G05 initialization exactly.
+        # 구조만 불러오기 전에 전체 모델을 같은 seed로 초기화한다. 그러면 독립된
+        # G05 branch의 초기값과 셔플 조건이 원래 실험과 정확히 같게 유지된다.
         model.load_state_dict(best_structure, strict=False)
     optimizer = torch.optim.AdamW(
         [parameter for name, parameter in model.named_parameters()
@@ -733,7 +817,7 @@ def train_model(
     )
     train_loader = create_data_loader(train_dataset, settings.batch_size, shuffle=True, seed=seed, device=device)
     validation_loader = create_data_loader(validation_dataset, settings.batch_size, device=device)
-    # Also protect callers using train_model directly instead of main's run folders.
+    # main을 거치지 않고 train_model을 직접 호출해도 기존 run을 덮어쓰지 않게 한다.
     run_dir.mkdir(parents=True, exist_ok=False)
     if structure_source is not None:
         save_checkpoint({**run_metadata, "component": "structure",
@@ -760,8 +844,8 @@ def train_model(
         else:
             train_global_loss = run_global_sign_epoch(model, train_loader, optimizer, weights.global_sign)
             val_global_loss = run_global_sign_epoch(model, validation_loader, loss_weight=weights.global_sign)
-            # Do not report borrowed structure curves as new training. Its
-            # original history remains alongside structure_source.
+            # 빌려온 구조 곡선을 새 학습 결과처럼 기록하지 않는다. 원래 이력은
+            # structure_source 옆에 보존되어 있으며 여기에는 G05 이력만 남긴다.
             history.append({"epoch": epoch, "train_global_sign": train_global_loss,
                             "validation_global_sign": val_global_loss})
             train_text = "N/A" if train_global_loss is None else f"{train_global_loss:.5f}"
@@ -777,6 +861,8 @@ def train_model(
         print(f"seed={seed} G05={fraction:.3f} epoch={epoch:03d}/{settings.max_epochs} "
               f"{progress} global={sign_text}", flush=True)
     assert best_structure is not None
+    # 두 branch의 최적 epoch가 다를 수 있으므로 마지막 epoch 전체 모델을 쓰지
+    # 않는다. 구조·전체 부호의 각 최적 부분만 합쳐 추론용 composed.pt를 만든다.
     composed = copy_state(model)
     composed.update(best_structure)
     if best_global is not None:
@@ -797,11 +883,12 @@ def evaluate_model(
     model: ChargeNet, dataset: TensorDataset, stats: NormalizationStats,
     batch_size: int = 128, weights: LossWeights = LossWeights(),
 ) -> dict[str, float | None]:
-    """Set metrics after one joint assignment, shared across all charge fields.
+    """모든 전하 필드에 공유되는 하나의 일대일 대응으로 집합 지표를 계산한다.
 
-    charge_mae uses absolute signed q for observed samples and the better of
-    the TWO whole-set global orientations for unobserved samples. It never
-    independently flips individual charges. No metrics refer to slot numbers.
+    G05가 관측된 샘플의 charge_mae는 절대 부호 전하를 사용한다. 미관측 샘플은
+    전하 다섯 개를 함께 뒤집은 두 전체 방향 중 더 좋은 경우만 허용하며, 개별
+    전하를 따로 뒤집어 오차를 줄이지 않는다. 어느 지표도 고정 슬롯 번호를
+    전하의 실제 ID로 해석하지 않는다.
     """
     model.eval()
     device = next(model.parameters()).device
@@ -950,7 +1037,7 @@ def run_smoke_tests(
         permutation = torch.tensor([4, 2, 0, 3, 1], device=device)
         permuted_loss = calculate_losses(output, positions[:, permutation], charges[:, permutation], mask)
         torch.testing.assert_close(losses.total, permuted_loss.total)
-        # Forward isolation, including the physics sign reversal of G05.
+        # G05의 물리적 부호 반전 대칭을 포함해 두 branch의 순전파 분리를 검사한다.
         reversed_g05 = g05 * g05.new_tensor((1, 1, -1))
         reversed_output = model(g00, reversed_g05, mask)
         for name in ("position", "magnitude", "relative_sign_logit"):
@@ -1065,8 +1152,8 @@ def main(argv: Sequence[str] | None = None) -> None:
     metric_names: tuple[str, ...] = ()
     structure_sources: dict[int, Path] = {}
     for fraction in args.fractions:
-        # Prepare one fraction at a time instead of duplicating full datasets
-        # for all six fractions in memory.
+        # 모든 G05 비율의 전체 tensor를 메모리에 중복 생성하지 않고, 한 비율씩
+        # 준비한다. 데이터가 커져도 GPU/메모리 사용량이 불필요하게 늘지 않는다.
         datasets = tuple(prepare_dataset(arrays, getattr(split, part), stats, fraction)
                          for part in ("train", "validation", "test"))
         best_selection_score = math.inf
