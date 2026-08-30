@@ -186,6 +186,57 @@ Shape·capacity·initial state·batch order·120개 assignment·16개 sign patte
   -s "C:\Users\COM\Documents\KK-AI\Codes" -p "test_*.py" -v
 ```
 
+## 평가 전용 모드 (`--evaluate-only`)
+
+저장된 `best_total.pt`와 `best_structure.pt`를 원래 test set으로 다시 평가하려면
+`--evaluate-only`(별칭 `--eval-only`)를 사용한다. 학습 loop, optimizer 생성·step, smoke test를
+모두 건너뛰므로 파라미터 업데이트가 없다. 이미 완료된 run도 skip하지 않고 재평가한다.
+
+현재 저장된 `5point_routing_v1`의 75% / seed41 / 두 모델을 평가하는 예:
+
+```powershell
+& "C:\Users\COM\Documents\KK-AI\.venv\Scripts\python.exe" `
+  "C:\Users\COM\Documents\KK-AI\Codes\ModelExperiment9.py" `
+  --experiment-name 5point_routing_v1 `
+  --models "g05_sign_only,g05_full_reconstruction" `
+  --fractions 0.75 --seeds 41 --device cuda --evaluate-only
+```
+
+`--models`, `--fractions`, `--seeds`는 **이미 학습한 조건**을 지정한다. 생략 시 기존 CLI와 같이
+두 모델 / 0.75 / seed42를 사용한다. 여러 조건은 기존과 같이 쉼표로 구분한다.
+예를 들어 seed41의 전체 관측률은 `--fractions "0,0.10,0.25,0.50,0.75,1.0" --seeds 41`이다.
+
+평가에는 저장된 `protocol.json`의 fingerprint, normalization, split indices, loss weights와
+학습 설정을 사용한다. 정규화나 분할을 새로 계산하지 않는다. `--epochs`, `--learning-rate`,
+`--weight-decay`는 평가에 영향을 주지 않으며, `--batch-size`는 생략하면 저장된 값을 사용한다.
+`--data`도 생략하면 저장된 데이터 경로를 사용하고, 파일을 옮겼다면 SHA256이 같은 복사본을 지정할 수 있다.
+GPU에서 학습한 모델도 `--device cpu`로 평가할 수 있다. 실행한 코드의 hash와 평가 환경은 따로 기록한다.
+평가 모드 추가 전 `ModelExperiment9.py`의 hash를 가진 checkpoint도 사용할 수 있지만,
+물리 계산과 평가 함수를 제공하는 `NewLearning9.py`는 학습 당시 파일과 같아야 한다.
+
+원래 protocol의 “학습 종료 후 test 평가” 원칙을 유지한다. 완료된 `latest.pt`, 또는 완료된
+`result.json`과 두 best checkpoint가 필요하다. 학습이 끝났지만 test 평가가 중단된 경우도
+`latest.pt`로 평가할 수 있다. 누락된 best는 latest 안의 snapshot을 메모리에서만 읽고 파일을 복구하지 않는다.
+미완료 학습이나 없는 checkpoint는 오류로 종료하며, 자동으로 새 학습을 시작하거나 재개하지 않는다.
+`--continue-on-error`를 붙이면 다른 요청 조건의 평가는 계속하되, 실패가 있으면 최종 종료 코드는 실패다.
+`--smoke-only`와 `--evaluate-only`는 함께 사용할 수 없다.
+
+원본 checkpoint, `result.json`, history, status, 기존 CSV는 덮어쓰지 않는다. 실행마다 새 폴더를 만들며,
+아래 경로를 콘솔에 출력한다. 원본 experiment와 같은 잠금을 사용하므로 동시에 학습을 실행할 수 없다.
+
+```text
+Results/new_learning9_experiments/<experiment_name>/evaluations/<UTC-time>_<id>/
+├── evaluation.json             # 원본 protocol 참조와 실제 평가 코드·환경
+├── runs.csv
+├── summary.csv
+├── pairwise_comparisons.csv
+├── pairwise_summary.csv
+└── runs/<run-id>/result.json   # 두 선택의 재평가 결과
+```
+
+일반 학습 모드의 fingerprint 검사는 그대로 유지한다. 코드 변경 전 실험에 학습을 이어가려면
+당시 코드·환경·설정을 복원해야 하며, 새 코드로 학습하려면 새 `--experiment-name`을 사용한다.
+
 ## 7. 75% / seed42 / 300 epoch 비교 명령어
 
 ```powershell

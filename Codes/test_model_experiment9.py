@@ -66,6 +66,15 @@ class FiveChargeExperimentTests(unittest.TestCase):
     def load(self, root: Path, config: dict, selection: str = "latest") -> dict:
         return experiment.load_torch_checkpoint(self.paths(root, config)[selection], torch.device("cpu"))
 
+    def evaluation_trial(self, protocol: dict) -> tuple[Path, Path, list[str]]:
+        results = self.case_root / "results" / "trial"
+        checkpoints = self.case_root / "checkpoints" / "trial"
+        experiment.initialize_experiment_artifacts(experiment_results_dir=results, experiment_checkpoint_dir=checkpoints,
+                                                  protocol=protocol, split=self.split)
+        args = ["--evaluate-only", "--device", "cpu", "--experiment-name", "trial",
+                "--results-root", str(results.parent), "--checkpoint-root", str(checkpoints.parent)]
+        return results, checkpoints, args
+
     def assert_nested_equal(self, first, second) -> None:
         if isinstance(first, torch.Tensor):
             torch.testing.assert_close(first, second, rtol=0, atol=0)
@@ -633,11 +642,218 @@ class FiveChargeExperimentTests(unittest.TestCase):
         self.assertEqual(defaults.seeds, (42,))
         self.assertEqual(defaults.epochs, 300)
         self.assertEqual(defaults.models, experiment.DEFAULT_MODELS)
+        self.assertEqual(defaults.batch_size, 128)
+        self.assertEqual(defaults.data, experiment.DEFAULT_DATA_PATH)
+        self.assertFalse(defaults.evaluate_only)
+        self.assertTrue(experiment.parse_args(["--eval-only"]).evaluate_only)
         with contextlib.redirect_stderr(io.StringIO()):
             for invalid in (("--fractions", "nan"), ("--seeds", "42,42"), ("--models", "unknown"),
-                            ("--experiment-name", "../escape"), ("--learning-rate", "inf")):
+                            ("--experiment-name", "../escape"), ("--learning-rate", "inf"),
+                            ("--smoke-only", "--evaluate-only"), ("--evaluate-only", "--batch-size", "0")):
                 with self.assertRaises(SystemExit):
                     experiment.parse_args(list(invalid))
+
+    def test_evaluate_only_cli_reuses_saved_protocol_without_updates_or_source_writes(self) -> None:
+        weights = physics.LossWeights(position=1.7, global_sign=0.4)
+        protocol = self.protocol(epochs=1, weights=weights)
+        protocol["source_sha256"]["ModelExperiment9.py"] = "0" * 64  # Before evaluation-only support.
+        protocol["environment"]["device"] = "cuda"  # Evaluation must permit a different device.
+        results, checkpoints, args = self.evaluation_trial(protocol)
+        originals = {}
+        with contextlib.redirect_stdout(io.StringIO()):
+            for name in experiment.DEFAULT_MODELS:
+                config = experiment.run_configuration(protocol, model_name=name, fraction=0.75, seed=42)
+                result, _ = experiment.train_and_evaluate_run(run_config=config, datasets=self.datasets[0.75],
+                                                              experiment_results_dir=results, experiment_checkpoint_dir=checkpoints,
+                                                              device=torch.device("cpu"))
+                originals[result["run_id"]] = result
+        preserved = {path: (path.read_bytes(), path.stat().st_mtime_ns)
+                     for root in (results, checkpoints) for path in root.rglob("*") if path.is_file()}
+        original_evaluate = experiment.evaluate_model
+
+        def evaluate(model, dataset, stats, **kwargs):
+            self.assertFalse(torch.is_grad_enabled())
+            self.assertFalse(model.training)
+            self.assertEqual(kwargs["batch_size"], 8)
+            self.assertEqual(kwargs["weights"], weights)
+            self.assertEqual(stats.to_dict(), self.stats.to_dict())
+            self.assert_nested_equal(dataset.tensors, self.datasets[0.75][2].tensors)
+            before = experiment.copy_model_state(model)
+            metrics = original_evaluate(model, dataset, stats, **kwargs)
+            self.assert_nested_equal(before, model.state_dict())
+            self.assertTrue(all(parameter.grad is None for parameter in model.parameters()))
+            return metrics
+
+        with contextlib.ExitStack() as stack:
+            for module, name in ((experiment, "train_and_evaluate_run"), (experiment, "run_epoch"),
+                                 (experiment, "run_smoke_tests"), (experiment, "build_protocol"),
+                                 (experiment, "atomic_torch_save"), (torch.optim, "AdamW"),
+                                 (physics, "create_data_split"), (physics, "calculate_normalization_stats")):
+                stack.enter_context(mock.patch.object(module, name, side_effect=AssertionError(f"unexpected {name}")))
+            evaluated = stack.enter_context(mock.patch.object(experiment, "evaluate_model", side_effect=evaluate))
+            prepared = stack.enter_context(mock.patch.object(physics, "prepare_dataset", wraps=physics.prepare_dataset))
+            output = stack.enter_context(contextlib.redirect_stdout(io.StringIO()))
+            # No --data or --batch-size: use the saved path/size, not training defaults.
+            for _ in range(2):
+                experiment.main([*args, "--epochs", "999", "--learning-rate", "0.2", "--weight-decay", "0.3"])
+            self.assertEqual(evaluated.call_count, 8)
+            self.assertEqual(prepared.call_count, 2)
+            for call in prepared.call_args_list:
+                self.assert_nested_equal(call.args[1], self.split.test)
+        self.assertIn("evaluated=2, failed=0", output.getvalue())
+        evaluation_roots = list((results / "evaluations").iterdir())
+        self.assertEqual(len(evaluation_roots), 2)  # A rerun neither skips evaluation nor overwrites it.
+        for root in evaluation_roots:
+            context = json.loads((root / "evaluation.json").read_text(encoding="utf-8"))
+            self.assertEqual(context["environment"]["device"], "cpu")
+            self.assertEqual(context["source_sha256"]["ModelExperiment9.py"], experiment.file_sha256(Path(experiment.__file__)))
+            self.assertEqual(context["protocol_fingerprint"], experiment.object_fingerprint(protocol))
+            for path in root.glob("runs/*/result.json"):
+                result = json.loads(path.read_text(encoding="utf-8"))
+                self.assertTrue(result["evaluation_only"])
+                self.assertEqual(result["configuration"], originals[result["run_id"]]["configuration"])
+                for selection in experiment.CHECKPOINT_SELECTIONS:
+                    self.assertEqual(result["evaluations"][selection]["test_metrics"],
+                                     originals[result["run_id"]]["evaluations"][selection]["test_metrics"])
+            for name, expected in (("runs", 4), ("summary", 4), ("pairwise_comparisons", 30), ("pairwise_summary", 30)):
+                with (root / f"{name}.csv").open(encoding="utf-8", newline="") as handle:
+                    self.assertEqual(len(list(csv.DictReader(handle))), expected)
+        for path, (contents, modified) in preserved.items():
+            self.assertEqual(path.read_bytes(), contents)
+            self.assertEqual(path.stat().st_mtime_ns, modified)
+
+    def test_evaluate_only_uses_latest_snapshots_without_repairing_missing_files(self) -> None:
+        root, config = self.case_root, self.config(epochs=1, fraction=0.0)
+        original, _ = self.run_model(root, config)
+        paths = self.paths(root, config)
+        result_path = root / "results" / "runs" / original["run_id"] / "result.json"
+        for path in (paths["total"], paths["structure"], result_path):
+            path.unlink()
+        before = {path: path.read_bytes() for path in root.rglob("*") if path.is_file()}
+        with mock.patch.object(torch.optim, "AdamW", side_effect=AssertionError("unexpected optimizer")), mock.patch.object(
+            experiment, "atomic_torch_save", side_effect=AssertionError("unexpected checkpoint repair"),
+        ), contextlib.redirect_stdout(io.StringIO()):
+            result = experiment.evaluate_only_run(run_config=config, test=self.datasets[0.0][2],
+                                                   experiment_results_dir=root / "results", experiment_checkpoint_dir=root / "checkpoints",
+                                                   device=torch.device("cpu"), batch_size=1)
+        self.assertEqual(result["evaluation_batch_size"], 1)
+        for selection in experiment.CHECKPOINT_SELECTIONS:
+            self.assertFalse(paths[selection].exists())
+            evaluation = result["evaluations"][selection]
+            self.assertEqual(evaluation["checkpoint_path"], str(paths["latest"].resolve()))
+            self.assertEqual(evaluation["checkpoint_source"], f"best_checkpoints.{selection}")
+            self.assertIsNone(evaluation["test_metrics"]["global_sign_accuracy"])
+            for metric, expected in original["evaluations"][selection]["test_metrics"].items():
+                if expected is not None:
+                    self.assertAlmostEqual(evaluation["test_metrics"][metric], expected, places=6)
+        self.assertFalse(result_path.exists())
+        self.assertEqual({path: path.read_bytes() for path in root.rglob("*") if path.is_file()}, before)
+
+    def test_evaluate_only_can_use_selected_files_with_completed_result_without_latest(self) -> None:
+        root, config = self.case_root, self.config(epochs=1)
+        original, _ = self.run_model(root, config)
+        paths = self.paths(root, config)
+        paths["latest"].unlink()
+        with mock.patch.object(torch.optim, "AdamW", side_effect=AssertionError("unexpected optimizer")), contextlib.redirect_stdout(io.StringIO()):
+            result = experiment.evaluate_only_run(run_config=config, test=self.datasets[0.75][2],
+                                                   experiment_results_dir=root / "results", experiment_checkpoint_dir=root / "checkpoints",
+                                                   device=torch.device("cpu"))
+        for selection in experiment.CHECKPOINT_SELECTIONS:
+            self.assertEqual(result["evaluations"][selection]["test_metrics"], original["evaluations"][selection]["test_metrics"])
+        self.assertFalse(paths["latest"].exists())
+        paths["structure"].unlink()
+        with mock.patch.object(experiment, "evaluate_model", side_effect=AssertionError("unexpected partial evaluation")):
+            with self.assertRaisesRegex(FileNotFoundError, "Missing evaluation checkpoint"):
+                experiment.evaluate_only_run(run_config=config, test=self.datasets[0.75][2],
+                                             experiment_results_dir=root / "results", experiment_checkpoint_dir=root / "checkpoints",
+                                             device=torch.device("cpu"))
+
+    def test_evaluate_only_missing_or_unfinished_training_never_starts_training(self) -> None:
+        protocol = self.protocol(epochs=2)
+        results, checkpoints, args = self.evaluation_trial(protocol)
+        args.extend(["--models", "g05_full_reconstruction"])
+        with mock.patch.object(experiment, "train_and_evaluate_run", side_effect=AssertionError("unexpected training")), mock.patch.object(
+            experiment, "run_smoke_tests", side_effect=AssertionError("unexpected smoke test"),
+        ), contextlib.redirect_stdout(io.StringIO()):
+            with self.assertRaisesRegex(FileNotFoundError, "No completed training"):
+                experiment.main(args)
+        self.assertEqual(list(checkpoints.iterdir()), [])
+        config = experiment.run_configuration(protocol, model_name="g05_full_reconstruction", fraction=0.75, seed=42)
+        original_save = experiment.atomic_torch_save
+
+        def interrupt(value, path):
+            original_save(value, path)
+            if path.name == "latest.pt" and value["epoch"] == 1:
+                raise InterruptedError("stop after first epoch")
+
+        with mock.patch.object(experiment, "atomic_torch_save", side_effect=interrupt), contextlib.redirect_stdout(io.StringIO()):
+            with self.assertRaises(InterruptedError):
+                experiment.train_and_evaluate_run(run_config=config, datasets=self.datasets[0.75],
+                                                 experiment_results_dir=results, experiment_checkpoint_dir=checkpoints,
+                                                 device=torch.device("cpu"))
+        before = {path: path.read_bytes() for path in checkpoints.rglob("*.pt")}
+        with contextlib.ExitStack() as stack:
+            for name in ("train_and_evaluate_run", "run_smoke_tests", "run_epoch", "evaluate_model"):
+                stack.enter_context(mock.patch.object(experiment, name, side_effect=AssertionError(f"unexpected {name}")))
+            stack.enter_context(contextlib.redirect_stdout(io.StringIO()))
+            with self.assertRaisesRegex(RuntimeError, "unfinished training"):
+                experiment.main(args)
+        self.assertEqual({path: path.read_bytes() for path in checkpoints.rglob("*.pt")}, before)
+
+    def test_evaluate_only_rejects_changed_data_protocol_and_split(self) -> None:
+        protocol = self.protocol(epochs=1)
+        results, _, args = self.evaluation_trial(protocol)
+        protocol_path = results / "protocol.json"
+        saved = json.loads(protocol_path.read_text(encoding="utf-8"))
+        invalid = copy.deepcopy(saved)
+        invalid["data"]["sample_count"] += 1
+        experiment.atomic_write_json(protocol_path, invalid)
+        with self.assertRaisesRegex(RuntimeError, "fingerprint"):
+            experiment.main(args)
+        experiment.atomic_write_json(protocol_path, saved)
+        # A relocated byte-identical copy is accepted; unrelated data are not.
+        relocated = self.case_root / "relocated.npz"
+        relocated.write_bytes(self.data_path.read_bytes())
+        restored, _, split, path = experiment.load_evaluation_data(results, relocated)
+        self.assertEqual(restored, protocol)
+        self.assertEqual(path, relocated.resolve())
+        self.assert_nested_equal(split.test, self.split.test)
+        relocated.write_bytes(b"not the training dataset")
+        with self.assertRaisesRegex(RuntimeError, "SHA256"):
+            experiment.main([*args, "--data", str(relocated)])
+        experiment.atomic_save_npz(results / "split_indices.npz", train=self.split.train,
+                                   validation=self.split.validation, test=self.split.test[::-1])
+        with self.assertRaisesRegex(RuntimeError, "Saved split"):
+            experiment.main(args)
+        experiment.atomic_save_npz(results / "split_indices.npz", train=self.split.train,
+                                   validation=self.split.validation, test=self.split.test)
+        invalid_normalization = {**protocol["normalization"], "g00_mean": 999}
+        experiment.atomic_write_json(results / "normalization.json", invalid_normalization)
+        with self.assertRaisesRegex(RuntimeError, "normalization"):
+            experiment.main(args)
+        self.assertFalse((results / "evaluations").exists())
+
+    def test_evaluate_only_continue_on_error_keeps_successes_separate_from_training(self) -> None:
+        protocol = self.protocol(epochs=1)
+        results, checkpoints, args = self.evaluation_trial(protocol)
+        config = experiment.run_configuration(protocol, model_name="g05_full_reconstruction", fraction=0.75, seed=42)
+        with contextlib.redirect_stdout(io.StringIO()):
+            experiment.train_and_evaluate_run(run_config=config, datasets=self.datasets[0.75],
+                                             experiment_results_dir=results, experiment_checkpoint_dir=checkpoints,
+                                             device=torch.device("cpu"))
+        original_dirs = list(checkpoints.iterdir())
+        with mock.patch.object(experiment, "train_and_evaluate_run", side_effect=AssertionError("unexpected training")), mock.patch.object(
+            experiment, "run_smoke_tests", side_effect=AssertionError("unexpected smoke test"),
+        ), contextlib.redirect_stdout(io.StringIO()) as output:
+            with self.assertRaisesRegex(RuntimeError, "1 evaluations failed"):
+                experiment.main([*args, "--models", "g05_full_reconstruction", "--seeds", "43,42", "--continue-on-error"])
+        self.assertIn("evaluated=1, failed=1", output.getvalue())
+        self.assertEqual(list(checkpoints.iterdir()), original_dirs)
+        evaluation_root, = (results / "evaluations").iterdir()
+        self.assertEqual(len(list(evaluation_root.glob("runs/*/result.json"))), 1)
+        self.assertEqual(len(list(evaluation_root.glob("runs/*/status.json"))), 1)
+        with (evaluation_root / "runs.csv").open(encoding="utf-8", newline="") as handle:
+            self.assertEqual(len(list(csv.DictReader(handle))), 2)
 
     def test_inference_loader_rejects_baseline_checkpoint_with_clear_error(self) -> None:
         path = self.case_root / "legacy.pt"

@@ -2,6 +2,7 @@
 
 python Codes/ModelExperiment9.py --fractions 0.75 --seeds 42 --epochs 300 --smoke-only
 Remove --smoke-only to train the two capacity-matched models.
+Use --evaluate-only with an existing --experiment-name to evaluate saved checkpoints without training.
 NewLearning9.py remains the authority for data, exact set assignment, losses and metrics.
 """
 
@@ -349,6 +350,21 @@ def selection_policy(selection: str, *, g05_count: int | None, global_sign_weigh
     }
 
 
+def runtime_environment(device: torch.device) -> dict[str, Any]:
+    return {
+        "python": platform.python_version(), "numpy": np.__version__,
+        "torch": torch.__version__, "cuda": torch.version.cuda,
+        "cudnn": torch.backends.cudnn.version(), "device": str(device),
+        "device_name": torch.cuda.get_device_name(device) if device.type == "cuda" else platform.processor(),
+        "platform": platform.platform(), "cublas_workspace_config": os.environ.get("CUBLAS_WORKSPACE_CONFIG"),
+        "torch_num_threads": torch.get_num_threads(), "torch_num_interop_threads": torch.get_num_interop_threads(),
+        "float32_matmul_precision": torch.get_float32_matmul_precision(),
+        "cuda_matmul_allow_tf32": torch.backends.cuda.matmul.allow_tf32,
+        "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32,
+        "deterministic_algorithms": "enabled, warn_only=True (unchanged baseline)",
+    }
+
+
 def build_protocol(
     *, data_path: Path, arrays: physics.DatasetArrays, split: physics.DataSplit,
     stats: physics.NormalizationStats, settings: TrainingSettings,
@@ -388,16 +404,7 @@ def build_protocol(
                        "pairing": "same protocol, fraction, seed and checkpoint selection",
                        "positive_improvement": "g05_full_reconstruction is better",
                        "standard_deviation": "sample std ddof=1; N/A with fewer than two seeds"},
-        "environment": {"python": platform.python_version(), "numpy": np.__version__,
-                        "torch": torch.__version__, "cuda": torch.version.cuda,
-                        "cudnn": torch.backends.cudnn.version(), "device": str(device),
-                        "device_name": torch.cuda.get_device_name(device) if device.type == "cuda" else platform.processor(),
-                        "platform": platform.platform(), "cublas_workspace_config": os.environ.get("CUBLAS_WORKSPACE_CONFIG"),
-                        "torch_num_threads": torch.get_num_threads(), "torch_num_interop_threads": torch.get_num_interop_threads(),
-                        "float32_matmul_precision": torch.get_float32_matmul_precision(),
-                        "cuda_matmul_allow_tf32": torch.backends.cuda.matmul.allow_tf32,
-                        "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32,
-                        "deterministic_algorithms": "enabled, warn_only=True (unchanged baseline)"},
+        "environment": runtime_environment(device),
     })
 
 
@@ -852,6 +859,127 @@ def load_trained_model(path: Path, device: torch.device = torch.device("cpu")) -
     return model, normalization_from_config(config), checkpoint
 
 
+def load_evaluation_data(
+    result_root: Path, data_path: Path | None,
+) -> tuple[dict[str, Any], physics.DatasetArrays, physics.DataSplit, Path]:
+    """Reuse the training protocol; do not refit normalization or recreate a split."""
+    protocol_path = result_root / "protocol.json"
+    if not protocol_path.is_file():
+        raise FileNotFoundError(f"Evaluation requires an existing protocol.json: {protocol_path}; no training will run")
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    fingerprint = protocol.pop("protocol_fingerprint", None)
+    if object_fingerprint(protocol) != fingerprint:
+        raise RuntimeError("Saved evaluation protocol fingerprint is invalid")
+    if (protocol.get("protocol_version") != PROTOCOL_VERSION
+            or protocol.get("baseline_protocol_version") != physics.PROTOCOL_VERSION):
+        raise RuntimeError("Saved protocol is not compatible with this five-charge routing experiment")
+    if protocol["source_sha256"]["NewLearning9.py"] != file_sha256(Path(physics.__file__)):
+        raise RuntimeError("NewLearning9.py changed since training; restore the saved physics/evaluation implementation")
+    # ModelExperiment9.py may have gained evaluation-only support since training.
+    # Preserve its old hash in the training identity and record current sources separately.
+    data_path = (data_path if data_path is not None else Path(protocol["data"]["path"])).resolve()
+    if not data_path.is_file():
+        raise FileNotFoundError(f"Evaluation dataset not found: {data_path}; use --data for an identical relocated copy")
+    if file_sha256(data_path) != protocol["data"]["sha256"]:
+        raise RuntimeError("Evaluation dataset SHA256 differs from the training dataset")
+    arrays = physics.load_dataset(data_path)
+    if (len(arrays.target) != protocol["data"]["sample_count"]
+            or any(list(getattr(arrays, name).shape) != protocol["data"][f"{name}_shape"]
+                   for name in ("g00", "g05", "target"))):
+        raise RuntimeError("Evaluation dataset shapes differ from the saved protocol")
+    indices = {name: np.asarray(protocol["physics"]["split_indices"][name])
+               for name in ("train", "validation", "test")}
+    if any(value.ndim != 1 or value.size == 0 or value.dtype.kind not in "iu" for value in indices.values()):
+        raise RuntimeError("Invalid saved split indices")
+    if not np.array_equal(np.sort(np.concatenate(list(indices.values()))), np.arange(len(arrays.target))):
+        raise RuntimeError("Saved splits must be disjoint and cover the training dataset exactly")
+    split_path = result_root / "split_indices.npz"
+    if split_path.exists():
+        with np.load(split_path, allow_pickle=False) as saved_split:
+            if any(name not in saved_split or not np.array_equal(saved_split[name], value)
+                   for name, value in indices.items()):
+                raise RuntimeError("Saved split does not match the evaluation protocol")
+    normalization_path = result_root / "normalization.json"
+    if (canonical_json(protocol["normalization"]) != canonical_json(protocol["physics"]["normalization"])
+            or (normalization_path.exists() and canonical_json(json.loads(normalization_path.read_text(encoding="utf-8")))
+                != canonical_json(protocol["normalization"]))):
+        raise RuntimeError("Saved normalization does not match the evaluation protocol")
+    return protocol, arrays, physics.DataSplit(**indices), data_path
+
+
+@torch.no_grad()
+def evaluate_only_run(
+    *, run_config: dict[str, Any], test: TensorDataset, experiment_results_dir: Path,
+    experiment_checkpoint_dir: Path, device: torch.device, batch_size: int | None = None,
+) -> dict[str, Any]:
+    """Evaluate completed training snapshots without an optimizer or any source writes."""
+    run_id = run_id_for(run_config)
+    paths = run_checkpoint_paths(experiment_checkpoint_dir / run_id)
+    result_path = experiment_results_dir / "runs" / run_id / "result.json"
+    if paths["latest"].is_file():
+        latest = load_torch_checkpoint(paths["latest"], device)
+        validate_resume_checkpoint(latest, run_config)
+        if latest["epoch"] != run_config["training"]["max_epochs"]:
+            raise RuntimeError(f"Cannot evaluate unfinished training: {run_id} (epoch {latest['epoch']}); no training will run")
+        best = latest["best_checkpoints"]
+        training_result = {"epochs_completed": latest["epoch"], "elapsed_seconds": latest["elapsed_seconds"],
+                           **best_tracking_fields(best)}
+    elif result_path.is_file():
+        # Selected model files suffice when a completed result proves training finished.
+        original_result = json.loads(result_path.read_text(encoding="utf-8"))
+        validate_identity(original_result, run_config)
+        completed_result_evaluations(original_result)
+        best, training_result = original_result["evaluations"], original_result["training_result"]
+    else:
+        raise FileNotFoundError(f"No completed training checkpoint/result for {run_id}: {paths['latest']}; no training will run")
+    if len(test) != run_config["split_counts"]["test"]:
+        raise ValueError("Evaluation test dataset count does not match the saved split")
+    selected_checkpoints = {}
+    for selection in CHECKPOINT_SELECTIONS:
+        path = paths[selection]
+        if path.is_file():
+            selected = load_torch_checkpoint(path, device)
+        elif "model_state_dict" in best[selection]:
+            # Recover in memory only; never repair or rewrite training artifacts.
+            selected, path = best[selection], paths["latest"]
+        else:
+            raise FileNotFoundError(f"Missing evaluation checkpoint: {path}; no training will run")
+        validate_selected_checkpoint(selected, run_config, selection=selection,
+                                     expected_epoch=best[selection]["selected_epoch"],
+                                     expected_loss=best[selection]["selected_validation_loss"])
+        if selected["validation_losses"] != best[selection]["validation_losses"]:
+            raise RuntimeError(f"{selection} checkpoint losses differ from the saved training result")
+        selected_checkpoints[selection] = selected, path
+    set_reproducibility(run_config["training"]["seed"])
+    model = MODEL_REGISTRY[run_config["model"]["name"]].factory().to(device)
+    model.eval()
+    stats = normalization_from_config(run_config)
+    weights = LossWeights(**run_config["training"]["loss_weights"])
+    effective_batch_size = batch_size if batch_size is not None else run_config["training"]["batch_size"]
+    evaluations = {}
+    print(f"EVALUATE {run_id} | {device} | batch_size={effective_batch_size}", flush=True)
+    for selection, (selected, path) in selected_checkpoints.items():
+        model.load_state_dict(selected["model_state_dict"], strict=True)
+        metrics = evaluate_model(model, test, stats, batch_size=effective_batch_size, weights=weights)
+        evaluations[selection] = {
+            **run_config["training"]["checkpoint_selection"][selection],
+            "selected_epoch": selected["selected_epoch"], "selected_validation_loss": selected["selected_validation_loss"],
+            "validation_losses": selected["validation_losses"], "checkpoint_path": str(path.resolve()),
+            "checkpoint_source": f"best_checkpoints.{selection}" if path == paths["latest"] else "model_state_dict",
+            "test_metrics": metrics,
+        }
+        print(f"  TEST {selection}: position_mae={metrics['mean_position_mae']:.6f} "
+              f"position_3d={metrics['mean_position_3d_error']:.6f} magnitude={metrics['charge_magnitude_mae']:.6f}", flush=True)
+    result = {
+        "result_schema_version": RESULT_SCHEMA_VERSION, **run_metadata(run_config),
+        "configuration": run_config, "status": "completed", "completed_at": utc_now(),
+        "evaluation_only": True, "evaluation_batch_size": effective_batch_size,
+        "training_result": training_result, "evaluations": evaluations,
+    }
+    completed_result_evaluations(result)
+    return result
+
+
 def result_to_row(record: Mapping[str, Any]) -> dict[str, Any]:
     config = record["configuration"]
     return {
@@ -1189,21 +1317,29 @@ def parse_csv_values(value: str, converter: Callable[[str], Any]) -> tuple[Any, 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     defaults = TrainingSettings()
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--data", type=Path, default=DEFAULT_DATA_PATH)
+    parser.add_argument("--data", type=Path, help=f"Dataset (training default: {DEFAULT_DATA_PATH}; evaluation: saved path)")
     parser.add_argument("--models", type=lambda value: parse_csv_values(value, str), default=DEFAULT_MODELS)
     parser.add_argument("--fractions", type=lambda value: parse_csv_values(value, float), default=(0.75,))
     parser.add_argument("--seeds", type=lambda value: parse_csv_values(value, int), default=(42,))
-    parser.add_argument("--epochs", type=int, default=defaults.max_epochs)
-    parser.add_argument("--batch-size", type=int, default=defaults.batch_size)
-    parser.add_argument("--learning-rate", type=float, default=defaults.learning_rate)
-    parser.add_argument("--weight-decay", type=float, default=defaults.weight_decay)
+    parser.add_argument("--epochs", type=int, default=defaults.max_epochs, help="Training only; evaluation uses saved settings")
+    parser.add_argument("--batch-size", type=int, help=f"Batch size (training default: {defaults.batch_size}; evaluation: saved size)")
+    parser.add_argument("--learning-rate", type=float, default=defaults.learning_rate, help="Training only")
+    parser.add_argument("--weight-decay", type=float, default=defaults.weight_decay, help="Training only")
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     parser.add_argument("--experiment-name", default=DEFAULT_EXPERIMENT_NAME)
     parser.add_argument("--results-root", "--results-dir", dest="results_root", type=Path, default=DEFAULT_RESULTS_ROOT)
     parser.add_argument("--checkpoint-root", "--checkpoint-dir", dest="checkpoint_root", type=Path, default=DEFAULT_CHECKPOINT_ROOT)
-    parser.add_argument("--smoke-only", action="store_true", help="Check training subset only; do not create experiment artifacts or run full training")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--smoke-only", action="store_true", help="Check training subset only; do not create experiment artifacts or run full training")
+    modes.add_argument("--evaluate-only", "--eval-only", action="store_true",
+                       help="Evaluate saved checkpoints into a separate evaluations folder; never train or run smoke tests")
     parser.add_argument("--continue-on-error", action="store_true")
     args = parser.parse_args(argv)
+    if not args.evaluate_only:
+        if args.data is None:
+            args.data = DEFAULT_DATA_PATH
+        if args.batch_size is None:
+            args.batch_size = defaults.batch_size
     if (not args.models or len(set(args.models)) != len(args.models)
             or set(args.models).difference(MODEL_REGISTRY)):
         parser.error(f"--models must be a unique subset of {DEFAULT_MODELS}")
@@ -1213,7 +1349,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     if (not args.seeds or len(set(args.seeds)) != len(args.seeds)
             or any(not 0 <= seed < 2**32 for seed in args.seeds)):
         parser.error("--seeds must contain unique integers in [0,2**32)")
-    if args.epochs < 1 or args.batch_size < 1:
+    if args.epochs < 1 or (args.batch_size is not None and args.batch_size < 1):
         parser.error("--epochs and --batch-size must be positive")
     if not math.isfinite(args.learning_rate) or args.learning_rate <= 0:
         parser.error("--learning-rate must be finite and positive")
@@ -1226,6 +1362,63 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         parser.error("CUDA was requested but is unavailable")
     args.fractions = tuple(sorted(args.fractions))
     return args
+
+
+def run_evaluation_matrix(
+    *, args: argparse.Namespace, result_root: Path, checkpoint_root: Path, device: torch.device,
+) -> Path:
+    protocol, arrays, split, data_path = load_evaluation_data(result_root, args.data)
+    fingerprint = object_fingerprint(protocol)
+    stats = normalization_from_config(protocol)
+    evaluation_id = f"{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')}_{uuid.uuid4().hex[:8]}"
+    output_root = result_root / "evaluations" / evaluation_id
+    context = {
+        "mode": "evaluate_only", "created_at": utc_now(), "protocol_fingerprint": fingerprint,
+        "source_protocol_path": str((result_root / "protocol.json").resolve()),
+        "checkpoint_root": str(checkpoint_root.resolve()), "data_path": str(data_path),
+        "data_sha256": protocol["data"]["sha256"], "test_sample_count": len(split.test),
+        "models": args.models, "fractions": args.fractions, "seeds": args.seeds,
+        "batch_size": args.batch_size if args.batch_size is not None else protocol["training"]["batch_size"],
+        "source_sha256": {"ModelExperiment9.py": file_sha256(Path(__file__)),
+                          "NewLearning9.py": file_sha256(Path(physics.__file__))},
+        "environment": runtime_environment(device),
+    }
+    atomic_write_json(output_root / "evaluation.json", context)
+    print(f"Evaluation only | device={device} | saved test samples={len(split.test)}", flush=True)
+    print("Using saved normalization, split, loss weights and training settings; no smoke tests or training.", flush=True)
+    print(f"Evaluation output: {output_root}", flush=True)
+    completed = failed = 0
+    for fraction in args.fractions:
+        test = physics.prepare_dataset(arrays, split.test, stats, fraction)
+        for seed in args.seeds:
+            for model_name in args.models:
+                # Build the identity from the SAVED protocol, including its old source hashes.
+                config = run_configuration(protocol, model_name=model_name, fraction=fraction, seed=seed)
+                run_id = run_id_for(config)
+                try:
+                    result = evaluate_only_run(run_config=config, test=test, experiment_results_dir=result_root,
+                                               experiment_checkpoint_dir=checkpoint_root, device=device, batch_size=args.batch_size)
+                except (Exception, KeyboardInterrupt) as error:
+                    save_status(output_root / "runs" / run_id / "status.json",
+                                status="interrupted" if isinstance(error, KeyboardInterrupt) else "failed",
+                                run_id=run_id, error=f"{type(error).__name__}: {error}")
+                    if isinstance(error, KeyboardInterrupt) or not args.continue_on_error:
+                        raise
+                    failed += 1
+                    print(f"EVALUATION FAILED {run_id}: {error}", flush=True)
+                    continue
+                result["evaluation_context"] = context
+                atomic_write_json(output_root / "runs" / run_id / "result.json", result)
+                if not refresh_reports(output_root, fingerprint):
+                    raise RuntimeError(f"Cannot refresh evaluation reports: {output_root}")
+                completed += 1
+        del test
+        if device.type == "cuda":
+            torch.cuda.empty_cache()
+    print(f"Evaluation complete: evaluated={completed}, failed={failed} | {output_root}", flush=True)
+    if failed:
+        raise RuntimeError(f"{failed} evaluations failed; inspect {output_root}; no training was performed")
+    return output_root
 
 
 def run_experiment_matrix(
@@ -1274,6 +1467,14 @@ def run_experiment_matrix(
 def main(argv: Sequence[str] | None = None) -> None:
     args = parse_args(argv)
     device = physics.DEVICE if args.device == "auto" else torch.device(args.device)
+    result_root = args.results_root.resolve() / args.experiment_name
+    checkpoint_root = args.checkpoint_root.resolve() / args.experiment_name
+    if args.evaluate_only:
+        if not (result_root / "protocol.json").is_file():
+            raise FileNotFoundError(f"Evaluation requires an existing protocol.json: {result_root}; no training will run")
+        with experiment_locks(result_root, checkpoint_root):
+            run_evaluation_matrix(args=args, result_root=result_root, checkpoint_root=checkpoint_root, device=device)
+        return
     settings = TrainingSettings(args.epochs, args.batch_size, args.learning_rate, args.weight_decay)
     arrays = physics.load_dataset(args.data.resolve())
     split = physics.create_data_split(len(arrays.target))
@@ -1285,8 +1486,6 @@ def main(argv: Sequence[str] | None = None) -> None:
     if args.smoke_only:
         print("Smoke-only complete; no test-set evaluation or experiment artifacts.", flush=True)
         return
-    result_root = args.results_root.resolve() / args.experiment_name
-    checkpoint_root = args.checkpoint_root.resolve() / args.experiment_name
     with experiment_locks(result_root, checkpoint_root):
         run_experiment_matrix(args=args, arrays=arrays, split=split, stats=stats, protocol=protocol,
                               device=device, result_root=result_root, checkpoint_root=checkpoint_root)
