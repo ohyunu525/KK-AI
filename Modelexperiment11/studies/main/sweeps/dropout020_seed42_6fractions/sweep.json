@@ -1,0 +1,115 @@
+{
+  "created_at": "2026-08-31T04:28:38.906713+00:00",
+  "fingerprint": "cf2210f8680b5692de7933e25725a0dd555e4940d44bf3548abe0d0c5750c41e",
+  "identity": {
+    "batch_size": 128,
+    "charge_count": 5,
+    "data_audit": {
+      "array_hashes": {
+        "g00": "de8e4d669800e0a87d825368bffe0ab1f4d669fde7845df66e3a125c0555afd1",
+        "g05": "c9414695c34d262fb78fd3d91c761e069a7b91f449070ee53916242a9a0fa96f",
+        "grid_x": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+        "grid_y": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+        "target": "9cdbff9ffc7934e33fbf0c4aee467c9bfe74b9f5f36c09b7d8f41ee0933f0941"
+      },
+      "generation_seed": 20260827,
+      "normalization_reproduced": true,
+      "parent_split_archive_present": false,
+      "recorded_path": "C:\\Users\\COM\\Documents\\KK-AI\\Models\\charge_dataset_5charges_v9.npz",
+      "relocated_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\charge_dataset_5charges_v9.npz",
+      "sha256": "f90880bbbcd31c528c0603a2aa8043c0ddea567c393d83fc59ae3afd3ac24863",
+      "split_reproduced": true,
+      "split_seed": 42
+    },
+    "early_stopping_patience": 20,
+    "environment": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.6",
+      "cuda_matmul_allow_tf32": false,
+      "cudnn": 90701,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": "enabled, warn_only=False",
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 3070",
+      "float32_matmul_precision": "highest",
+      "numpy": "2.5.2",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "python": "3.12.13",
+      "torch": "2.7.0+cu126",
+      "torch_num_interop_threads": 10,
+      "torch_num_threads": 10
+    },
+    "fractions": [
+      0.0,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "max_epochs": 150,
+    "models": [
+      "g05_sign_only",
+      "g05_full_reconstruction"
+    ],
+    "parent_study_fingerprint": "6f0e5056295c4d70434b887be1e77170db6849b68ad032878f169a661319e480",
+    "parent_study_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Modelexperiment11\\studies\\main",
+    "policy": {
+      "checkpoint_selection": "frozen validation split only",
+      "output_isolated_from_parent_runs": true,
+      "test_evaluated": false,
+      "test_tensor_dataset_constructed": false,
+      "training_data": "frozen train split only"
+    },
+    "seed": 42,
+    "selected_candidate": {
+      "id": "dropout020",
+      "learning_rate": 0.001,
+      "structure_dropout": 0.2,
+      "weight_decay": 0.0001
+    },
+    "selection_audit": {
+      "artifact_count": 80,
+      "exact_artifact_count": 0,
+      "missing_parent_checkpoint_count": 24,
+      "newline_normalized_artifact_count": 56,
+      "parent_checkpoint_weights_reused": false,
+      "promotion_hash_mode": "crlf_to_lf",
+      "ranking_reproduced": true
+    },
+    "selection_fingerprint": "9e8ba01bffb13d118f0c4e3dc5a82f477f590142da4ab06ba3f19c5bbf68e5fd",
+    "source_audit": {
+      "ModelExperiment10.py": {
+        "live_hash_mode": "exact",
+        "live_snapshot_bytes_equal": true,
+        "recorded_sha256": "20c2f9e26fee48187fa57e5a55750a9654a93724d11d8f83dfadedb3e598de38",
+        "snapshot_hash_mode": "exact",
+        "used_during_training": true
+      },
+      "ModelExperiment11.py": {
+        "live_hash_mode": "crlf_to_lf",
+        "live_snapshot_bytes_equal": true,
+        "recorded_sha256": "ad841cf4eaa1afadea6df49924d358d5eaa3a7d833d62b98f0af61e11ec6af21",
+        "snapshot_hash_mode": "crlf_to_lf",
+        "used_during_training": true
+      },
+      "NewLearning9.py": {
+        "live_hash_mode": "exact",
+        "live_snapshot_bytes_equal": true,
+        "recorded_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+        "snapshot_hash_mode": "exact",
+        "used_during_training": true
+      },
+      "generate_charge_dataset.py": {
+        "live_hash_mode": "recorded_byte_hash_unrecoverable_after_checkout",
+        "live_snapshot_bytes_equal": true,
+        "recorded_sha256": "67ef87aa64ef93e3811c600d74e30ce74a7d59e93574e6a94974db9c9da5ddc6",
+        "snapshot_hash_mode": "recorded_byte_hash_unrecoverable_after_checkout",
+        "used_during_training": false
+      }
+    }
+  },
+  "schema": "model-experiment11-selected-fraction-sweep-v1"
+}
