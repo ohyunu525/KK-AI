@@ -1,0 +1,19 @@
+test_accepts_identical_relocated_data_and_checkpoint_rejects_changed_data (test_visualize_3d_v2.VisualizationV2Tests.test_accepts_identical_relocated_data_and_checkpoint_rejects_changed_data) ... ok
+test_both_layouts_models_all_fractions_and_checkpoint_selections (test_visualize_3d_v2.VisualizationV2Tests.test_both_layouts_models_all_fractions_and_checkpoint_selections) ... ok
+test_check_only_creates_no_visualization_and_does_no_inference (test_visualize_3d_v2.VisualizationV2Tests.test_check_only_creates_no_visualization_and_does_no_inference) ... ok
+test_displayed_metrics_equal_original_evaluator_and_weights_stay_frozen (test_visualize_3d_v2.VisualizationV2Tests.test_displayed_metrics_equal_original_evaluator_and_weights_stay_frozen) ... ok
+test_fraction_zero_is_a_whole_vector_equivalence_class_never_oracle_plot (test_visualize_3d_v2.VisualizationV2Tests.test_fraction_zero_is_a_whole_vector_equivalence_class_never_oracle_plot) ... ok
+test_main_uses_saved_index_list_when_optional_split_archive_is_absent (test_visualize_3d_v2.VisualizationV2Tests.test_main_uses_saved_index_list_when_optional_split_archive_is_absent) ... ok
+test_matching_uses_saved_joint_weights_not_position_only (test_visualize_3d_v2.VisualizationV2Tests.test_matching_uses_saved_joint_weights_not_position_only) ... ok
+test_missing_selection_lock_blocks_test_data_access (test_visualize_3d_v2.VisualizationV2Tests.test_missing_selection_lock_blocks_test_data_access) ... ok
+test_no_normalization_refit_training_or_other_checkpoint_reads (test_visualize_3d_v2.VisualizationV2Tests.test_no_normalization_refit_training_or_other_checkpoint_reads) ... ok
+test_rejects_changed_normalization_and_source (test_visualize_3d_v2.VisualizationV2Tests.test_rejects_changed_normalization_and_source) ... ok
+test_rejects_latest_and_modified_selected_weights (test_visualize_3d_v2.VisualizationV2Tests.test_rejects_latest_and_modified_selected_weights) ... ok
+test_rejects_swapped_validation_test_split (test_visualize_3d_v2.VisualizationV2Tests.test_rejects_swapped_validation_test_split) ... ok
+test_sample_selection_is_stable_and_index_is_within_saved_test_split (test_visualize_3d_v2.VisualizationV2Tests.test_sample_selection_is_stable_and_index_is_within_saved_test_split) ... ok
+test_unique_outputs_have_reproducible_metadata_and_do_not_modify_inputs (test_visualize_3d_v2.VisualizationV2Tests.test_unique_outputs_have_reproducible_metadata_and_do_not_modify_inputs) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 4.954s
+
+OK

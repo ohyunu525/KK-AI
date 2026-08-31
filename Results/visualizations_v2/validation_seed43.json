@@ -1,0 +1,279 @@
+{
+  "schema": "visualization-v2-seed43-compatibility-audit-v1",
+  "completed_at": "2026-08-31T07:52:04.414537+00:00",
+  "status": "passed",
+  "seed": 43,
+  "study_dir": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Modelexperiment11\\studies\\final_fraction_sweep_seed43_20260831",
+  "checkpoint_count": 24,
+  "fractions": [
+    0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "models": [
+    "g05_sign_only",
+    "g05_full_reconstruction"
+  ],
+  "selections": [
+    "total",
+    "structure"
+  ],
+  "absolute_tolerance": 0.000001,
+  "metrics": [
+    "mean_position_3d_error",
+    "mean_position_mae",
+    "charge_mae",
+    "global_invariant_charge_mae",
+    "charge_magnitude_mae"
+  ],
+  "visualizer_sha256": "f3d63bf13b47e535bf567a68ea547361da3fd0498907a5c340667e0277caa7a0",
+  "unit_test_count": 14,
+  "unit_test_status": "passed",
+  "training_performed": false,
+  "other_seed_checkpoints_loaded": false,
+  "protected_file_count": 140,
+  "protected_files_unchanged": true,
+  "max_abs_difference_vs_native": 2.2485852180231802e-8,
+  "max_abs_difference_vs_saved_test": 2.2485852180231802e-8,
+  "inference_environment": {
+    "python": "3.12.13",
+    "numpy": "2.5.2",
+    "torch": "2.12.1+cu126",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 3070",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "cublas_workspace_config": ":4096:8",
+    "torch_num_threads": 10,
+    "torch_num_interop_threads": 10,
+    "float32_matmul_precision": "highest",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": true,
+    "deterministic_algorithms": true,
+    "deterministic_warn_only": false,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true
+  },
+  "records": [
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0.1,
+      "selection": "structure",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 6.4074993089136e-9,
+      "max_abs_difference_vs_saved_test": 6.4074993089136e-9
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0.1,
+      "selection": "total",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 6.4074993089136e-9,
+      "max_abs_difference_vs_saved_test": 6.4074993089136e-9
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0.25,
+      "selection": "structure",
+      "selected_epoch": 43,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.8060207329639866e-8,
+      "max_abs_difference_vs_saved_test": 1.8060207329639866e-8
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0.25,
+      "selection": "total",
+      "selected_epoch": 47,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 2.2485852180231802e-8,
+      "max_abs_difference_vs_saved_test": 2.2485852180231802e-8
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0.5,
+      "selection": "structure",
+      "selected_epoch": 43,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.2565404161613003e-8,
+      "max_abs_difference_vs_saved_test": 1.2565404161613003e-8
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0.5,
+      "selection": "total",
+      "selected_epoch": 49,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 4.082918170222882e-9,
+      "max_abs_difference_vs_saved_test": 4.082918170222882e-9
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0.75,
+      "selection": "structure",
+      "selected_epoch": 43,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 5.990266727096127e-9,
+      "max_abs_difference_vs_saved_test": 5.990266727096127e-9
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0.75,
+      "selection": "total",
+      "selected_epoch": 45,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.3202428816860845e-8,
+      "max_abs_difference_vs_saved_test": 1.3202428816860845e-8
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0,
+      "selection": "structure",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 0,
+      "selection": "total",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 1,
+      "selection": "structure",
+      "selected_epoch": 43,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 4.872679704170935e-9,
+      "max_abs_difference_vs_saved_test": 4.872679704170935e-9
+    },
+    {
+      "model": "g05_full_reconstruction",
+      "fraction": 1,
+      "selection": "total",
+      "selected_epoch": 40,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 3.859400743433383e-9,
+      "max_abs_difference_vs_saved_test": 3.859400743433383e-9
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0.1,
+      "selection": "structure",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0.1,
+      "selection": "total",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0.25,
+      "selection": "structure",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0.25,
+      "selection": "total",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0.5,
+      "selection": "structure",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0.5,
+      "selection": "total",
+      "selected_epoch": 66,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 6.943941144310628e-9,
+      "max_abs_difference_vs_saved_test": 6.943941144310628e-9
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0.75,
+      "selection": "structure",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0.75,
+      "selection": "total",
+      "selected_epoch": 66,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 6.943941144310628e-9,
+      "max_abs_difference_vs_saved_test": 6.943941144310628e-9
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0,
+      "selection": "structure",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 0,
+      "selection": "total",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 1,
+      "selection": "structure",
+      "selected_epoch": 41,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 1.0192394261920867e-8,
+      "max_abs_difference_vs_saved_test": 1.0192394261920867e-8
+    },
+    {
+      "model": "g05_sign_only",
+      "fraction": 1,
+      "selection": "total",
+      "selected_epoch": 66,
+      "sample_count": 1000,
+      "max_abs_difference_vs_native": 6.943941144310628e-9,
+      "max_abs_difference_vs_saved_test": 6.943941144310628e-9
+    }
+  ]
+}
