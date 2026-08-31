@@ -1,0 +1,27 @@
+{
+  "checks": [
+    "disjoint fixed split",
+    "same hyperparameters/seed budget/loss definition",
+    "all scheduled trials complete",
+    "first validation minima and loss decomposition",
+    "early stopping replay",
+    "data/source artifact identity",
+    "baseline-inclusive promotion",
+    "independent ranking and guardrail calculation",
+    "frozen checkpoints",
+    "test timestamp gate and full paired evaluation matrix",
+    "comparison arithmetic"
+  ],
+  "final_evaluation_records": 48,
+  "limitations": "Checks saved artifacts and arithmetic; exact training replay is tested separately.",
+  "passed": true,
+  "selected_candidate": "dropout020",
+  "study_fingerprint": "6f0e5056295c4d70434b887be1e77170db6849b68ad032878f169a661319e480",
+  "total_training_epochs": 1708,
+  "trial_count": 28,
+  "validation_structure_scores": {
+    "baseline": 0.5993982612291971,
+    "dropout020": 0.5794699858029684,
+    "random_02": 0.5796554852326711
+  }
+}

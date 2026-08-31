@@ -1,0 +1,7 @@
+# Binary weights and generated final holdout remain on disk, outside Git.
+studies/**/runs/**/*.pt
+studies/**/final/*.npz
+studies/**/split_indices.npz
+**/__pycache__/
+.matplotlib-cache/
+studies/.*.lock

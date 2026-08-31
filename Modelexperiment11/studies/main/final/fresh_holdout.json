@@ -1,0 +1,15 @@
+{
+  "array_hashes": {
+    "g00": "528436467abf8a6c798931700605bb2c255a667980a80bbd199c21c5a0adbb8e",
+    "g05": "3785e8e105271f275c2f6e4bb30eacec476c39bc4bf6e4a9e1eed61cf2b04469",
+    "grid_x": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+    "grid_y": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+    "target": "83b250cbf1460db8a08ffa61696198b45970073017269cd7d54ab99bf4883e37"
+  },
+  "original_sample_overlap": 0,
+  "same_sensor_coordinates": true,
+  "samples": 1000,
+  "seed": 2026083101,
+  "selection_fingerprint": "9e8ba01bffb13d118f0c4e3dc5a82f477f590142da4ab06ba3f19c5bbf68e5fd",
+  "sha256": "e875cb387d614aea8ce1cac9a8b5c09b3dcfb5a54ec55a7f7f03e166e1c497b0"
+}

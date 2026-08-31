@@ -1,0 +1,14 @@
+{
+  "41": {
+    "common_epochs": 57,
+    "max_global_loss_difference": 0.0
+  },
+  "42": {
+    "common_epochs": 62,
+    "max_global_loss_difference": 0.0
+  },
+  "43": {
+    "common_epochs": 56,
+    "max_global_loss_difference": 0.0
+  }
+}

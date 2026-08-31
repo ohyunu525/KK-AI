@@ -1,0 +1,28 @@
+{
+  "models": ["g05_sign_only", "g05_full_reconstruction"],
+  "fractions": [1.0],
+  "screen_seeds": [41],
+  "confirmation_seeds": [42, 43],
+  "max_epochs": 150,
+  "batch_size": 128,
+  "early_stopping_patience": 20,
+  "top_k": 2,
+  "min_improvement_pct": 0.5,
+  "max_model_regression_pct": 1.0,
+  "search_seed": 20260831,
+  "anchors": [
+    {"id": "baseline", "learning_rate": 0.001, "weight_decay": 0.0001, "structure_dropout": 0.0},
+    {"id": "dropout010", "learning_rate": 0.001, "weight_decay": 0.0001, "structure_dropout": 0.1},
+    {"id": "dropout020", "learning_rate": 0.001, "weight_decay": 0.0001, "structure_dropout": 0.2},
+    {"id": "decay001", "learning_rate": 0.001, "weight_decay": 0.001, "structure_dropout": 0.0},
+    {"id": "lr0005", "learning_rate": 0.0005, "weight_decay": 0.0001, "structure_dropout": 0.0},
+    {"id": "lr002", "learning_rate": 0.002, "weight_decay": 0.0001, "structure_dropout": 0.0}
+  ],
+  "random_candidates": 2,
+  "search_space": {
+    "learning_rate": [0.0003, 0.003],
+    "weight_decay": [0.00001, 0.003],
+    "structure_dropout": [0.0, 0.05, 0.1, 0.2]
+  },
+  "fresh_test": {"samples": 1000, "seed": 2026083101}
+}

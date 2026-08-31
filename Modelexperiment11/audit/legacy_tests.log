@@ -1,0 +1,24 @@
+...................................................E.............................................................................sss
+======================================================================
+ERROR: test_windows_long_unicode_atomic_save_load_replace_and_lock (test_model_experiment10_storage.StorageCompatibilityTests.test_windows_long_unicode_atomic_save_load_replace_and_lock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COM\Documents\KK-AI\.uv-python\cpython-3.12.13-windows-x86_64-none\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] ������ ��θ� ã�� �� �����ϴ�: 'C:\\Users\\COM\\AppData\\Local\\Temp\\m10-storage-tests-2vwdb6h2\\e3c16bfe12\\�ѱ� ��� aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\�� ��° ���� bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\\�� ��° cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\COM\Documents\KK-AI\Codes\test_model_experiment10_storage.py", line 241, in test_windows_long_unicode_atomic_save_load_replace_and_lock
+    directory.mkdir(parents=True)
+  File "C:\Users\COM\Documents\KK-AI\.uv-python\cpython-3.12.13-windows-x86_64-none\Lib\pathlib.py", line 1316, in mkdir
+    self.mkdir(mode, parents=False, exist_ok=exist_ok)
+  File "C:\Users\COM\Documents\KK-AI\.uv-python\cpython-3.12.13-windows-x86_64-none\Lib\pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [WinError 3] ������ ��θ� ã�� �� �����ϴ�: 'C:\\Users\\COM\\AppData\\Local\\Temp\\m10-storage-tests-2vwdb6h2\\e3c16bfe12\\�ѱ� ��� aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\�� ��° ���� bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\\�� ��° cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc'
+
+----------------------------------------------------------------------
+Ran 132 tests in 29.877s
+
+FAILED (errors=1, skipped=3)

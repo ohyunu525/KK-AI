@@ -1,0 +1,2677 @@
+{
+  "archive": {
+    "G00": {
+      "dtype": "float32",
+      "sha256": "de8e4d669800e0a87d825368bffe0ab1f4d669fde7845df66e3a125c0555afd1",
+      "shape": [
+        10000,
+        32,
+        32
+      ]
+    },
+    "G05": {
+      "dtype": "float32",
+      "sha256": "c9414695c34d262fb78fd3d91c761e069a7b91f449070ee53916242a9a0fa96f",
+      "shape": [
+        10000,
+        32,
+        3
+      ]
+    },
+    "charge_count": {
+      "dtype": "int64",
+      "sha256": "e6a4d52e2165d1c4ecb5eab95a3844677d5606792fdeb7b26cc13137e4ec2727",
+      "shape": [],
+      "value": 5
+    },
+    "epsilon_0": {
+      "dtype": "float64",
+      "sha256": "fc6986bca557ac3b85f9aa49769e20c6868a49568c50ac8de693e049551eabaa",
+      "shape": [],
+      "value": 1.0
+    },
+    "g05_fields": {
+      "dtype": "<U16",
+      "sha256": "b46f0d3ebaadf8aa919465e5bdc5d3e0089fe38fd84f85eeb5b3ccecade6d324",
+      "shape": [
+        3
+      ],
+      "value": [
+        "grid_x_index",
+        "grid_y_index",
+        "signed_potential"
+      ]
+    },
+    "generation_seed": {
+      "dtype": "int64",
+      "sha256": "a8f67b3dea3dc4aadafc18a67f81d4b5214df3bc3ae963484e5f30d44e5cbc8e",
+      "shape": [],
+      "value": 20260827
+    },
+    "grid_x": {
+      "dtype": "float64",
+      "sha256": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+      "shape": [
+        32
+      ],
+      "value": [
+        -2.0,
+        -1.870967741935484,
+        -1.7419354838709677,
+        -1.6129032258064515,
+        -1.4838709677419355,
+        -1.3548387096774195,
+        -1.2258064516129032,
+        -1.096774193548387,
+        -0.967741935483871,
+        -0.838709677419355,
+        -0.7096774193548387,
+        -0.5806451612903225,
+        -0.4516129032258065,
+        -0.3225806451612905,
+        -0.19354838709677424,
+        -0.06451612903225801,
+        0.06451612903225801,
+        0.19354838709677402,
+        0.32258064516129004,
+        0.4516129032258065,
+        0.5806451612903225,
+        0.7096774193548385,
+        0.838709677419355,
+        0.967741935483871,
+        1.096774193548387,
+        1.225806451612903,
+        1.354838709677419,
+        1.4838709677419355,
+        1.6129032258064515,
+        1.7419354838709675,
+        1.870967741935484,
+        2.0
+      ]
+    },
+    "grid_y": {
+      "dtype": "float64",
+      "sha256": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+      "shape": [
+        32
+      ],
+      "value": [
+        -2.0,
+        -1.870967741935484,
+        -1.7419354838709677,
+        -1.6129032258064515,
+        -1.4838709677419355,
+        -1.3548387096774195,
+        -1.2258064516129032,
+        -1.096774193548387,
+        -0.967741935483871,
+        -0.838709677419355,
+        -0.7096774193548387,
+        -0.5806451612903225,
+        -0.4516129032258065,
+        -0.3225806451612905,
+        -0.19354838709677424,
+        -0.06451612903225801,
+        0.06451612903225801,
+        0.19354838709677402,
+        0.32258064516129004,
+        0.4516129032258065,
+        0.5806451612903225,
+        0.7096774193548385,
+        0.838709677419355,
+        0.967741935483871,
+        1.096774193548387,
+        1.225806451612903,
+        1.354838709677419,
+        1.4838709677419355,
+        1.6129032258064515,
+        1.7419354838709675,
+        1.870967741935484,
+        2.0
+      ]
+    },
+    "partial_g05_definition": {
+      "dtype": "<U47",
+      "sha256": "4f951762c8ba4fe70e964f4e69490851e6ee32c1f6170aaf2cbc108db4326799",
+      "shape": [],
+      "value": "fixed spatially-balanced nested sensor prefixes"
+    },
+    "sensor_grid_indices": {
+      "dtype": "int64",
+      "sha256": "c678bdfe2150016403f07614f0b750e12b3bfcd4416e2d987a46ee6c2a48c79a",
+      "shape": [
+        32,
+        2
+      ]
+    },
+    "target": {
+      "dtype": "float32",
+      "sha256": "514a1ea5a9cf0570087c3833e7d4a26d37d149d319a231aaca594bb72aec16df",
+      "shape": [
+        10000,
+        20
+      ]
+    },
+    "target_fields": {
+      "dtype": "<U2",
+      "sha256": "c592613f0e464433da773ac7a6f39e162bbb2489d3e44297466806b068fb1a62",
+      "shape": [
+        20
+      ],
+      "value": [
+        "x1",
+        "y1",
+        "z1",
+        "q1",
+        "x2",
+        "y2",
+        "z2",
+        "q2",
+        "x3",
+        "y3",
+        "z3",
+        "q3",
+        "x4",
+        "y4",
+        "z4",
+        "q4",
+        "x5",
+        "y5",
+        "z5",
+        "q5"
+      ]
+    }
+  },
+  "benchmark": [
+    {
+      "epoch": 1,
+      "seconds": 1.0667711000423878,
+      "train_structure": 1.0984189829826354,
+      "validation_structure": 0.9200279159545899
+    },
+    {
+      "epoch": 2,
+      "seconds": 0.7318588999914937,
+      "train_structure": 0.869075753211975,
+      "validation_structure": 0.8386423668861389
+    },
+    {
+      "epoch": 3,
+      "seconds": 0.7553479999769479,
+      "train_structure": 0.8056542806625366,
+      "validation_structure": 0.7971048245429992
+    }
+  ],
+  "benchmark_strict_determinism": true,
+  "checkpoint_count": 36,
+  "created_at": "2026-08-31T03:10:25.771060+00:00",
+  "cross_split_identical_g00": {
+    "train_test": 0,
+    "train_validation": 0,
+    "validation_test": 0
+  },
+  "data_path": "C:\\Users\\COM\\Documents\\KK-AI\\Models\\charge_dataset_5charges_v9.npz",
+  "data_sha256": "f90880bbbcd31c528c0603a2aa8043c0ddea567c393d83fc59ae3afd3ac24863",
+  "duplicate_g00_rows": 0,
+  "environment": {
+    "cublas_workspace_config": ":4096:8",
+    "cuda": "12.6",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn": 90701,
+    "cudnn_allow_tf32": true,
+    "deterministic_algorithms": "enabled, warn_only=True (unchanged baseline)",
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 3070",
+    "float32_matmul_precision": "highest",
+    "numpy": "2.5.2",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.12.13",
+    "torch": "2.7.0+cu126",
+    "torch_num_interop_threads": 10,
+    "torch_num_threads": 10
+  },
+  "inspected_checkpoints": [
+    {
+      "configuration": {
+        "charge_count": 5,
+        "model": {
+          "input_policy": {
+            "global_sign": "masked G05 only; odd in V",
+            "magnitude": "G00 only",
+            "position": "G00 only",
+            "relative_sign": "G00 only"
+          },
+          "name": "g05_sign_only",
+          "parameter_count": {
+            "total": 406969,
+            "trainable": 406969
+          },
+          "state_shapes": {
+            "g00_cnn.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                16
+              ]
+            },
+            "g00_cnn.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                16,
+                1,
+                3,
+                3
+              ]
+            },
+            "g00_cnn.3.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                32
+              ]
+            },
+            "g00_cnn.3.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                32,
+                16,
+                3,
+                3
+              ]
+            },
+            "g00_cnn.6.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                64
+              ]
+            },
+            "g00_cnn.6.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                64,
+                32,
+                3,
+                3
+              ]
+            },
+            "g00_encoder.1.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                256
+              ]
+            },
+            "g00_encoder.1.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                256,
+                1024
+              ]
+            },
+            "g05_encoder.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                32
+              ]
+            },
+            "g05_encoder.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                32,
+                3
+              ]
+            },
+            "g05_encoder.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                32
+              ]
+            },
+            "g05_encoder.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                32,
+                32
+              ]
+            },
+            "global_sign_head.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                64
+              ]
+            },
+            "global_sign_head.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                64,
+                96
+              ]
+            },
+            "global_sign_head.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                1,
+                64
+              ]
+            },
+            "magnitude_head.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                64
+              ]
+            },
+            "magnitude_head.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                64,
+                256
+              ]
+            },
+            "magnitude_head.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                5
+              ]
+            },
+            "magnitude_head.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                5,
+                64
+              ]
+            },
+            "position_head.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                128
+              ]
+            },
+            "position_head.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                128,
+                256
+              ]
+            },
+            "position_head.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                15
+              ]
+            },
+            "position_head.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                15,
+                128
+              ]
+            },
+            "relative_sign_head.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                64
+              ]
+            },
+            "relative_sign_head.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                64,
+                256
+              ]
+            },
+            "relative_sign_head.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                5
+              ]
+            },
+            "relative_sign_head.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                5,
+                64
+              ]
+            },
+            "structure_context.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                128
+              ]
+            },
+            "structure_context.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                128,
+                96
+              ]
+            },
+            "structure_context.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                256
+              ]
+            },
+            "structure_context.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                256,
+                128
+              ]
+            }
+          }
+        },
+        "normalization": {
+          "charge_scale": 0.6794502589494028,
+          "g00_mean": 0.006332700330095314,
+          "g00_std": 0.011903275799601066,
+          "g05_value_scale": 0.07531177929884283,
+          "position_mean": [
+            0.0016500300262123346,
+            -0.0023164229933172464,
+            0.7972654104232788
+          ],
+          "position_std": [
+            0.867354691028595,
+            0.8655665516853333,
+            0.40409448742866516
+          ]
+        },
+        "observation": {
+          "candidate_count": 32,
+          "full_fraction_definition": "all stored candidate sensors, not the full 32x32 field",
+          "g05_count_per_sample": 0,
+          "g05_fraction": 0.0,
+          "selection": "fixed nested sensor prefix"
+        },
+        "protocol_fingerprint": "1692babe9d2153d97a0706d0bece7194c22c1fc53b7f215c8f2260f0b820046c",
+        "protocol_version": "new-learning9-g05-routing-v1",
+        "split_counts": {
+          "test": 1000,
+          "train": 8000,
+          "validation": 1000
+        },
+        "training": {
+          "batch_size": 128,
+          "checkpoint_selection": {
+            "structure": {
+              "checkpoint_selection": "structure",
+              "global_sign_in_selection_objective": false,
+              "global_sign_metrics_note": "Global-sign and absolute-sign metrics are secondary diagnostics: structure selection does not optimize global-sign performance; training still uses the unchanged total loss.",
+              "primary_metrics": [
+                "position_mae_x",
+                "position_mae_y",
+                "position_mae_z",
+                "mean_position_mae",
+                "mean_position_3d_error",
+                "charge_magnitude_mae",
+                "relative_sign_accuracy",
+                "relative_configuration_accuracy",
+                "pairwise_relative_sign_accuracy"
+              ],
+              "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+              "selection_objective": "validation_loss.structure"
+            },
+            "total": {
+              "checkpoint_selection": "total",
+              "global_sign_in_selection_objective": false,
+              "global_sign_metrics_note": "Total selection includes global-sign loss only with observed G05 and nonzero global-sign weight.",
+              "primary_metrics": [
+                "position_mae_x",
+                "position_mae_y",
+                "position_mae_z",
+                "mean_position_mae",
+                "mean_position_3d_error",
+                "charge_magnitude_mae",
+                "relative_sign_accuracy",
+                "relative_configuration_accuracy",
+                "pairwise_relative_sign_accuracy",
+                "global_sign_accuracy",
+                "global_sign_bce",
+                "absolute_sign_accuracy",
+                "absolute_sign_set_accuracy",
+                "charge_mae",
+                "global_invariant_charge_mae"
+              ],
+              "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+              "selection_objective": "validation_loss.total"
+            }
+          },
+          "learning_rate": 0.001,
+          "loss_weights": {
+            "global_sign": 1.0,
+            "magnitude": 1.0,
+            "position": 1.0,
+            "relative_sign": 1.0
+          },
+          "max_epochs": 300,
+          "optimizer": "AdamW",
+          "seed": 41,
+          "weight_decay": 0.0001
+        }
+      },
+      "finite_model_state": true,
+      "path": "Models/new_learning9_experiments/5point_routing_v1/g05_sign_only__g05_000pct__seed_41__f56e5ea3c50e/best_structure.pt",
+      "protocol_version": "new-learning9-g05-routing-v1",
+      "selected_epoch": 37,
+      "selected_validation_loss": 0.5906645221710205,
+      "sha256": "573cabbbd84b9b176abbebc2018f4e37968abc9dbe9e0353b683c67b85d22069"
+    },
+    {
+      "configuration": {
+        "charge_count": 5,
+        "model": {
+          "input_policy": {
+            "global_sign": "masked G05 only; odd in V",
+            "magnitude": "G00 + masked even G05 summary",
+            "position": "G00 + masked even G05 summary",
+            "relative_sign": "G00 + masked even G05 summary"
+          },
+          "name": "g05_full_reconstruction",
+          "parameter_count": {
+            "total": 406969,
+            "trainable": 406969
+          },
+          "state_shapes": {
+            "g00_cnn.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                16
+              ]
+            },
+            "g00_cnn.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                16,
+                1,
+                3,
+                3
+              ]
+            },
+            "g00_cnn.3.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                32
+              ]
+            },
+            "g00_cnn.3.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                32,
+                16,
+                3,
+                3
+              ]
+            },
+            "g00_cnn.6.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                64
+              ]
+            },
+            "g00_cnn.6.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                64,
+                32,
+                3,
+                3
+              ]
+            },
+            "g00_encoder.1.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                256
+              ]
+            },
+            "g00_encoder.1.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                256,
+                1024
+              ]
+            },
+            "g05_encoder.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                32
+              ]
+            },
+            "g05_encoder.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                32,
+                3
+              ]
+            },
+            "g05_encoder.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                32
+              ]
+            },
+            "g05_encoder.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                32,
+                32
+              ]
+            },
+            "global_sign_head.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                64
+              ]
+            },
+            "global_sign_head.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                64,
+                96
+              ]
+            },
+            "global_sign_head.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                1,
+                64
+              ]
+            },
+            "magnitude_head.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                64
+              ]
+            },
+            "magnitude_head.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                64,
+                256
+              ]
+            },
+            "magnitude_head.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                5
+              ]
+            },
+            "magnitude_head.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                5,
+                64
+              ]
+            },
+            "position_head.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                128
+              ]
+            },
+            "position_head.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                128,
+                256
+              ]
+            },
+            "position_head.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                15
+              ]
+            },
+            "position_head.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                15,
+                128
+              ]
+            },
+            "relative_sign_head.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                64
+              ]
+            },
+            "relative_sign_head.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                64,
+                256
+              ]
+            },
+            "relative_sign_head.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                5
+              ]
+            },
+            "relative_sign_head.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                5,
+                64
+              ]
+            },
+            "structure_context.0.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                128
+              ]
+            },
+            "structure_context.0.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                128,
+                96
+              ]
+            },
+            "structure_context.2.bias": {
+              "dtype": "torch.float32",
+              "shape": [
+                256
+              ]
+            },
+            "structure_context.2.weight": {
+              "dtype": "torch.float32",
+              "shape": [
+                256,
+                128
+              ]
+            }
+          }
+        },
+        "normalization": {
+          "charge_scale": 0.6794502589494028,
+          "g00_mean": 0.006332700330095314,
+          "g00_std": 0.011903275799601066,
+          "g05_value_scale": 0.07531177929884283,
+          "position_mean": [
+            0.0016500300262123346,
+            -0.0023164229933172464,
+            0.7972654104232788
+          ],
+          "position_std": [
+            0.867354691028595,
+            0.8655665516853333,
+            0.40409448742866516
+          ]
+        },
+        "observation": {
+          "candidate_count": 32,
+          "full_fraction_definition": "all stored candidate sensors, not the full 32x32 field",
+          "g05_count_per_sample": 0,
+          "g05_fraction": 0.0,
+          "selection": "fixed nested sensor prefix"
+        },
+        "protocol_fingerprint": "1692babe9d2153d97a0706d0bece7194c22c1fc53b7f215c8f2260f0b820046c",
+        "protocol_version": "new-learning9-g05-routing-v1",
+        "split_counts": {
+          "test": 1000,
+          "train": 8000,
+          "validation": 1000
+        },
+        "training": {
+          "batch_size": 128,
+          "checkpoint_selection": {
+            "structure": {
+              "checkpoint_selection": "structure",
+              "global_sign_in_selection_objective": false,
+              "global_sign_metrics_note": "Global-sign and absolute-sign metrics are secondary diagnostics: structure selection does not optimize global-sign performance; training still uses the unchanged total loss.",
+              "primary_metrics": [
+                "position_mae_x",
+                "position_mae_y",
+                "position_mae_z",
+                "mean_position_mae",
+                "mean_position_3d_error",
+                "charge_magnitude_mae",
+                "relative_sign_accuracy",
+                "relative_configuration_accuracy",
+                "pairwise_relative_sign_accuracy"
+              ],
+              "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+              "selection_objective": "validation_loss.structure"
+            },
+            "total": {
+              "checkpoint_selection": "total",
+              "global_sign_in_selection_objective": false,
+              "global_sign_metrics_note": "Total selection includes global-sign loss only with observed G05 and nonzero global-sign weight.",
+              "primary_metrics": [
+                "position_mae_x",
+                "position_mae_y",
+                "position_mae_z",
+                "mean_position_mae",
+                "mean_position_3d_error",
+                "charge_magnitude_mae",
+                "relative_sign_accuracy",
+                "relative_configuration_accuracy",
+                "pairwise_relative_sign_accuracy",
+                "global_sign_accuracy",
+                "global_sign_bce",
+                "absolute_sign_accuracy",
+                "absolute_sign_set_accuracy",
+                "charge_mae",
+                "global_invariant_charge_mae"
+              ],
+              "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+              "selection_objective": "validation_loss.total"
+            }
+          },
+          "learning_rate": 0.001,
+          "loss_weights": {
+            "global_sign": 1.0,
+            "magnitude": 1.0,
+            "position": 1.0,
+            "relative_sign": 1.0
+          },
+          "max_epochs": 300,
+          "optimizer": "AdamW",
+          "seed": 41,
+          "weight_decay": 0.0001
+        }
+      },
+      "finite_model_state": true,
+      "path": "Models/new_learning9_experiments/5point_routing_v1/g05_full_reconstruction__g05_000pct__seed_41__8ea078f3c543/best_structure.pt",
+      "protocol_version": "new-learning9-g05-routing-v1",
+      "selected_epoch": 37,
+      "selected_validation_loss": 0.5906645221710205,
+      "sha256": "9354627a410d7acb8088199a8a303a76de4b180db794e5297594e0317ed13fd3"
+    }
+  ],
+  "legacy_histories": [
+    {
+      "best_structure_epoch": 37,
+      "best_validation": {
+        "global_sign": null,
+        "magnitude": 0.07286872959136963,
+        "position": 0.45602763891220094,
+        "relative_sign": 0.061768150627613067,
+        "structure": 0.5906645221710205,
+        "total": 0.5906645221710205
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": null,
+        "magnitude": 0.02384998072683811,
+        "position": 0.06651038724184036,
+        "relative_sign": 3.987399939796887e-05,
+        "structure": 0.09040024167299271,
+        "total": 0.09040024167299271
+      },
+      "last_validation": {
+        "global_sign": null,
+        "magnitude": 0.1203429799079895,
+        "position": 0.635617561340332,
+        "relative_sign": 0.23750619089603425,
+        "structure": 0.9934667472839356,
+        "total": 0.9934667472839356
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_full_reconstruction__g05_000pct__seed_41__8ea078f3c543/history.json",
+      "train_at_best": {
+        "global_sign": null,
+        "magnitude": 0.06759899079799653,
+        "position": 0.346708655834198,
+        "relative_sign": 0.02521072527766228,
+        "structure": 0.4395183711051941,
+        "total": 0.4395183711051941
+      }
+    },
+    {
+      "best_structure_epoch": 37,
+      "best_validation": {
+        "global_sign": 0.3742412931919098,
+        "magnitude": 0.07339407932758331,
+        "position": 0.4563860051631928,
+        "relative_sign": 0.06230403217673302,
+        "structure": 0.5920841226577759,
+        "total": 0.9663254158496857
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.34445631194114684,
+        "magnitude": 0.020853172108531,
+        "position": 0.06493930721282959,
+        "relative_sign": 2.0078902580280555e-05,
+        "structure": 0.08581255871057511,
+        "total": 0.4302688706517219
+      },
+      "last_validation": {
+        "global_sign": 0.3692051982879639,
+        "magnitude": 0.12082927972078324,
+        "position": 0.639552140712738,
+        "relative_sign": 0.23785974383354186,
+        "structure": 0.9982411603927612,
+        "total": 1.367446358680725
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_full_reconstruction__g05_010pct__seed_41__3a047e27a893/history.json",
+      "train_at_best": {
+        "global_sign": 0.35179846215248106,
+        "magnitude": 0.06725241178274155,
+        "position": 0.35509272408485415,
+        "relative_sign": 0.025388689294457437,
+        "structure": 0.44773382806777956,
+        "total": 0.7995322902202606
+      }
+    },
+    {
+      "best_structure_epoch": 28,
+      "best_validation": {
+        "global_sign": 0.35405753231048587,
+        "magnitude": 0.07445665103197098,
+        "position": 0.4706930205821991,
+        "relative_sign": 0.058331910669803616,
+        "structure": 0.6034815797805786,
+        "total": 0.9575391120910645
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.29046015739440917,
+        "magnitude": 0.01889345996081829,
+        "position": 0.06036838075518608,
+        "relative_sign": 3.0556043100659736e-05,
+        "structure": 0.07929239654541016,
+        "total": 0.3697525539398193
+      },
+      "last_validation": {
+        "global_sign": 0.3376453948020935,
+        "magnitude": 0.12327346706390381,
+        "position": 0.6583032946586609,
+        "relative_sign": 0.26408009266853333,
+        "structure": 1.0456568689346313,
+        "total": 1.3833022637367247
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_full_reconstruction__g05_025pct__seed_41__6b8f65cff0c4/history.json",
+      "train_at_best": {
+        "global_sign": 0.31720270562171937,
+        "magnitude": 0.06977984207868576,
+        "position": 0.39443702626228333,
+        "relative_sign": 0.03485045064985752,
+        "structure": 0.49906732058525083,
+        "total": 0.8162700262069702
+      }
+    },
+    {
+      "best_structure_epoch": 25,
+      "best_validation": {
+        "global_sign": 0.3605401663780212,
+        "magnitude": 0.07399868607521057,
+        "position": 0.4822946858406067,
+        "relative_sign": 0.05972915661334992,
+        "structure": 0.6160225253105164,
+        "total": 0.9765626916885376
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.28088783502578735,
+        "magnitude": 0.020213719472289084,
+        "position": 0.06595407676696777,
+        "relative_sign": 2.2220399103389355e-05,
+        "structure": 0.08619001680612565,
+        "total": 0.367077851831913
+      },
+      "last_validation": {
+        "global_sign": 0.34484680819511415,
+        "magnitude": 0.12118493175506592,
+        "position": 0.652075611114502,
+        "relative_sign": 0.2757278106212616,
+        "structure": 1.0489883451461792,
+        "total": 1.3938351533412934
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_full_reconstruction__g05_050pct__seed_41__2e76912911c3/history.json",
+      "train_at_best": {
+        "global_sign": 0.3217743682861328,
+        "magnitude": 0.07075415045022965,
+        "position": 0.4226266951560974,
+        "relative_sign": 0.038512448638677595,
+        "structure": 0.5318932914733887,
+        "total": 0.8536676597595215
+      }
+    },
+    {
+      "best_structure_epoch": 34,
+      "best_validation": {
+        "global_sign": 0.3454427633285522,
+        "magnitude": 0.07402025508880615,
+        "position": 0.4650387513637543,
+        "relative_sign": 0.06353777527809143,
+        "structure": 0.602596776008606,
+        "total": 0.9480395393371581
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.27879180908203127,
+        "magnitude": 0.022076123252511026,
+        "position": 0.07737885242700576,
+        "relative_sign": 0.00031128206077846697,
+        "structure": 0.09976625782251358,
+        "total": 0.37855806690454485
+      },
+      "last_validation": {
+        "global_sign": 0.3368258090019226,
+        "magnitude": 0.11515047967433929,
+        "position": 0.6358937640190124,
+        "relative_sign": 0.22220323371887207,
+        "structure": 0.9732475090026855,
+        "total": 1.310073318004608
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_full_reconstruction__g05_075pct__seed_41__1880b8d860fe/history.json",
+      "train_at_best": {
+        "global_sign": 0.30846757197380065,
+        "magnitude": 0.06814113587141037,
+        "position": 0.3685750341415405,
+        "relative_sign": 0.02947126169502735,
+        "structure": 0.46618743395805357,
+        "total": 0.7746550059318542
+      }
+    },
+    {
+      "best_structure_epoch": 35,
+      "best_validation": {
+        "global_sign": 0.3483570759296417,
+        "magnitude": 0.07351794737577438,
+        "position": 0.4635216920375824,
+        "relative_sign": 0.06387830966711044,
+        "structure": 0.6009179449081421,
+        "total": 0.9492750208377838
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2791781280040741,
+        "magnitude": 0.01948585879802704,
+        "position": 0.06633993554115296,
+        "relative_sign": 2.071381495807145e-05,
+        "structure": 0.08584650868177414,
+        "total": 0.3650246366858482
+      },
+      "last_validation": {
+        "global_sign": 0.35194412088394167,
+        "magnitude": 0.12520528721809387,
+        "position": 0.6567755331993103,
+        "relative_sign": 0.2653891134262085,
+        "structure": 1.0473699226379394,
+        "total": 1.3993140435218812
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_full_reconstruction__g05_100pct__seed_41__acf3506459d6/history.json",
+      "train_at_best": {
+        "global_sign": 0.30716676568984985,
+        "magnitude": 0.06723721531033516,
+        "position": 0.3710177705287933,
+        "relative_sign": 0.030830627009272575,
+        "structure": 0.46908561325073245,
+        "total": 0.7762523789405823
+      }
+    },
+    {
+      "best_structure_epoch": 37,
+      "best_validation": {
+        "global_sign": null,
+        "magnitude": 0.07286872959136963,
+        "position": 0.45602763891220094,
+        "relative_sign": 0.061768150627613067,
+        "structure": 0.5906645221710205,
+        "total": 0.5906645221710205
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": null,
+        "magnitude": 0.02384998072683811,
+        "position": 0.06651038724184036,
+        "relative_sign": 3.987399939796887e-05,
+        "structure": 0.09040024167299271,
+        "total": 0.09040024167299271
+      },
+      "last_validation": {
+        "global_sign": null,
+        "magnitude": 0.1203429799079895,
+        "position": 0.635617561340332,
+        "relative_sign": 0.23750619089603425,
+        "structure": 0.9934667472839356,
+        "total": 0.9934667472839356
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_sign_only__g05_000pct__seed_41__f56e5ea3c50e/history.json",
+      "train_at_best": {
+        "global_sign": null,
+        "magnitude": 0.06759899079799653,
+        "position": 0.346708655834198,
+        "relative_sign": 0.02521072527766228,
+        "structure": 0.4395183711051941,
+        "total": 0.4395183711051941
+      }
+    },
+    {
+      "best_structure_epoch": 37,
+      "best_validation": {
+        "global_sign": 0.3720878474712372,
+        "magnitude": 0.07286872959136963,
+        "position": 0.45602763891220094,
+        "relative_sign": 0.061768150627613067,
+        "structure": 0.5906645221710205,
+        "total": 0.9627523696422577
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.34484342312812805,
+        "magnitude": 0.02384998072683811,
+        "position": 0.06651038724184036,
+        "relative_sign": 3.987399939796887e-05,
+        "structure": 0.09040024167299271,
+        "total": 0.43524366480112076
+      },
+      "last_validation": {
+        "global_sign": 0.36727560329437253,
+        "magnitude": 0.1203429799079895,
+        "position": 0.635617561340332,
+        "relative_sign": 0.23750619089603425,
+        "structure": 0.9934667472839356,
+        "total": 1.360742350578308
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_sign_only__g05_010pct__seed_41__10a71341c43e/history.json",
+      "train_at_best": {
+        "global_sign": 0.3515965971946716,
+        "magnitude": 0.06759899079799653,
+        "position": 0.346708655834198,
+        "relative_sign": 0.02521072527766228,
+        "structure": 0.4395183711051941,
+        "total": 0.7911149682998657
+      }
+    },
+    {
+      "best_structure_epoch": 37,
+      "best_validation": {
+        "global_sign": 0.3449736444950104,
+        "magnitude": 0.07286872959136963,
+        "position": 0.45602763891220094,
+        "relative_sign": 0.061768150627613067,
+        "structure": 0.5906645221710205,
+        "total": 0.935638166666031
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2893012752532959,
+        "magnitude": 0.02384998072683811,
+        "position": 0.06651038724184036,
+        "relative_sign": 3.987399939796887e-05,
+        "structure": 0.09040024167299271,
+        "total": 0.3797015169262886
+      },
+      "last_validation": {
+        "global_sign": 0.3427595269680023,
+        "magnitude": 0.1203429799079895,
+        "position": 0.635617561340332,
+        "relative_sign": 0.23750619089603425,
+        "structure": 0.9934667472839356,
+        "total": 1.336226274251938
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_sign_only__g05_025pct__seed_41__662874c8682f/history.json",
+      "train_at_best": {
+        "global_sign": 0.3131574559211731,
+        "magnitude": 0.06759899079799653,
+        "position": 0.346708655834198,
+        "relative_sign": 0.02521072527766228,
+        "structure": 0.4395183711051941,
+        "total": 0.7526758270263672
+      }
+    },
+    {
+      "best_structure_epoch": 37,
+      "best_validation": {
+        "global_sign": 0.3492302031517029,
+        "magnitude": 0.07286872959136963,
+        "position": 0.45602763891220094,
+        "relative_sign": 0.061768150627613067,
+        "structure": 0.5906645221710205,
+        "total": 0.9398947253227234
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.28549770832061766,
+        "magnitude": 0.02384998072683811,
+        "position": 0.06651038724184036,
+        "relative_sign": 3.987399939796887e-05,
+        "structure": 0.09040024167299271,
+        "total": 0.37589794999361037
+      },
+      "last_validation": {
+        "global_sign": 0.3451038806438446,
+        "magnitude": 0.1203429799079895,
+        "position": 0.635617561340332,
+        "relative_sign": 0.23750619089603425,
+        "structure": 0.9934667472839356,
+        "total": 1.3385706279277803
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_sign_only__g05_050pct__seed_41__c565131aab8b/history.json",
+      "train_at_best": {
+        "global_sign": 0.3123376951217651,
+        "magnitude": 0.06759899079799653,
+        "position": 0.346708655834198,
+        "relative_sign": 0.02521072527766228,
+        "structure": 0.4395183711051941,
+        "total": 0.7518560662269592
+      }
+    },
+    {
+      "best_structure_epoch": 37,
+      "best_validation": {
+        "global_sign": 0.3463334131240845,
+        "magnitude": 0.07286872959136963,
+        "position": 0.45602763891220094,
+        "relative_sign": 0.061768150627613067,
+        "structure": 0.5906645221710205,
+        "total": 0.936997935295105
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.28080985879898074,
+        "magnitude": 0.02384998072683811,
+        "position": 0.06651038724184036,
+        "relative_sign": 3.987399939796887e-05,
+        "structure": 0.09040024167299271,
+        "total": 0.37121010047197345
+      },
+      "last_validation": {
+        "global_sign": 0.34265584230422974,
+        "magnitude": 0.1203429799079895,
+        "position": 0.635617561340332,
+        "relative_sign": 0.23750619089603425,
+        "structure": 0.9934667472839356,
+        "total": 1.3361225895881654
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_sign_only__g05_075pct__seed_41__d55cbe85d9a9/history.json",
+      "train_at_best": {
+        "global_sign": 0.3094494423866272,
+        "magnitude": 0.06759899079799653,
+        "position": 0.346708655834198,
+        "relative_sign": 0.02521072527766228,
+        "structure": 0.4395183711051941,
+        "total": 0.7489678134918213
+      }
+    },
+    {
+      "best_structure_epoch": 37,
+      "best_validation": {
+        "global_sign": 0.34561516451835633,
+        "magnitude": 0.07286872959136963,
+        "position": 0.45602763891220094,
+        "relative_sign": 0.061768150627613067,
+        "structure": 0.5906645221710205,
+        "total": 0.9362796866893768
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2810027315616608,
+        "magnitude": 0.02384998072683811,
+        "position": 0.06651038724184036,
+        "relative_sign": 3.987399939796887e-05,
+        "structure": 0.09040024167299271,
+        "total": 0.3714029732346535
+      },
+      "last_validation": {
+        "global_sign": 0.34645525002479555,
+        "magnitude": 0.1203429799079895,
+        "position": 0.635617561340332,
+        "relative_sign": 0.23750619089603425,
+        "structure": 0.9934667472839356,
+        "total": 1.339921997308731
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed41/runs/g05_sign_only__g05_100pct__seed_41__47b3174b2f65/history.json",
+      "train_at_best": {
+        "global_sign": 0.3067870318889618,
+        "magnitude": 0.06759899079799653,
+        "position": 0.346708655834198,
+        "relative_sign": 0.02521072527766228,
+        "structure": 0.4395183711051941,
+        "total": 0.7463054029941558
+      }
+    },
+    {
+      "best_structure_epoch": 27,
+      "best_validation": {
+        "global_sign": null,
+        "magnitude": 0.07530465525388717,
+        "position": 0.47306728982925417,
+        "relative_sign": 0.05817475923895836,
+        "structure": 0.6065466957092285,
+        "total": 0.6065466957092285
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": null,
+        "magnitude": 0.0299135462641716,
+        "position": 0.08582750600576401,
+        "relative_sign": 7.397627498721704e-05,
+        "structure": 0.11581502902507781,
+        "total": 0.11581502902507781
+      },
+      "last_validation": {
+        "global_sign": null,
+        "magnitude": 0.11421160757541657,
+        "position": 0.6194217925071717,
+        "relative_sign": 0.2707863631248474,
+        "structure": 1.004419762611389,
+        "total": 1.004419762611389
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_full_reconstruction__g05_000pct__seed_42__7d8ae61c4605/history.json",
+      "train_at_best": {
+        "global_sign": null,
+        "magnitude": 0.07251573568582535,
+        "position": 0.4222634825706482,
+        "relative_sign": 0.04186356151103973,
+        "structure": 0.5366427807807922,
+        "total": 0.5366427807807922
+      }
+    },
+    {
+      "best_structure_epoch": 28,
+      "best_validation": {
+        "global_sign": 0.37850918459892274,
+        "magnitude": 0.07405737972259521,
+        "position": 0.47074387097358705,
+        "relative_sign": 0.05749035757780075,
+        "structure": 0.602291600227356,
+        "total": 0.9808007848262787
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.3437068831920624,
+        "magnitude": 0.024211313620209694,
+        "position": 0.08049019205570221,
+        "relative_sign": 2.941348512104014e-05,
+        "structure": 0.10473092013597489,
+        "total": 0.4484378033280373
+      },
+      "last_validation": {
+        "global_sign": 0.3706768922805786,
+        "magnitude": 0.1179291889667511,
+        "position": 0.6353267736434937,
+        "relative_sign": 0.2916989766359329,
+        "structure": 1.0449549384117127,
+        "total": 1.4156318306922913
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_full_reconstruction__g05_010pct__seed_42__7d4653f145ab/history.json",
+      "train_at_best": {
+        "global_sign": 0.35550886273384097,
+        "magnitude": 0.0705684340596199,
+        "position": 0.4082694778442383,
+        "relative_sign": 0.03853286679089069,
+        "structure": 0.5173707785606384,
+        "total": 0.8728796412944794
+      }
+    },
+    {
+      "best_structure_epoch": 38,
+      "best_validation": {
+        "global_sign": 0.3669300599098206,
+        "magnitude": 0.07460983324050903,
+        "position": 0.4596008043289185,
+        "relative_sign": 0.06454860725998879,
+        "structure": 0.598759229183197,
+        "total": 0.9656892890930175
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2949608461856842,
+        "magnitude": 0.025636745065450668,
+        "position": 0.08177181249856949,
+        "relative_sign": 3.615654644818278e-05,
+        "structure": 0.10744471442699433,
+        "total": 0.4024055606126785
+      },
+      "last_validation": {
+        "global_sign": 0.34120678091049195,
+        "magnitude": 0.11748741281032563,
+        "position": 0.6603193626403808,
+        "relative_sign": 0.2844198069572449,
+        "structure": 1.0622265701293945,
+        "total": 1.4034333510398864
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_full_reconstruction__g05_025pct__seed_42__1ba41dbd95be/history.json",
+      "train_at_best": {
+        "global_sign": 0.32834844303131105,
+        "magnitude": 0.06791668289899826,
+        "position": 0.3663136773109436,
+        "relative_sign": 0.027298949994146823,
+        "structure": 0.4615293142795563,
+        "total": 0.7898777573108673
+      }
+    },
+    {
+      "best_structure_epoch": 42,
+      "best_validation": {
+        "global_sign": 0.35060458183288573,
+        "magnitude": 0.07559500950574875,
+        "position": 0.45564954209327696,
+        "relative_sign": 0.07046575456857682,
+        "structure": 0.6017102870941162,
+        "total": 0.952314868927002
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2823677568435669,
+        "magnitude": 0.024269363656640053,
+        "position": 0.08158358192443847,
+        "relative_sign": 5.1859984945622274e-05,
+        "structure": 0.10590480595827102,
+        "total": 0.3882725628018379
+      },
+      "last_validation": {
+        "global_sign": 0.3320423195362091,
+        "magnitude": 0.11620787054300308,
+        "position": 0.6239222078323364,
+        "relative_sign": 0.26823534512519837,
+        "structure": 1.0083654403686524,
+        "total": 1.3404077599048616
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_full_reconstruction__g05_050pct__seed_42__8c9fbcc55de0/history.json",
+      "train_at_best": {
+        "global_sign": 0.31321565437316895,
+        "magnitude": 0.0663571537733078,
+        "position": 0.3462255582809448,
+        "relative_sign": 0.02522453735768795,
+        "structure": 0.43780725026130674,
+        "total": 0.7510229046344756
+      }
+    },
+    {
+      "best_structure_epoch": 33,
+      "best_validation": {
+        "global_sign": 0.34949118208885194,
+        "magnitude": 0.0745064726471901,
+        "position": 0.46954309248924253,
+        "relative_sign": 0.06627334088087082,
+        "structure": 0.6103228888511658,
+        "total": 0.9598140709400178
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2806669130325317,
+        "magnitude": 0.025517129257321358,
+        "position": 0.08137930172681808,
+        "relative_sign": 2.108987342217006e-05,
+        "structure": 0.10691752117872239,
+        "total": 0.3875844342112541
+      },
+      "last_validation": {
+        "global_sign": 0.3305983476638794,
+        "magnitude": 0.1173327757716179,
+        "position": 0.6382208061218262,
+        "relative_sign": 0.31381490409374235,
+        "structure": 1.0693685102462769,
+        "total": 1.3999668579101563
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_full_reconstruction__g05_075pct__seed_42__ea2fff605788/history.json",
+      "train_at_best": {
+        "global_sign": 0.3078699378967285,
+        "magnitude": 0.06844418054819107,
+        "position": 0.3886767671108246,
+        "relative_sign": 0.032046923905611036,
+        "structure": 0.48916787338256834,
+        "total": 0.7970378112792968
+      }
+    },
+    {
+      "best_structure_epoch": 40,
+      "best_validation": {
+        "global_sign": 0.3815167336463928,
+        "magnitude": 0.07484757882356644,
+        "position": 0.46239331316947935,
+        "relative_sign": 0.07355735212564468,
+        "structure": 0.6107982482910156,
+        "total": 0.9923149819374084
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2803350284099579,
+        "magnitude": 0.023803438499569892,
+        "position": 0.07838807064294816,
+        "relative_sign": 2.5827084871707483e-05,
+        "structure": 0.10221733611822129,
+        "total": 0.3825523645281792
+      },
+      "last_validation": {
+        "global_sign": 0.3318722674846649,
+        "magnitude": 0.11846016883850098,
+        "position": 0.6249916548728943,
+        "relative_sign": 0.299663290977478,
+        "structure": 1.0431151294708252,
+        "total": 1.3749873969554902
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_full_reconstruction__g05_100pct__seed_42__e2a69d923385/history.json",
+      "train_at_best": {
+        "global_sign": 0.30663163542747496,
+        "magnitude": 0.06607404762506484,
+        "position": 0.3557780890464783,
+        "relative_sign": 0.02524998028576374,
+        "structure": 0.44710211658477783,
+        "total": 0.7537337520122528
+      }
+    },
+    {
+      "best_structure_epoch": 27,
+      "best_validation": {
+        "global_sign": null,
+        "magnitude": 0.07530465525388717,
+        "position": 0.47306728982925417,
+        "relative_sign": 0.05817475923895836,
+        "structure": 0.6065466957092285,
+        "total": 0.6065466957092285
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": null,
+        "magnitude": 0.0299135462641716,
+        "position": 0.08582750600576401,
+        "relative_sign": 7.397627498721704e-05,
+        "structure": 0.11581502902507781,
+        "total": 0.11581502902507781
+      },
+      "last_validation": {
+        "global_sign": null,
+        "magnitude": 0.11421160757541657,
+        "position": 0.6194217925071717,
+        "relative_sign": 0.2707863631248474,
+        "structure": 1.004419762611389,
+        "total": 1.004419762611389
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_sign_only__g05_000pct__seed_42__7381148c39db/history.json",
+      "train_at_best": {
+        "global_sign": null,
+        "magnitude": 0.07251573568582535,
+        "position": 0.4222634825706482,
+        "relative_sign": 0.04186356151103973,
+        "structure": 0.5366427807807922,
+        "total": 0.5366427807807922
+      }
+    },
+    {
+      "best_structure_epoch": 27,
+      "best_validation": {
+        "global_sign": 0.3749533123970032,
+        "magnitude": 0.07530465525388717,
+        "position": 0.47306728982925417,
+        "relative_sign": 0.05817475923895836,
+        "structure": 0.6065466957092285,
+        "total": 0.9815000081062317
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.344801899433136,
+        "magnitude": 0.0299135462641716,
+        "position": 0.08582750600576401,
+        "relative_sign": 7.397627498721704e-05,
+        "structure": 0.11581502902507781,
+        "total": 0.4606169284582138
+      },
+      "last_validation": {
+        "global_sign": 0.36983342957496645,
+        "magnitude": 0.11421160757541657,
+        "position": 0.6194217925071717,
+        "relative_sign": 0.2707863631248474,
+        "structure": 1.004419762611389,
+        "total": 1.3742531921863557
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_sign_only__g05_010pct__seed_42__c436f6048f89/history.json",
+      "train_at_best": {
+        "global_sign": 0.3536305947303772,
+        "magnitude": 0.07251573568582535,
+        "position": 0.4222634825706482,
+        "relative_sign": 0.04186356151103973,
+        "structure": 0.5366427807807922,
+        "total": 0.8902733755111694
+      }
+    },
+    {
+      "best_structure_epoch": 27,
+      "best_validation": {
+        "global_sign": 0.3687897653579712,
+        "magnitude": 0.07530465525388717,
+        "position": 0.47306728982925417,
+        "relative_sign": 0.05817475923895836,
+        "structure": 0.6065466957092285,
+        "total": 0.9753364610671997
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2920395634174347,
+        "magnitude": 0.0299135462641716,
+        "position": 0.08582750600576401,
+        "relative_sign": 7.397627498721704e-05,
+        "structure": 0.11581502902507781,
+        "total": 0.40785459244251254
+      },
+      "last_validation": {
+        "global_sign": 0.34318002772331235,
+        "magnitude": 0.11421160757541657,
+        "position": 0.6194217925071717,
+        "relative_sign": 0.2707863631248474,
+        "structure": 1.004419762611389,
+        "total": 1.3475997903347015
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_sign_only__g05_025pct__seed_42__6b6220edd43e/history.json",
+      "train_at_best": {
+        "global_sign": 0.3284915158748627,
+        "magnitude": 0.07251573568582535,
+        "position": 0.4222634825706482,
+        "relative_sign": 0.04186356151103973,
+        "structure": 0.5366427807807922,
+        "total": 0.8651342966556549
+      }
+    },
+    {
+      "best_structure_epoch": 27,
+      "best_validation": {
+        "global_sign": 0.35861022424697875,
+        "magnitude": 0.07530465525388717,
+        "position": 0.47306728982925417,
+        "relative_sign": 0.05817475923895836,
+        "structure": 0.6065466957092285,
+        "total": 0.9651569199562072
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2827101833820343,
+        "magnitude": 0.0299135462641716,
+        "position": 0.08582750600576401,
+        "relative_sign": 7.397627498721704e-05,
+        "structure": 0.11581502902507781,
+        "total": 0.39852521240711214
+      },
+      "last_validation": {
+        "global_sign": 0.33855383515357973,
+        "magnitude": 0.11421160757541657,
+        "position": 0.6194217925071717,
+        "relative_sign": 0.2707863631248474,
+        "structure": 1.004419762611389,
+        "total": 1.3429735977649688
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_sign_only__g05_050pct__seed_42__3e78c74bbf35/history.json",
+      "train_at_best": {
+        "global_sign": 0.31895484471321106,
+        "magnitude": 0.07251573568582535,
+        "position": 0.4222634825706482,
+        "relative_sign": 0.04186356151103973,
+        "structure": 0.5366427807807922,
+        "total": 0.8555976254940032
+      }
+    },
+    {
+      "best_structure_epoch": 27,
+      "best_validation": {
+        "global_sign": 0.3568743999004364,
+        "magnitude": 0.07530465525388717,
+        "position": 0.47306728982925417,
+        "relative_sign": 0.05817475923895836,
+        "structure": 0.6065466957092285,
+        "total": 0.9634210956096649
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2824175908565521,
+        "magnitude": 0.0299135462641716,
+        "position": 0.08582750600576401,
+        "relative_sign": 7.397627498721704e-05,
+        "structure": 0.11581502902507781,
+        "total": 0.39823261988162995
+      },
+      "last_validation": {
+        "global_sign": 0.33021969509124754,
+        "magnitude": 0.11421160757541657,
+        "position": 0.6194217925071717,
+        "relative_sign": 0.2707863631248474,
+        "structure": 1.004419762611389,
+        "total": 1.3346394577026366
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_sign_only__g05_075pct__seed_42__4f060fadcb77/history.json",
+      "train_at_best": {
+        "global_sign": 0.3141081192493439,
+        "magnitude": 0.07251573568582535,
+        "position": 0.4222634825706482,
+        "relative_sign": 0.04186356151103973,
+        "structure": 0.5366427807807922,
+        "total": 0.8507509000301361
+      }
+    },
+    {
+      "best_structure_epoch": 27,
+      "best_validation": {
+        "global_sign": 0.3509220976829529,
+        "magnitude": 0.07530465525388717,
+        "position": 0.47306728982925417,
+        "relative_sign": 0.05817475923895836,
+        "structure": 0.6065466957092285,
+        "total": 0.9574687933921814
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2825717258453369,
+        "magnitude": 0.0299135462641716,
+        "position": 0.08582750600576401,
+        "relative_sign": 7.397627498721704e-05,
+        "structure": 0.11581502902507781,
+        "total": 0.39838675487041475
+      },
+      "last_validation": {
+        "global_sign": 0.32771957325935364,
+        "magnitude": 0.11421160757541657,
+        "position": 0.6194217925071717,
+        "relative_sign": 0.2707863631248474,
+        "structure": 1.004419762611389,
+        "total": 1.3321393358707427
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed42/runs/g05_sign_only__g05_100pct__seed_42__adefc6a18cb3/history.json",
+      "train_at_best": {
+        "global_sign": 0.3131165153980255,
+        "magnitude": 0.07251573568582535,
+        "position": 0.4222634825706482,
+        "relative_sign": 0.04186356151103973,
+        "structure": 0.5366427807807922,
+        "total": 0.8497592961788176
+      }
+    },
+    {
+      "best_structure_epoch": 31,
+      "best_validation": {
+        "global_sign": null,
+        "magnitude": 0.0743892343044281,
+        "position": 0.4678407955169678,
+        "relative_sign": 0.05767583599686622,
+        "structure": 0.5999058632850647,
+        "total": 0.5999058632850647
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": null,
+        "magnitude": 0.02725758643448353,
+        "position": 0.08254962325096131,
+        "relative_sign": 5.9058504666609225e-05,
+        "structure": 0.1098662680387497,
+        "total": 0.1098662680387497
+      },
+      "last_validation": {
+        "global_sign": null,
+        "magnitude": 0.12104687714576721,
+        "position": 0.665353015422821,
+        "relative_sign": 0.2729374330043793,
+        "structure": 1.0593373126983643,
+        "total": 1.0593373126983643
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f/history.json",
+      "train_at_best": {
+        "global_sign": null,
+        "magnitude": 0.07024250954389571,
+        "position": 0.39926036715507507,
+        "relative_sign": 0.03567390260100365,
+        "structure": 0.5051767783164978,
+        "total": 0.5051767783164978
+      }
+    },
+    {
+      "best_structure_epoch": 27,
+      "best_validation": {
+        "global_sign": 0.37536359167099,
+        "magnitude": 0.07357158869504929,
+        "position": 0.4682438440322876,
+        "relative_sign": 0.054659009933471676,
+        "structure": 0.5964744434356689,
+        "total": 0.9718380351066589
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.3426867480278015,
+        "magnitude": 0.02208446927368641,
+        "position": 0.07369381487369538,
+        "relative_sign": 3.8242931448621674e-05,
+        "structure": 0.09581652748584747,
+        "total": 0.438503275513649
+      },
+      "last_validation": {
+        "global_sign": 0.37245496034622194,
+        "magnitude": 0.1195515570640564,
+        "position": 0.662607560634613,
+        "relative_sign": 0.2281413675546646,
+        "structure": 1.010300495147705,
+        "total": 1.382755455493927
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b/history.json",
+      "train_at_best": {
+        "global_sign": 0.3552506718635559,
+        "magnitude": 0.0696830125451088,
+        "position": 0.4090103399753571,
+        "relative_sign": 0.03694064939022064,
+        "structure": 0.5156340045928955,
+        "total": 0.8708846764564515
+      }
+    },
+    {
+      "best_structure_epoch": 33,
+      "best_validation": {
+        "global_sign": 0.3568475744724274,
+        "magnitude": 0.07334905797243119,
+        "position": 0.46267149472236635,
+        "relative_sign": 0.061389246582984926,
+        "structure": 0.5974098076820373,
+        "total": 0.9542573821544647
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.29335313296318055,
+        "magnitude": 0.022643917948007585,
+        "position": 0.0740288810133934,
+        "relative_sign": 2.354457104956964e-05,
+        "structure": 0.09669634348154069,
+        "total": 0.3900494764447212
+      },
+      "last_validation": {
+        "global_sign": 0.3409908266067505,
+        "magnitude": 0.11892287814617157,
+        "position": 0.6503190817832947,
+        "relative_sign": 0.265727627158165,
+        "structure": 1.0349696035385132,
+        "total": 1.3759604301452637
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e/history.json",
+      "train_at_best": {
+        "global_sign": 0.32022604656219483,
+        "magnitude": 0.06838246214389801,
+        "position": 0.3828200933933258,
+        "relative_sign": 0.032110005274415016,
+        "structure": 0.4833125605583191,
+        "total": 0.803538607120514
+      }
+    },
+    {
+      "best_structure_epoch": 33,
+      "best_validation": {
+        "global_sign": 0.3562797310352325,
+        "magnitude": 0.07372922784090043,
+        "position": 0.4632988200187683,
+        "relative_sign": 0.05783303362131119,
+        "structure": 0.5948610897064209,
+        "total": 0.9511408207416534
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.27749868893623353,
+        "magnitude": 0.022731699079275133,
+        "position": 0.07054673767089843,
+        "relative_sign": 7.25130575010553e-05,
+        "structure": 0.09335095065832139,
+        "total": 0.3708496395945549
+      },
+      "last_validation": {
+        "global_sign": 0.3483253388404846,
+        "magnitude": 0.11768400555849075,
+        "position": 0.6383894438743591,
+        "relative_sign": 0.2184495105743408,
+        "structure": 0.974522970199585,
+        "total": 1.3228483090400696
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502/history.json",
+      "train_at_best": {
+        "global_sign": 0.3122539303302765,
+        "magnitude": 0.06901004207134247,
+        "position": 0.3890635459423065,
+        "relative_sign": 0.03237752433121204,
+        "structure": 0.49045111155509946,
+        "total": 0.802705041885376
+      }
+    },
+    {
+      "best_structure_epoch": 26,
+      "best_validation": {
+        "global_sign": 0.35340508699417117,
+        "magnitude": 0.074294773042202,
+        "position": 0.46660291957855227,
+        "relative_sign": 0.05628466010093689,
+        "structure": 0.5971823506355286,
+        "total": 0.9505874376296998
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2759305191040039,
+        "magnitude": 0.02302010588347912,
+        "position": 0.07502878552675248,
+        "relative_sign": 0.0001382824738320778,
+        "structure": 0.09818717396259308,
+        "total": 0.374117693066597
+      },
+      "last_validation": {
+        "global_sign": 0.3477213888168335,
+        "magnitude": 0.11827160096168518,
+        "position": 0.6251947274208068,
+        "relative_sign": 0.2021163876056671,
+        "structure": 0.9455827112197877,
+        "total": 1.2933041000366212
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782/history.json",
+      "train_at_best": {
+        "global_sign": 0.31208418679237365,
+        "magnitude": 0.07038318246603012,
+        "position": 0.4096940543651581,
+        "relative_sign": 0.036951451927423475,
+        "structure": 0.5170286922454834,
+        "total": 0.829112879037857
+      }
+    },
+    {
+      "best_structure_epoch": 26,
+      "best_validation": {
+        "global_sign": 0.3511271677017212,
+        "magnitude": 0.07336975514888763,
+        "position": 0.4670393805503845,
+        "relative_sign": 0.05710779157280922,
+        "structure": 0.5975169048309327,
+        "total": 0.9486440725326539
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.27821440196037295,
+        "magnitude": 0.021707228779792784,
+        "position": 0.0711808557510376,
+        "relative_sign": 4.4619544485613003e-05,
+        "structure": 0.09293270337581634,
+        "total": 0.3711471053361893
+      },
+      "last_validation": {
+        "global_sign": 0.33791594982147216,
+        "magnitude": 0.11738427972793579,
+        "position": 0.6513352289199829,
+        "relative_sign": 0.23418973064422607,
+        "structure": 1.0029092330932616,
+        "total": 1.3408251829147337
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa/history.json",
+      "train_at_best": {
+        "global_sign": 0.3113430233001709,
+        "magnitude": 0.06963429224491119,
+        "position": 0.4087362780570984,
+        "relative_sign": 0.03786148577928543,
+        "structure": 0.5162320566177369,
+        "total": 0.8275750799179078
+      }
+    },
+    {
+      "best_structure_epoch": 31,
+      "best_validation": {
+        "global_sign": null,
+        "magnitude": 0.0743892343044281,
+        "position": 0.4678407955169678,
+        "relative_sign": 0.05767583599686622,
+        "structure": 0.5999058632850647,
+        "total": 0.5999058632850647
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": null,
+        "magnitude": 0.02725758643448353,
+        "position": 0.08254962325096131,
+        "relative_sign": 5.9058504666609225e-05,
+        "structure": 0.1098662680387497,
+        "total": 0.1098662680387497
+      },
+      "last_validation": {
+        "global_sign": null,
+        "magnitude": 0.12104687714576721,
+        "position": 0.665353015422821,
+        "relative_sign": 0.2729374330043793,
+        "structure": 1.0593373126983643,
+        "total": 1.0593373126983643
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e/history.json",
+      "train_at_best": {
+        "global_sign": null,
+        "magnitude": 0.07024250954389571,
+        "position": 0.39926036715507507,
+        "relative_sign": 0.03567390260100365,
+        "structure": 0.5051767783164978,
+        "total": 0.5051767783164978
+      }
+    },
+    {
+      "best_structure_epoch": 31,
+      "best_validation": {
+        "global_sign": 0.37580735206604005,
+        "magnitude": 0.0743892343044281,
+        "position": 0.4678407955169678,
+        "relative_sign": 0.05767583599686622,
+        "structure": 0.5999058632850647,
+        "total": 0.9757132153511048
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.3432771544456482,
+        "magnitude": 0.02725758643448353,
+        "position": 0.08254962325096131,
+        "relative_sign": 5.9058504666609225e-05,
+        "structure": 0.1098662680387497,
+        "total": 0.45314342248439793
+      },
+      "last_validation": {
+        "global_sign": 0.37446298336982725,
+        "magnitude": 0.12104687714576721,
+        "position": 0.665353015422821,
+        "relative_sign": 0.2729374330043793,
+        "structure": 1.0593373126983643,
+        "total": 1.4338002960681915
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_sign_only__g05_010pct__seed_43__569719e6de6c/history.json",
+      "train_at_best": {
+        "global_sign": 0.3547313499450684,
+        "magnitude": 0.07024250954389571,
+        "position": 0.39926036715507507,
+        "relative_sign": 0.03567390260100365,
+        "structure": 0.5051767783164978,
+        "total": 0.8599081282615662
+      }
+    },
+    {
+      "best_structure_epoch": 31,
+      "best_validation": {
+        "global_sign": 0.3595487148761749,
+        "magnitude": 0.0743892343044281,
+        "position": 0.4678407955169678,
+        "relative_sign": 0.05767583599686622,
+        "structure": 0.5999058632850647,
+        "total": 0.9594545781612396
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.29418763661384584,
+        "magnitude": 0.02725758643448353,
+        "position": 0.08254962325096131,
+        "relative_sign": 5.9058504666609225e-05,
+        "structure": 0.1098662680387497,
+        "total": 0.40405390465259555
+      },
+      "last_validation": {
+        "global_sign": 0.3445144147872925,
+        "magnitude": 0.12104687714576721,
+        "position": 0.665353015422821,
+        "relative_sign": 0.2729374330043793,
+        "structure": 1.0593373126983643,
+        "total": 1.4038517274856568
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_sign_only__g05_025pct__seed_43__559b9cd8371e/history.json",
+      "train_at_best": {
+        "global_sign": 0.3207866780757904,
+        "magnitude": 0.07024250954389571,
+        "position": 0.39926036715507507,
+        "relative_sign": 0.03567390260100365,
+        "structure": 0.5051767783164978,
+        "total": 0.8259634563922882
+      }
+    },
+    {
+      "best_structure_epoch": 31,
+      "best_validation": {
+        "global_sign": 0.3506477074623108,
+        "magnitude": 0.0743892343044281,
+        "position": 0.4678407955169678,
+        "relative_sign": 0.05767583599686622,
+        "structure": 0.5999058632850647,
+        "total": 0.9505535707473755
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.27987837624549866,
+        "magnitude": 0.02725758643448353,
+        "position": 0.08254962325096131,
+        "relative_sign": 5.9058504666609225e-05,
+        "structure": 0.1098662680387497,
+        "total": 0.3897446442842484
+      },
+      "last_validation": {
+        "global_sign": 0.33917489886283875,
+        "magnitude": 0.12104687714576721,
+        "position": 0.665353015422821,
+        "relative_sign": 0.2729374330043793,
+        "structure": 1.0593373126983643,
+        "total": 1.398512211561203
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_sign_only__g05_050pct__seed_43__9763f0d66175/history.json",
+      "train_at_best": {
+        "global_sign": 0.31123724389076235,
+        "magnitude": 0.07024250954389571,
+        "position": 0.39926036715507507,
+        "relative_sign": 0.03567390260100365,
+        "structure": 0.5051767783164978,
+        "total": 0.8164140222072601
+      }
+    },
+    {
+      "best_structure_epoch": 31,
+      "best_validation": {
+        "global_sign": 0.3458353707790375,
+        "magnitude": 0.0743892343044281,
+        "position": 0.4678407955169678,
+        "relative_sign": 0.05767583599686622,
+        "structure": 0.5999058632850647,
+        "total": 0.9457412340641022
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2816920492649078,
+        "magnitude": 0.02725758643448353,
+        "position": 0.08254962325096131,
+        "relative_sign": 5.9058504666609225e-05,
+        "structure": 0.1098662680387497,
+        "total": 0.39155831730365753
+      },
+      "last_validation": {
+        "global_sign": 0.3432642796039581,
+        "magnitude": 0.12104687714576721,
+        "position": 0.665353015422821,
+        "relative_sign": 0.2729374330043793,
+        "structure": 1.0593373126983643,
+        "total": 1.4026015923023225
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_sign_only__g05_075pct__seed_43__b85b94b83477/history.json",
+      "train_at_best": {
+        "global_sign": 0.30762356066703794,
+        "magnitude": 0.07024250954389571,
+        "position": 0.39926036715507507,
+        "relative_sign": 0.03567390260100365,
+        "structure": 0.5051767783164978,
+        "total": 0.8128003389835357
+      }
+    },
+    {
+      "best_structure_epoch": 31,
+      "best_validation": {
+        "global_sign": 0.3407242395877838,
+        "magnitude": 0.0743892343044281,
+        "position": 0.4678407955169678,
+        "relative_sign": 0.05767583599686622,
+        "structure": 0.5999058632850647,
+        "total": 0.9406301028728485
+      },
+      "epochs": 300,
+      "last_train": {
+        "global_sign": 0.2798713213205338,
+        "magnitude": 0.02725758643448353,
+        "position": 0.08254962325096131,
+        "relative_sign": 5.9058504666609225e-05,
+        "structure": 0.1098662680387497,
+        "total": 0.3897375893592835
+      },
+      "last_validation": {
+        "global_sign": 0.3331105363368988,
+        "magnitude": 0.12104687714576721,
+        "position": 0.665353015422821,
+        "relative_sign": 0.2729374330043793,
+        "structure": 1.0593373126983643,
+        "total": 1.3924478490352632
+      },
+      "path": "Results/new_learning9_experiments/5point_routing_v1_seed43/runs/g05_sign_only__g05_100pct__seed_43__7eca43faabbb/history.json",
+      "train_at_best": {
+        "global_sign": 0.30447284317016604,
+        "magnitude": 0.07024250954389571,
+        "position": 0.39926036715507507,
+        "relative_sign": 0.03567390260100365,
+        "structure": 0.5051767783164978,
+        "total": 0.8096496214866638
+      }
+    }
+  ],
+  "legacy_pilots": [
+    {
+      "best_structure_epoch": 38,
+      "best_structure_loss": 0.6105242009162903,
+      "best_total_epoch": 38,
+      "best_total_loss": 0.9600613071918488,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.6105242009162903,
+          "total": 0.9600613071918488
+        },
+        "epoch": 58,
+        "last_improvement_epoch": 38,
+        "stopped": true
+      },
+      "elapsed_seconds": 53.3031203999999,
+      "epochs_completed": 58,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_full_reconstruction",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_full_reconstruction__seed41__baseline",
+      "seed": 41,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.0,
+      "variant": "baseline",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 34,
+      "best_structure_loss": 0.6001890206336975,
+      "best_total_epoch": 34,
+      "best_total_loss": 0.9491911022663116,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.6001890206336975,
+          "total": 0.9491911022663116
+        },
+        "epoch": 54,
+        "last_improvement_epoch": 34,
+        "stopped": true
+      },
+      "elapsed_seconds": 49.9664119000081,
+      "epochs_completed": 54,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_full_reconstruction",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_full_reconstruction__seed41__dropout010",
+      "seed": 41,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.1,
+      "variant": "dropout010",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 28,
+      "best_structure_loss": 0.6067527198791504,
+      "best_total_epoch": 35,
+      "best_total_loss": 0.9500554325580597,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.6067527198791504,
+          "total": 0.9500554325580597
+        },
+        "epoch": 55,
+        "last_improvement_epoch": 35,
+        "stopped": true
+      },
+      "elapsed_seconds": 51.760772500012536,
+      "epochs_completed": 55,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_full_reconstruction",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_full_reconstruction__seed42__baseline",
+      "seed": 42,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.0,
+      "variant": "baseline",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 37,
+      "best_structure_loss": 0.5873950505256653,
+      "best_total_epoch": 37,
+      "best_total_loss": 0.9304454171657562,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.5873950505256653,
+          "total": 0.9304454171657562
+        },
+        "epoch": 57,
+        "last_improvement_epoch": 37,
+        "stopped": true
+      },
+      "elapsed_seconds": 55.2562555000186,
+      "epochs_completed": 57,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_full_reconstruction",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_full_reconstruction__seed42__dropout010",
+      "seed": 42,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.1,
+      "variant": "dropout010",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 32,
+      "best_structure_loss": 0.5996894488334655,
+      "best_total_epoch": 32,
+      "best_total_loss": 0.9458713150024414,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.5996894488334655,
+          "total": 0.9458713150024414
+        },
+        "epoch": 52,
+        "last_improvement_epoch": 32,
+        "stopped": true
+      },
+      "elapsed_seconds": 40.76532939996105,
+      "epochs_completed": 52,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_sign_only",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_sign_only__seed41__baseline",
+      "seed": 41,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.0,
+      "variant": "baseline",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 33,
+      "best_structure_loss": 0.6158075246810913,
+      "best_total_epoch": 35,
+      "best_total_loss": 0.9634989786148072,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.6158075246810913,
+          "total": 0.9634989786148072
+        },
+        "epoch": 55,
+        "last_improvement_epoch": 35,
+        "stopped": true
+      },
+      "elapsed_seconds": 43.62092010001652,
+      "epochs_completed": 55,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_sign_only",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_sign_only__seed41__dropout010",
+      "seed": 41,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.1,
+      "variant": "dropout010",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 43,
+      "best_structure_loss": 0.594987015247345,
+      "best_total_epoch": 43,
+      "best_total_loss": 0.9418657929897308,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.594987015247345,
+          "total": 0.9418657929897308
+        },
+        "epoch": 63,
+        "last_improvement_epoch": 43,
+        "stopped": true
+      },
+      "elapsed_seconds": 47.98460849997355,
+      "epochs_completed": 63,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_sign_only",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_sign_only__seed42__baseline",
+      "seed": 42,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.0,
+      "variant": "baseline",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 35,
+      "best_structure_loss": 0.597558454990387,
+      "best_total_epoch": 44,
+      "best_total_loss": 0.9401398575305939,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.597558454990387,
+          "total": 0.9401398575305939
+        },
+        "epoch": 64,
+        "last_improvement_epoch": 44,
+        "stopped": true
+      },
+      "elapsed_seconds": 49.60155270004179,
+      "epochs_completed": 64,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_sign_only",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_sign_only__seed42__dropout010",
+      "seed": 42,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.1,
+      "variant": "dropout010",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 31,
+      "best_structure_loss": 0.5999058632850647,
+      "best_total_epoch": 31,
+      "best_total_loss": 0.9406301028728485,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.5999058632850647,
+          "total": 0.9406301028728485
+        },
+        "epoch": 51,
+        "last_improvement_epoch": 31,
+        "stopped": true
+      },
+      "elapsed_seconds": 40.77002779999748,
+      "epochs_completed": 51,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_sign_only",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_sign_only__seed43__baseline",
+      "seed": 43,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.0,
+      "variant": "baseline",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 43,
+      "best_structure_loss": 0.5884055914878845,
+      "best_total_epoch": 46,
+      "best_total_loss": 0.92796351146698,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.5884055914878845,
+          "total": 0.92796351146698
+        },
+        "epoch": 66,
+        "last_improvement_epoch": 46,
+        "stopped": true
+      },
+      "elapsed_seconds": 47.348426199983805,
+      "epochs_completed": 66,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_sign_only",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_sign_only__seed43__dropout010",
+      "seed": 43,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.1,
+      "variant": "dropout010",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 26,
+      "best_structure_loss": 0.5975169048309327,
+      "best_total_epoch": 26,
+      "best_total_loss": 0.9486440725326539,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.5975169048309327,
+          "total": 0.9486440725326539
+        },
+        "epoch": 46,
+        "last_improvement_epoch": 26,
+        "stopped": true
+      },
+      "elapsed_seconds": 42.52869639999699,
+      "epochs_completed": 46,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_full_reconstruction",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_full_reconstruction__seed43__baseline",
+      "seed": 43,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.0,
+      "variant": "baseline",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 26,
+      "best_structure_loss": 0.5940469732284546,
+      "best_total_epoch": 26,
+      "best_total_loss": 0.9457789270877838,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.5940469732284546,
+          "total": 0.9457789270877838
+        },
+        "epoch": 46,
+        "last_improvement_epoch": 26,
+        "stopped": true
+      },
+      "elapsed_seconds": 44.11467029998312,
+      "epochs_completed": 46,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_full_reconstruction",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_full_reconstruction__seed43__decay001",
+      "seed": 43,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.0,
+      "variant": "decay001",
+      "weight_decay": 0.001
+    },
+    {
+      "best_structure_epoch": 43,
+      "best_structure_loss": 0.5739723343849182,
+      "best_total_epoch": 46,
+      "best_total_loss": 0.9242306201457977,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.5739723343849182,
+          "total": 0.9242306201457977
+        },
+        "epoch": 66,
+        "last_improvement_epoch": 46,
+        "stopped": true
+      },
+      "elapsed_seconds": 61.25245209998684,
+      "epochs_completed": 66,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_full_reconstruction",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_full_reconstruction__seed43__dropout010",
+      "seed": 43,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.1,
+      "variant": "dropout010",
+      "weight_decay": 0.0001
+    },
+    {
+      "best_structure_epoch": 72,
+      "best_structure_loss": 0.5731293087005616,
+      "best_total_epoch": 72,
+      "best_total_loss": 0.9127203702926636,
+      "early_stopping": {
+        "bad_epochs": 20,
+        "best_losses": {
+          "structure": 0.5731293087005616,
+          "total": 0.9127203702926636
+        },
+        "epoch": 92,
+        "last_improvement_epoch": 72,
+        "stopped": true
+      },
+      "elapsed_seconds": 85.05846460000612,
+      "epochs_completed": 92,
+      "fraction": 1.0,
+      "max_epochs": 100,
+      "model": "g05_full_reconstruction",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "run_name": "g05_full_reconstruction__seed43__dropout020",
+      "seed": 43,
+      "stop_reason": "early_stopping",
+      "structure_dropout": 0.2,
+      "variant": "dropout020",
+      "weight_decay": 0.0001
+    }
+  ],
+  "normalization": {
+    "charge_scale": 0.6794502589494028,
+    "g00_mean": 0.006332700330095314,
+    "g00_std": 0.011903275799601066,
+    "g05_value_scale": 0.07531177929884283,
+    "position_mean": [
+      0.0016500300262123346,
+      -0.0023164229933172464,
+      0.7972654104232788
+    ],
+    "position_std": [
+      0.867354691028595,
+      0.8655665516853333,
+      0.40409448742866516
+    ]
+  },
+  "pilot_data_hashes": [
+    "12453caa0ec01dff00f6265ffe65724346b8ebd09bedb8c795f3cd6b45b255c4"
+  ],
+  "pilot_normalization_matches_current": true,
+  "split_counts": {
+    "test": 1000,
+    "train": 8000,
+    "validation": 1000
+  },
+  "split_seed": 42,
+  "test_evaluated": false,
+  "v10_checkpoint_count": 0
+}

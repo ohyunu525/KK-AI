@@ -1,0 +1,42 @@
+{
+  "candidate_id": "dropout020",
+  "checkpoint_selection": "structure",
+  "checkpoint_sha256": "d76f4c3915ca68d9a31bfe30686a7942c9aaee74a07b4b79b6067b76a6faa4de",
+  "evaluated_at": "2026-08-31T03:45:30.013491+00:00",
+  "fingerprint": "9c7e8485c760bce267542356f6c9cd71a6aa016cc4710bd6d15b344aa9526c74",
+  "fraction": 1.0,
+  "losses": {
+    "global_sign": 0.33265522265434266,
+    "magnitude": 0.07606912636756898,
+    "position": 0.43046209478378294,
+    "relative_sign": 0.07570811831951141,
+    "structure": 0.5822393550872803,
+    "total": 0.914894577741623
+  },
+  "metrics": {
+    "absolute_sign_accuracy": 0.8837999801635742,
+    "absolute_sign_set_accuracy": 0.845,
+    "charge_mae": 0.2847536315917969,
+    "charge_magnitude_mae": 0.15817335891723633,
+    "global_invariant_charge_mae": 0.19465887260437012,
+    "global_sign_accuracy": 0.871,
+    "global_sign_bce": 0.3326552200317383,
+    "mean_position_3d_error": 0.7222858200073242,
+    "mean_position_mae": 0.3543983383178711,
+    "observations_per_sample": 32.0,
+    "observed_sample_fraction": 1.0,
+    "pairwise_relative_sign_accuracy": 0.9499999923706055,
+    "position_mae_x": 0.4500562286376953,
+    "position_mae_y": 0.3978508834838867,
+    "position_mae_z": 0.21528786659240723,
+    "relative_configuration_accuracy": 0.913,
+    "relative_sign_accuracy": 0.9607999877929687
+  },
+  "model": "g05_sign_only",
+  "sample_count": 1000,
+  "seed": 42,
+  "selected_epoch": 55,
+  "selection_fingerprint": "9e8ba01bffb13d118f0c4e3dc5a82f477f590142da4ab06ba3f19c5bbf68e5fd",
+  "split": "historical_test",
+  "trial": "dropout020__g05_sign_only__g1__s42"
+}
