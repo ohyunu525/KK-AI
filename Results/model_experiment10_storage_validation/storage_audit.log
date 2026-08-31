@@ -1,0 +1,65 @@
+Using seed-specific results directory: C:\Users\COM\Documents\GitHub\KK-AI\Results\new_learning9_experiments\5point_routing_v1_seed41
+Using seed-specific results directory: C:\Users\COM\Documents\GitHub\KK-AI\Results\new_learning9_experiments\5point_routing_v1_seed42
+Using seed-specific results directory: C:\Users\COM\Documents\GitHub\KK-AI\Results\new_learning9_experiments\5point_routing_v1_seed43
+{
+  "environment": {
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 3070",
+    "gpu_memory_bytes": 8589410304,
+    "ram": {
+      "total_bytes": 34203516928,
+      "available_bytes": 25357447168
+    },
+    "disk_total_bytes": 1000081453056,
+    "disk_free_bytes": 885324922880,
+    "LongPathsEnabled": 1,
+    "project": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI"
+  },
+  "existing_checkpoint_count": 36,
+  "existing_checkpoint_bytes": 122821368,
+  "dataset_checks": [
+    {
+      "seed": 41,
+      "ok": false,
+      "error": "Saved dataset is missing and local candidate SHA256 differs: ['C:\\\\Users\\\\COM\\\\Documents\\\\GitHub\\\\KK-AI\\\\Models\\\\charge_dataset_5charges_v9.npz']; use --data with the original byte-identical dataset"
+    },
+    {
+      "seed": 42,
+      "ok": false,
+      "error": "Evaluation dataset SHA256 differs from the training dataset"
+    },
+    {
+      "seed": 43,
+      "ok": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\charge_dataset_5charges_v9.npz"
+    }
+  ],
+  "write_checks": [
+    {
+      "root": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results",
+      "checkpoint_path_characters": 320,
+      "unicode_path": true,
+      "atomic_create_and_replace": true,
+      "cpu_load_for_cuda_request": true,
+      "state_round_trip_exact": true,
+      "exclusive_lock": true,
+      "seconds": 0.05151530000148341,
+      "temporary_directory_cleaned": true
+    },
+    {
+      "root": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models",
+      "checkpoint_path_characters": 319,
+      "unicode_path": true,
+      "atomic_create_and_replace": true,
+      "cpu_load_for_cuda_request": true,
+      "state_round_trip_exact": true,
+      "exclusive_lock": true,
+      "seconds": 0.04068889998598024,
+      "temporary_directory_cleaned": true
+    }
+  ],
+  "original_files_unchanged": true
+}

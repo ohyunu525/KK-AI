@@ -1,0 +1,1342 @@
+{
+  "checkpoints": [
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 6193029,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 8267141,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 8267141,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 8267141,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 8267141,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642566,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 6630147,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 6192965,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 6263195,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 6263195,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 6263195,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 6263195,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\latest.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\best_structure.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 1642502,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\best_total.pt",
+      "seed": 43,
+      "valid": true
+    },
+    {
+      "bytes": 6263195,
+      "cpu_model_state": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\latest.pt",
+      "seed": 43,
+      "valid": true
+    }
+  ],
+  "created_at": "2026-08-31T01:50:48.714016+00:00",
+  "dataset_checks": [
+    {
+      "error": "Saved dataset is missing and local candidate SHA256 differs: ['C:\\\\Users\\\\COM\\\\Documents\\\\GitHub\\\\KK-AI\\\\Models\\\\charge_dataset_5charges_v9.npz']; use --data with the original byte-identical dataset",
+      "ok": false,
+      "seed": 41
+    },
+    {
+      "error": "Evaluation dataset SHA256 differs from the training dataset",
+      "ok": false,
+      "seed": 42
+    },
+    {
+      "ok": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\charge_dataset_5charges_v9.npz",
+      "seed": 43
+    }
+  ],
+  "environment": {
+    "LongPathsEnabled": 1,
+    "cuda": "12.8",
+    "disk_free_bytes": 885324922880,
+    "disk_total_bytes": 1000081453056,
+    "gpu": "NVIDIA GeForce RTX 3070",
+    "gpu_memory_bytes": 8589410304,
+    "os": "Windows-10-10.0.19045-SP0",
+    "project": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI",
+    "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+    "ram": {
+      "available_bytes": 25357447168,
+      "total_bytes": 34203516928
+    },
+    "torch": "2.11.0+cu128"
+  },
+  "existing_checkpoint_bytes": 122821368,
+  "existing_checkpoint_count": 36,
+  "inference": [
+    {
+      "device": "cpu",
+      "finite": true,
+      "samples": 4,
+      "selected_epoch": 26
+    },
+    {
+      "device": "cuda",
+      "finite": true,
+      "samples": 4,
+      "selected_epoch": 26
+    }
+  ],
+  "note": "v9 checkpoints remain v9; no model migration, training or test-metric evaluation was performed",
+  "original_file_count": 232,
+  "original_file_manifest": {
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Codes\\ModelExperiment9.py": {
+      "mtime_ns": 1788139341183561000,
+      "sha256": "6e8a6f2831276ed2c86cbcde51f4eb20ff8b4ff0840afb4e8c4b3936a4633741"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Codes\\NewLearning9.py": {
+      "mtime_ns": 1788131241412572400,
+      "sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Codes\\test_model_experiment9.py": {
+      "mtime_ns": 1788139341183561000,
+      "sha256": "c0b66082c33be5cd9e3f081675d47d3d67ff007f5048c5c32ee8833b7c2ac642"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\charge_dataset_5charges_v9.npz": {
+      "mtime_ns": 1787901157732688100,
+      "sha256": "12453caa0ec01dff00f6265ffe65724346b8ebd09bedb8c795f3cd6b45b255c4"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\best_structure.pt": {
+      "mtime_ns": 1787903009623923200,
+      "sha256": "884508451feef35d74b892f849b7e452d3b0e9d44150e3b63d0e92cb3194e03d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\best_total.pt": {
+      "mtime_ns": 1787903009615922500,
+      "sha256": "7c42ee77504792310aa5363f600f0cfebece2075620ed94d3ec330112395aaf0"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\latest.pt": {
+      "mtime_ns": 1787903188913309200,
+      "sha256": "2b9efd377ed08acaac62ff975aeccdcbadb7e707a223cabbfef53ff30c8d3470"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\best_structure.pt": {
+      "mtime_ns": 1787903460983220000,
+      "sha256": "f3d619247c48785cc2f36cdcee003e3f61aa09f12a4c42a6a9d8d41a74b68abb"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\best_total.pt": {
+      "mtime_ns": 1787903463001571800,
+      "sha256": "ac917227abf42144cfd673f4959563ddee5112057be030500250f47a9eeb3509"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\latest.pt": {
+      "mtime_ns": 1787903738610014600,
+      "sha256": "6950b4216c4eed4acc6bd494331cb6dc0c842858ba788bc20aed1ee18fe86d76"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\best_structure.pt": {
+      "mtime_ns": 1787904025902294700,
+      "sha256": "a855a67310021ad4af5e6f7f0f1ca9dd9ca59f878874907c896b0d762127793e"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\best_total.pt": {
+      "mtime_ns": 1787904022040971400,
+      "sha256": "97cce63da0c81d1b188ec5ed1bdf43aea1f473f4aea92d284182df8b6ae2153e"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\latest.pt": {
+      "mtime_ns": 1787904298130662500,
+      "sha256": "04f0da0c5392ecbbfe613fe523d42763f7d9f5711a6dca01673fb69f76663a29"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\best_structure.pt": {
+      "mtime_ns": 1787904585753291600,
+      "sha256": "a046e586921905ae6060b230668f4eb1d5cd4471135da41abe32a8904610242f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\best_total.pt": {
+      "mtime_ns": 1787904593867042600,
+      "sha256": "e09f25c7865f4d3a8f3d1bac3b66750f77838ed9ce978bf58c452546ba075141"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\latest.pt": {
+      "mtime_ns": 1787904849010413300,
+      "sha256": "de1d1331346b2da5a6175bcd02ae11070a21fbceb9093609b6aeba4c3ce3be0d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\best_structure.pt": {
+      "mtime_ns": 1787905111630876700,
+      "sha256": "d7df9280337241499d05eab115ed1b62ee8eadb40567b78a1453b53753fae57d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\best_total.pt": {
+      "mtime_ns": 1787905121103836300,
+      "sha256": "46ef23dcd7873759f7bf488af128387f22ed0e82ca1778466f1fd4964066c641"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\latest.pt": {
+      "mtime_ns": 1787905373850842100,
+      "sha256": "0add2c4a5d4709268f1e8256a7608ab6f0f56286257c64994d9fdee390713f4a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\best_structure.pt": {
+      "mtime_ns": 1787905635689702100,
+      "sha256": "ca33ff5583947aa5a3c6941556cf1a65fc5b6ae136578efbcf7e5ef0661695f4"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\best_total.pt": {
+      "mtime_ns": 1787905635674075600,
+      "sha256": "cb0eb07e24053e632b0a60d8c3ee632e9323915f5f317c42e0a67ac1b277a27d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\latest.pt": {
+      "mtime_ns": 1787905896864873200,
+      "sha256": "461907af12a3f0e95031d6363c8f2b9021353b54784e936aad0471a13c8bf675"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\best_structure.pt": {
+      "mtime_ns": 1787902814617674800,
+      "sha256": "bb475f9366b343dfc0ca402261cb94d68d90f68dbf875acf9a2c52e0fe4d3908"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\best_total.pt": {
+      "mtime_ns": 1787902814617674800,
+      "sha256": "9b19ba848afede4f8efff02df08ef794efcf17ee1faa3a7e946c00c455f68038"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\latest.pt": {
+      "mtime_ns": 1787902989030775200,
+      "sha256": "2ad384f9e102c11239943f09835bd1f66b8d869fd43dbd88a3b5c23a96167994"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\best_structure.pt": {
+      "mtime_ns": 1787903214111177100,
+      "sha256": "1cfd5d308d29cc95ee7c7799d872ee682d2b3c618c16a778a5c2da984d94840c"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\best_total.pt": {
+      "mtime_ns": 1787903214111177100,
+      "sha256": "7aa81d3bb3343b299afb69c1bcf67520de75e715aaad10d3376d803ab3151d97"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\latest.pt": {
+      "mtime_ns": 1787903433645213500,
+      "sha256": "986ef1b25d834b22ae707bc11de416a90ced697442e7b7624a465cafebb01d6d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\best_structure.pt": {
+      "mtime_ns": 1787903765271197800,
+      "sha256": "7017e9a0ee44f51ad4efd16b6cc1b2ba8c84c541e5ac60e2de5bc361d29897a6"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\best_total.pt": {
+      "mtime_ns": 1787903765265145600,
+      "sha256": "774b0bf289f3465c43e9ff8559321d6905ab9ea7672dcc3790ba60417cda3c2d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\latest.pt": {
+      "mtime_ns": 1787903992375042500,
+      "sha256": "2bc0f5071f7c5d7c982794abb7ce7edc35ba966945112674611c378834521ae5"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\best_structure.pt": {
+      "mtime_ns": 1787904324526425000,
+      "sha256": "940d2cc10b1b936f321aae04a506e089f5d188769f3cc067ccee8af52782a19b"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\best_total.pt": {
+      "mtime_ns": 1787904324521425400,
+      "sha256": "7b166a8e2f5cdc7f6280bbe99f8547fb08252bddd9dc85050eea8c8adf5c8ac3"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\latest.pt": {
+      "mtime_ns": 1787904551723103400,
+      "sha256": "84a2cfe8fc6221f5b9eb9623b97748f9e5c818a6736498edd726209cf2d2e288"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\best_structure.pt": {
+      "mtime_ns": 1787904873941698400,
+      "sha256": "a8b764853329c8a9bcee289637608a0a6c98c7c0fb5e3f148bccb69b457065b0"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\best_total.pt": {
+      "mtime_ns": 1787904873926071500,
+      "sha256": "9c7a0f52dafd08fe2042fb5133ca059bd0276c48b2688f9a56bb9e2c377fb50a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\latest.pt": {
+      "mtime_ns": 1787905086463369500,
+      "sha256": "650130692aa66dac6322fea6d3818f30cfef1a3662926adc97424b58f936a632"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\best_structure.pt": {
+      "mtime_ns": 1787905398590858900,
+      "sha256": "7584adfb1deafa6d1ccef1edbef2c37508dd019eaae41a5743ea6e44cd3cdc48"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\best_total.pt": {
+      "mtime_ns": 1787905398590858900,
+      "sha256": "587b244f8a82ba115c37a3cba7588849f50428ac1d2a4bde891c2df8cde947fa"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1_seed43\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\latest.pt": {
+      "mtime_ns": 1787905611037728700,
+      "sha256": "41f37c84905032db0367b0c33ce4a59463378f8ae438ad58bba8424b08e2a893"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\.5point_routing_v1_seed41.lock": {
+      "mtime_ns": 1787906152091529200,
+      "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\.5point_routing_v1_seed42.lock": {
+      "mtime_ns": 1787906152091529200,
+      "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\.5point_routing_v1_seed43.lock": {
+      "mtime_ns": 1787902794684365800,
+      "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1\\evaluations\\20260830T231523599812Z_f3efb6a1\\evaluation.json": {
+      "mtime_ns": 1788135855164505100,
+      "sha256": "67df60b24cc8bad6605bbf175582aa8a45f1e31020d816709f02425f1a940051"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1\\evaluations\\20260830T231523599812Z_f3efb6a1\\pairwise_comparisons.csv": {
+      "mtime_ns": 1788135855164505100,
+      "sha256": "e9cb477b379c51a0f8e9b92b03ae1c5b7d209c08f8bede3c273f1cb75835b30f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1\\evaluations\\20260830T231523599812Z_f3efb6a1\\pairwise_summary.csv": {
+      "mtime_ns": 1788135855164505100,
+      "sha256": "9e05b7380ed99bd0a0f889c5fcb184125b18242d6e53b0a773472d58734193aa"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1\\evaluations\\20260830T231523599812Z_f3efb6a1\\runs.csv": {
+      "mtime_ns": 1788135855164505100,
+      "sha256": "13dde4a447728af66b824c20e3bdb12a84213c47ba9ab91ea86554b216b2ffac"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1\\evaluations\\20260830T231523599812Z_f3efb6a1\\runs\\g05_full_reconstruction__g05_075pct__seed_41__1880b8d860fe\\result.json": {
+      "mtime_ns": 1788135855164505100,
+      "sha256": "5983d2b2376d30d8466212cceef258330d4bda630d8cbb21580a0af6da6eb4f3"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1\\evaluations\\20260830T231523599812Z_f3efb6a1\\runs\\g05_sign_only__g05_075pct__seed_41__d55cbe85d9a9\\result.json": {
+      "mtime_ns": 1788135855164505100,
+      "sha256": "57b30a3de11dc12b954e48efcfec98ddceac8e7fd8f10753764546b95d42ac2a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1\\evaluations\\20260830T231523599812Z_f3efb6a1\\summary.csv": {
+      "mtime_ns": 1788135855164505100,
+      "sha256": "9b8c5c13a1ec996336d4a6e567bd529c837a4db7e1ef038edcd329358f6bd0fd"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\evaluation.json": {
+      "mtime_ns": 1788139341183561000,
+      "sha256": "5496e3f1d0ee82c938e74237aa1a002485ef32c1ec7523c4ec4979a4731a484e"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\pairwise_comparisons.csv": {
+      "mtime_ns": 1788139341196220900,
+      "sha256": "582401fff79135a40775579024d83994f80e68f45b061e5fc26370b05144e9b5"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\pairwise_summary.csv": {
+      "mtime_ns": 1788139341196220900,
+      "sha256": "128e925f3a8b1a48700a7700134d54b08fd4092dc983472cf6681bd5db480ab4"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs.csv": {
+      "mtime_ns": 1788139341196220900,
+      "sha256": "e61b1efe847507d21b0bc55d59a5ee616fa01e7e87c7383aa06589fd4438c30d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_full_reconstruction__g05_000pct__seed_41__8ea078f3c543\\result.json": {
+      "mtime_ns": 1788139341196220900,
+      "sha256": "78dd49a566d08d6515a2e97a22c767c86c9fddf051d62a3bff4515fadd9d5d4f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_full_reconstruction__g05_010pct__seed_41__3a047e27a893\\result.json": {
+      "mtime_ns": 1788139341196220900,
+      "sha256": "4a37c4409908526d1f8b31380adda0b8293a5f6c5ee090cdab8f018bf6d75a0a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_full_reconstruction__g05_025pct__seed_41__6b8f65cff0c4\\result.json": {
+      "mtime_ns": 1788139341196220900,
+      "sha256": "a9fa7ad4a7b6acdedc6eece862dd839d5a53217758dbdde0a7408e39fd59121b"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_full_reconstruction__g05_050pct__seed_41__2e76912911c3\\result.json": {
+      "mtime_ns": 1788139341196220900,
+      "sha256": "ba7b1ee964ea4e37e748f29870e4a38a7b4a81921a41281b3494ad848cd485ff"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_full_reconstruction__g05_075pct__seed_41__1880b8d860fe\\result.json": {
+      "mtime_ns": 1788139341209536300,
+      "sha256": "200610aeee794f2fab996835880d6e9821d106d920e6a29a5041ff2d21ec9c28"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_full_reconstruction__g05_100pct__seed_41__acf3506459d6\\result.json": {
+      "mtime_ns": 1788139341209536300,
+      "sha256": "9eab8022d923e423896e0c9ee5fac853d56ca533c1ed2be9f0b3cff3b5d1d159"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_sign_only__g05_000pct__seed_41__f56e5ea3c50e\\result.json": {
+      "mtime_ns": 1788139341209536300,
+      "sha256": "3530da9c4c04f9575d5d20f55fc9cb514ebca56cc483478e8dfb68a4b692bcf7"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_sign_only__g05_010pct__seed_41__10a71341c43e\\result.json": {
+      "mtime_ns": 1788139341209536300,
+      "sha256": "e548944323e85cec9e3472c09c087e6c7c431ec48af93a8c79854da2b854e072"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_sign_only__g05_025pct__seed_41__662874c8682f\\result.json": {
+      "mtime_ns": 1788139341209536300,
+      "sha256": "4eb4323ebfdbb5f95ea3799e18feaa182bebb1c33c3763d8159ac50828923053"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_sign_only__g05_050pct__seed_41__c565131aab8b\\result.json": {
+      "mtime_ns": 1788139341209536300,
+      "sha256": "6668a427f26b1f03495f1fa784345286b01cf0427c1320a3d417fcc520f9a33b"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_sign_only__g05_075pct__seed_41__d55cbe85d9a9\\result.json": {
+      "mtime_ns": 1788139341209536300,
+      "sha256": "623208d7df1dfadbea9d8f00468b008700fb2b967400eec72b51b5fde5645824"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\runs\\g05_sign_only__g05_100pct__seed_41__47b3174b2f65\\result.json": {
+      "mtime_ns": 1788139341222676800,
+      "sha256": "06bd73d7d4c2e5b8bf9502ffe771298f6c5b3475b716c5621520b2cb487544ec"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\evaluations\\20260831T003225629017Z_a297511b\\summary.csv": {
+      "mtime_ns": 1788139341223567600,
+      "sha256": "8b0f80c2ac431d331840f576d237c799349b55cb5a200a898d2454280ad5a1c7"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\normalization.json": {
+      "mtime_ns": 1787906152105052500,
+      "sha256": "7018a28e262069e88256f64985e1ce83cdbc13da32d538af0da0e288ccee264c"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\pairwise_comparisons.csv": {
+      "mtime_ns": 1787906152105052500,
+      "sha256": "582401fff79135a40775579024d83994f80e68f45b061e5fc26370b05144e9b5"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\pairwise_summary.csv": {
+      "mtime_ns": 1787906152105052500,
+      "sha256": "128e925f3a8b1a48700a7700134d54b08fd4092dc983472cf6681bd5db480ab4"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\protocol.json": {
+      "mtime_ns": 1787906152105052500,
+      "sha256": "e9c00cb8d7cf199e918913d83949232e0e93d8536d15f3cdf737263972f6e7af"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs.csv": {
+      "mtime_ns": 1787906152105052500,
+      "sha256": "6091e9f28dc2e37b02a707bab612eda6d3832317f8dcd1245c2fd2222eb98759"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_000pct__seed_41__8ea078f3c543\\config.json": {
+      "mtime_ns": 1787906152105052500,
+      "sha256": "33ce52125b5f12fde0d52d58cefe96f3bd89afa4c4e943be6ee645f90e644cf3"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_000pct__seed_41__8ea078f3c543\\history.json": {
+      "mtime_ns": 1787906152105052500,
+      "sha256": "3e060f5afbe243ef57435b5e9fa32f7322b09fc1428ce822c77c70caca92656f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_000pct__seed_41__8ea078f3c543\\result.json": {
+      "mtime_ns": 1787906152105052500,
+      "sha256": "57495b5cb0c5fcbf879ea9dbf32274dc24a9ded7aaf27c6d86edcd770d123423"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_000pct__seed_41__8ea078f3c543\\status.json": {
+      "mtime_ns": 1787906152105052500,
+      "sha256": "5c2e14ea1eb6d3de04f2d167f67828629ab4d5953197cee56721fae05c9897b2"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_010pct__seed_41__3a047e27a893\\config.json": {
+      "mtime_ns": 1787906152119243300,
+      "sha256": "ac2d752c6da79d911778d7fcb2f9dcf2d7f2ef0cd93d582509c5653ba8ad7a51"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_010pct__seed_41__3a047e27a893\\history.json": {
+      "mtime_ns": 1787906152121243200,
+      "sha256": "fb860af2974003aca3e0fd093185910ed0b2158e85cc590f606f951a54368610"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_010pct__seed_41__3a047e27a893\\result.json": {
+      "mtime_ns": 1787906152122243700,
+      "sha256": "c9de43f6c7642a9d97623cc1f251b1c19f7de1c0ad69f39bddf15913e124e4d2"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_010pct__seed_41__3a047e27a893\\status.json": {
+      "mtime_ns": 1787906152123243200,
+      "sha256": "7d108f01990fdf5103b48328f8cfa3e8c89094d6bdf17282983e739dccc2c0ba"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_025pct__seed_41__6b8f65cff0c4\\config.json": {
+      "mtime_ns": 1787906152123243200,
+      "sha256": "b464e4c1bc99d4279cdbfc04de28151e370e1ac59eb198d474660c2bfb422454"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_025pct__seed_41__6b8f65cff0c4\\history.json": {
+      "mtime_ns": 1787906152125243700,
+      "sha256": "f7dad2a898ae2431b7ba05088a68783c2ea474053a6fbe9deb46d789bec530f2"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_025pct__seed_41__6b8f65cff0c4\\result.json": {
+      "mtime_ns": 1787906152126243200,
+      "sha256": "d355b9abcb89f4a8e9273c90cc35d6c8ab1018d0689603940f34f3113168e8ec"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_025pct__seed_41__6b8f65cff0c4\\status.json": {
+      "mtime_ns": 1787906152127243200,
+      "sha256": "bdd9b90f55b9a47f9e9331836ed806339435d30c8703e64f08c3895a221e523e"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_050pct__seed_41__2e76912911c3\\config.json": {
+      "mtime_ns": 1787906152128243300,
+      "sha256": "23526dd6d09f6c06da58f1fe050c208e391084e2e7f98c70c99602fd388eb3d9"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_050pct__seed_41__2e76912911c3\\history.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "f44efa38e74d29801e0f493ff35764aca014f389366a9d316ce1d48467aa8e23"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_050pct__seed_41__2e76912911c3\\result.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "a8c38662113a47de1e5d9593c47096d6c994b002d646d27d1d46e4fd37cb06b0"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_050pct__seed_41__2e76912911c3\\status.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "c998367d02ff3d72b559d176007c51da1a279cb8b591bd29da78d8adc848127d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_075pct__seed_41__1880b8d860fe\\config.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "1821b359c8d594620cab5924c735d0bfc5521ea0fbdd0a1ba0bbcb20161b6334"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_075pct__seed_41__1880b8d860fe\\history.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "2e8c363d31b06b677910bde9efe8e49771cdffc4961741591e01b0a10aee8dd7"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_075pct__seed_41__1880b8d860fe\\result.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "2ac4a928631d0b5b1676ce7b6b7ec4a0f9d3fd20c467e5f49c7a9253a31c3a0d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_075pct__seed_41__1880b8d860fe\\status.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "7363938573477428468311afa951bfff0b63e1f77e406c8212cb97cc75d91407"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_100pct__seed_41__acf3506459d6\\config.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "346677af13c64abe90f839314fffedf90eb5d99de8e5e3b7a382863e27b698ab"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_100pct__seed_41__acf3506459d6\\history.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "6f9602dbc4da2b001c42548459b935431ac37a7fb287934aa3f92b8365d04824"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_100pct__seed_41__acf3506459d6\\result.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "053b58f97508ce9acfd5bdfff4daef4fc8a73428d768beb21efc92ecbaa1f4f8"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_full_reconstruction__g05_100pct__seed_41__acf3506459d6\\status.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "a4dff7f63912ed17d87ee0213caabfebc0926f7072c53435ec63e73dae7d3d37"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_000pct__seed_41__f56e5ea3c50e\\config.json": {
+      "mtime_ns": 1787906152131264400,
+      "sha256": "987dfb5811d146a3c1803933632a139f5383b2e967b11293b5a57b30cb54530c"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_000pct__seed_41__f56e5ea3c50e\\history.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "3e060f5afbe243ef57435b5e9fa32f7322b09fc1428ce822c77c70caca92656f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_000pct__seed_41__f56e5ea3c50e\\result.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "77b08c203036a3d9684f3bfd8b73bc0f389f3af3ecf82948554b462781ee614a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_000pct__seed_41__f56e5ea3c50e\\status.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "6b3b3738b5cb375fa63a35d6ae054e6c0fda3d25313903f5d3ca93766e5cd4cb"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_010pct__seed_41__10a71341c43e\\config.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "ce887e4558ce38b6ed862438ccb88bd896af9ea752fffdd4d9bc2fe2083b793e"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_010pct__seed_41__10a71341c43e\\history.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "caa6db802b3ecf1047549cd1230cc42a957684eb325f8541a0b7a7b6d06a59ac"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_010pct__seed_41__10a71341c43e\\result.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "9c17d963ad8ef39016798d02cf8435b979e7a68196a6d3aff6b4bb5382982524"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_010pct__seed_41__10a71341c43e\\status.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "d004e2cd218ca634178ea0a96d7313ba437d1200a6acc4de83b91b902aac5092"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_025pct__seed_41__662874c8682f\\config.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "9f4fd8505134976b8c274b6b18beffa7e5b0ef4e954b58e55e4202a506cbf6ca"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_025pct__seed_41__662874c8682f\\history.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "ecf62c1272883a6a181719284139d0a0d8401e0a5502fcd665e81d3b93946d45"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_025pct__seed_41__662874c8682f\\result.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "3cbeb7e7dfeebed617d8147cd999a392c41b34f7cf5c77c3362056b75b01396d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_025pct__seed_41__662874c8682f\\status.json": {
+      "mtime_ns": 1787906152143839000,
+      "sha256": "73e650b4d877e4f40869050c46ce2fee40ce1edf8e8d74ada876afb7aeb8d245"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_050pct__seed_41__c565131aab8b\\config.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "799cb83b4837fbb05d322cbe3d5e949696dc07c9de544d182a8f3641664ef838"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_050pct__seed_41__c565131aab8b\\history.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "d2c5116aff0ef382a414d99317099c6c889b631e6dc3335505b5823cd6c3e199"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_050pct__seed_41__c565131aab8b\\result.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "1f87c25a4f95bb99ce9f903602e9e51e2e5996b4a62c2a2e6338863cecd21c6a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_050pct__seed_41__c565131aab8b\\status.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "33a22368b243a3a1b094c4de47c01d654df77e9d06bf2d61b9d78c8c53c2cbc5"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_075pct__seed_41__d55cbe85d9a9\\config.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "0c30c65fa449ffd63f1d39c1749e32216a1de4ab2b35f92ab371fb0dc35a31b8"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_075pct__seed_41__d55cbe85d9a9\\history.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "bd21b5d73d4e06852266942c66b62f1ba94ba1cd2237fa26fd46fe825a89061d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_075pct__seed_41__d55cbe85d9a9\\result.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "02d31cfd7e33b5b1cc1e1acc946bac1c0f6c5f0166423e22e244d71e5ffa83bd"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_075pct__seed_41__d55cbe85d9a9\\status.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "492b526a3a5cb276112cacc11ea598db4999484523469bd3cc2f6e530ca5c2c0"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_100pct__seed_41__47b3174b2f65\\config.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "4525c3d83be49421b35c0ccb9521b6ff48d2f3843db011098d31803cdddce47e"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_100pct__seed_41__47b3174b2f65\\history.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "b8cd1bca54cf14afb857061b27a0733a5c9d1a30a8bcf656112a23610d4e2e99"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_100pct__seed_41__47b3174b2f65\\result.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "83601a25b57c3ed7db44a4f1979b5d02edbaaff29e58fb9976b8656014bebd9d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\runs\\g05_sign_only__g05_100pct__seed_41__47b3174b2f65\\status.json": {
+      "mtime_ns": 1787906152157219000,
+      "sha256": "6a341f6df5c6c8fa2680118896c02ed9178ba232e31a706273bdd7cb6bdf9747"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\split_indices.npz": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "a63dbc2f47a9f452860c3b235592787c856ac9d079dc33a628d7868afd85138f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed41\\summary.csv": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "8b0f80c2ac431d331840f576d237c799349b55cb5a200a898d2454280ad5a1c7"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\normalization.json": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "7018a28e262069e88256f64985e1ce83cdbc13da32d538af0da0e288ccee264c"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\pairwise_comparisons.csv": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "5a374cb00096b7ad150ce9b0d0b9ddb7c6ddb702d0957d9a6b9d4cb69396eb86"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\pairwise_summary.csv": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "43168ace24ac49a0f6c0a792969c74920198e547a1f404a252d89c6bf237936c"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\protocol.json": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "d16d23d6090df9c569a89cdd5aea9be9fbf8541ec97ef42865e1fb82477cd642"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs.csv": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "4dc7e55f93c48742de099143fc7342e331fac5c41000bc3845c683180d4cde38"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_000pct__seed_42__7d8ae61c4605\\config.json": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "be1dd379203a62938ae6fff53aab2b44094d2c87f52e60e92a8f0c3065910f1a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_000pct__seed_42__7d8ae61c4605\\history.json": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "1e3b35b41b55a2e5d02e36aeb9188e38f1c44dd3a9a682f9186a9855cdc0a526"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_000pct__seed_42__7d8ae61c4605\\result.json": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "57130e0f7bcbe8a260a15f491a35392f5c4e58d8eb64e9fd2332d92e5c222ebb"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_000pct__seed_42__7d8ae61c4605\\status.json": {
+      "mtime_ns": 1787906152170677800,
+      "sha256": "cd908de82cc2e2172e906f5580902123793ef107d7d3953d840f7e0c9fb08d67"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_010pct__seed_42__7d4653f145ab\\config.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "caa593f423af386c214b5141a0091e926be69df91e85ea81cda5f825f4706e05"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_010pct__seed_42__7d4653f145ab\\history.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "b4affd24691918c504b69501b8a49a68803ea2d05168d13a69261309983ac548"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_010pct__seed_42__7d4653f145ab\\result.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "d4230aa07100a1fe596e65a2ef0942f8b6895297f12a7455f78a2832bc35f99a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_010pct__seed_42__7d4653f145ab\\status.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "55049c4ab607e27d7cf6b85089d5946beb5250829b045d58d6ca282188bc95bc"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_025pct__seed_42__1ba41dbd95be\\config.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "9c92cdf2c3bf8b1f835c3550f9e72161c903d5b6f17ad41c11496386be171f7e"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_025pct__seed_42__1ba41dbd95be\\history.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "ec6ec5db21eea08c5b243b8b21739e95d42435e241c93ce73d31d3f93a7f4148"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_025pct__seed_42__1ba41dbd95be\\result.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "99f2302d23ee2d2cabaed868e45188f0c42b511e80afcc1cb54e1dba058df2e4"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_025pct__seed_42__1ba41dbd95be\\status.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "3b59b690754af309489d92caf9e877a58ed3180fa1a7388dff15566e3905a1e0"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_050pct__seed_42__8c9fbcc55de0\\config.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "1505f0076a504a36e025dcf06192f87f04a61b0bd81d20787fed170b37a57eb7"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_050pct__seed_42__8c9fbcc55de0\\history.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "1dbc38893833e690d4b252fa81af43cb04caaadadf616f913325c149d961ce97"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_050pct__seed_42__8c9fbcc55de0\\result.json": {
+      "mtime_ns": 1787906152183950800,
+      "sha256": "e09417db160be5de08c9aeab1acffe4160f107c7d43e0688d51a16b8d97e3f53"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_050pct__seed_42__8c9fbcc55de0\\status.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "99728220740b8c7906bb6551e79134b24c8f26618fb2935f1bd438aa95ff548c"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_075pct__seed_42__ea2fff605788\\config.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "3db811f453ec6f49df61295eb76f480cce0c713770a6faa2101d6aaa6c3c85da"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_075pct__seed_42__ea2fff605788\\history.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "e499463ba09bd3825dc4498c2c1141413ce836fd7613cc0ff3862ba56a064627"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_075pct__seed_42__ea2fff605788\\result.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "8dfeb7dba22f3283b3e2d42aa7f3eed4cc837dfece5a430662c1dc5aad5b6dc8"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_075pct__seed_42__ea2fff605788\\status.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "f725f4348b3e0cc8ded43c107da7925e4bde5dd094674e21dc4fc9cd9cb421c4"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_100pct__seed_42__e2a69d923385\\config.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "ffd5733e9463679c09422fc2131b3b82dfa1de0c32b32f6d99ebb44f5e418b13"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_100pct__seed_42__e2a69d923385\\history.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "7175452985cb18257e7dfec486163128d242b232939ff579f1dff995d4c8ff9f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_100pct__seed_42__e2a69d923385\\result.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "3e42ae27a45482139cae5fc4aae4355ade6f6d91db85ae7e160d57735add3bbd"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_full_reconstruction__g05_100pct__seed_42__e2a69d923385\\status.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "279c10b47e2474e7050c5f477b5d665a3639ad601eb0b005d8591366f069ebdf"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_000pct__seed_42__7381148c39db\\config.json": {
+      "mtime_ns": 1787906152197584900,
+      "sha256": "68fb57f3e6fba8ece29dee5dedf74ea15cb5e0e252ad339c37fbb77d7f16c0e9"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_000pct__seed_42__7381148c39db\\history.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "1e3b35b41b55a2e5d02e36aeb9188e38f1c44dd3a9a682f9186a9855cdc0a526"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_000pct__seed_42__7381148c39db\\result.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "b1cac61fbedb3b8323b1053122b2a60278f9d7e119a2957b67130fcede2ddd88"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_000pct__seed_42__7381148c39db\\status.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "f3002b9f0b42fb6379e9b6dc3392bfbabe18d275c871ba8d28726f38de7661bc"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_010pct__seed_42__c436f6048f89\\config.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "ce8dc73141f34d4ee536df3012d471c2dc0f46fb8e36dbeeae0cd04cf1abbcb0"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_010pct__seed_42__c436f6048f89\\history.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "b8028daca5ebb59bf7530d695814394c1b2c86b0532a9127dd0489a70c76bc13"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_010pct__seed_42__c436f6048f89\\result.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "06a0d2481fd1aca5652ec5cec09e2a2ce7090719d2f8e95c2d0edc78ebf2044c"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_010pct__seed_42__c436f6048f89\\status.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "ef34a1c17cf059381f4337fb4e35dd0dc21194f1797bd8d89ae285c7bdb16fc3"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_025pct__seed_42__6b6220edd43e\\config.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "425a5b5485a94609a46739a652682fa740c4761086b2612e70ae59a25772abe9"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_025pct__seed_42__6b6220edd43e\\history.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "d78747fec20da4def63469d11d16dd0affc7d28058de605ea5e17cd2f1368145"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_025pct__seed_42__6b6220edd43e\\result.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "fdc6b8a8bc3b320a24ca7cb9ce53e7c6fc49efff49b597c8690171a6cdd7f16f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_025pct__seed_42__6b6220edd43e\\status.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "8f2c5dc6e06290776c08b5f4386b69f9b6829607ca1da14e3dc330b7588cfde1"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_050pct__seed_42__3e78c74bbf35\\config.json": {
+      "mtime_ns": 1787906152210526900,
+      "sha256": "961717ab6b857e78cf18b534010d010024726ee5e19d1862ddbc6d942d679556"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_050pct__seed_42__3e78c74bbf35\\history.json": {
+      "mtime_ns": 1787906152223895300,
+      "sha256": "7948ea656b95391250ddc1bd328d7d6977880e5000d6abb59ac68e355604b56b"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_050pct__seed_42__3e78c74bbf35\\result.json": {
+      "mtime_ns": 1787906152225371300,
+      "sha256": "6f8facc3fc1b6d011dd93342a55025ae4c51aa76040af8f5387fd6d0c0da68d2"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_050pct__seed_42__3e78c74bbf35\\status.json": {
+      "mtime_ns": 1787906152226372300,
+      "sha256": "2cc4e0b754471551a217d4f3d1df28d17d762b84625550aa157d143ebd4f7734"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_075pct__seed_42__4f060fadcb77\\config.json": {
+      "mtime_ns": 1787906152227372400,
+      "sha256": "c9cc9b41c6afd869a51320c964bb6dc7552cebbf92d18c592c2f58660f3f324c"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_075pct__seed_42__4f060fadcb77\\history.json": {
+      "mtime_ns": 1787906152229372600,
+      "sha256": "49ccd3bb8e8b2f043d45aca21a7f3591e9b537898f4d52ef21401f18b1c4902d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_075pct__seed_42__4f060fadcb77\\result.json": {
+      "mtime_ns": 1787906152230372400,
+      "sha256": "d0156a92dc5977bab24702c4fdaeac1ea70b8d2a1255d30fcdebbfe7e32c15d9"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_075pct__seed_42__4f060fadcb77\\status.json": {
+      "mtime_ns": 1787906152231372000,
+      "sha256": "435e6a84a22afaf294d2ab567af815e9387fdd82c1b057ef805b726e257e317e"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_100pct__seed_42__adefc6a18cb3\\config.json": {
+      "mtime_ns": 1787906152232371900,
+      "sha256": "c64c86c596eb57d61928638de028815434be8f73990719c1d0c49762f433fa0c"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_100pct__seed_42__adefc6a18cb3\\history.json": {
+      "mtime_ns": 1787906152233371800,
+      "sha256": "20e638ee9c5d822458d5f55284590d1c2b3cc978260e88035eb0862e5ab98379"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_100pct__seed_42__adefc6a18cb3\\result.json": {
+      "mtime_ns": 1787906152234372000,
+      "sha256": "528078311e54a0f8bdee0cb6b545a8a0a6b648f2165f1aac7b3a6c83afd2f097"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\runs\\g05_sign_only__g05_100pct__seed_42__adefc6a18cb3\\status.json": {
+      "mtime_ns": 1787906152235371900,
+      "sha256": "2f96b6395ae238cec57f953669ba81637850d252242e97b9aebfdc1ad4bb6598"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\split_indices.npz": {
+      "mtime_ns": 1787906152235371900,
+      "sha256": "a63dbc2f47a9f452860c3b235592787c856ac9d079dc33a628d7868afd85138f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed42\\summary.csv": {
+      "mtime_ns": 1787906152237372300,
+      "sha256": "e39616d8d3d4e5efb5e87d1e82ceb9360abacf5b6ef3339fe4128b9a1285eecf"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\normalization.json": {
+      "mtime_ns": 1787902794711413300,
+      "sha256": "fe25b425707841b0c35bea1863f7e52ac56b6b5e349834fc3e29755ee9977c1d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\pairwise_comparisons.csv": {
+      "mtime_ns": 1787905897102233500,
+      "sha256": "cc3c4a91366a2e736db5587e50fa762b3d9b05866339ac9272ca6de7cf86e684"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\pairwise_summary.csv": {
+      "mtime_ns": 1787905897105120100,
+      "sha256": "c8ba59732ddc2b01ccc58eac9cd6b1edee69d18eb6f1360db2720e80efc75933"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\protocol.json": {
+      "mtime_ns": 1787902794699401800,
+      "sha256": "5250e2e4bcdf7c699f69abe34b4330d6e224984b625c4e2babaf0d8a2ff0f7be"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs.csv": {
+      "mtime_ns": 1787905897087233600,
+      "sha256": "d074711c156d01c13e6ab534ae76396b1591de5a9148ce24bc2f37c1b9c4dec0"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\config.json": {
+      "mtime_ns": 1787902989271058500,
+      "sha256": "0ba3e9777a7e0d32f9b3657175a67d7885098b250152273d21e74ab4d7a69256"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\history.json": {
+      "mtime_ns": 1787903188938310200,
+      "sha256": "958e6293a9c8e1f719dc54eaaa57e040b0afe31e29db7e0035803cc8fa8940ec"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\result.json": {
+      "mtime_ns": 1787903189069961900,
+      "sha256": "ac0837a4437a26547bbd0e731c758e929cf38c569556a28f6f1ad2fe61f93095"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f\\status.json": {
+      "mtime_ns": 1787903189072961800,
+      "sha256": "cd540d74354dea092f2a36e64655410da54978d61be5f4465765c97b70ab901a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\config.json": {
+      "mtime_ns": 1787903433847371100,
+      "sha256": "2ddc2043053e6b4ad8474fd8f66cc8d19cf381f3d87ac5e1afb5a1be2bfc3f26"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\history.json": {
+      "mtime_ns": 1787903738631048400,
+      "sha256": "fd58507901d84d5abfe9b2de8722bae5ff16dfee59f4095ad02dd3c86bbd6a77"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\result.json": {
+      "mtime_ns": 1787903738798193200,
+      "sha256": "491a2bcdafe54e16898df8e9ec79406e96fa15058dcbe8f60aec30f8dc6b149a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b\\status.json": {
+      "mtime_ns": 1787903738801193500,
+      "sha256": "6dbc9bebfbeda65a7870b801e3dcd88dd0df30871966b09b6044d4f3c6866e11"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\config.json": {
+      "mtime_ns": 1787903992598154500,
+      "sha256": "ff6ed9badd938f1014a69d31eee571c132ba7b5cc06915040a46f541e5bcf3c7"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\history.json": {
+      "mtime_ns": 1787904298150662500,
+      "sha256": "bf95c1447b670a8386a8c398fa52f6f9ad8b4558b13a215afc85247c63eeb6d9"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\result.json": {
+      "mtime_ns": 1787904298308811900,
+      "sha256": "995e79a872ade0f311fb084467956d903e2d458311d6793f9bae1a326be606af"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e\\status.json": {
+      "mtime_ns": 1787904298312812000,
+      "sha256": "7af98774655efef4baa697284f74382df61d57529e3c39aa6a15a1a8e096024d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\config.json": {
+      "mtime_ns": 1787904551974320200,
+      "sha256": "3e020e5cd8d9cc37dd4a74507dc97072e84f5861ce9385b73a169344135ff154"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\history.json": {
+      "mtime_ns": 1787904849023716200,
+      "sha256": "f9a141847f42ee54ca79fe63d60445548caa3a0dbc9d5a2e4bed75e97d7cc728"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\result.json": {
+      "mtime_ns": 1787904849193878600,
+      "sha256": "a08d13227d90db2c5c2d66b581fb5abc9b3dc455539ccbb7060ce93c0bdc2f1a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502\\status.json": {
+      "mtime_ns": 1787904849209503600,
+      "sha256": "d7628a1fa049a7968f52c4aefb50b00b04e7042a6d9b83b728f8b7cafe524b19"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\config.json": {
+      "mtime_ns": 1787905086689812800,
+      "sha256": "44d29dd56eafe2350f64fb7b4383bc3508223e9d0c430127207efe09a01225c6"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\history.json": {
+      "mtime_ns": 1787905373863904900,
+      "sha256": "e86fa5a39d9629237b059e99784bbe275ac222dc278658241bc39ba4eba71c4b"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\result.json": {
+      "mtime_ns": 1787905374028881500,
+      "sha256": "9dfaace34d6abd9683216ee37b3ff8d07bdf804ea3bd10dd37ae4c971a1aa1c5"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782\\status.json": {
+      "mtime_ns": 1787905374031881600,
+      "sha256": "f0d02ca6cc98c9738f46ecf9e4a6347cb5ba934a4b71da98abe6926dcf1ef976"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\config.json": {
+      "mtime_ns": 1787905611288661400,
+      "sha256": "42474e55f808097c4078821ea1849f8d8924938dc9282efdc1d4580347628365"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\history.json": {
+      "mtime_ns": 1787905896877977900,
+      "sha256": "b69dd48227d00f1c25a2f2dac569c8e7e86e1f74925d63ddfef43723b885b110"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\result.json": {
+      "mtime_ns": 1787905897037661700,
+      "sha256": "9d81d3737c47c70a60b471ba5c0b1a13cd24871e8a0c4b2e4a2d8cbe1e43cc01"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa\\status.json": {
+      "mtime_ns": 1787905897037661700,
+      "sha256": "d23933fa06e0c75234f624c62fdf91d887d228fbb85bcc84f335bf39530ccce5"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\config.json": {
+      "mtime_ns": 1787902794759823200,
+      "sha256": "3611c7d06cb8a4d5ae014011c46fc77afccbe765fcda66c8885fd51fc5fd50ba"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\history.json": {
+      "mtime_ns": 1787902989044346300,
+      "sha256": "958e6293a9c8e1f719dc54eaaa57e040b0afe31e29db7e0035803cc8fa8940ec"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\result.json": {
+      "mtime_ns": 1787902989241126100,
+      "sha256": "ba6cac68a209e34ee2cf666f012e698eec396eafd791b5959be1ca700122f815"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e\\status.json": {
+      "mtime_ns": 1787902989243126100,
+      "sha256": "94cc982e8a93b08e53e2316f4a428ebf104dfa5ef9033e2c723b36a82a12b8e2"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\config.json": {
+      "mtime_ns": 1787903189137426600,
+      "sha256": "02ae157724feea3d74ee1b18790c1e57b622c60d55bb67dc67668d35985da0c3"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\history.json": {
+      "mtime_ns": 1787903433666249700,
+      "sha256": "34d25cbef4d8d3e5785f872bbc6e31ef9770d510fc9510503bc09fa5508fa3c2"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\result.json": {
+      "mtime_ns": 1787903433809291100,
+      "sha256": "a676d289eb6ea57cdd1676ef997f9b1108b3c99683206cb2b4eafc1a51eda5ec"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_010pct__seed_43__569719e6de6c\\status.json": {
+      "mtime_ns": 1787903433812370600,
+      "sha256": "03f139c40ebfc4cdb7dd4248e37dfc810c0af8863d67e6bf041fa3cce96e8ee8"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\config.json": {
+      "mtime_ns": 1787903738875315800,
+      "sha256": "fd55c8e97e463e99e805a7d71cd6d302e34d9d9acb05df7b9bc1240938c66db9"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\history.json": {
+      "mtime_ns": 1787903992389041700,
+      "sha256": "7f27099b81e94bfe981628f17bd49fa90506e61d0b442004a087dba70d5cfc05"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\result.json": {
+      "mtime_ns": 1787903992547094900,
+      "sha256": "8a3131c328a7369cfb75adf54b8ab168fee1819eacd43928cb92a5602bb6cdcc"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_025pct__seed_43__559b9cd8371e\\status.json": {
+      "mtime_ns": 1787903992550094800,
+      "sha256": "39c1d78abf2ce41b87000efd564e7fc1ef638dbe8001867d51c56ff345708d9f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\config.json": {
+      "mtime_ns": 1787904298388841600,
+      "sha256": "e1fe330e720035bdf956f0c2d339989a29f635321045b887e736c7a832ffb1b8"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\history.json": {
+      "mtime_ns": 1787904551740134600,
+      "sha256": "c42cc5a1427989644d4957700cde1ee308cb3e661676d85710c2baaaa47d6dd8"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\result.json": {
+      "mtime_ns": 1787904551921319800,
+      "sha256": "866d921120ba539deea39cfb465dff535d25e570ef7676a94bf89f3dd065dada"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_050pct__seed_43__9763f0d66175\\status.json": {
+      "mtime_ns": 1787904551924320200,
+      "sha256": "fc6c72813cd7fa20b35dced91c23245f493c7901f658f02fccc2c0fc8ec4119d"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\config.json": {
+      "mtime_ns": 1787904849294524300,
+      "sha256": "9ea6d0991178a4ad87dfee68c00d2fd9d52cd7a31f5c9c86e9213844c2756d02"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\history.json": {
+      "mtime_ns": 1787905086489604100,
+      "sha256": "250786fbb6fd491aaeca328ad14a3cd00a080d504d7be72f4476665631a30649"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\result.json": {
+      "mtime_ns": 1787905086623699300,
+      "sha256": "1521daa503eef53b62dc62807f610eae906954033a150ac48bc7c73e4002360a"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_075pct__seed_43__b85b94b83477\\status.json": {
+      "mtime_ns": 1787905086623699300,
+      "sha256": "e164c7281f0134ad9765f5274ecc71a2c412cfde0fe54bde35af81207b190c0b"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\config.json": {
+      "mtime_ns": 1787905374136362300,
+      "sha256": "6b80e27aedd99dab9c85ec4d23eef79e0a01628b5d1c9cc54b2d1429fd703593"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\history.json": {
+      "mtime_ns": 1787905611059074200,
+      "sha256": "95fb4141f574ab0c44742cb819a832048d287bcc06d54f2936debb0ac0c18ce1"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\result.json": {
+      "mtime_ns": 1787905611212394700,
+      "sha256": "4888c6d48087b127da44d32e8f2a53c8c5df77f4c279c100bbe616d7f7e86345"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\runs\\g05_sign_only__g05_100pct__seed_43__7eca43faabbb\\status.json": {
+      "mtime_ns": 1787905611212394700,
+      "sha256": "b1a03150b0f7555c56a6e370f8d7224139b671675f5db3fa083c0f11412b151f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\split_indices.npz": {
+      "mtime_ns": 1787902794711413300,
+      "sha256": "a63dbc2f47a9f452860c3b235592787c856ac9d079dc33a628d7868afd85138f"
+    },
+    "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning9_experiments\\5point_routing_v1_seed43\\summary.csv": {
+      "mtime_ns": 1787905897092233500,
+      "sha256": "ff5f43a3394d1ae22253d4f567483820d887f0598c4413e848059d1a587db244"
+    }
+  },
+  "original_files_unchanged": true,
+  "original_m9_default_root_resolution": [
+    {
+      "error": "Evaluation checkpoint directory not found: C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1; use --evaluation-checkpoint-dir to select its exact directory; no training will run",
+      "ok": false,
+      "seed": 41
+    },
+    {
+      "error": "Evaluation checkpoint directory not found: C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1; use --evaluation-checkpoint-dir to select its exact directory; no training will run",
+      "ok": false,
+      "seed": 42
+    },
+    {
+      "error": "Evaluation checkpoint directory not found: C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning9_experiments\\5point_routing_v1; use --evaluation-checkpoint-dir to select its exact directory; no training will run",
+      "ok": false,
+      "seed": 43
+    }
+  ],
+  "source_checks": [
+    {
+      "seed": 41,
+      "v10_physics_source_checker": {
+        "current_ast_format": "python-ast-show-empty-v1",
+        "current_ast_sha256": "38a0d1b746fa0275e1e1efa2b303b7c164179d406121863e8392a2ff08684263",
+        "current_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+        "training_ast_format": null,
+        "training_ast_sha256": "38a0d1b746fa0275e1e1efa2b303b7c164179d406121863e8392a2ff08684263",
+        "training_sha256": "4768dd7dd514605d62642c39943d4a0655dc8058ccf8414c3efc1600f5df16cd",
+        "verification": "identical_executable_ast"
+      },
+      "v9": {
+        "error": "NewLearning9.py executable code differs from training or its compatibility cannot be verified; restore the saved physics/evaluation implementation"
+      }
+    },
+    {
+      "seed": 42,
+      "v10_physics_source_checker": {
+        "current_ast_format": "python-ast-show-empty-v1",
+        "current_ast_sha256": "38a0d1b746fa0275e1e1efa2b303b7c164179d406121863e8392a2ff08684263",
+        "current_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+        "training_ast_format": null,
+        "training_ast_sha256": "38a0d1b746fa0275e1e1efa2b303b7c164179d406121863e8392a2ff08684263",
+        "training_sha256": "8cd11ae42ff69a6520b2840023c88d204382d7bb047d8281f824f163e25dfba4",
+        "verification": "identical_executable_ast"
+      },
+      "v9": {
+        "error": "NewLearning9.py executable code differs from training or its compatibility cannot be verified; restore the saved physics/evaluation implementation"
+      }
+    },
+    {
+      "seed": 43,
+      "v10_physics_source_checker": {
+        "current_ast_format": "python-ast-show-empty-v1",
+        "current_ast_sha256": "38a0d1b746fa0275e1e1efa2b303b7c164179d406121863e8392a2ff08684263",
+        "current_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+        "training_ast_format": null,
+        "training_ast_sha256": "38a0d1b746fa0275e1e1efa2b303b7c164179d406121863e8392a2ff08684263",
+        "training_sha256": "8cd11ae42ff69a6520b2840023c88d204382d7bb047d8281f824f163e25dfba4",
+        "verification": "identical_executable_ast"
+      },
+      "v9": {
+        "error": "NewLearning9.py executable code differs from training or its compatibility cannot be verified; restore the saved physics/evaluation implementation"
+      }
+    }
+  ],
+  "source_files_verified_from_git": [
+    {
+      "crlf_sha256": "8cd11ae42ff69a6520b2840023c88d204382d7bb047d8281f824f163e25dfba4",
+      "lf_sha256": "4768dd7dd514605d62642c39943d4a0655dc8058ccf8414c3efc1600f5df16cd",
+      "ref": "ac59a6c",
+      "same_executable_ast": true
+    },
+    {
+      "crlf_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+      "lf_sha256": "765ef6b6be3e82aaa3077e31a71e36b0e7ce06be8a9115edb8fe2439339bef69",
+      "ref": "f524bcf",
+      "same_executable_ast": true
+    }
+  ],
+  "v10_source_sha256": "461a7eadcfc87e1dc2d364b67b24e047db9c944eca82b45d3d9e92589c213f2b",
+  "write_checks": [
+    {
+      "atomic_create_and_replace": true,
+      "checkpoint_path_characters": 320,
+      "cpu_load_for_cuda_request": true,
+      "exclusive_lock": true,
+      "root": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results",
+      "seconds": 0.05151530000148341,
+      "state_round_trip_exact": true,
+      "temporary_directory_cleaned": true,
+      "unicode_path": true
+    },
+    {
+      "atomic_create_and_replace": true,
+      "checkpoint_path_characters": 319,
+      "cpu_load_for_cuda_request": true,
+      "exclusive_lock": true,
+      "root": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models",
+      "seconds": 0.04068889998598024,
+      "state_round_trip_exact": true,
+      "temporary_directory_cleaned": true,
+      "unicode_path": true
+    }
+  ]
+}

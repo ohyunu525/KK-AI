@@ -2,6 +2,8 @@
 
 [실행 코드](C:/Users/COM/Documents/GitHub/KK-AI/Codes/ModelExperiment10.py)는 최신 ModelExperiment9의 학습·평가 전용 실행·저장·재개·집계 기능을 별도 버전으로 유지한다. `ModelExperiment9.py`, `NewLearning9.py`, 기존 학습 결과와 체크포인트는 수정하지 않았다. 새 라이브러리도 추가하지 않았다.
 
+2026-08-31 저장 구조 점검에서는 이 PC의 seed별 체크포인트 경로와 Python 3.14 소스 검사 문제를 10에서 보완했다. 학습 저장 형식과 아래 과적합 제어는 유지한다. 실제 파일 검사 결과와 이동한 실험의 평가 방법은 [저장 호환성 분석](C:/Users/COM/Documents/GitHub/KK-AI/Documents/ModelExperiment10_storage_compatibility.md)에 정리했다.
+
 기본 변경은 **두 검증 목적을 함께 감시하는 조기 종료**다. 구조 분기 드롭아웃도 구현했지만 기본값은 **0.0(비활성)** 이다. 실제 비교에서 full 모델에는 도움이 되고 sign-only에는 일관되게 도움이 되지 않아, 공통 기본 설정으로 강제하지 않았다. 드롭아웃 확률을 지정하면 두 모델에 같은 값이 적용된다.
 
 **왜 바꾸었는가**
@@ -142,13 +144,19 @@ Full은 3/3 seed에서 개선했고, seed별 개선율 평균은 **+2.94%**였�
 
 기본 결과는 `Results/new_learning10_experiments/<experiment-name>/`, 체크포인트는 `Models/new_learning10_experiments/<experiment-name>/` 아래에 저장된다. 각 실행에는 `latest.pt`, `best_structure.pt`, `best_total.pt`를 유지한다. 평가 전용은 결과 폴더 아래 `evaluations/<timestamp_uuid>/`에 별도로 저장한다. `--results-root/--results-dir`, `--checkpoint-root/--checkpoint-dir`로 위치를 바꿀 수 있다.
 
-v9 가중치를 v10 실행에 섞어 재개하지 않는다. v9 결과는 원래 `ModelExperiment9.py --evaluate-only`로 평가한다. v10은 체크포인트 schema 2와 별도 프로토콜을 사용한다. 체크포인트 로더에는 이 프로젝트에서 생성한 신뢰할 수 있는 파일만 전달한다.
+평가 전용에서는 `--evaluation-results-dir`로 `protocol.json`이 있는 **정확한 폴더**, `--evaluation-checkpoint-dir`로 run별 가중치 폴더들이 있는 **정확한 폴더**를 지정할 수 있다. 이 두 옵션은 실험명을 뒤에 붙이지 않는다. 암묵적인 결과 경로에 protocol이 없으면 단일 seed의 `_seedN` 폴더를 확인하며, 가중치는 공통/seed별 구조에서 저장된 protocol의 run ID가 일치하는 폴더를 찾는다. 여러 대체 후보가 일치하면 명시적인 경로가 필요하고, 여러 폴더의 가중치를 섞지 않는다.
+
+PC 이동으로 데이터의 저장 경로만 사라졌을 때는 현재 프로젝트의 제한된 후보 중 **학습 당시 SHA256과 같은 파일만** 사용한다. 명시한 데이터 경로가 없거나 파일 내용이 다르면 다른 파일로 자동 대체하지 않는다. 물리 소스는 원본 파일 해시 일치를 우선하고, 주석·docstring·LF/CRLF 차이가 있을 때만 검증된 AST 동일성을 허용한다. 저장 protocol과 학습 실행 ID는 수정하지 않는다.
+
+v9 가중치를 v10 실행에 섞어 재개하지 않는다. v9는 원래 v9 전용 로더/평가기를 사용해야 하며, 현재 v9 평가 명령에는 위 호환성 보고서에 기록한 경로·소스 검사 제한이 남아 있다. v10은 체크포인트 schema 2와 별도 프로토콜을 사용한다. 체크포인트 로더에는 이 프로젝트에서 생성한 신뢰할 수 있는 파일만 전달한다.
 
 **검증 범위와 제한**
 
 [전용 테스트](C:/Users/COM/Documents/GitHub/KK-AI/Codes/test_model_experiment10.py)는 기존 32개 회귀 시나리오에 조기 종료·dropout·손상 상태 거부 등을 추가한다. CPU와 RTX 3070 CUDA에서 dropout이 켜진 상태로 일반 epoch 및 종료 epoch의 저장 전/후 강제 중단을 재현하고, 재개한 모델·optimizer·RNG·shuffle·이력·두 최적 파일이 연속 실행과 정확히 같은지 검사했다. 중단된 테스트 평가 완료, 유실된 best 복구, 원본을 수정하지 않는 평가 전용 경로도 포함한다.
 
-전체 회귀 검증은 121개 중 118개 통과, 3개 skip이었다. Skip은 이번 변경 전에도 존재한 구형 `train_g05_fraction_experiment` 모듈 부재에 따른 항목이다. v10 전용 44개는 모두 통과했다. 최종 결과는 [전체 테스트 로그](C:/Users/COM/Documents/GitHub/KK-AI/Results/model_experiment10_validation/final_all_tests.log)에 남겼다.
+최초 과적합 제어 구현 시점에는 전체 121개 중 118개 통과, 3개 skip이었고 v10 전용 44개는 모두 통과했다. 당시 결과는 [초기 전체 테스트 로그](C:/Users/COM/Documents/GitHub/KK-AI/Results/model_experiment10_validation/final_all_tests.log)에 보존했다.
+
+저장 호환성 보완 후 현재 검증은 **v10 전용 52개 모두 통과**, 전체 132개 중 128개 통과·1개 오류·3개 skip이다. 오류는 수정하지 않은 v9의 `test_evaluate_only_accepts_moved_seed_results_and_documented_legacy_source`로, 이번 수정 전에도 Python 3.14에서 같은 소스 해시 오류가 발생했다. Skip은 종전과 같은 구형 `train_g05_fraction_experiment` 모듈 부재다. [현재 v10 로그](C:/Users/COM/Documents/GitHub/KK-AI/Results/model_experiment10_storage_validation/final_model10_tests.log), [현재 전체 로그](C:/Users/COM/Documents/GitHub/KK-AI/Results/model_experiment10_storage_validation/final_all_tests.log), [새 저장 회귀 테스트](C:/Users/COM/Documents/GitHub/KK-AI/Codes/test_model_experiment10_storage.py).
 
 ```powershell
 .\.venv\Scripts\python.exe -m unittest discover -s Codes -p 'test_*.py' -v

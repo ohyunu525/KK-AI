@@ -15,6 +15,7 @@ ModelExperiment9의 데이터, 120가지 전하 대응, 16가지 상대 부호, 
 from __future__ import annotations
 
 import argparse
+import ast
 import csv
 import hashlib
 import itertools
@@ -53,6 +54,19 @@ PROTOCOL_VERSION = "new-learning10-g05-routing-v1"
 CHECKPOINT_SCHEMA_VERSION = 2
 RESULT_SCHEMA_VERSION = 2
 CHECKPOINT_SELECTIONS = ("total", "structure")
+# Python 3.13부터 ast.dump()가 빈 필드를 생략할 수 있어 기본 출력의 해시는
+# 3.12와 달라진다. 새 protocol은 빈 필드를 포함하는 형식을 명시해 저장한다.
+SOURCE_AST_FORMAT = "python-ast-show-empty-v1"
+# 저장 당시 AST가 없는 구형 protocol은 확인된 원본 파일만 예외적으로 대조한다.
+# ac59a6c의 원본 및 f524bcf의 주석 보완본을 Git에서 읽고 LF/CRLF 바이트와
+# 계산 AST를 직접 비교했다. 임의의 알 수 없는 SHA를 현재 코드로 간주하지 않는다.
+_VERIFIED_BASELINE_AST = "38a0d1b746fa0275e1e1efa2b303b7c164179d406121863e8392a2ff08684263"
+LEGACY_BASELINE_AST_SHA256 = dict.fromkeys((
+    "4768dd7dd514605d62642c39943d4a0655dc8058ccf8414c3efc1600f5df16cd",  # ac59a6c, LF
+    "8cd11ae42ff69a6520b2840023c88d204382d7bb047d8281f824f163e25dfba4",  # ac59a6c, CRLF
+    "765ef6b6be3e82aaa3077e31a71e36b0e7ce06be8a9115edb8fe2439339bef69",  # f524bcf, LF
+    "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",  # f524bcf, CRLF
+), _VERIFIED_BASELINE_AST)
 STRUCTURE_METRIC_NAMES = (
     "position_mae_x", "position_mae_y", "position_mae_z", "mean_position_mae",
     "mean_position_3d_error", "charge_magnitude_mae", "relative_sign_accuracy",
@@ -339,6 +353,61 @@ def file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def source_ast_sha256(path: Path, *, legacy_default: bool = False) -> str:
+    """주석/docstring/줄바꿈을 제외한 실행 구문을 버전 표시된 형식으로 해시한다.
+
+    ast.dump의 기본값에 의존하면 이 PC(Python 3.14)는 같은 코드의 Python 3.12
+    해시를 재현하지 못한다. 새 형식은 show_empty=True로 고정한다. 해당 인자가
+    없던 3.12에서는 원래 기본 출력이 빈 필드를 포함한다. legacy_default는 형식
+    표시 없이 저장된 과거 AST를 비교할 때만 쓰며 새 protocol 저장에는 쓰지 않는다.
+    """
+    tree = ast.parse(path.read_text(encoding="utf-8-sig"))
+    for node in ast.walk(tree):
+        if (isinstance(node, (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef))
+                and node.body and isinstance(node.body[0], ast.Expr)
+                and isinstance(node.body[0].value, ast.Constant) and isinstance(node.body[0].value.value, str)):
+            node.body.pop(0)
+    options = {"show_empty": True} if sys.version_info >= (3, 13) and not legacy_default else {}
+    dump = ast.dump(tree, include_attributes=False, **options)
+    return hashlib.sha256(dump.encode("utf-8")).hexdigest()
+
+
+def validate_evaluation_source(protocol: Mapping[str, Any]) -> dict[str, Any]:
+    """저장 프로토콜은 바꾸지 않고 평가용 물리 코드의 동일성만 확인한다.
+
+    전체 파일 SHA 일치가 우선이다. 그렇지 않을 때만 저장된 AST 또는 위에서
+    검증한 원본 SHA→AST 대응으로 계산 코드의 동일성을 확인한다. 미확인 원본,
+    계산식/상수 변경, 알 수 없는 AST 형식은 거부하며 체크섬 검사를 끄지 않는다.
+    이 확인은 v9/v10 모델 체크포인트를 서로 호환시키는 변환 기능이 아니다.
+    """
+    path = Path(physics.__file__)
+    saved_hash = protocol["source_sha256"]["NewLearning9.py"]
+    current_hash, current_ast = file_sha256(path), source_ast_sha256(path)
+    saved_ast = protocol.get("source_ast_sha256", {}).get("NewLearning9.py")
+    saved_format = protocol.get("source_ast_format")
+    if current_hash == saved_hash:
+        verification = "identical_file"
+    else:
+        if saved_format not in (None, SOURCE_AST_FORMAT):
+            raise RuntimeError(f"Unknown physics source AST format: {saved_format}")
+        if saved_ast is None:
+            saved_ast = LEGACY_BASELINE_AST_SHA256.get(saved_hash)
+            allowed = {current_ast}
+        elif saved_format == SOURCE_AST_FORMAT:
+            allowed = {current_ast}
+        elif saved_format is None:
+            # v9 등 형식 태그가 없는 과거 AST 기록의 두 출력 관례를 명시적으로
+            # 대조한다. 여기서도 AST 자체가 같아야 하며 단순 파일명은 근거가 아니다.
+            allowed = {current_ast, source_ast_sha256(path, legacy_default=True)}
+        if saved_ast is None or saved_ast not in allowed:
+            raise RuntimeError("NewLearning9.py executable code differs from training or its compatibility cannot be verified; "
+                               "restore the saved physics/evaluation implementation")
+        verification = "identical_executable_ast"
+    return {"verification": verification, "training_sha256": saved_hash, "current_sha256": current_hash,
+            "training_ast_sha256": saved_ast, "current_ast_sha256": current_ast,
+            "current_ast_format": SOURCE_AST_FORMAT, "training_ast_format": saved_format}
+
+
 def replace_with_retry(source: Path, destination: Path) -> None:
     """Atomically replace a file despite short-lived Windows file locks."""
 
@@ -550,6 +619,8 @@ def build_protocol(
                  "candidate_count": arrays.g05.shape[1]},
         "source_sha256": {"ModelExperiment10.py": file_sha256(Path(__file__)),
                           "NewLearning9.py": file_sha256(Path(physics.__file__))},
+        "source_ast_sha256": {"NewLearning9.py": source_ast_sha256(Path(physics.__file__))},
+        "source_ast_format": SOURCE_AST_FORMAT,
         "normalization": stats.to_dict(),
         "training": {**asdict(settings), "optimizer": "AdamW", "loss_weights": asdict(weights),
                      "regularization": asdict(regularization),
@@ -1067,10 +1138,8 @@ def load_trained_model(path: Path, device: torch.device = torch.device("cpu")) -
     return model, normalization_from_config(config), checkpoint
 
 
-def load_evaluation_data(
-    result_root: Path, data_path: Path | None,
-) -> tuple[dict[str, Any], physics.DatasetArrays, physics.DataSplit, Path]:
-    """Reuse the training protocol; do not refit normalization or recreate a split."""
+def read_evaluation_protocol(result_root: Path) -> dict[str, Any]:
+    """저장된 프로토콜의 식별자를 검증한다. 이동한 경로로 내용을 덮어쓰지 않는다."""
     protocol_path = result_root / "protocol.json"
     if not protocol_path.is_file():
         raise FileNotFoundError(f"Evaluation requires an existing protocol.json: {protocol_path}; no training will run")
@@ -1081,15 +1150,47 @@ def load_evaluation_data(
     if (protocol.get("protocol_version") != PROTOCOL_VERSION
             or protocol.get("baseline_protocol_version") != physics.PROTOCOL_VERSION):
         raise RuntimeError("Saved protocol is not compatible with this five-charge routing experiment")
-    if protocol["source_sha256"]["NewLearning9.py"] != file_sha256(Path(physics.__file__)):
-        raise RuntimeError("NewLearning9.py changed since training; restore the saved physics/evaluation implementation")
-    # 평가 코드만 보완된 경우에도 저장된 실행 식별자는 보존한다. 현재 소스 해시는
-    # evaluation.json에 별도로 기록하며 물리 손실·지표의 NewLearning9 해시는 엄격히 확인한다.
-    data_path = (data_path if data_path is not None else Path(protocol["data"]["path"])).resolve()
-    if not data_path.is_file():
-        raise FileNotFoundError(f"Evaluation dataset not found: {data_path}; use --data for an identical relocated copy")
-    if file_sha256(data_path) != protocol["data"]["sha256"]:
-        raise RuntimeError("Evaluation dataset SHA256 differs from the training dataset")
+    return protocol
+
+
+def resolve_evaluation_dataset(protocol: Mapping[str, Any], data_path: Path | None) -> Path:
+    """PC 이동으로 끊어진 절대 경로만, SHA256이 같은 로컬 복사본으로 해석한다.
+
+    --data를 명시했거나 원래 경로가 아직 존재하면 해당 파일만 검사한다. 내용이
+    달라진 파일을 발견하고도 다른 파일로 바꿔 성공한 것처럼 처리하지 않는다.
+    자동 후보는 현재 기본 데이터와 프로젝트 Models의 같은 파일명 두 곳뿐이다.
+    디스크 전체를 검색하거나 데이터를 재생성하지 않으며 저장 protocol도 그대로다.
+    """
+    original = Path(protocol["data"]["path"])
+    expected_hash = protocol["data"]["sha256"]
+    chosen = (data_path if data_path is not None else original).resolve()
+    if data_path is not None or chosen.exists():
+        if not chosen.is_file():
+            raise FileNotFoundError(f"Evaluation dataset not found: {chosen}; use --data for an identical relocated copy")
+        if file_sha256(chosen) != expected_hash:
+            raise RuntimeError("Evaluation dataset SHA256 differs from the training dataset")
+        return chosen
+    candidates = dict.fromkeys((DEFAULT_DATA_PATH.resolve(), (PROJECT_DIR / "Models" / original.name).resolve()))
+    mismatched = []
+    for candidate in candidates:
+        if candidate.is_file():
+            if file_sha256(candidate) == expected_hash:
+                print(f"Using byte-identical relocated dataset: {candidate} (saved path: {original})", flush=True)
+                return candidate
+            mismatched.append(str(candidate))
+    if mismatched:
+        raise RuntimeError(f"Saved dataset is missing and local candidate SHA256 differs: {mismatched}; "
+                           "use --data with the original byte-identical dataset")
+    raise FileNotFoundError(f"Evaluation dataset not found: {chosen}; use --data for an identical relocated copy")
+
+
+def load_evaluation_data(
+    result_root: Path, data_path: Path | None,
+) -> tuple[dict[str, Any], physics.DatasetArrays, physics.DataSplit, Path]:
+    """Reuse the training protocol; do not refit normalization or recreate a split."""
+    protocol = read_evaluation_protocol(result_root)
+    validate_evaluation_source(protocol)
+    data_path = resolve_evaluation_dataset(protocol, data_path)
     arrays = physics.load_dataset(data_path)
     if (len(arrays.target) != protocol["data"]["sample_count"]
             or any(list(getattr(arrays, name).shape) != protocol["data"][f"{name}_shape"]
@@ -1559,12 +1660,18 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--experiment-name", default=DEFAULT_EXPERIMENT_NAME)
     parser.add_argument("--results-root", "--results-dir", dest="results_root", type=Path, default=DEFAULT_RESULTS_ROOT)
     parser.add_argument("--checkpoint-root", "--checkpoint-dir", dest="checkpoint_root", type=Path, default=DEFAULT_CHECKPOINT_ROOT)
+    parser.add_argument("--evaluation-results-dir", type=Path,
+                        help="Evaluation only: exact folder containing protocol.json; do not append experiment name")
+    parser.add_argument("--evaluation-checkpoint-dir", type=Path,
+                        help="Evaluation only: exact folder containing checkpoint run folders; do not append experiment name")
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--smoke-only", action="store_true", help="Check training subset only; do not create experiment artifacts or run full training")
     modes.add_argument("--evaluate-only", "--eval-only", action="store_true",
                        help="Evaluate saved checkpoints into a separate evaluations folder; never train or run smoke tests")
     parser.add_argument("--continue-on-error", action="store_true")
     args = parser.parse_args(argv)
+    if not args.evaluate_only and (args.evaluation_results_dir is not None or args.evaluation_checkpoint_dir is not None):
+        parser.error("--evaluation-results-dir and --evaluation-checkpoint-dir require --evaluate-only")
     if not args.evaluate_only:
         if args.data is None:
             args.data = DEFAULT_DATA_PATH
@@ -1599,6 +1706,61 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return args
 
 
+def resolve_evaluation_roots(args: argparse.Namespace) -> tuple[Path, Path]:
+    """평가에만 적용하는 폴더 탐색. 학습의 저장 구조/실행 ID는 바꾸지 않는다.
+
+    사용자가 명시한 exact 경로를 우선하고, 암묵적인 결과 경로는 원래 폴더를
+    먼저 사용한다. protocol이 없고 seed가 하나일 때만 _seedN 결과 폴더를 찾는다.
+    체크포인트는 공통 폴더와 seed별 폴더 양쪽을 지원하되 요청한 run ID의 실제
+    파일이 있어야 자동 후보로 인정한다. 서로 다른 두 후보가 맞으면 임의 선택하지
+    않고 exact 경로를 요구한다. 개별 run을 여러 폴더에서 섞어 조립하지 않는다.
+    """
+    result_root = (args.evaluation_results_dir.resolve() if args.evaluation_results_dir is not None
+                   else args.results_root.resolve() / args.experiment_name)
+    if args.evaluation_results_dir is None and not (result_root / "protocol.json").is_file() and len(args.seeds) == 1:
+        candidate = args.results_root.resolve() / f"{args.experiment_name}_seed{args.seeds[0]}"
+        if (candidate / "protocol.json").is_file():
+            result_root = candidate
+            print(f"Using seed-specific results directory: {result_root}", flush=True)
+    if not (result_root / "protocol.json").is_file():
+        raise FileNotFoundError(f"Evaluation requires protocol.json: {result_root}; "
+                                "use --evaluation-results-dir to select its exact directory; no training will run")
+    primary = (args.evaluation_checkpoint_dir.resolve() if args.evaluation_checkpoint_dir is not None
+               else args.checkpoint_root.resolve() / args.experiment_name)
+    if args.evaluation_checkpoint_dir is not None:
+        if not primary.is_dir():
+            raise FileNotFoundError(f"Evaluation checkpoint directory not found: {primary}; "
+                                    "check --evaluation-checkpoint-dir; no training will run")
+        return result_root, primary
+    # 실험명과 결과 폴더명이 달라도 위치만 재해석한다. run ID는 SAVED protocol로
+    # 계산하므로 데이터/모델/seed/정규화 설정이 다른 폴더를 후보로 채택하지 않는다.
+    protocol = read_evaluation_protocol(result_root)
+    run_ids = [run_id_for(run_configuration(protocol, model_name=model, fraction=fraction, seed=seed))
+               for model in args.models for fraction in args.fractions for seed in args.seeds]
+
+    def contains_requested_checkpoint(root: Path) -> bool:
+        return any(path.is_file() for run_id in run_ids for path in run_checkpoint_paths(root / run_id).values())
+
+    if contains_requested_checkpoint(primary):
+        return result_root, primary
+    alternatives = [args.checkpoint_root.resolve() / result_root.name]
+    if len(args.seeds) == 1:
+        alternatives.append(args.checkpoint_root.resolve() / f"{args.experiment_name}_seed{args.seeds[0]}")
+    alternatives = list(dict.fromkeys(path for path in alternatives if path != primary))
+    matches = [path for path in alternatives if contains_requested_checkpoint(path)]
+    if len(matches) > 1:
+        raise RuntimeError(f"Ambiguous evaluation checkpoint directories: {matches}; use --evaluation-checkpoint-dir")
+    if matches:
+        print(f"Using matching checkpoint directory: {matches[0]}", flush=True)
+        return result_root, matches[0]
+    if primary.is_dir():
+        # 원래 폴더가 있으나 필요한 run이 없으면 기존 evaluate-only의 개별 오류와
+        # continue-on-error 동작을 유지한다. 다른 seed 가중치를 대신 사용하지 않는다.
+        return result_root, primary
+    raise FileNotFoundError(f"Evaluation checkpoint directory not found for the requested runs: {primary}; "
+                            "use --evaluation-checkpoint-dir; no training will run")
+
+
 def run_evaluation_matrix(
     *, args: argparse.Namespace, result_root: Path, checkpoint_root: Path, device: torch.device,
 ) -> Path:
@@ -1616,11 +1778,15 @@ def run_evaluation_matrix(
         "batch_size": args.batch_size if args.batch_size is not None else protocol["training"]["batch_size"],
         "source_sha256": {"ModelExperiment10.py": file_sha256(Path(__file__)),
                           "NewLearning9.py": file_sha256(Path(physics.__file__))},
+        "source_compatibility": validate_evaluation_source(protocol),
         "environment": runtime_environment(device),
     }
     atomic_write_json(output_root / "evaluation.json", context)
     print(f"Evaluation only | device={device} | saved test samples={len(split.test)}", flush=True)
+    if context["source_compatibility"]["verification"] == "identical_executable_ast":
+        print("NewLearning9.py executable code matches training; verified documentation/formatting changes accepted.", flush=True)
     print("Using saved normalization, split, loss weights and training settings; no smoke tests or training.", flush=True)
+    print(f"Checkpoints: {checkpoint_root}", flush=True)
     print(f"Evaluation output: {output_root}", flush=True)
     completed = failed = 0
     for fraction in args.fractions:
@@ -1705,8 +1871,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     result_root = args.results_root.resolve() / args.experiment_name
     checkpoint_root = args.checkpoint_root.resolve() / args.experiment_name
     if args.evaluate_only:
-        if not (result_root / "protocol.json").is_file():
-            raise FileNotFoundError(f"Evaluation requires an existing protocol.json: {result_root}; no training will run")
+        result_root, checkpoint_root = resolve_evaluation_roots(args)
         with experiment_locks(result_root, checkpoint_root):
             run_evaluation_matrix(args=args, result_root=result_root, checkpoint_root=checkpoint_root, device=device)
         return
