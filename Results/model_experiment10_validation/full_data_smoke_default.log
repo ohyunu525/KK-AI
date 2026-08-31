@@ -1,0 +1,10 @@
+Five-charge routing experiment | device=cuda | G00=(10000, 32, 32) G05=(10000, 32, 3)
+Unchanged 120-permutation matching / 16 relative patterns / train-only normalization; G05=1 means all candidates
+Structure dropout=0; dual-objective early stopping patience=20 (0=off), min_delta=0, min_epochs=0
+SMOKE PASS: fraction=0, points=0, parameters=406969 | capacity/init/order/mask/matching/parity/gradients/symmetry/finite/step/checkpoint
+SMOKE PASS: fraction=0.1, points=3, parameters=406969 | capacity/init/order/mask/matching/parity/gradients/symmetry/finite/step/checkpoint
+SMOKE PASS: fraction=0.25, points=8, parameters=406969 | capacity/init/order/mask/matching/parity/gradients/symmetry/finite/step/checkpoint
+SMOKE PASS: fraction=0.5, points=16, parameters=406969 | capacity/init/order/mask/matching/parity/gradients/symmetry/finite/step/checkpoint
+SMOKE PASS: fraction=0.75, points=24, parameters=406969 | capacity/init/order/mask/matching/parity/gradients/symmetry/finite/step/checkpoint
+SMOKE PASS: fraction=1, points=32, parameters=406969 | capacity/init/order/mask/matching/parity/gradients/symmetry/finite/step/checkpoint
+Smoke-only complete; no test-set evaluation or experiment artifacts.

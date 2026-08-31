@@ -1,0 +1,15 @@
+best_structure_epoch,best_structure_loss,best_total_epoch,best_total_loss,elapsed_seconds,epochs_completed,fraction,max_epochs,model,run_name,seed,stop_reason,structure_dropout,variant,weight_decay
+26,0.5975169048309327,26,0.9486440725326539,42.52869639999699,46,1.0,100,g05_full_reconstruction,g05_full_reconstruction__seed43__baseline,43,early_stopping,0.0,baseline,0.0001
+43,0.5739723343849182,46,0.9242306201457977,61.25245209998684,66,1.0,100,g05_full_reconstruction,g05_full_reconstruction__seed43__dropout010,43,early_stopping,0.1,dropout010,0.0001
+72,0.5731293087005616,72,0.9127203702926636,85.05846460000612,92,1.0,100,g05_full_reconstruction,g05_full_reconstruction__seed43__dropout020,43,early_stopping,0.2,dropout020,0.0001
+26,0.5940469732284546,26,0.9457789270877838,44.11467029998312,46,1.0,100,g05_full_reconstruction,g05_full_reconstruction__seed43__decay001,43,early_stopping,0.0,decay001,0.001
+32,0.5996894488334655,32,0.9458713150024414,40.76532939996105,52,1.0,100,g05_sign_only,g05_sign_only__seed41__baseline,41,early_stopping,0.0,baseline,0.0001
+33,0.6158075246810913,35,0.9634989786148072,43.62092010001652,55,1.0,100,g05_sign_only,g05_sign_only__seed41__dropout010,41,early_stopping,0.1,dropout010,0.0001
+43,0.594987015247345,43,0.9418657929897308,47.98460849997355,63,1.0,100,g05_sign_only,g05_sign_only__seed42__baseline,42,early_stopping,0.0,baseline,0.0001
+35,0.597558454990387,44,0.9401398575305939,49.60155270004179,64,1.0,100,g05_sign_only,g05_sign_only__seed42__dropout010,42,early_stopping,0.1,dropout010,0.0001
+38,0.6105242009162903,38,0.9600613071918488,53.3031203999999,58,1.0,100,g05_full_reconstruction,g05_full_reconstruction__seed41__baseline,41,early_stopping,0.0,baseline,0.0001
+34,0.6001890206336975,34,0.9491911022663116,49.9664119000081,54,1.0,100,g05_full_reconstruction,g05_full_reconstruction__seed41__dropout010,41,early_stopping,0.1,dropout010,0.0001
+28,0.6067527198791504,35,0.9500554325580597,51.760772500012536,55,1.0,100,g05_full_reconstruction,g05_full_reconstruction__seed42__baseline,42,early_stopping,0.0,baseline,0.0001
+37,0.5873950505256653,37,0.9304454171657562,55.2562555000186,57,1.0,100,g05_full_reconstruction,g05_full_reconstruction__seed42__dropout010,42,early_stopping,0.1,dropout010,0.0001
+31,0.5999058632850647,31,0.9406301028728485,40.77002779999748,51,1.0,100,g05_sign_only,g05_sign_only__seed43__baseline,43,early_stopping,0.0,baseline,0.0001
+43,0.5884055914878845,46,0.92796351146698,47.348426199983805,66,1.0,100,g05_sign_only,g05_sign_only__seed43__dropout010,43,early_stopping,0.1,dropout010,0.0001

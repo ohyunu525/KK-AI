@@ -1,3 +1,10 @@
+"""v9 회귀 시나리오를 v10에도 적용하고 정규화/종료/재개 경계를 추가 검증한다.
+
+기존 기능 보존 테스트에서는 dropout=0, patience=0을 명시한다. 아래 별도 테스트는
+드롭아웃이 켜진 실제 optimizer 업데이트와 CPU/CUDA 중단 재개까지 확인한다.
+테스트용 20개 합성 샘플의 지표는 실제 데이터의 성능 주장에 사용하지 않는다.
+"""
+
 from __future__ import annotations
 
 import contextlib
@@ -17,7 +24,8 @@ import numpy as np
 import torch
 from torch.utils.data import TensorDataset
 
-import ModelExperiment9 as experiment
+import ModelExperiment10 as experiment
+import ModelExperiment9 as previous_experiment
 import NewLearning9 as physics
 import generate_charge_dataset as generator
 
@@ -28,7 +36,7 @@ class FiveChargeExperimentTests(unittest.TestCase):
         previous_threads = torch.get_num_threads()
         torch.set_num_threads(1)
         cls.addClassCleanup(torch.set_num_threads, previous_threads)
-        cls.temporary = tempfile.TemporaryDirectory(prefix="m9-tests-")
+        cls.temporary = tempfile.TemporaryDirectory(prefix="m10-tests-")
         cls.addClassCleanup(cls.temporary.cleanup)
         cls.root = Path(cls.temporary.name)
         cls.data_path = cls.root / "five.npz"
@@ -47,6 +55,8 @@ class FiveChargeExperimentTests(unittest.TestCase):
                  device: torch.device = torch.device("cpu")) -> dict:
         return experiment.build_protocol(data_path=self.data_path, arrays=self.arrays, split=self.split,
                                          stats=self.stats, settings=physics.TrainingSettings(max_epochs=epochs, batch_size=8),
+                                         regularization=experiment.RegularizationSettings(structure_dropout=0.0,
+                                                                                          early_stopping_patience=0),
                                          weights=weights, device=device)
 
     def config(self, model_name: str = "g05_full_reconstruction", fraction: float = 0.75,
@@ -498,9 +508,12 @@ class FiveChargeExperimentTests(unittest.TestCase):
                 "test_metrics": metrics,
                 "checkpoint_path": str(self.case_root / "fake" / experiment.run_id_for(config) / f"best_{selection}.pt"),
             }
+        stopping = experiment.DualObjectiveEarlyStopping(experiment.regularization_from_config(config))
+        for epoch, (total, structure) in enumerate(((2.5, 2.1), (2.6, 2.0), (2.6, 2.0)), 1):
+            stopping.update(epoch, {"total": total, "structure": structure})
         return {"result_schema_version": experiment.RESULT_SCHEMA_VERSION, **experiment.run_metadata(config),
                 "configuration": config, "status": "completed", "evaluations": evaluations,
-                "training_result": {"epochs_completed": 3, "elapsed_seconds": 1.0,
+                "training_result": {**experiment.completion_metadata(config, 3, stopping.state_dict()), "elapsed_seconds": 1.0,
                                     **experiment.best_tracking_fields(evaluations)}}
 
     def test_three_seed_reports_include_individual_pairs_and_correct_improvement(self) -> None:
@@ -604,7 +617,7 @@ class FiveChargeExperimentTests(unittest.TestCase):
 
     def test_protocol_guard_preserves_existing_files_and_tracks_both_sources(self) -> None:
         protocol = self.protocol()
-        self.assertEqual(set(protocol["source_sha256"]), {"NewLearning9.py", "ModelExperiment9.py"})
+        self.assertEqual(set(protocol["source_sha256"]), {"NewLearning9.py", "ModelExperiment10.py"})
         results, checkpoints = self.case_root / "results", self.case_root / "checkpoints"
         fingerprint = experiment.initialize_experiment_artifacts(experiment_results_dir=results, experiment_checkpoint_dir=checkpoints,
                                                                   protocol=protocol, split=self.split)
@@ -629,7 +642,8 @@ class FiveChargeExperimentTests(unittest.TestCase):
     def test_smoke_only_cli_checks_training_subset_without_creating_experiment(self) -> None:
         root = self.case_root
         args = ["--data", str(self.data_path), "--fractions", "0.75", "--seeds", "42", "--epochs", "300", "--device", "cpu",
-                "--results-root", str(root / "results"), "--checkpoint-root", str(root / "checkpoints"), "--smoke-only"]
+                "--results-root", str(root / "results"), "--checkpoint-root", str(root / "checkpoints"),
+                "--structure-dropout", "0.25", "--smoke-only"]
         with mock.patch.object(experiment, "train_and_evaluate_run", side_effect=AssertionError("unexpected full training")), mock.patch.object(
             experiment, "evaluate_model", side_effect=AssertionError("unexpected test-set evaluation"),
         ), contextlib.redirect_stdout(io.StringIO()) as output:
@@ -644,20 +658,22 @@ class FiveChargeExperimentTests(unittest.TestCase):
         self.assertEqual(defaults.models, experiment.DEFAULT_MODELS)
         self.assertEqual(defaults.batch_size, 128)
         self.assertEqual(defaults.data, experiment.DEFAULT_DATA_PATH)
+        self.assertEqual(defaults.structure_dropout, 0.0)
+        self.assertEqual(defaults.early_stopping_patience, 20)
         self.assertFalse(defaults.evaluate_only)
         self.assertTrue(experiment.parse_args(["--eval-only"]).evaluate_only)
         with contextlib.redirect_stderr(io.StringIO()):
             for invalid in (("--fractions", "nan"), ("--seeds", "42,42"), ("--models", "unknown"),
                             ("--experiment-name", "../escape"), ("--learning-rate", "inf"),
-                            ("--smoke-only", "--evaluate-only"), ("--evaluate-only", "--batch-size", "0"),
-                            ("--evaluation-results-dir", "saved"), ("--evaluation-checkpoint-dir", "saved")):
+                            ("--smoke-only", "--evaluate-only"), ("--evaluate-only", "--batch-size", "0")):
                 with self.assertRaises(SystemExit):
                     experiment.parse_args(list(invalid))
 
     def test_evaluate_only_cli_reuses_saved_protocol_without_updates_or_source_writes(self) -> None:
         weights = physics.LossWeights(position=1.7, global_sign=0.4)
         protocol = self.protocol(epochs=1, weights=weights)
-        protocol["source_sha256"]["ModelExperiment9.py"] = "0" * 64  # Before evaluation-only support.
+        protocol["training"]["regularization"]["structure_dropout"] = 0.25
+        protocol["source_sha256"]["ModelExperiment10.py"] = "0" * 64  # A saved earlier v10 source hash.
         protocol["environment"]["device"] = "cuda"  # Evaluation must permit a different device.
         results, checkpoints, args = self.evaluation_trial(protocol)
         originals = {}
@@ -675,6 +691,7 @@ class FiveChargeExperimentTests(unittest.TestCase):
         def evaluate(model, dataset, stats, **kwargs):
             self.assertFalse(torch.is_grad_enabled())
             self.assertFalse(model.training)
+            self.assertEqual(model.structure_dropout.p, 0.25)
             self.assertEqual(kwargs["batch_size"], 8)
             self.assertEqual(kwargs["weights"], weights)
             self.assertEqual(stats.to_dict(), self.stats.to_dict())
@@ -696,7 +713,9 @@ class FiveChargeExperimentTests(unittest.TestCase):
             output = stack.enter_context(contextlib.redirect_stdout(io.StringIO()))
             # No --data or --batch-size: use the saved path/size, not training defaults.
             for _ in range(2):
-                experiment.main([*args, "--epochs", "999", "--learning-rate", "0.2", "--weight-decay", "0.3"])
+                experiment.main([*args, "--epochs", "999", "--learning-rate", "0.2", "--weight-decay", "0.3",
+                                 "--structure-dropout", "0.8", "--early-stopping-patience", "20",
+                                 "--early-stopping-min-delta", "10", "--early-stopping-min-epochs", "999"])
             self.assertEqual(evaluated.call_count, 8)
             self.assertEqual(prepared.call_count, 2)
             for call in prepared.call_args_list:
@@ -707,7 +726,7 @@ class FiveChargeExperimentTests(unittest.TestCase):
         for root in evaluation_roots:
             context = json.loads((root / "evaluation.json").read_text(encoding="utf-8"))
             self.assertEqual(context["environment"]["device"], "cpu")
-            self.assertEqual(context["source_sha256"]["ModelExperiment9.py"], experiment.file_sha256(Path(experiment.__file__)))
+            self.assertEqual(context["source_sha256"]["ModelExperiment10.py"], experiment.file_sha256(Path(experiment.__file__)))
             self.assertEqual(context["protocol_fingerprint"], experiment.object_fingerprint(protocol))
             for path in root.glob("runs/*/result.json"):
                 result = json.loads(path.read_text(encoding="utf-8"))
@@ -722,80 +741,6 @@ class FiveChargeExperimentTests(unittest.TestCase):
         for path, (contents, modified) in preserved.items():
             self.assertEqual(path.read_bytes(), contents)
             self.assertEqual(path.stat().st_mtime_ns, modified)
-
-    def test_evaluate_only_accepts_moved_seed_results_and_documented_legacy_source(self) -> None:
-        protocol = self.protocol(epochs=1)
-        protocol.pop("source_ast_sha256")  # Original v1 protocols stored only the raw source hash.
-        protocol["source_sha256"]["NewLearning9.py"] = "4768dd7dd514605d62642c39943d4a0655dc8058ccf8414c3efc1600f5df16cd"
-        results = self.case_root / "results" / "trial_seed42"
-        checkpoints = self.case_root / "checkpoints" / "trial"
-        experiment.initialize_experiment_artifacts(experiment_results_dir=results, experiment_checkpoint_dir=checkpoints,
-                                                  protocol=protocol, split=self.split)
-        config = experiment.run_configuration(protocol, model_name="g05_full_reconstruction", fraction=0.75, seed=42)
-        with contextlib.redirect_stdout(io.StringIO()):
-            original, _ = experiment.train_and_evaluate_run(run_config=config, datasets=self.datasets[0.75],
-                                                           experiment_results_dir=results, experiment_checkpoint_dir=checkpoints,
-                                                           device=torch.device("cpu"))
-        before = {path: (path.read_bytes(), path.stat().st_mtime_ns)
-                  for root in (results, checkpoints) for path in root.rglob("*") if path.is_file()}
-        args = ["--evaluate-only", "--device", "cpu", "--experiment-name", "trial", "--models", "g05_full_reconstruction",
-                "--results-root", str(results.parent), "--checkpoint-root", str(checkpoints.parent)]
-        with mock.patch.object(experiment, "run_smoke_tests", side_effect=AssertionError("unexpected smoke test")), mock.patch.object(
-            experiment, "train_and_evaluate_run", side_effect=AssertionError("unexpected training"),
-        ), mock.patch.object(torch.optim, "AdamW", side_effect=AssertionError("unexpected optimizer")), contextlib.redirect_stdout(io.StringIO()) as output:
-            experiment.main(args)
-            # Explicit directories must override the name independently, without appending it.
-            experiment.main([*args, "--experiment-name", "irrelevant", "--evaluation-results-dir", str(results),
-                             "--evaluation-checkpoint-dir", str(checkpoints)])
-        self.assertIn("Using seed-specific results directory", output.getvalue())
-        self.assertIn("documentation/formatting changes accepted", output.getvalue())
-        self.assertFalse((results.parent / "trial").exists())
-        evaluation_paths = list((results / "evaluations").glob("*/runs/*/result.json"))
-        self.assertEqual(len(evaluation_paths), 2)
-        for path in evaluation_paths:
-            evaluated = json.loads(path.read_text(encoding="utf-8"))
-            self.assertEqual(evaluated["configuration"], original["configuration"])
-            context = evaluated["evaluation_context"]
-            self.assertEqual(context["source_protocol_path"], str((results / "protocol.json").resolve()))
-            self.assertEqual(context["checkpoint_root"], str(checkpoints.resolve()))
-            self.assertEqual(context["source_compatibility"]["verification"], "identical_executable_ast")
-            for selection in experiment.CHECKPOINT_SELECTIONS:
-                self.assertEqual(evaluated["evaluations"][selection]["test_metrics"], original["evaluations"][selection]["test_metrics"])
-        for path, (contents, modified) in before.items():
-            self.assertEqual(path.read_bytes(), contents)
-            self.assertEqual(path.stat().st_mtime_ns, modified)
-
-    def test_evaluation_source_allows_only_documentation_and_format_changes(self) -> None:
-        self.case_root.mkdir(parents=True)
-        original = self.case_root / "original.py"
-        documented = self.case_root / "documented.py"
-        changed = self.case_root / "changed.py"
-        original.write_text('"""Original docs."""\nthreshold = 1.0\nclass Model:\n    """Model docs."""\n    def predict(self):\n        """Predict docs."""\n        return threshold\n', encoding="utf-8")
-        documented.write_text('# New comment\n"""새 설명."""\nthreshold=1.0\n\nclass Model:\n    """새 모델 설명."""\n    def predict(self):\n        """새 예측 설명."""\n        return threshold\n', encoding="utf-8")
-        changed.write_text(documented.read_text(encoding="utf-8").replace("threshold=1.0", "threshold=2.0"), encoding="utf-8")
-        protocol = {"source_sha256": {"NewLearning9.py": experiment.file_sha256(original)},
-                    "source_ast_sha256": {"NewLearning9.py": experiment.source_ast_sha256(original)}}
-        with mock.patch.object(physics, "__file__", str(documented)):
-            self.assertEqual(experiment.validate_evaluation_source(protocol)["verification"], "identical_executable_ast")
-            unknown_legacy = {"source_sha256": {"NewLearning9.py": "unverified-source"}}
-            with self.assertRaisesRegex(RuntimeError, "compatibility cannot be verified"):
-                experiment.validate_evaluation_source(unknown_legacy)
-        with mock.patch.object(physics, "__file__", str(changed)):
-            with self.assertRaisesRegex(RuntimeError, "executable code differs"):
-                experiment.validate_evaluation_source(protocol)
-
-    def test_evaluation_path_resolution_does_not_override_explicit_or_multi_seed_requests(self) -> None:
-        protocol = self.protocol(epochs=1)
-        results, checkpoints, args = self.evaluation_trial(protocol)
-        candidate = results.with_name("trial_seed42")
-        experiment.initialize_experiment_artifacts(experiment_results_dir=candidate, experiment_checkpoint_dir=checkpoints,
-                                                  protocol=protocol, split=self.split)
-        self.assertEqual(experiment.resolve_evaluation_roots(experiment.parse_args(args)), (results, checkpoints))
-        (results / "protocol.json").unlink()
-        with self.assertRaisesRegex(FileNotFoundError, "evaluation-results-dir"):
-            experiment.resolve_evaluation_roots(experiment.parse_args([*args, "--seeds", "42,43"]))
-        with self.assertRaisesRegex(FileNotFoundError, "evaluation-results-dir"):
-            experiment.resolve_evaluation_roots(experiment.parse_args([*args, "--evaluation-results-dir", str(results)]))
 
     def test_evaluate_only_uses_latest_snapshots_without_repairing_missing_files(self) -> None:
         root, config = self.case_root, self.config(epochs=1, fraction=0.0)
@@ -1006,6 +951,311 @@ class FiveChargeExperimentTests(unittest.TestCase):
         self.assertIn("skipped=2", output.getvalue())
         for path, contents in before.items():
             self.assertEqual(path.read_bytes(), contents)
+
+
+    def regularized_config(self, *, model_name: str = "g05_full_reconstruction", fraction: float = 0.75,
+                           epochs: int = 12, dropout: float = 0.25, patience: int = 2,
+                           min_delta: float = 0.0, min_epochs: int = 0,
+                           device: torch.device = torch.device("cpu")) -> dict:
+        protocol = self.protocol(epochs=epochs, device=device)
+        protocol["training"]["regularization"] = asdict(experiment.RegularizationSettings(
+            dropout, patience, min_delta, min_epochs))
+        return experiment.run_configuration(protocol, model_name=model_name, fraction=fraction, seed=42)
+
+    def plateau_epoch(self, model, loader, optimizer=None, weights=physics.LossWeights()):
+        """실제 학습·드롭아웃·optimizer를 실행하되 종료 시나리오용 검증 손실만 고정한다."""
+        actual = physics.run_epoch(model, loader, optimizer, weights)
+        if optimizer is not None:
+            return actual
+        observed = bool(torch.any(loader.dataset.tensors[2]))
+        return physics.EpochLoss(1.5 if observed else 1.0, 1.0, 0.7, 0.2, 0.1, 0.5 if observed else None)
+
+    def test_disabled_controls_match_both_v9_routes_epoch_for_epoch(self) -> None:
+        # NewLearning9 sign-only뿐 아니라 v9의 full G05 경로도 원형과 비교한다.
+        for name in experiment.DEFAULT_MODELS:
+            for fraction in (0.0, 0.75):
+                with self.subTest(model=name, fraction=fraction):
+                    experiment.set_reproducibility(42)
+                    old = previous_experiment.MODEL_REGISTRY[name].factory()
+                    experiment.set_reproducibility(42)
+                    new = experiment.model_from_config(self.config(model_name=name, fraction=fraction))
+                    self.assert_nested_equal(old.state_dict(), new.state_dict())
+                    optimizers = [torch.optim.AdamW(m.parameters(), lr=1e-3, weight_decay=1e-4) for m in (old, new)]
+                    loaders = [physics.create_data_loader(self.datasets[fraction][0], 8, shuffle=True,
+                                                         seed=42, device=torch.device("cpu")) for _ in (old, new)]
+                    for _ in range(3):
+                        expected = previous_experiment.run_epoch(old, loaders[0], optimizers[0])
+                        actual = experiment.run_epoch(new, loaders[1], optimizers[1])
+                        self.assertEqual(asdict(expected), asdict(actual))
+                        self.assert_nested_equal(old.state_dict(), new.state_dict())
+                        self.assert_nested_equal(optimizers[0].state_dict(), optimizers[1].state_dict())
+
+    def test_dual_stopping_resets_when_either_objective_improves(self) -> None:
+        tracker = experiment.DualObjectiveEarlyStopping(experiment.RegularizationSettings(early_stopping_patience=2))
+        for epoch, (structure, total) in enumerate(((3, 5), (2, 6), (3, 4), (3, 5), (3, 5)), 1):
+            stopped = tracker.update(epoch, {"structure": structure, "total": total})
+            self.assertEqual(stopped, epoch == 5)
+        self.assertEqual(tracker.state_dict(), {"epoch": 5, "best_losses": {"total": 4.0, "structure": 2.0},
+                                               "last_improvement_epoch": 3, "bad_epochs": 2, "stopped": True})
+        with self.assertRaisesRegex(RuntimeError, "cannot continue"):
+            tracker.update(6, {"structure": 0.0, "total": 0.0})
+
+    def test_min_delta_accumulates_and_does_not_change_raw_best_selection(self) -> None:
+        config = self.regularized_config(dropout=0, min_delta=0.25, patience=2)
+        tracker = experiment.DualObjectiveEarlyStopping(experiment.regularization_from_config(config))
+        state = experiment.copy_model_state(experiment.model_from_config(config))
+        best = {}
+        # 정확히 표현 가능한 1/8 단위로 strict '<' 경계도 검사한다.
+        for epoch, structure in enumerate((2.0, 1.875, 1.75), 1):
+            validation = physics.EpochLoss(structure + 0.5, structure, structure, 0.0, 0.0, 0.5)
+            tracker.update(epoch, validation)
+            experiment.update_best_checkpoints(best, config=config, epoch=epoch, validation=validation, model_state=state)
+        self.assertTrue(tracker.stopped)
+        self.assertEqual(tracker.best_losses, {"total": 2.5, "structure": 2.0})
+        self.assertEqual({k: v["selected_epoch"] for k, v in best.items()}, {"total": 3, "structure": 3})
+        cumulative = experiment.DualObjectiveEarlyStopping(experiment.RegularizationSettings(
+            early_stopping_patience=3, early_stopping_min_delta=0.25))
+        for epoch, score in enumerate((2.0, 1.875, 1.75, 1.625), 1):
+            cumulative.update(epoch, {"total": score, "structure": score})
+        self.assertFalse(cumulative.stopped)
+        self.assertEqual(cumulative.bad_epochs, 0)
+        self.assertEqual(cumulative.last_improvement_epoch, 4)
+
+    def test_stopping_warmup_disabled_and_invalid_inputs(self) -> None:
+        for patience, minimum, expected_epoch in ((2, 5, 5), (0, 0, None)):
+            tracker = experiment.DualObjectiveEarlyStopping(experiment.RegularizationSettings(
+                early_stopping_patience=patience, early_stopping_min_epochs=minimum))
+            for epoch in range(1, (expected_epoch or 12) + 1):
+                self.assertEqual(tracker.update(epoch, {"total": 1.0, "structure": 1.0}), epoch == expected_epoch)
+        with contextlib.redirect_stderr(io.StringIO()):
+            for flag, value in (("--structure-dropout", "1"), ("--structure-dropout", "nan"),
+                                ("--structure-dropout", "-0.1"), ("--early-stopping-patience", "-1"),
+                                ("--early-stopping-min-delta", "inf"), ("--early-stopping-min-delta", "-0.01"),
+                                ("--early-stopping-min-epochs", "-2")):
+                with self.subTest(flag=flag, value=value), self.assertRaises(SystemExit):
+                    experiment.parse_args([flag, value])
+        tracker = experiment.DualObjectiveEarlyStopping(experiment.RegularizationSettings())
+        before = tracker.state_dict()
+        with self.assertRaises(FloatingPointError):
+            tracker.update(1, {"total": 1.0, "structure": float("nan")})
+        self.assertEqual(tracker.state_dict(), before)
+        with self.assertRaisesRegex(RuntimeError, "consecutive"):
+            tracker.update(2, {"total": 1.0, "structure": 1.0})
+
+    def test_regularization_settings_change_identity_and_survive_inference_load(self) -> None:
+        base = self.regularized_config(epochs=1)
+        for changes in ({"dropout": 0.3}, {"patience": 4}, {"min_delta": 0.01}, {"min_epochs": 6}):
+            self.assertNotEqual(experiment.run_id_for(base), experiment.run_id_for(self.regularized_config(epochs=1, **changes)))
+        self.run_model(self.case_root, base)
+        loaded, _, checkpoint = experiment.load_trained_model(self.paths(self.case_root, base)["structure"])
+        self.assertFalse(loaded.training)
+        self.assertEqual(loaded.structure_dropout.p, 0.25)
+        self.assertEqual(checkpoint["configuration"]["training"]["regularization"], base["training"]["regularization"])
+        path = self.case_root / "v9.pt"
+        experiment.atomic_torch_save({"protocol_version": previous_experiment.PROTOCOL_VERSION,
+                                     "checkpoint_schema_version": previous_experiment.CHECKPOINT_SCHEMA_VERSION}, path)
+        with self.assertRaisesRegex(RuntimeError, "not a checkpoint"):
+            experiment.load_trained_model(path)
+
+
+    def test_dropout_is_training_only_and_preserves_symmetry_and_gradient_routes(self) -> None:
+        batch = tuple(t[:6] for t in self.datasets[0.75][0].tensors)
+        g00, g05, mask, position, charge = batch
+        reversed_g05 = g05 * g05.new_tensor((1, 1, -1))
+        for name in experiment.DEFAULT_MODELS:
+            model = experiment.model_from_config(self.regularized_config(model_name=name, dropout=0.4))
+            optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3)
+            # context가 실제 활성화된 뒤에도 성질이 유지되는지 확인한다.
+            for _ in range(2):
+                optimizer.zero_grad(set_to_none=True)
+                physics.calculate_losses(model(*batch[:3]), position, charge, mask).total.backward()
+                optimizer.step()
+            model.train()
+            rng = experiment.capture_rng_state()
+            output = model(*batch[:3])
+            experiment.restore_rng_state(rng)
+            flipped = model(g00, reversed_g05, mask)
+            for field in experiment.OUTPUT_FIELDS[:-1]:
+                torch.testing.assert_close(getattr(output, field), getattr(flipped, field), rtol=1e-6, atol=1e-7)
+            torch.testing.assert_close(output.global_sign_logit, -flipped.global_sign_logit, rtol=1e-6, atol=1e-7)
+            independent = model(*batch[:3])
+            self.assertFalse(torch.equal(output.position, independent.position))
+            torch.testing.assert_close(output.global_sign_logit, independent.global_sign_logit, rtol=0, atol=0)
+            optimizer.zero_grad(set_to_none=True)
+            physics.calculate_losses(model(*batch[:3]), position, charge, mask).global_sign.backward()
+            experiment.assert_no_gradient(model, experiment.STRUCTURE_PREFIXES)
+            optimizer.zero_grad(set_to_none=True)
+            physics.calculate_losses(model(*batch[:3]), position, charge, mask).structure.backward()
+            experiment.assert_no_gradient(model, ("global_sign_head.",))
+            if name == "g05_sign_only":
+                experiment.assert_no_gradient(model, ("g05_encoder.", "structure_context."))
+            else:
+                self.assertTrue(experiment.has_nonzero_gradient(model, ("g05_encoder.", "structure_context.")))
+            model.eval()
+            with torch.no_grad():
+                expected = model(*batch[:3])
+                experiment.assert_outputs_close(expected, model(*batch[:3]))
+                hidden = g05.masked_fill(~mask.bool().expand_as(g05), float("nan"))
+                experiment.assert_outputs_close(expected, model(g00, hidden, mask))
+                zero = model(g00, torch.full_like(g05, float("nan")), torch.zeros_like(mask))
+                self.assertTrue(torch.equal(zero.global_sign_logit, torch.zeros_like(zero.global_sign_logit)))
+
+    def test_dropout_sign_only_structure_stays_independent_of_g05_fraction(self) -> None:
+        references = None
+        for fraction in (0.0, 0.75, 1.0):
+            config = self.regularized_config(model_name="g05_sign_only", fraction=fraction, epochs=3, patience=0)
+            root = self.case_root / str(fraction)
+            self.run_model(root, config)
+            latest = self.load(root, config)
+            structure = {k: v for k, v in latest["model_state_dict"].items() if k.startswith(experiment.STRUCTURE_PREFIXES)}
+            losses = [h["train"]["structure"] for h in latest["history"]]
+            if references is None:
+                references = structure, losses
+            self.assert_nested_equal(structure, references[0])
+            self.assertEqual(losses, references[1])
+
+    def test_dropout_zero_g05_both_models_still_match_and_stop(self) -> None:
+        checkpoints = []
+        for name in experiment.DEFAULT_MODELS:
+            config = self.regularized_config(model_name=name, fraction=0.0)
+            root = self.case_root / name
+            with mock.patch.object(experiment, "run_epoch", side_effect=self.plateau_epoch):
+                result, _ = self.run_model(root, config)
+            self.assertEqual(result["training_result"]["epochs_completed"], 3)
+            self.assertEqual(result["training_result"]["stop_reason"], "early_stopping")
+            for evaluation in result["evaluations"].values():
+                self.assertIsNone(evaluation["test_metrics"]["global_sign_accuracy"])
+                self.assertIsNone(evaluation["validation_losses"]["global_sign"])
+            checkpoints.append(self.load(root, config))
+        for key in ("model_state_dict", "optimizer_state_dict", "rng_state", "shuffle_generator_state", "history", "early_stopping"):
+            self.assert_nested_equal(checkpoints[0][key], checkpoints[1][key])
+
+    def check_regularized_resume(self, device: torch.device) -> None:
+        config = self.regularized_config(device=device)
+        base_root = self.case_root / "baseline"
+        with mock.patch.object(experiment, "run_epoch", side_effect=self.plateau_epoch):
+            baseline_result, _ = self.run_model(base_root, config, device)
+        baseline = self.load(base_root, config)
+        self.assertEqual(baseline["epoch"], 3)
+        for epoch, boundary in ((2, "before"), (2, "after"), (3, "before"), (3, "after")):
+            with self.subTest(device=str(device), epoch=epoch, boundary=boundary):
+                root = self.case_root / f"epoch{epoch}_{boundary}"
+                original = experiment.atomic_torch_save
+
+                def interrupt(value, path):
+                    target = path.name == "latest.pt" and value["epoch"] == epoch
+                    if target and boundary == "before":
+                        raise InterruptedError("before commit")
+                    original(value, path)
+                    if target and boundary == "after":
+                        raise InterruptedError("after commit")
+
+                with mock.patch.object(experiment, "atomic_torch_save", side_effect=interrupt), mock.patch.object(
+                    experiment, "run_epoch", side_effect=self.plateau_epoch,
+                ), self.assertRaises(InterruptedError):
+                    self.run_model(root, config, device)
+                # 종료 스냅샷을 저장했다면 학습/검증 epoch 호출 자체가 없어야 한다.
+                side_effect = AssertionError("terminal checkpoint must not train") if (epoch, boundary) == (3, "after") else self.plateau_epoch
+                with mock.patch.object(experiment, "run_epoch", side_effect=side_effect):
+                    result, _ = self.run_model(root, config, device)
+                resumed = self.load(root, config)
+                for key in ("model_state_dict", "optimizer_state_dict", "rng_state", "shuffle_generator_state",
+                            "history", "best_checkpoints", "early_stopping"):
+                    self.assert_nested_equal(baseline[key], resumed[key])
+                self.assertEqual(result["training_result"]["epochs_completed"], 3)
+                for selection in experiment.CHECKPOINT_SELECTIONS:
+                    self.assertEqual(baseline_result["evaluations"][selection]["test_metrics"], result["evaluations"][selection]["test_metrics"])
+
+    def test_dropout_cpu_resume_is_exact_before_and_after_stop_commit(self) -> None:
+        self.check_regularized_resume(torch.device("cpu"))
+
+    @unittest.skipUnless(torch.cuda.is_available(), "CUDA unavailable")
+    def test_dropout_cuda_resume_is_exact_before_and_after_stop_commit(self) -> None:
+        self.check_regularized_resume(torch.device("cuda"))
+
+
+    def test_early_stop_evaluation_interruption_repair_and_read_only_evaluation(self) -> None:
+        root, config = self.case_root, self.regularized_config()
+        with mock.patch.object(experiment, "run_epoch", side_effect=self.plateau_epoch), mock.patch.object(
+            experiment, "evaluate_model", side_effect=InterruptedError("evaluation interrupted after stopping"),
+        ), self.assertRaises(InterruptedError):
+            self.run_model(root, config)
+        latest = self.load(root, config)
+        self.assertEqual(latest["epoch"], 3)
+        self.assertTrue(latest["early_stopping"]["stopped"])
+        with mock.patch.object(experiment, "run_epoch", side_effect=AssertionError("already stopped")):
+            result, _ = self.run_model(root, config)
+        self.assertTrue(experiment.refresh_reports(root / "results", config["protocol_fingerprint"]))
+        with (root / "results" / "runs.csv").open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(len(rows), 2)
+        for row in rows:
+            self.assertEqual(row["stop_reason"], "early_stopping")
+            self.assertEqual(row["epochs_completed"], "3")
+            self.assertEqual(row["structure_dropout"], "0.25")
+        paths = self.paths(root, config)
+        # 완료된 조기 종료 실행도 latest로 유실된 두 선택 파일을 복구할 수 있다.
+        for selection in experiment.CHECKPOINT_SELECTIONS:
+            paths[selection].unlink()
+        with mock.patch.object(experiment, "run_epoch", side_effect=AssertionError("already stopped")), mock.patch.object(
+            experiment, "evaluate_model", side_effect=AssertionError("already evaluated"),
+        ):
+            _, skipped = self.run_model(root, config)
+        self.assertTrue(skipped)
+        for selection in experiment.CHECKPOINT_SELECTIONS:
+            self.assert_nested_equal(self.load(root, config, selection), latest["best_checkpoints"][selection])
+        # evaluation-only는 누락 파일을 디스크에 복구하지 않고 latest 안에서 읽는다.
+        for selection in experiment.CHECKPOINT_SELECTIONS:
+            paths[selection].unlink()
+        before = {p: p.read_bytes() for p in root.rglob("*") if p.is_file()}
+        with mock.patch.object(experiment, "run_epoch", side_effect=AssertionError("evaluation only")), mock.patch.object(
+            torch.optim, "AdamW", side_effect=AssertionError("no optimizer"),
+        ), contextlib.redirect_stdout(io.StringIO()):
+            evaluation = experiment.evaluate_only_run(run_config=config, test=self.datasets[0.75][2],
+                                                       experiment_results_dir=root / "results",
+                                                       experiment_checkpoint_dir=root / "checkpoints", device=torch.device("cpu"))
+        self.assertEqual(evaluation["training_result"]["stop_reason"], "early_stopping")
+        for selection in experiment.CHECKPOINT_SELECTIONS:
+            self.assertEqual(evaluation["evaluations"][selection]["test_metrics"], result["evaluations"][selection]["test_metrics"])
+        self.assertEqual({p: p.read_bytes() for p in root.rglob("*") if p.is_file()}, before)
+        # latest 없이도 완료 결과와 두 best만 있으면 기존 평가 경로를 사용할 수 있다.
+        for selection in experiment.CHECKPOINT_SELECTIONS:
+            experiment.atomic_torch_save(latest["best_checkpoints"][selection], paths[selection])
+        paths["latest"].unlink()
+        with contextlib.redirect_stdout(io.StringIO()):
+            selected_only = experiment.evaluate_only_run(run_config=config, test=self.datasets[0.75][2],
+                                                         experiment_results_dir=root / "results",
+                                                         experiment_checkpoint_dir=root / "checkpoints", device=torch.device("cpu"))
+        self.assertEqual(selected_only["training_result"]["stop_reason"], "early_stopping")
+
+    def test_saved_early_stop_state_and_completion_cannot_be_forged(self) -> None:
+        config = self.regularized_config()
+        with mock.patch.object(experiment, "run_epoch", side_effect=self.plateau_epoch):
+            result, _ = self.run_model(self.case_root, config)
+        latest = self.load(self.case_root, config)
+        for key, value in (("bad_epochs", 0), ("stopped", False), ("last_improvement_epoch", 2)):
+            altered = copy.deepcopy(latest)
+            altered["early_stopping"][key] = value
+            with self.subTest(key=key), self.assertRaisesRegex(RuntimeError, "Early stopping state"):
+                experiment.validate_resume_checkpoint(altered, config)
+        altered = copy.deepcopy(latest)
+        altered["epoch"] += 1
+        altered["history"].append({**altered["history"][-1], "epoch": altered["epoch"]})
+        with self.assertRaisesRegex(RuntimeError, "cannot continue"):
+            experiment.validate_resume_checkpoint(altered, config)
+        for mutation in ("reason", "epochs", "missing_state", "premature"):
+            altered = copy.deepcopy(result)
+            if mutation == "reason":
+                altered["training_result"]["stop_reason"] = "max_epochs"
+            elif mutation == "epochs":
+                altered["training_result"]["epochs_completed"] = config["training"]["max_epochs"]
+            elif mutation == "missing_state":
+                del altered["training_result"]["early_stopping"]
+            else:
+                altered["training_result"]["epochs_completed"] = 2
+                altered["training_result"]["early_stopping"].update(epoch=2, bad_epochs=1, stopped=False)
+            with self.subTest(mutation=mutation), self.assertRaises(RuntimeError):
+                experiment.completed_result_evaluations(altered)
 
 
 if __name__ == "__main__":

@@ -1,15 +1,20 @@
-"""Five-charge G05 routing ablation, preserving the NewLearning9 physics protocol.
+"""ModelExperiment10: 물리·비교 실험 기능을 보존하면서 과적합을 제어한다.
 
-python Codes/ModelExperiment9.py --fractions 0.75 --seeds 42 --epochs 300 --smoke-only
-Remove --smoke-only to train the two capacity-matched models.
-Use --evaluate-only with an existing --experiment-name to evaluate saved checkpoints without training.
-NewLearning9.py remains the authority for data, exact set assignment, losses and metrics.
+python Codes/ModelExperiment10.py --fractions 0.75 --seeds 42 --epochs 300 --smoke-only
+--smoke-only를 빼면 같은 용량의 두 모델을 학습한다. --epochs는 최대 epoch 수다.
+--evaluate-only는 저장된 정규화/분할/설정으로 평가만 하고 원래 학습 파일을 바꾸지 않는다.
+--early-stopping-patience 0 --structure-dropout 0으로 새 제어를 모두 끌 수 있다.
+
+ModelExperiment9의 데이터, 120가지 전하 대응, 16가지 상대 부호, 손실, 지표,
+독립적인 best_total/best_structure, 원자적 저장·재개·결과 집계 기능을 유지한다.
+해당 물리 정의는 계속 NewLearning9.py를 사용한다. v9 파일이나 결과는 수정하지 않는다.
+새 설정과 종료 상태는 v10 프로토콜에 기록하며, v9 체크포인트와 혼합 재개하지 않는다.
+설계 근거·실험 결과·실행 예시는 Documents/ModelExperiment10.md를 참고한다.
 """
 
 from __future__ import annotations
 
 import argparse
-import ast
 import csv
 import hashlib
 import itertools
@@ -40,20 +45,14 @@ from torch.utils.data import TensorDataset
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_DATA_PATH = physics.DEFAULT_DATA_PATH
-DEFAULT_RESULTS_ROOT = PROJECT_DIR / "Results" / "new_learning9_experiments"
-DEFAULT_CHECKPOINT_ROOT = PROJECT_DIR / "Models" / "new_learning9_experiments"
-DEFAULT_EXPERIMENT_NAME = "g05_routing_v1"
+DEFAULT_RESULTS_ROOT = PROJECT_DIR / "Results" / "new_learning10_experiments"
+DEFAULT_CHECKPOINT_ROOT = PROJECT_DIR / "Models" / "new_learning10_experiments"
+DEFAULT_EXPERIMENT_NAME = "g05_routing_regularized_v1"
 DEFAULT_MODELS = ("g05_sign_only", "g05_full_reconstruction")
-PROTOCOL_VERSION = "new-learning9-g05-routing-v1"
-CHECKPOINT_SCHEMA_VERSION = 1
-RESULT_SCHEMA_VERSION = 1
+PROTOCOL_VERSION = "new-learning10-g05-routing-v1"
+CHECKPOINT_SCHEMA_VERSION = 2
+RESULT_SCHEMA_VERSION = 2
 CHECKPOINT_SELECTIONS = ("total", "structure")
-# Verified against the original NewLearning9.py in commit ac59a6c. Legacy
-# protocols stored only raw file hashes; this mapping supplies their audited AST.
-LEGACY_BASELINE_AST_SHA256 = {
-    "4768dd7dd514605d62642c39943d4a0655dc8058ccf8414c3efc1600f5df16cd":
-        "38a0d1b746fa0275e1e1efa2b303b7c164179d406121863e8392a2ff08684263",
-}
 STRUCTURE_METRIC_NAMES = (
     "position_mae_x", "position_mae_y", "position_mae_z", "mean_position_mae",
     "mean_position_3d_error", "charge_magnitude_mae", "relative_sign_accuracy",
@@ -75,10 +74,154 @@ evaluate_model = physics.evaluate_model
 copy_model_state = physics.copy_state
 
 
-class RoutedChargeNet(physics.ChargeNet):
-    """Identical modules and initialization; only the G05-to-structure route differs."""
+@dataclass(frozen=True)
+class RegularizationSettings:
+    """학습 동작을 바꾸는 값은 모두 실행 식별자와 체크포인트에 포함한다.
 
-    def __init__(self, *, allow_g05_for_structure: bool) -> None:
+    patience=20은 기존 36개 학습 이력의 검증 손실을 재생했을 때 두 최적 epoch을
+    모두 보존한 보수적인 출발점이다. 앞으로의 학습에서도 보존된다는 보장은 없다.
+    min_delta는 조기 종료의 개선 판정에만 적용한다. best 파일은 이 값과 무관하게
+    실제 검증 손실의 엄격한 최솟값을 계속 저장하므로 작은 개선도 버리지 않는다.
+    min_epochs 이전에도 검증/최적 파일 저장은 수행하며, 종료 결정만 유예한다.
+    """
+
+    # 실제 3-seed 검증에서 10% dropout은 full 구조 손실에는 도움이 되었지만
+    # sign-only에는 일관되게 도움이 되지 않았다. 기본 동작은 조기 종료만 적용하고,
+    # dropout은 사용자가 비교 실험에서 명시하도록 한다. 두 모델에 같은 값을 쓴다.
+    structure_dropout: float = 0.0
+    early_stopping_patience: int = 20
+    early_stopping_min_delta: float = 0.0
+    early_stopping_min_epochs: int = 0
+
+    def __post_init__(self) -> None:
+        for name in ("structure_dropout", "early_stopping_min_delta"):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+                raise ValueError(f"{name} must be finite")
+        if not 0 <= self.structure_dropout < 1:
+            raise ValueError("structure_dropout must be in [0, 1)")
+        if self.early_stopping_min_delta < 0:
+            raise ValueError("early_stopping_min_delta must be nonnegative")
+        for name in ("early_stopping_patience", "early_stopping_min_epochs"):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                raise ValueError(f"{name} must be a nonnegative integer")
+
+
+def regularization_from_config(config: Mapping[str, Any]) -> RegularizationSettings:
+    """평가/재개 시 CLI 기본값 대신 저장된 값을 복원한다. 누락은 묵인하지 않는다."""
+    try:
+        values = config["training"]["regularization"]
+        if not isinstance(values, Mapping) or set(values) != set(RegularizationSettings.__dataclass_fields__):
+            raise ValueError("missing or unknown regularization fields")
+        return RegularizationSettings(**values)
+    except (KeyError, TypeError, ValueError) as error:
+        raise RuntimeError(f"Invalid v10 regularization configuration: {error}") from error
+
+
+class DualObjectiveEarlyStopping:
+    """검증 structure와 total이 **둘 다** 개선되지 않은 epoch 수를 센다.
+
+    structure만 감시하면 아직 개선 중인 G05 부호 분기를 조기에 끊을 수 있다.
+    반대로 total만 감시하면 구조만 좋아지는 epoch을 놓칠 수 있으므로 둘 중
+    하나라도 min_delta를 넘게 좋아지면 patience를 리셋한다. 손실은 검증셋에서만
+    가져오며 테스트 지표는 받지 않는다. 최적 모델 선택과 종료 판단은 분리한다.
+
+    이 클래스는 optimizer/학습률/gradient를 건드리지 않는다. 특히 total 기반의
+    공통 LR scheduler를 넣어 G05 부호 손실이 sign-only 구조 학습률을 바꾸게 하지
+    않는다. 종료 시점은 조건별로 달라도 같은 epoch까지의 분리된 학습 경로는 유지한다.
+    """
+
+    def __init__(self, settings: RegularizationSettings) -> None:
+        self.settings = settings
+        self.epoch = 0
+        self.best_losses: dict[str, float | None] = dict.fromkeys(CHECKPOINT_SELECTIONS)
+        self.last_improvement_epoch = 0
+        self.bad_epochs = 0
+        self.stopped = False
+
+    def update(self, epoch: int, validation: EpochLoss | Mapping[str, Any]) -> bool:
+        if self.stopped or type(epoch) is not int or epoch != self.epoch + 1:
+            raise RuntimeError("Early stopping requires consecutive epochs and cannot continue after stopping")
+        values = asdict(validation) if isinstance(validation, EpochLoss) else validation
+        # 먼저 두 값을 모두 검증한다. 두 번째 값이 NaN일 때 첫 번째 최솟값만
+        # 갱신된 불완전 상태가 남지 않게 하기 위한 순서다.
+        scores = {name: values[name] for name in CHECKPOINT_SELECTIONS}
+        if any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v)
+               for v in scores.values()):
+            raise FloatingPointError("Early stopping requires finite validation total and structure losses")
+        improved = False
+        for name, score in scores.items():
+            previous = self.best_losses[name]
+            if previous is None or score < previous - self.settings.early_stopping_min_delta:
+                # min_delta>0이면 유의미했던 최솟값을 기준으로 누적 개선을 비교한다.
+                # 작은 개선마다 기준을 움직여 patience가 영원히 리셋되지 않는 오류를 피한다.
+                self.best_losses[name] = float(score)
+                improved = True
+        self.epoch = epoch
+        if improved:
+            self.last_improvement_epoch, self.bad_epochs = epoch, 0
+        else:
+            self.bad_epochs += 1
+        self.stopped = bool(self.settings.early_stopping_patience > 0
+                            and epoch >= self.settings.early_stopping_min_epochs
+                            and self.bad_epochs >= self.settings.early_stopping_patience)
+        return self.stopped
+
+    def state_dict(self) -> dict[str, Any]:
+        return {"epoch": self.epoch, "best_losses": dict(self.best_losses),
+                "last_improvement_epoch": self.last_improvement_epoch,
+                "bad_epochs": self.bad_epochs, "stopped": self.stopped}
+
+    def load_state_dict(self, state: Mapping[str, Any]) -> None:
+        """완료 결과의 자체 일관성을 검사한다. latest는 아래에서 이력 재생도 검사한다."""
+        if not isinstance(state, Mapping) or set(state) != set(self.state_dict()):
+            raise RuntimeError("Incomplete early stopping state")
+        epoch, last, bad = (state[key] for key in ("epoch", "last_improvement_epoch", "bad_epochs"))
+        scores = state["best_losses"]
+        if (any(type(value) is not int for value in (epoch, last, bad)) or not 1 <= last <= epoch
+                or bad != epoch - last or not isinstance(scores, Mapping)
+                or set(scores) != set(CHECKPOINT_SELECTIONS)
+                or any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v)
+                       for v in scores.values())):
+            raise RuntimeError("Invalid early stopping counters/losses")
+        stopped = bool(self.settings.early_stopping_patience > 0
+                       and epoch >= self.settings.early_stopping_min_epochs
+                       and bad >= self.settings.early_stopping_patience)
+        if type(state["stopped"]) is not bool or state["stopped"] != stopped:
+            raise RuntimeError("Early stopping decision does not match its counters/settings")
+        self.epoch, self.last_improvement_epoch, self.bad_epochs = epoch, last, bad
+        self.best_losses, self.stopped = dict(scores), stopped
+
+
+def replay_early_stopping(config: Mapping[str, Any], history: Sequence[Mapping[str, Any]]) -> DualObjectiveEarlyStopping:
+    """저장된 검증 이력에서 제어 상태를 재계산해 재개 시 카운터 초기화/변조를 막는다."""
+    tracker = DualObjectiveEarlyStopping(regularization_from_config(config))
+    for row in history:
+        tracker.update(row["epoch"], row["validation"])
+    return tracker
+
+
+def completion_metadata(config: Mapping[str, Any], epoch: int, state: Mapping[str, Any]) -> dict[str, Any]:
+    """최대 epoch 도달 또는 확인된 조기 종료만 '학습 완료'로 인정한다."""
+    tracker = DualObjectiveEarlyStopping(regularization_from_config(config))
+    tracker.load_state_dict(state)
+    maximum = config["training"]["max_epochs"]
+    if type(epoch) is not int or not 1 <= epoch <= maximum or tracker.epoch != epoch:
+        raise RuntimeError("Completed epoch does not match early stopping state / epoch budget")
+    if epoch == maximum:
+        reason = "max_epochs"
+    elif tracker.stopped:
+        reason = "early_stopping"
+    else:
+        raise RuntimeError("Cannot evaluate unfinished training: neither epoch budget nor early stopping reached")
+    return {"epochs_completed": epoch, "stop_reason": reason, "early_stopping": tracker.state_dict()}
+
+
+class RoutedChargeNet(physics.ChargeNet):
+    """동일한 파라미터/초기화/드롭아웃 위치를 쓰고 G05→구조 경로만 비교한다."""
+
+    def __init__(self, *, allow_g05_for_structure: bool, structure_dropout: float = 0.0) -> None:
         # Keep every original module and its construction order, including G05.
         super().__init__()
         self.allow_g05_for_structure = allow_g05_for_structure
@@ -87,10 +230,13 @@ class RoutedChargeNet(physics.ChargeNet):
         )
         nn.init.zeros_(self.structure_context[-1].weight)
         nn.init.zeros_(self.structure_context[-1].bias)
+        # 파라미터가 없는 Dropout을 기존 모듈 뒤에 추가하므로 p=0일 때 초기 가중치,
+        # 파라미터 수, optimizer 순서와 v9 학습 경로가 그대로다. API factory의 기본
+        # p=0은 원형 비교용이며 실제 학습/불러오기는 저장 설정을 model_from_config로 쓴다.
+        RegularizationSettings(structure_dropout=structure_dropout)
+        self.structure_dropout = nn.Dropout(p=structure_dropout)
 
     def forward(self, g00: torch.Tensor, g05: torch.Tensor, g05_mask: torch.Tensor) -> physics.ModelOutput:
-        if not self.allow_g05_for_structure:
-            return super().forward(g00, g05, g05_mask)
         if (g05.ndim != 3 or g05.shape[-1] != 3 or g05.shape[1] < 1
                 or g05_mask.shape != (*g05.shape[:2], 1) or g05.shape[0] != g00.shape[0]):
             raise ValueError(f"G00/G05/mask shape mismatch: {g00.shape}, {g05.shape}, {g05_mask.shape}")
@@ -98,7 +244,7 @@ class RoutedChargeNet(physics.ChargeNet):
         # The inherited G05-only odd function is intentionally unchanged.
         global_logit = self.forward_global_sign(g05, g05_mask)
         observed = g05_mask.sum(dim=(1, 2)) > 0
-        if torch.any(observed):
+        if self.allow_g05_for_structure and torch.any(observed):
             points = g05.masked_fill(~g05_mask.bool(), 0)
             reversed_points = points * points.new_tensor((1, 1, -1))
             summaries = self._masked_summary(
@@ -110,6 +256,12 @@ class RoutedChargeNet(physics.ChargeNet):
             even_summary = (positive + negative) * 0.5
             context = self.structure_context(even_summary) * observed[:, None]
             structure = structure + context
+        # 부호 반전 대칭을 만드는 G05의 +V/-V 쌍에는 난수를 넣지 않는다. 대칭적인
+        # 구조 특징을 합친 뒤 한 번만 dropout한다. global_logit은 이 연산과 무관하다.
+        # eval()에서는 항등 함수이므로 기존 결정론적 추론/전하 순열/짝·홀 대칭을 유지한다.
+        # train()의 두 독립 forward는 마스크가 달라 구조 출력이 다를 수 있다. 학습 중
+        # 대칭 검증이 필요하면 같은 RNG 상태(동일 마스크)로 비교해야 한다.
+        structure = self.structure_dropout(structure)
         return physics.ModelOutput(
             position=self.position_head(structure).reshape(-1, physics.CHARGE_COUNT, 3),
             magnitude=F.softplus(self.magnitude_head(structure)),
@@ -123,8 +275,9 @@ class ModelSpec:
     name: str
     allow_g05_for_structure: bool
 
-    def factory(self) -> RoutedChargeNet:
-        return RoutedChargeNet(allow_g05_for_structure=self.allow_g05_for_structure)
+    def factory(self, *, structure_dropout: float = 0.0) -> RoutedChargeNet:
+        return RoutedChargeNet(allow_g05_for_structure=self.allow_g05_for_structure,
+                               structure_dropout=structure_dropout)
 
     @property
     def input_policy(self) -> dict[str, str]:
@@ -138,6 +291,12 @@ class ModelSpec:
 MODEL_REGISTRY = {
     name: ModelSpec(name, name == "g05_full_reconstruction") for name in DEFAULT_MODELS
 }
+
+
+def model_from_config(config: Mapping[str, Any]) -> RoutedChargeNet:
+    """Dropout 확률은 state_dict의 텐서가 아니므로 반드시 저장된 설정으로 복원한다."""
+    settings = regularization_from_config(config)
+    return MODEL_REGISTRY[config["model"]["name"]].factory(structure_dropout=settings.structure_dropout)
 
 
 def utc_now() -> str:
@@ -178,33 +337,6 @@ def file_sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
-
-
-def source_ast_sha256(path: Path) -> str:
-    """Hash executable syntax, ignoring comments, docstrings and formatting."""
-    tree = ast.parse(path.read_text(encoding="utf-8-sig"))
-    for node in ast.walk(tree):
-        if (isinstance(node, (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef))
-                and node.body and isinstance(node.body[0], ast.Expr)
-                and isinstance(node.body[0].value, ast.Constant) and isinstance(node.body[0].value.value, str)):
-            node.body.pop(0)
-    return hashlib.sha256(ast.dump(tree, include_attributes=False).encode("utf-8")).hexdigest()
-
-
-def validate_evaluation_source(protocol: Mapping[str, Any]) -> dict[str, Any]:
-    path = Path(physics.__file__)
-    saved_hash = protocol["source_sha256"]["NewLearning9.py"]
-    current_hash, current_ast = file_sha256(path), source_ast_sha256(path)
-    saved_ast = protocol.get("source_ast_sha256", {}).get("NewLearning9.py") or LEGACY_BASELINE_AST_SHA256.get(saved_hash)
-    if current_hash == saved_hash:
-        verification = "identical_file"
-    elif saved_ast is not None and current_ast == saved_ast:
-        verification = "identical_executable_ast"
-    else:
-        raise RuntimeError("NewLearning9.py executable code differs from training or its compatibility cannot be verified; "
-                           "restore the saved physics/evaluation implementation")
-    return {"verification": verification, "training_sha256": saved_hash, "current_sha256": current_hash,
-            "training_ast_sha256": saved_ast, "current_ast_sha256": current_ast}
 
 
 def replace_with_retry(source: Path, destination: Path) -> None:
@@ -403,6 +535,7 @@ def build_protocol(
     *, data_path: Path, arrays: physics.DatasetArrays, split: physics.DataSplit,
     stats: physics.NormalizationStats, settings: TrainingSettings,
     weights: LossWeights = LossWeights(), device: torch.device,
+    regularization: RegularizationSettings = RegularizationSettings(),
 ) -> dict[str, Any]:
     baseline = physics.checkpoint_metadata(arrays, stats, split, data_path)
     # These describe the baseline's routing/composition, not its physical protocol.
@@ -415,11 +548,12 @@ def build_protocol(
                  "sample_count": len(arrays.target), "g00_shape": arrays.g00.shape,
                  "g05_shape": arrays.g05.shape, "target_shape": arrays.target.shape,
                  "candidate_count": arrays.g05.shape[1]},
-        "source_sha256": {"ModelExperiment9.py": file_sha256(Path(__file__)),
+        "source_sha256": {"ModelExperiment10.py": file_sha256(Path(__file__)),
                           "NewLearning9.py": file_sha256(Path(physics.__file__))},
-        "source_ast_sha256": {"NewLearning9.py": source_ast_sha256(Path(physics.__file__))},
         "normalization": stats.to_dict(),
         "training": {**asdict(settings), "optimizer": "AdamW", "loss_weights": asdict(weights),
+                     "regularization": asdict(regularization),
+                     "early_stopping_policy": "reset patience when either validation total or structure improves; no test metrics",
                      "structure_reuse": False, "joint_gradient_clipping": False,
                      "checkpoint_selection": {
                          selection: selection_policy(selection, g05_count=None, global_sign_weight=weights.global_sign)
@@ -430,6 +564,7 @@ def build_protocol(
                    "g05_summary": "unchanged masked mean/max/std; same g05_encoder as global sign",
                    "structure_feature_size": 256, "context_hidden_size": 128,
                    "final_projection_zero_initialized": True,
+                   "dropout_location": "once after G00/even-G05 fusion, before all structure heads; none in global branch",
                    "shared_encoder_note": "Full model G05 encoder receives both structure and global-sign gradients; "
                                           "global loss has no path into G00, structure heads or structure_context"},
         "evaluation": {"metrics": METRIC_NAMES, "structure_primary_metrics": STRUCTURE_METRIC_NAMES,
@@ -505,10 +640,11 @@ def initialize_experiment_artifacts(
 
 def run_configuration(protocol: Mapping[str, Any], *, model_name: str, fraction: float, seed: int) -> dict[str, Any]:
     spec = MODEL_REGISTRY[model_name]
+    regularization = regularization_from_config(protocol)
     candidate_count = int(protocol["data"]["candidate_count"])
     count = physics.g05_count_for_fraction(fraction, candidate_count)
     with torch.random.fork_rng(devices=[]):
-        prototype = spec.factory()
+        prototype = spec.factory(structure_dropout=regularization.structure_dropout)
         state_shapes = {name: {"shape": list(tensor.shape), "dtype": str(tensor.dtype)}
                         for name, tensor in prototype.state_dict().items()}
         counts = parameter_counts(prototype)
@@ -523,6 +659,7 @@ def run_configuration(protocol: Mapping[str, Any], *, model_name: str, fraction:
                         "candidate_count": candidate_count, "selection": "fixed nested sensor prefix",
                         "full_fraction_definition": "all stored candidate sensors, not the full 32x32 field"},
         "training": {**training, "seed": seed, "optimizer": "AdamW", "loss_weights": weights,
+                     "regularization": asdict(regularization),
                      "checkpoint_selection": {
                          selection: selection_policy(selection, g05_count=count, global_sign_weight=weights["global_sign"])
                          for selection in CHECKPOINT_SELECTIONS}},
@@ -572,6 +709,7 @@ def validate_model_state(state: Any, config: Mapping[str, Any]) -> None:
 def validate_identity(value: Mapping[str, Any], config: Mapping[str, Any]) -> None:
     if config.get("protocol_version") != PROTOCOL_VERSION or config.get("charge_count") != physics.CHARGE_COUNT:
         raise RuntimeError("Configuration is not for this five-charge routing experiment")
+    regularization_from_config(config)
     for key, expected in run_metadata(config).items():
         if value.get(key) != expected:
             raise RuntimeError(f"Run metadata mismatch: {key}")
@@ -641,14 +779,19 @@ def make_resume_checkpoint(
     *, config: Mapping[str, Any], epoch: int, model_state: dict[str, torch.Tensor],
     optimizer: torch.optim.Optimizer, shuffle_generator: torch.Generator,
     best: dict[str, dict[str, Any]], history: list[dict[str, Any]], elapsed_seconds: float,
+    early_stopping: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
+    # 종료를 결정한 epoch까지 하나의 latest.pt 안에 함께 커밋한다. best 파일이나
+    # history.json 쓰기 도중 중단돼도 이 스냅샷으로 두 선택 결과와 종료 결정을 복구한다.
+    # 작은 외부/스모크 호출도 기존 API로 쓸 수 있도록 미지정 시 검증 이력에서 재생한다.
+    state = dict(early_stopping) if early_stopping is not None else replay_early_stopping(config, history).state_dict()
     return {
         "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION, "checkpoint_kind": "latest",
         **run_metadata(config), "configuration": config, "epoch": epoch,
         "model_state_dict": model_state, "optimizer_state_dict": optimizer.state_dict(),
         "shuffle_generator_state": shuffle_generator.get_state(), "rng_state": capture_rng_state(),
         "best_checkpoints": best, **best_tracking_fields(best),
-        "history": history, "elapsed_seconds": elapsed_seconds,
+        "history": history, "elapsed_seconds": elapsed_seconds, "early_stopping": state,
     }
 
 
@@ -658,7 +801,7 @@ def validate_resume_checkpoint(checkpoint: Mapping[str, Any], config: Mapping[st
         raise RuntimeError("Expected this experiment's latest checkpoint, not a baseline composed/component checkpoint")
     validate_identity(checkpoint, config)
     required = {"epoch", "model_state_dict", "optimizer_state_dict", "shuffle_generator_state",
-                "rng_state", "best_checkpoints", "history", "elapsed_seconds"}
+                "rng_state", "best_checkpoints", "history", "elapsed_seconds", "early_stopping"}
     if required.difference(checkpoint):
         raise RuntimeError(f"Incomplete resume checkpoint: {sorted(required.difference(checkpoint))}")
     epoch, history = checkpoint["epoch"], checkpoint["history"]
@@ -668,6 +811,11 @@ def validate_resume_checkpoint(checkpoint: Mapping[str, Any], config: Mapping[st
     for row in history:
         for phase in ("train", "validation"):
             validate_loss_values(row.get(phase), config, f"{phase} history at epoch {row['epoch']}")
+    # RNG만 복원하고 patience를 0부터 다시 세면 재개한 실행만 더 오래 학습하게 된다.
+    # 저장된 설정+검증 이력을 다시 읽어 상태를 확인하고, 종료 뒤의 추가 epoch도 거부한다.
+    expected_stopping = replay_early_stopping(config, history).state_dict()
+    if canonical_json(checkpoint["early_stopping"]) != canonical_json(expected_stopping):
+        raise RuntimeError("Early stopping state does not match validation history")
     validate_model_state(checkpoint["model_state_dict"], config)
     best = checkpoint["best_checkpoints"]
     if set(best) != set(CHECKPOINT_SELECTIONS):
@@ -693,8 +841,10 @@ def completed_result_evaluations(result: Mapping[str, Any]) -> list[dict[str, An
         raise RuntimeError("Expected a completed run with both total and structure evaluations")
     config = result["configuration"]
     validate_identity(result, config)
-    if result["training_result"]["epochs_completed"] != config["training"]["max_epochs"]:
-        raise RuntimeError("Completed result has an unfinished training history")
+    training = result["training_result"]
+    completed = completion_metadata(config, training["epochs_completed"], training.get("early_stopping", {}))
+    if any(canonical_json(training.get(key)) != canonical_json(value) for key, value in completed.items()):
+        raise RuntimeError("Completed result has inconsistent termination metadata")
     common = {key: value for key, value in result.items() if key != "evaluations"}
     records = []
     for selection in CHECKPOINT_SELECTIONS:
@@ -705,11 +855,15 @@ def completed_result_evaluations(result: Mapping[str, Any]) -> list[dict[str, An
         for key, value in expected.items():
             if canonical_json(evaluation.get(key)) != canonical_json(value):
                 raise RuntimeError(f"Invalid {selection} result metadata: {key}")
-        if (not 1 <= evaluation["selected_epoch"] <= config["training"]["max_epochs"]
+        if (not 1 <= evaluation["selected_epoch"] <= completed["epochs_completed"]
                 or not math.isfinite(evaluation["selected_validation_loss"])
                 or evaluation["validation_losses"][selection] != evaluation["selected_validation_loss"]
                 or not evaluation.get("checkpoint_path")):
             raise RuntimeError(f"Invalid {selection} selected epoch/loss/path")
+        anchor = completed["early_stopping"]["best_losses"][selection]
+        delta = regularization_from_config(config).early_stopping_min_delta
+        if not 0 <= anchor - evaluation["selected_validation_loss"] <= delta + 1e-12:
+            raise RuntimeError(f"{selection} stopping anchor does not match the selected raw minimum")
         metrics = evaluation["test_metrics"]
         validate_loss_values(evaluation["validation_losses"], config, f"{selection} result losses")
         count = config["observation"]["g05_count_per_sample"]
@@ -740,8 +894,10 @@ def repair_completed_run(
                     raise RuntimeError("Cannot restore missing best checkpoint without latest.pt")
                 latest = load_torch_checkpoint(paths["latest"], device)
                 validate_resume_checkpoint(latest, config)
-                if latest["epoch"] != config["training"]["max_epochs"]:
-                    raise RuntimeError("Cannot restore a completed run from unfinished latest.pt")
+                completion = completion_metadata(config, latest["epoch"], latest["early_stopping"])
+                if any(canonical_json(result["training_result"].get(key)) != canonical_json(value)
+                       for key, value in completion.items()):
+                    raise RuntimeError("Cannot restore a completed run from a different terminal latest.pt")
             checkpoint = latest["best_checkpoints"][selection]
         else:
             checkpoint = load_torch_checkpoint(paths[selection], device)
@@ -754,6 +910,8 @@ def repair_completed_run(
         if missing:
             atomic_torch_save(checkpoint, paths[selection])
     save_status(status_path, status="completed", run_id=run_id_for(config),
+                epochs_completed=result["training_result"]["epochs_completed"],
+                stop_reason=result["training_result"]["stop_reason"],
                 **best_tracking_fields(result["evaluations"]), result_path=str(result_path.resolve()))
 
 
@@ -777,6 +935,7 @@ def train_and_evaluate_run(
     else:
         atomic_write_json(config_path, run_config)
     settings = TrainingSettings(**{name: run_config["training"][name] for name in TrainingSettings.__dataclass_fields__})
+    stopping = DualObjectiveEarlyStopping(regularization_from_config(run_config))
     weights = LossWeights(**run_config["training"]["loss_weights"])
     stats = normalization_from_config(run_config)
     train, validation, test = datasets
@@ -791,7 +950,7 @@ def train_and_evaluate_run(
             raise ValueError(f"{name} mask does not match the configured fixed G05 prefix")
     seed = run_config["training"]["seed"]
     set_reproducibility(seed)
-    model = MODEL_REGISTRY[run_config["model"]["name"]].factory().to(device)
+    model = model_from_config(run_config).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=settings.learning_rate, weight_decay=settings.weight_decay)
     train_loader = physics.create_data_loader(train, settings.batch_size, shuffle=True, seed=seed, device=device)
     validation_loader = physics.create_data_loader(validation, settings.batch_size, device=device)
@@ -810,6 +969,9 @@ def train_and_evaluate_run(
         optimizer.load_state_dict(latest["optimizer_state_dict"])
         shuffle_generator.set_state(latest["shuffle_generator_state"])
         restore_rng_state(latest["rng_state"])
+        # Dropout은 CPU/CUDA RNG를 쓰므로 위 RNG 복원과 이 제어 상태 복원이 모두
+        # 필요하다. 동일 환경에서 중단하지 않은 실행과 같은 마스크/종료 epoch을 얻는다.
+        stopping.load_state_dict(latest["early_stopping"])
         best, history = dict(latest["best_checkpoints"]), list(latest["history"])
         start_epoch, elapsed_before = latest["epoch"] + 1, latest["elapsed_seconds"]
         for selection in CHECKPOINT_SELECTIONS:
@@ -822,26 +984,36 @@ def train_and_evaluate_run(
     started = time.perf_counter()
     print(f"RUN {run_id} | {device} | start epoch={start_epoch}", flush=True)
     for epoch in range(start_epoch, settings.max_epochs + 1):
+        # 조기 종료 epoch의 latest 저장 직후 프로세스가 꺼진 경우, 남은 일은 평가다.
+        # 이 검사가 없으면 재개한 실행에만 epoch 하나 이상이 잘못 추가될 수 있다.
+        if stopping.stopped:
+            break
         train_loss = run_epoch(model, train_loader, optimizer, weights)
         validation_loss = run_epoch(model, validation_loader, weights=weights)
         history.append({"epoch": epoch, "train": asdict(train_loss), "validation": asdict(validation_loss)})
         state = copy_model_state(model)
         changed = update_best_checkpoints(best, config=run_config, epoch=epoch,
                                           validation=validation_loss, model_state=state)
+        stopping.update(epoch, validation_loss)
         # One atomic authority holds training state AND both whole-epoch bests.
         latest = make_resume_checkpoint(config=run_config, epoch=epoch, model_state=state,
                                         optimizer=optimizer, shuffle_generator=shuffle_generator,
                                         best=best, history=history,
+                                        early_stopping=stopping.state_dict(),
                                         elapsed_seconds=elapsed_before + time.perf_counter() - started)
         atomic_torch_save(latest, paths["latest"])
         for selection in changed:
             atomic_torch_save(best[selection], paths[selection])
         atomic_write_json(history_path, history)
-        save_status(status_path, status="running", run_id=run_id, epoch=epoch, **best_tracking_fields(best))
+        save_status(status_path, status="running", run_id=run_id, epoch=epoch,
+                    early_stopping=stopping.state_dict(), **best_tracking_fields(best))
         print(f"  epoch={epoch:03d}/{settings.max_epochs} train={train_loss.total:.6f} "
               f"val_total={validation_loss.total:.6f} val_structure={validation_loss.structure:.6f} "
-              f"best_total={best['total']['selected_epoch']} best_structure={best['structure']['selected_epoch']}", flush=True)
-    save_status(status_path, status="evaluating", run_id=run_id, **best_tracking_fields(best))
+              f"best_total={best['total']['selected_epoch']} best_structure={best['structure']['selected_epoch']} "
+              f"no_improvement={stopping.bad_epochs}", flush=True)
+    completion = completion_metadata(run_config, len(history), stopping.state_dict())
+    print(f"  TRAINING FINISHED: {completion['stop_reason']} at epoch {len(history)}/{settings.max_epochs}", flush=True)
+    save_status(status_path, status="evaluating", run_id=run_id, **completion, **best_tracking_fields(best))
     evaluations = {}
     for selection in CHECKPOINT_SELECTIONS:
         selected = load_torch_checkpoint(paths[selection], device)
@@ -862,7 +1034,7 @@ def train_and_evaluate_run(
     result = {
         "result_schema_version": RESULT_SCHEMA_VERSION, **run_metadata(run_config),
         "configuration": run_config, "status": "completed", "completed_at": utc_now(),
-        "training_result": {"epochs_completed": settings.max_epochs, **best_tracking_fields(best),
+        "training_result": {**completion, **best_tracking_fields(best),
                             "resumed": resumed, "elapsed_seconds": elapsed_before + time.perf_counter() - started},
         "evaluations": evaluations,
         "artifacts": {"history": str(history_path.resolve()), "config": str(config_path.resolve()),
@@ -871,6 +1043,7 @@ def train_and_evaluate_run(
     completed_result_evaluations(result)
     atomic_write_json(result_path, result)
     save_status(status_path, status="completed", run_id=run_id, **best_tracking_fields(best),
+                **completion,
                 result_path=str(result_path.resolve()))
     return result, False
 
@@ -888,7 +1061,7 @@ def load_trained_model(path: Path, device: torch.device = torch.device("cpu")) -
     validate_selected_checkpoint(checkpoint, config, selection=selection,
                                  expected_epoch=checkpoint["selected_epoch"],
                                  expected_loss=checkpoint["selected_validation_loss"])
-    model = MODEL_REGISTRY[config["model"]["name"]].factory().to(device)
+    model = model_from_config(config).to(device)
     model.load_state_dict(checkpoint["model_state_dict"], strict=True)
     model.eval()
     return model, normalization_from_config(config), checkpoint
@@ -908,9 +1081,10 @@ def load_evaluation_data(
     if (protocol.get("protocol_version") != PROTOCOL_VERSION
             or protocol.get("baseline_protocol_version") != physics.PROTOCOL_VERSION):
         raise RuntimeError("Saved protocol is not compatible with this five-charge routing experiment")
-    validate_evaluation_source(protocol)
-    # ModelExperiment9.py may have gained evaluation-only support since training.
-    # Preserve its old hash in the training identity and record current sources separately.
+    if protocol["source_sha256"]["NewLearning9.py"] != file_sha256(Path(physics.__file__)):
+        raise RuntimeError("NewLearning9.py changed since training; restore the saved physics/evaluation implementation")
+    # 평가 코드만 보완된 경우에도 저장된 실행 식별자는 보존한다. 현재 소스 해시는
+    # evaluation.json에 별도로 기록하며 물리 손실·지표의 NewLearning9 해시는 엄격히 확인한다.
     data_path = (data_path if data_path is not None else Path(protocol["data"]["path"])).resolve()
     if not data_path.is_file():
         raise FileNotFoundError(f"Evaluation dataset not found: {data_path}; use --data for an identical relocated copy")
@@ -953,10 +1127,11 @@ def evaluate_only_run(
     if paths["latest"].is_file():
         latest = load_torch_checkpoint(paths["latest"], device)
         validate_resume_checkpoint(latest, run_config)
-        if latest["epoch"] != run_config["training"]["max_epochs"]:
-            raise RuntimeError(f"Cannot evaluate unfinished training: {run_id} (epoch {latest['epoch']}); no training will run")
+        # 최대 epoch 미만이어도 저장된 검증 이력이 정당한 조기 종료를 보여 주면
+        # 평가할 수 있다. 미완료 latest를 '평가 전용' 경로에서 추가 학습하지 않는다.
+        completion = completion_metadata(run_config, latest["epoch"], latest["early_stopping"])
         best = latest["best_checkpoints"]
-        training_result = {"epochs_completed": latest["epoch"], "elapsed_seconds": latest["elapsed_seconds"],
+        training_result = {**completion, "elapsed_seconds": latest["elapsed_seconds"],
                            **best_tracking_fields(best)}
     elif result_path.is_file():
         # Selected model files suffice when a completed result proves training finished.
@@ -985,7 +1160,7 @@ def evaluate_only_run(
             raise RuntimeError(f"{selection} checkpoint losses differ from the saved training result")
         selected_checkpoints[selection] = selected, path
     set_reproducibility(run_config["training"]["seed"])
-    model = MODEL_REGISTRY[run_config["model"]["name"]].factory().to(device)
+    model = model_from_config(run_config).to(device)
     model.eval()
     stats = normalization_from_config(run_config)
     weights = LossWeights(**run_config["training"]["loss_weights"])
@@ -1027,6 +1202,9 @@ def result_to_row(record: Mapping[str, Any]) -> dict[str, Any]:
         "primary_metrics": canonical_json(record["primary_metrics"]),
         "parameter_count": config["model"]["parameter_count"]["total"],
         "epochs_completed": record["training_result"]["epochs_completed"],
+        "max_epochs": config["training"]["max_epochs"],
+        "stop_reason": record["training_result"]["stop_reason"],
+        **asdict(regularization_from_config(config)),
         "elapsed_seconds": record["training_result"]["elapsed_seconds"],
         "checkpoint_path": record["checkpoint_path"], **record["test_metrics"],
     }
@@ -1186,9 +1364,12 @@ def run_checkpoint_smoke_test(
     model: RoutedChargeNet, optimizer: torch.optim.Optimizer, config: dict[str, Any],
     batch: tuple[torch.Tensor, ...], weights: LossWeights, device: torch.device,
 ) -> None:
+    was_training = model.training
+    model.eval()  # 저장 전/후 비교는 dropout이 비활성인 실제 추론 경로로 수행한다.
     with torch.no_grad():
         reference = model(*batch[:3])
         validation = batch_to_epoch_loss(physics.calculate_losses(reference, *batch[3:], batch[2], weights))
+    model.train(was_training)
     best: dict[str, dict[str, Any]] = {}
     state = copy_model_state(model)
     update_best_checkpoints(best, config=config, epoch=1, validation=validation, model_state=state)
@@ -1196,7 +1377,7 @@ def run_checkpoint_smoke_test(
     shuffle = torch.Generator().manual_seed(config["training"]["seed"])
     latest = make_resume_checkpoint(config=config, epoch=1, model_state=state, optimizer=optimizer,
                                     shuffle_generator=shuffle, best=best, history=history, elapsed_seconds=0.0)
-    with tempfile.TemporaryDirectory(prefix="m9-smoke-") as directory:
+    with tempfile.TemporaryDirectory(prefix="m10-smoke-") as directory:
         paths = run_checkpoint_paths(Path(directory))
         atomic_torch_save(latest, paths["latest"])
         loaded = load_torch_checkpoint(paths["latest"], device)
@@ -1220,6 +1401,7 @@ def run_smoke_tests(
     """Use only a small training subset; never choose a checkpoint with test data."""
     saved_rng = capture_rng_state()
     settings = TrainingSettings(**{name: protocol["training"][name] for name in TrainingSettings.__dataclass_fields__})
+    regularization = regularization_from_config(protocol)
     weights = LossWeights(**protocol["training"]["loss_weights"])
     seed = 1729
     try:
@@ -1231,7 +1413,8 @@ def run_smoke_tests(
             models = []
             for name in DEFAULT_MODELS:
                 set_reproducibility(seed)
-                models.append(MODEL_REGISTRY[name].factory().to(device))
+                models.append(MODEL_REGISTRY[name].factory(
+                    structure_dropout=regularization.structure_dropout).to(device).eval())
             a, b = models
             if parameter_counts(a) != parameter_counts(b):
                 raise AssertionError("Model capacities differ")
@@ -1253,6 +1436,7 @@ def run_smoke_tests(
                 first_order, second_order = (torch.cat([item[3] for item in loader]) for loader in loaders)
                 torch.testing.assert_close(first_order, second_order, rtol=0, atol=0)
             for model, name in zip(models, DEFAULT_MODELS):
+                model.train()  # 새 정규화가 켜진 상태에서도 손실·gradient·optimizer를 검사한다.
                 optimizer = torch.optim.AdamW(model.parameters(), lr=settings.learning_rate, weight_decay=settings.weight_decay)
                 output = model(g00, g05, mask)
                 assert_finite_output(output, len(g00))
@@ -1318,6 +1502,7 @@ def run_smoke_tests(
                 optimizer.step()
                 if not all(torch.isfinite(p).all() for p in model.parameters()):
                     raise AssertionError("Non-finite parameters after optimizer step")
+                model.eval()  # 독립적인 난수 마스크 차이를 물리 대칭 위반으로 오판하지 않는다.
                 with torch.no_grad():
                     current = model(g00, g05, mask)
                     reversed_output = model(g00, g05 * g05.new_tensor((1, 1, -1)), mask)
@@ -1333,7 +1518,8 @@ def run_smoke_tests(
                     missing = model(g00, torch.full_like(g05, float("nan")), torch.zeros_like(mask))
                     torch.testing.assert_close(missing.global_sign_logit, torch.zeros_like(missing.global_sign_logit), rtol=0, atol=0)
                     # Zero-observation equality must also hold after the context learned.
-                    counterpart = MODEL_REGISTRY["g05_sign_only"].factory().to(device)
+                    counterpart = MODEL_REGISTRY["g05_sign_only"].factory(
+                        structure_dropout=regularization.structure_dropout).to(device).eval()
                     counterpart.load_state_dict(model.state_dict(), strict=True)
                     assert_outputs_close(missing, counterpart(g00, g05, torch.zeros_like(mask)))
                 config = run_configuration(protocol, model_name=name, fraction=fraction, seed=seed)
@@ -1350,31 +1536,35 @@ def parse_csv_values(value: str, converter: Callable[[str], Any]) -> tuple[Any, 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     defaults = TrainingSettings()
+    regularization_defaults = RegularizationSettings()
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--data", type=Path, help=f"Dataset (training default: {DEFAULT_DATA_PATH}; evaluation: saved path)")
     parser.add_argument("--models", type=lambda value: parse_csv_values(value, str), default=DEFAULT_MODELS)
     parser.add_argument("--fractions", type=lambda value: parse_csv_values(value, float), default=(0.75,))
     parser.add_argument("--seeds", type=lambda value: parse_csv_values(value, int), default=(42,))
-    parser.add_argument("--epochs", type=int, default=defaults.max_epochs, help="Training only; evaluation uses saved settings")
+    parser.add_argument("--epochs", type=int, default=defaults.max_epochs,
+                        help="Maximum training epochs; may stop earlier. Evaluation uses saved settings")
     parser.add_argument("--batch-size", type=int, help=f"Batch size (training default: {defaults.batch_size}; evaluation: saved size)")
     parser.add_argument("--learning-rate", type=float, default=defaults.learning_rate, help="Training only")
     parser.add_argument("--weight-decay", type=float, default=defaults.weight_decay, help="Training only")
+    parser.add_argument("--structure-dropout", type=float, default=regularization_defaults.structure_dropout,
+                        help="Training only: dropout after structure fusion, in [0,1); 0 disables it")
+    parser.add_argument("--early-stopping-patience", type=int, default=regularization_defaults.early_stopping_patience,
+                        help="Training only: stop after this many epochs without either validation objective improving; 0 disables")
+    parser.add_argument("--early-stopping-min-delta", type=float, default=regularization_defaults.early_stopping_min_delta,
+                        help="Training only: absolute improvement needed to reset patience; raw best checkpoints are unchanged")
+    parser.add_argument("--early-stopping-min-epochs", type=int, default=regularization_defaults.early_stopping_min_epochs,
+                        help="Training only: defer early stopping until this epoch; the maximum epoch budget still applies")
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     parser.add_argument("--experiment-name", default=DEFAULT_EXPERIMENT_NAME)
     parser.add_argument("--results-root", "--results-dir", dest="results_root", type=Path, default=DEFAULT_RESULTS_ROOT)
     parser.add_argument("--checkpoint-root", "--checkpoint-dir", dest="checkpoint_root", type=Path, default=DEFAULT_CHECKPOINT_ROOT)
-    parser.add_argument("--evaluation-results-dir", type=Path,
-                        help="Evaluation only: exact directory containing protocol.json; no experiment name is appended")
-    parser.add_argument("--evaluation-checkpoint-dir", type=Path,
-                        help="Evaluation only: exact directory containing checkpoint run folders; no experiment name is appended")
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--smoke-only", action="store_true", help="Check training subset only; do not create experiment artifacts or run full training")
     modes.add_argument("--evaluate-only", "--eval-only", action="store_true",
                        help="Evaluate saved checkpoints into a separate evaluations folder; never train or run smoke tests")
     parser.add_argument("--continue-on-error", action="store_true")
     args = parser.parse_args(argv)
-    if not args.evaluate_only and (args.evaluation_results_dir is not None or args.evaluation_checkpoint_dir is not None):
-        parser.error("--evaluation-results-dir and --evaluation-checkpoint-dir require --evaluate-only")
     if not args.evaluate_only:
         if args.data is None:
             args.data = DEFAULT_DATA_PATH
@@ -1395,6 +1585,11 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         parser.error("--learning-rate must be finite and positive")
     if not math.isfinite(args.weight_decay) or args.weight_decay < 0:
         parser.error("--weight-decay must be finite and nonnegative")
+    try:
+        RegularizationSettings(args.structure_dropout, args.early_stopping_patience,
+                               args.early_stopping_min_delta, args.early_stopping_min_epochs)
+    except ValueError as error:
+        parser.error(str(error))
     if (not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,63}", args.experiment_name)
             or args.experiment_name.endswith(".")):
         parser.error("--experiment-name must be a simple directory name (letters, digits, underscores, hyphens, dots)")
@@ -1402,26 +1597,6 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         parser.error("CUDA was requested but is unavailable")
     args.fractions = tuple(sorted(args.fractions))
     return args
-
-
-def resolve_evaluation_roots(args: argparse.Namespace) -> tuple[Path, Path]:
-    result_root = (args.evaluation_results_dir.resolve() if args.evaluation_results_dir is not None
-                   else args.results_root.resolve() / args.experiment_name)
-    checkpoint_root = (args.evaluation_checkpoint_dir.resolve() if args.evaluation_checkpoint_dir is not None
-                       else args.checkpoint_root.resolve() / args.experiment_name)
-    if args.evaluation_results_dir is None and not (result_root / "protocol.json").is_file() and len(args.seeds) == 1:
-        # A result folder may have been split/renamed by seed while models stayed put.
-        candidate = args.results_root.resolve() / f"{args.experiment_name}_seed{args.seeds[0]}"
-        if (candidate / "protocol.json").is_file():
-            result_root = candidate
-            print(f"Using seed-specific results directory: {result_root}", flush=True)
-    if not (result_root / "protocol.json").is_file():
-        raise FileNotFoundError(f"Evaluation requires protocol.json: {result_root}; "
-                                "use --evaluation-results-dir to select its exact directory; no training will run")
-    if not checkpoint_root.is_dir():
-        raise FileNotFoundError(f"Evaluation checkpoint directory not found: {checkpoint_root}; "
-                                "use --evaluation-checkpoint-dir to select its exact directory; no training will run")
-    return result_root, checkpoint_root
 
 
 def run_evaluation_matrix(
@@ -1439,17 +1614,13 @@ def run_evaluation_matrix(
         "data_sha256": protocol["data"]["sha256"], "test_sample_count": len(split.test),
         "models": args.models, "fractions": args.fractions, "seeds": args.seeds,
         "batch_size": args.batch_size if args.batch_size is not None else protocol["training"]["batch_size"],
-        "source_sha256": {"ModelExperiment9.py": file_sha256(Path(__file__)),
+        "source_sha256": {"ModelExperiment10.py": file_sha256(Path(__file__)),
                           "NewLearning9.py": file_sha256(Path(physics.__file__))},
-        "source_compatibility": validate_evaluation_source(protocol),
         "environment": runtime_environment(device),
     }
     atomic_write_json(output_root / "evaluation.json", context)
     print(f"Evaluation only | device={device} | saved test samples={len(split.test)}", flush=True)
-    if context["source_compatibility"]["verification"] == "identical_executable_ast":
-        print("NewLearning9.py executable code matches training; documentation/formatting changes accepted.", flush=True)
     print("Using saved normalization, split, loss weights and training settings; no smoke tests or training.", flush=True)
-    print(f"Checkpoints: {checkpoint_root}", flush=True)
     print(f"Evaluation output: {output_root}", flush=True)
     completed = failed = 0
     for fraction in args.fractions:
@@ -1534,17 +1705,24 @@ def main(argv: Sequence[str] | None = None) -> None:
     result_root = args.results_root.resolve() / args.experiment_name
     checkpoint_root = args.checkpoint_root.resolve() / args.experiment_name
     if args.evaluate_only:
-        result_root, checkpoint_root = resolve_evaluation_roots(args)
+        if not (result_root / "protocol.json").is_file():
+            raise FileNotFoundError(f"Evaluation requires an existing protocol.json: {result_root}; no training will run")
         with experiment_locks(result_root, checkpoint_root):
             run_evaluation_matrix(args=args, result_root=result_root, checkpoint_root=checkpoint_root, device=device)
         return
     settings = TrainingSettings(args.epochs, args.batch_size, args.learning_rate, args.weight_decay)
+    regularization = RegularizationSettings(args.structure_dropout, args.early_stopping_patience,
+                                            args.early_stopping_min_delta, args.early_stopping_min_epochs)
     arrays = physics.load_dataset(args.data.resolve())
     split = physics.create_data_split(len(arrays.target))
     stats = physics.calculate_normalization_stats(arrays, split.train)
-    protocol = build_protocol(data_path=args.data.resolve(), arrays=arrays, split=split, stats=stats, settings=settings, device=device)
+    protocol = build_protocol(data_path=args.data.resolve(), arrays=arrays, split=split, stats=stats,
+                              settings=settings, device=device, regularization=regularization)
     print(f"Five-charge routing experiment | device={device} | G00={arrays.g00.shape} G05={arrays.g05.shape}", flush=True)
     print("Unchanged 120-permutation matching / 16 relative patterns / train-only normalization; G05=1 means all candidates", flush=True)
+    print(f"Structure dropout={regularization.structure_dropout:g}; dual-objective early stopping "
+          f"patience={regularization.early_stopping_patience} (0=off), "
+          f"min_delta={regularization.early_stopping_min_delta:g}, min_epochs={regularization.early_stopping_min_epochs}", flush=True)
     run_smoke_tests(arrays=arrays, split=split, stats=stats, protocol=protocol, fractions=args.fractions, device=device)
     if args.smoke_only:
         print("Smoke-only complete; no test-set evaluation or experiment artifacts.", flush=True)

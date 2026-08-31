@@ -1,0 +1,39 @@
+PILOT g05_full_reconstruction__seed43__baseline | train=8000 validation=1000 | test unused
+  epoch=1 train_structure=1.096217 val_structure=0.920355 val_total=1.601353 patience_used=0
+  epoch=10 train_structure=0.645554 val_structure=0.667708 val_total=1.041746 patience_used=0
+  epoch=20 train_structure=0.559228 val_structure=0.618640 val_total=0.975115 patience_used=0
+  epoch=30 train_structure=0.491474 val_structure=0.611161 val_total=0.962970 patience_used=4
+  epoch=40 train_structure=0.436385 val_structure=0.606745 val_total=0.953162 patience_used=14
+  epoch=46 train_structure=0.403783 val_structure=0.618454 val_total=0.961244 patience_used=20
+{"run_name": "g05_full_reconstruction__seed43__baseline", "model": "g05_full_reconstruction", "seed": 43, "fraction": 1.0, "variant": "baseline", "structure_dropout": 0.0, "weight_decay": 0.0001, "epochs_completed": 46, "max_epochs": 100, "stop_reason": "early_stopping", "elapsed_seconds": 42.52869639999699, "parameter_count": {"total": 406969, "trainable": 406969}, "best_total_epoch": 26, "best_total_loss": 0.9486440725326539, "best_structure_epoch": 26, "best_structure_loss": 0.5975169048309327}
+PILOT g05_full_reconstruction__seed43__dropout010 | train=8000 validation=1000 | test unused
+  epoch=1 train_structure=1.113767 val_structure=0.927285 val_total=1.608268 patience_used=0
+  epoch=10 train_structure=0.659715 val_structure=0.660809 val_total=1.034105 patience_used=0
+  epoch=20 train_structure=0.577073 val_structure=0.624129 val_total=0.981339 patience_used=1
+  epoch=30 train_structure=0.517046 val_structure=0.589793 val_total=0.943210 patience_used=3
+  epoch=40 train_structure=0.470234 val_structure=0.589369 val_total=0.938115 patience_used=3
+  epoch=50 train_structure=0.429092 val_structure=0.607589 val_total=0.972458 patience_used=4
+  epoch=60 train_structure=0.392755 val_structure=0.605108 val_total=0.949570 patience_used=14
+  epoch=66 train_structure=0.379775 val_structure=0.628906 val_total=0.969360 patience_used=20
+{"run_name": "g05_full_reconstruction__seed43__dropout010", "model": "g05_full_reconstruction", "seed": 43, "fraction": 1.0, "variant": "dropout010", "structure_dropout": 0.1, "weight_decay": 0.0001, "epochs_completed": 66, "max_epochs": 100, "stop_reason": "early_stopping", "elapsed_seconds": 61.25245209998684, "parameter_count": {"total": 406969, "trainable": 406969}, "best_total_epoch": 46, "best_total_loss": 0.9242306201457977, "best_structure_epoch": 43, "best_structure_loss": 0.5739723343849182}
+PILOT g05_full_reconstruction__seed43__dropout020 | train=8000 validation=1000 | test unused
+  epoch=1 train_structure=1.119369 val_structure=0.930267 val_total=1.611125 patience_used=0
+  epoch=10 train_structure=0.658228 val_structure=0.652957 val_total=1.028062 patience_used=0
+  epoch=20 train_structure=0.575235 val_structure=0.613156 val_total=0.969507 patience_used=1
+  epoch=30 train_structure=0.517639 val_structure=0.588420 val_total=0.940660 patience_used=4
+  epoch=40 train_structure=0.475868 val_structure=0.584797 val_total=0.931449 patience_used=4
+  epoch=50 train_structure=0.437491 val_structure=0.583563 val_total=0.948579 patience_used=5
+  epoch=60 train_structure=0.404235 val_structure=0.591446 val_total=0.935095 patience_used=15
+  epoch=70 train_structure=0.380672 val_structure=0.590479 val_total=0.935297 patience_used=6
+  epoch=80 train_structure=0.358326 val_structure=0.589919 val_total=0.929422 patience_used=8
+  epoch=90 train_structure=0.342598 val_structure=0.602683 val_total=0.943985 patience_used=18
+  epoch=92 train_structure=0.339254 val_structure=0.611058 val_total=0.948040 patience_used=20
+{"run_name": "g05_full_reconstruction__seed43__dropout020", "model": "g05_full_reconstruction", "seed": 43, "fraction": 1.0, "variant": "dropout020", "structure_dropout": 0.2, "weight_decay": 0.0001, "epochs_completed": 92, "max_epochs": 100, "stop_reason": "early_stopping", "elapsed_seconds": 85.05846460000612, "parameter_count": {"total": 406969, "trainable": 406969}, "best_total_epoch": 72, "best_total_loss": 0.9127203702926636, "best_structure_epoch": 72, "best_structure_loss": 0.5731293087005616}
+PILOT g05_full_reconstruction__seed43__decay001 | train=8000 validation=1000 | test unused
+  epoch=1 train_structure=1.096638 val_structure=0.914613 val_total=1.595618 patience_used=0
+  epoch=10 train_structure=0.646947 val_structure=0.660781 val_total=1.034555 patience_used=0
+  epoch=20 train_structure=0.558359 val_structure=0.619045 val_total=0.975375 patience_used=1
+  epoch=30 train_structure=0.492411 val_structure=0.607803 val_total=0.959954 patience_used=4
+  epoch=40 train_structure=0.437863 val_structure=0.603014 val_total=0.949943 patience_used=14
+  epoch=46 train_structure=0.407313 val_structure=0.633911 val_total=0.976324 patience_used=20
+{"run_name": "g05_full_reconstruction__seed43__decay001", "model": "g05_full_reconstruction", "seed": 43, "fraction": 1.0, "variant": "decay001", "structure_dropout": 0.0, "weight_decay": 0.001, "epochs_completed": 46, "max_epochs": 100, "stop_reason": "early_stopping", "elapsed_seconds": 44.11467029998312, "parameter_count": {"total": 406969, "trainable": 406969}, "best_total_epoch": 26, "best_total_loss": 0.9457789270877838, "best_structure_epoch": 26, "best_structure_loss": 0.5940469732284546}

@@ -1,0 +1,19 @@
+PILOT g05_sign_only__seed43__baseline | train=8000 validation=1000 | test unused
+  epoch=1 train_structure=1.130869 val_structure=0.942599 val_total=1.619609 patience_used=0
+  epoch=10 train_structure=0.659456 val_structure=0.674007 val_total=1.037353 patience_used=0
+  epoch=20 train_structure=0.573113 val_structure=0.625568 val_total=0.972377 patience_used=0
+  epoch=30 train_structure=0.510297 val_structure=0.603785 val_total=0.951202 patience_used=0
+  epoch=40 train_structure=0.456817 val_structure=0.607657 val_total=0.947507 patience_used=9
+  epoch=50 train_structure=0.411441 val_structure=0.628829 val_total=0.981398 patience_used=19
+  epoch=51 train_structure=0.406498 val_structure=0.631852 val_total=0.969251 patience_used=20
+{"run_name": "g05_sign_only__seed43__baseline", "model": "g05_sign_only", "seed": 43, "fraction": 1.0, "variant": "baseline", "structure_dropout": 0.0, "weight_decay": 0.0001, "epochs_completed": 51, "max_epochs": 100, "stop_reason": "early_stopping", "elapsed_seconds": 40.77002779999748, "parameter_count": {"total": 406969, "trainable": 406969}, "best_total_epoch": 31, "best_total_loss": 0.9406301028728485, "best_structure_epoch": 31, "best_structure_loss": 0.5999058632850647}
+PILOT g05_sign_only__seed43__dropout010 | train=8000 validation=1000 | test unused
+  epoch=1 train_structure=1.146008 val_structure=0.954912 val_total=1.631922 patience_used=0
+  epoch=10 train_structure=0.665547 val_structure=0.664200 val_total=1.027546 patience_used=0
+  epoch=20 train_structure=0.582328 val_structure=0.615625 val_total=0.962434 patience_used=0
+  epoch=30 train_structure=0.523809 val_structure=0.597537 val_total=0.944954 patience_used=4
+  epoch=40 train_structure=0.476313 val_structure=0.596355 val_total=0.936205 patience_used=1
+  epoch=50 train_structure=0.430721 val_structure=0.599645 val_total=0.952215 patience_used=4
+  epoch=60 train_structure=0.391017 val_structure=0.610242 val_total=0.946615 patience_used=14
+  epoch=66 train_structure=0.378182 val_structure=0.625818 val_total=0.960194 patience_used=20
+{"run_name": "g05_sign_only__seed43__dropout010", "model": "g05_sign_only", "seed": 43, "fraction": 1.0, "variant": "dropout010", "structure_dropout": 0.1, "weight_decay": 0.0001, "epochs_completed": 66, "max_epochs": 100, "stop_reason": "early_stopping", "elapsed_seconds": 47.348426199983805, "parameter_count": {"total": 406969, "trainable": 406969}, "best_total_epoch": 46, "best_total_loss": 0.92796351146698, "best_structure_epoch": 43, "best_structure_loss": 0.5884055914878845}

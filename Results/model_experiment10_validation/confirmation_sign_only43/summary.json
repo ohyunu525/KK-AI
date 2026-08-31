@@ -1,0 +1,44 @@
+[
+  {
+    "best_structure_epoch": 31,
+    "best_structure_loss": 0.5999058632850647,
+    "best_total_epoch": 31,
+    "best_total_loss": 0.9406301028728485,
+    "elapsed_seconds": 40.77002779999748,
+    "epochs_completed": 51,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_sign_only",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_sign_only__seed43__baseline",
+    "seed": 43,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.0,
+    "variant": "baseline",
+    "weight_decay": 0.0001
+  },
+  {
+    "best_structure_epoch": 43,
+    "best_structure_loss": 0.5884055914878845,
+    "best_total_epoch": 46,
+    "best_total_loss": 0.92796351146698,
+    "elapsed_seconds": 47.348426199983805,
+    "epochs_completed": 66,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_sign_only",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_sign_only__seed43__dropout010",
+    "seed": 43,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.1,
+    "variant": "dropout010",
+    "weight_decay": 0.0001
+  }
+]
