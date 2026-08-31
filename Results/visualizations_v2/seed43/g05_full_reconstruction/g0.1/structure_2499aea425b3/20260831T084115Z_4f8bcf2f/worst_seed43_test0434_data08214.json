@@ -1,0 +1,588 @@
+{
+  "schema": "experiment11-3d-visualization-v2",
+  "checkpoint": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Modelexperiment11\\studies\\final_fraction_sweep_seed43_20260831\\runs\\dropout020__g05_full_reconstruction__g0.1__s43\\best_structure.pt",
+  "configuration": {
+    "protocol_version": "new-learning10-g05-routing-v1",
+    "protocol_fingerprint": "2f2a1ffddd5ce94651e8e637d4cc22537c8a8c289cb37358afc056ff96dd4aab",
+    "charge_count": 5,
+    "model": {
+      "name": "g05_full_reconstruction",
+      "input_policy": {
+        "position": "G00 + masked even G05 summary",
+        "magnitude": "G00 + masked even G05 summary",
+        "relative_sign": "G00 + masked even G05 summary",
+        "global_sign": "masked G05 only; odd in V"
+      },
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "state_shapes": {
+        "g00_cnn.0.weight": {
+          "shape": [
+            16,
+            1,
+            3,
+            3
+          ],
+          "dtype": "torch.float32"
+        },
+        "g00_cnn.0.bias": {
+          "shape": [
+            16
+          ],
+          "dtype": "torch.float32"
+        },
+        "g00_cnn.3.weight": {
+          "shape": [
+            32,
+            16,
+            3,
+            3
+          ],
+          "dtype": "torch.float32"
+        },
+        "g00_cnn.3.bias": {
+          "shape": [
+            32
+          ],
+          "dtype": "torch.float32"
+        },
+        "g00_cnn.6.weight": {
+          "shape": [
+            64,
+            32,
+            3,
+            3
+          ],
+          "dtype": "torch.float32"
+        },
+        "g00_cnn.6.bias": {
+          "shape": [
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        "g00_encoder.1.weight": {
+          "shape": [
+            256,
+            1024
+          ],
+          "dtype": "torch.float32"
+        },
+        "g00_encoder.1.bias": {
+          "shape": [
+            256
+          ],
+          "dtype": "torch.float32"
+        },
+        "position_head.0.weight": {
+          "shape": [
+            128,
+            256
+          ],
+          "dtype": "torch.float32"
+        },
+        "position_head.0.bias": {
+          "shape": [
+            128
+          ],
+          "dtype": "torch.float32"
+        },
+        "position_head.2.weight": {
+          "shape": [
+            15,
+            128
+          ],
+          "dtype": "torch.float32"
+        },
+        "position_head.2.bias": {
+          "shape": [
+            15
+          ],
+          "dtype": "torch.float32"
+        },
+        "magnitude_head.0.weight": {
+          "shape": [
+            64,
+            256
+          ],
+          "dtype": "torch.float32"
+        },
+        "magnitude_head.0.bias": {
+          "shape": [
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        "magnitude_head.2.weight": {
+          "shape": [
+            5,
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        "magnitude_head.2.bias": {
+          "shape": [
+            5
+          ],
+          "dtype": "torch.float32"
+        },
+        "relative_sign_head.0.weight": {
+          "shape": [
+            64,
+            256
+          ],
+          "dtype": "torch.float32"
+        },
+        "relative_sign_head.0.bias": {
+          "shape": [
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        "relative_sign_head.2.weight": {
+          "shape": [
+            5,
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        "relative_sign_head.2.bias": {
+          "shape": [
+            5
+          ],
+          "dtype": "torch.float32"
+        },
+        "g05_encoder.0.weight": {
+          "shape": [
+            32,
+            3
+          ],
+          "dtype": "torch.float32"
+        },
+        "g05_encoder.0.bias": {
+          "shape": [
+            32
+          ],
+          "dtype": "torch.float32"
+        },
+        "g05_encoder.2.weight": {
+          "shape": [
+            32,
+            32
+          ],
+          "dtype": "torch.float32"
+        },
+        "g05_encoder.2.bias": {
+          "shape": [
+            32
+          ],
+          "dtype": "torch.float32"
+        },
+        "global_sign_head.0.weight": {
+          "shape": [
+            64,
+            96
+          ],
+          "dtype": "torch.float32"
+        },
+        "global_sign_head.0.bias": {
+          "shape": [
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        "global_sign_head.2.weight": {
+          "shape": [
+            1,
+            64
+          ],
+          "dtype": "torch.float32"
+        },
+        "structure_context.0.weight": {
+          "shape": [
+            128,
+            96
+          ],
+          "dtype": "torch.float32"
+        },
+        "structure_context.0.bias": {
+          "shape": [
+            128
+          ],
+          "dtype": "torch.float32"
+        },
+        "structure_context.2.weight": {
+          "shape": [
+            256,
+            128
+          ],
+          "dtype": "torch.float32"
+        },
+        "structure_context.2.bias": {
+          "shape": [
+            256
+          ],
+          "dtype": "torch.float32"
+        }
+      }
+    },
+    "observation": {
+      "g05_fraction": 0.1,
+      "g05_count_per_sample": 3,
+      "candidate_count": 32,
+      "selection": "fixed nested sensor prefix",
+      "full_fraction_definition": "all stored candidate sensors, not the full 32x32 field"
+    },
+    "training": {
+      "max_epochs": 150,
+      "batch_size": 128,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001,
+      "seed": 43,
+      "optimizer": "AdamW",
+      "loss_weights": {
+        "global_sign": 1.0,
+        "magnitude": 1.0,
+        "position": 1.0,
+        "relative_sign": 1.0
+      },
+      "regularization": {
+        "structure_dropout": 0.2,
+        "early_stopping_patience": 20,
+        "early_stopping_min_delta": 0.0,
+        "early_stopping_min_epochs": 0
+      },
+      "checkpoint_selection": {
+        "total": {
+          "checkpoint_selection": "total",
+          "selection_objective": "validation_loss.total",
+          "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+          "primary_metrics": [
+            "position_mae_x",
+            "position_mae_y",
+            "position_mae_z",
+            "mean_position_mae",
+            "mean_position_3d_error",
+            "charge_magnitude_mae",
+            "relative_sign_accuracy",
+            "relative_configuration_accuracy",
+            "pairwise_relative_sign_accuracy",
+            "global_sign_accuracy",
+            "global_sign_bce",
+            "absolute_sign_accuracy",
+            "absolute_sign_set_accuracy",
+            "charge_mae",
+            "global_invariant_charge_mae"
+          ],
+          "global_sign_in_selection_objective": true,
+          "global_sign_metrics_note": "Total selection includes global-sign loss only with observed G05 and nonzero global-sign weight."
+        },
+        "structure": {
+          "checkpoint_selection": "structure",
+          "selection_objective": "validation_loss.structure",
+          "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+          "primary_metrics": [
+            "position_mae_x",
+            "position_mae_y",
+            "position_mae_z",
+            "mean_position_mae",
+            "mean_position_3d_error",
+            "charge_magnitude_mae",
+            "relative_sign_accuracy",
+            "relative_configuration_accuracy",
+            "pairwise_relative_sign_accuracy"
+          ],
+          "global_sign_in_selection_objective": false,
+          "global_sign_metrics_note": "Global-sign and absolute-sign metrics are secondary diagnostics: structure selection does not optimize global-sign performance; training still uses the unchanged total loss."
+        }
+      }
+    },
+    "normalization": {
+      "charge_scale": 0.6794502589494028,
+      "g00_mean": 0.006332700330095314,
+      "g00_std": 0.011903275799601066,
+      "g05_value_scale": 0.07531177929884283,
+      "position_mean": [
+        0.0016500300262123346,
+        -0.0023164229933172464,
+        0.7972654104232788
+      ],
+      "position_std": [
+        0.867354691028595,
+        0.8655665516853333,
+        0.40409448742866516
+      ]
+    },
+    "split_counts": {
+      "train": 8000,
+      "validation": 1000,
+      "test": 1000
+    },
+    "tuning": {
+      "schema": "model-experiment11-validation-tuning-v1",
+      "study_fingerprint": "6f0e5056295c4d70434b887be1e77170db6849b68ad032878f169a661319e480",
+      "candidate_id": "dropout020",
+      "phase": "train_validation_only"
+    }
+  },
+  "provenance": {
+    "checkpoint_sha256": "2499aea425b3cc2fbfa809e0b383fa8993da8febba8112ce436118d034bd77d2",
+    "selection_lock": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Modelexperiment11\\studies\\final_fraction_sweep_seed43_20260831\\validation_selection.json",
+    "selection_lock_fingerprint": "e1955521593a7f938d9b423bfa6c0d70381c4ec9541aeeb360dfc2ef8c3fc884",
+    "validation_record_fingerprint": "507ecd8169844aa7f3f3f5c29aadd1d6d236eef151e9cd2aad355c589c4ed820",
+    "validation": {
+      "checkpoint_path": "runs/dropout020__g05_full_reconstruction__g0.1__s43/best_structure.pt",
+      "checkpoint_sha256": "2499aea425b3cc2fbfa809e0b383fa8993da8febba8112ce436118d034bd77d2",
+      "selected_epoch": 41,
+      "selected_validation_loss": 0.5678460512161255,
+      "validation_losses": {
+        "global_sign": 0.3718574893474579,
+        "magnitude": 0.07160450059175491,
+        "position": 0.436766214132309,
+        "relative_sign": 0.05947534155845642,
+        "structure": 0.5678460512161255,
+        "total": 0.9397035405635834
+      },
+      "validation_metrics": {
+        "absolute_sign_accuracy": 0.8527999954223633,
+        "absolute_sign_set_accuracy": 0.817,
+        "charge_mae": 0.31594645309448244,
+        "charge_magnitude_mae": 0.15194943237304687,
+        "global_invariant_charge_mae": 0.18282608985900878,
+        "global_sign_accuracy": 0.836,
+        "global_sign_bce": 0.3718574867248535,
+        "mean_position_3d_error": 0.7290708770751954,
+        "mean_position_mae": 0.3578106346130371,
+        "observations_per_sample": 3.0,
+        "observed_sample_fraction": 1.0,
+        "pairwise_relative_sign_accuracy": 0.9556000061035156,
+        "position_mae_x": 0.42118167114257815,
+        "position_mae_y": 0.4355822334289551,
+        "position_mae_z": 0.21666796493530274,
+        "relative_configuration_accuracy": 0.921,
+        "relative_sign_accuracy": 0.9623999938964843
+      }
+    },
+    "verified_artifacts": {
+      "runs/dropout020__g05_full_reconstruction__g0.1__s43/best_structure.pt": "2499aea425b3cc2fbfa809e0b383fa8993da8febba8112ce436118d034bd77d2",
+      "runs/dropout020__g05_full_reconstruction__g0.1__s43/result.json": "8d486de365a0aae9bab99f2c28edefbcc3f86e832fe430b5bad254da3bb1650f",
+      "runs/dropout020__g05_full_reconstruction__g0.1__s43/history.json": "fe4f2a9fa743ad56ebaecc332a11690997a9f339a52a19adbf656e38e038d61e"
+    },
+    "verification_scope": "requested trial and checkpoint only; no other seed weights/results loaded",
+    "schema": "experiment11-3d-visualization-v2",
+    "authority_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Modelexperiment11\\studies\\final_fraction_sweep_seed43_20260831\\protocol.json",
+    "authority_fingerprint": "fc30abff7cc499f2969f0690894cd1961a6acf8eefc7c2fbda0cf19d8b5e2e0f",
+    "authority_schema": "model-experiment11-finalized-fraction-seed-v1",
+    "data_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\charge_dataset_5charges_v9.npz",
+    "data_sha256": "f90880bbbcd31c528c0603a2aa8043c0ddea567c393d83fc59ae3afd3ac24863",
+    "split_seed": 42,
+    "split_counts": {
+      "train": 8000,
+      "validation": 1000,
+      "test": 1000
+    },
+    "split_index_hashes": {
+      "train": "2e33647fac2b147578a2154d2bbaa719690e4cb38ed8977e7d6c5b68b8e6c8df",
+      "validation": "95b2c49404bc462ee435c32f4dc60db383102671b13b9eae3ccc7280e4f1c58a",
+      "test": "886e43a6dd1ef552af30129705da1f558dcf9ccad3eec59c287bfa673e8b4e1b"
+    },
+    "normalization": {
+      "charge_scale": 0.6794502589494028,
+      "g00_mean": 0.006332700330095314,
+      "g00_std": 0.011903275799601066,
+      "g05_value_scale": 0.07531177929884283,
+      "position_mean": [
+        0.0016500300262123346,
+        -0.0023164229933172464,
+        0.7972654104232788
+      ],
+      "position_std": [
+        0.867354691028595,
+        0.8655665516853333,
+        0.40409448742866516
+      ]
+    },
+    "sources": {
+      "ModelExperiment10.py": {
+        "recorded_sha256": "20c2f9e26fee48187fa57e5a55750a9654a93724d11d8f83dfadedb3e598de38",
+        "current_sha256": "20c2f9e26fee48187fa57e5a55750a9654a93724d11d8f83dfadedb3e598de38",
+        "snapshot_sha256": "20c2f9e26fee48187fa57e5a55750a9654a93724d11d8f83dfadedb3e598de38",
+        "match": "exact"
+      },
+      "ModelExperiment11.py": {
+        "recorded_sha256": "c76028f069ae5b6e48509db7db83a1dcd7876d85b22defbcda7fdd636d23b0dd",
+        "current_sha256": "c76028f069ae5b6e48509db7db83a1dcd7876d85b22defbcda7fdd636d23b0dd",
+        "snapshot_sha256": "c76028f069ae5b6e48509db7db83a1dcd7876d85b22defbcda7fdd636d23b0dd",
+        "match": "exact"
+      },
+      "NewLearning9.py": {
+        "recorded_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+        "current_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+        "snapshot_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+        "match": "exact"
+      }
+    },
+    "training_environment": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.6",
+      "cuda_matmul_allow_tf32": false,
+      "cudnn": 91002,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": "enabled, warn_only=False",
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 3070",
+      "float32_matmul_precision": "highest",
+      "numpy": "2.5.2",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "python": "3.12.13",
+      "torch": "2.12.1+cu126",
+      "torch_num_interop_threads": 10,
+      "torch_num_threads": 10
+    },
+    "matching": "NewLearning9.minimum_cost_assignment(matching_cost(output, target, saved_loss_weights)); one joint position/magnitude/relative-sign assignment for all fields; no G05/global-sign cost",
+    "sample_selection_policy": "Illustrative samples from the entire saved test split, ranked by mean five-charge 3D position error AFTER the evaluation's joint assignment. No checkpoint/model/hyperparameter selection uses these errors.",
+    "test_set": "original saved test split (historical test for the tuning study), NOT fresh_test",
+    "no_training_or_selection_changes": true
+  },
+  "sample": {
+    "mode": "worst",
+    "test_index": 434,
+    "dataset_index": 8214,
+    "test_count": 1000,
+    "error_rank": 1000,
+    "error_percentile": 100.0,
+    "assignment_predicted_to_original_target_0based": [
+      3,
+      1,
+      4,
+      2,
+      0
+    ],
+    "predicted_positions": [
+      [
+        -0.22774441540241241,
+        -0.564096212387085,
+        1.0461753606796265
+      ],
+      [
+        0.8815363049507141,
+        -0.06401979923248291,
+        0.9372545480728149
+      ],
+      [
+        -0.5718336701393127,
+        0.4241805970668793,
+        0.7998636960983276
+      ],
+      [
+        0.9211682677268982,
+        -1.1025941371917725,
+        0.7611029148101807
+      ],
+      [
+        0.18885637819766998,
+        -0.16432781517505646,
+        1.1824569702148438
+      ]
+    ],
+    "raw_predicted_charges": [
+      -0.7440291047096252,
+      0.5596475601196289,
+      -0.7294795513153076,
+      0.7087056636810303,
+      0.5446563363075256
+    ],
+    "matched_true_positions": [
+      [
+        0.8277753591537476,
+        -1.3603589534759521,
+        0.7670706510543823
+      ],
+      [
+        -1.248441219329834,
+        0.5928871035575867,
+        1.4886690378189087
+      ],
+      [
+        0.8696108460426331,
+        0.6792594194412231,
+        1.4255168437957764
+      ],
+      [
+        -0.5507975220680237,
+        -0.03362780064344406,
+        0.4917042553424835
+      ],
+      [
+        -1.4971297979354858,
+        0.20453037321567535,
+        1.4640374183654785
+      ]
+    ],
+    "matched_true_charges": [
+      0.8355278968811035,
+      -0.30353185534477234,
+      0.8537289500236511,
+      -0.32168519496917725,
+      -0.8140328526496887
+    ],
+    "per_charge_3d_errors": [
+      1.3513163328170776,
+      2.296168088912964,
+      1.591938853263855,
+      1.8390073776245117,
+      1.748683214187622
+    ],
+    "metrics": {
+      "mean_position_3d_error": 1.7654228210449219,
+      "mean_position_mae": 0.8625412583351135,
+      "charge_mae": 1.2830051183700562,
+      "global_invariant_charge_mae": 0.22565217316150665,
+      "charge_magnitude_mae": 0.22565217316150665
+    },
+    "g05_mask": [
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "global_sign_logit": 2.3305859565734863,
+    "absolute_sign_identifiable": true,
+    "prediction_sign_representation": "absolute prediction",
+    "global_sign_accuracy": false,
+    "absolute_sign_accuracy": 0.0,
+    "oracle_sign_used_for_plot": false
+  }
+}
