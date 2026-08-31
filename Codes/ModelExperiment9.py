@@ -9,6 +9,7 @@ NewLearning9.py remains the authority for data, exact set assignment, losses and
 from __future__ import annotations
 
 import argparse
+import ast
 import csv
 import hashlib
 import itertools
@@ -47,6 +48,12 @@ PROTOCOL_VERSION = "new-learning9-g05-routing-v1"
 CHECKPOINT_SCHEMA_VERSION = 1
 RESULT_SCHEMA_VERSION = 1
 CHECKPOINT_SELECTIONS = ("total", "structure")
+# Verified against the original NewLearning9.py in commit ac59a6c. Legacy
+# protocols stored only raw file hashes; this mapping supplies their audited AST.
+LEGACY_BASELINE_AST_SHA256 = {
+    "4768dd7dd514605d62642c39943d4a0655dc8058ccf8414c3efc1600f5df16cd":
+        "38a0d1b746fa0275e1e1efa2b303b7c164179d406121863e8392a2ff08684263",
+}
 STRUCTURE_METRIC_NAMES = (
     "position_mae_x", "position_mae_y", "position_mae_z", "mean_position_mae",
     "mean_position_3d_error", "charge_magnitude_mae", "relative_sign_accuracy",
@@ -171,6 +178,33 @@ def file_sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def source_ast_sha256(path: Path) -> str:
+    """Hash executable syntax, ignoring comments, docstrings and formatting."""
+    tree = ast.parse(path.read_text(encoding="utf-8-sig"))
+    for node in ast.walk(tree):
+        if (isinstance(node, (ast.Module, ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef))
+                and node.body and isinstance(node.body[0], ast.Expr)
+                and isinstance(node.body[0].value, ast.Constant) and isinstance(node.body[0].value.value, str)):
+            node.body.pop(0)
+    return hashlib.sha256(ast.dump(tree, include_attributes=False).encode("utf-8")).hexdigest()
+
+
+def validate_evaluation_source(protocol: Mapping[str, Any]) -> dict[str, Any]:
+    path = Path(physics.__file__)
+    saved_hash = protocol["source_sha256"]["NewLearning9.py"]
+    current_hash, current_ast = file_sha256(path), source_ast_sha256(path)
+    saved_ast = protocol.get("source_ast_sha256", {}).get("NewLearning9.py") or LEGACY_BASELINE_AST_SHA256.get(saved_hash)
+    if current_hash == saved_hash:
+        verification = "identical_file"
+    elif saved_ast is not None and current_ast == saved_ast:
+        verification = "identical_executable_ast"
+    else:
+        raise RuntimeError("NewLearning9.py executable code differs from training or its compatibility cannot be verified; "
+                           "restore the saved physics/evaluation implementation")
+    return {"verification": verification, "training_sha256": saved_hash, "current_sha256": current_hash,
+            "training_ast_sha256": saved_ast, "current_ast_sha256": current_ast}
 
 
 def replace_with_retry(source: Path, destination: Path) -> None:
@@ -383,6 +417,7 @@ def build_protocol(
                  "candidate_count": arrays.g05.shape[1]},
         "source_sha256": {"ModelExperiment9.py": file_sha256(Path(__file__)),
                           "NewLearning9.py": file_sha256(Path(physics.__file__))},
+        "source_ast_sha256": {"NewLearning9.py": source_ast_sha256(Path(physics.__file__))},
         "normalization": stats.to_dict(),
         "training": {**asdict(settings), "optimizer": "AdamW", "loss_weights": asdict(weights),
                      "structure_reuse": False, "joint_gradient_clipping": False,
@@ -873,8 +908,7 @@ def load_evaluation_data(
     if (protocol.get("protocol_version") != PROTOCOL_VERSION
             or protocol.get("baseline_protocol_version") != physics.PROTOCOL_VERSION):
         raise RuntimeError("Saved protocol is not compatible with this five-charge routing experiment")
-    if protocol["source_sha256"]["NewLearning9.py"] != file_sha256(Path(physics.__file__)):
-        raise RuntimeError("NewLearning9.py changed since training; restore the saved physics/evaluation implementation")
+    validate_evaluation_source(protocol)
     # ModelExperiment9.py may have gained evaluation-only support since training.
     # Preserve its old hash in the training identity and record current sources separately.
     data_path = (data_path if data_path is not None else Path(protocol["data"]["path"])).resolve()
@@ -1329,12 +1363,18 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--experiment-name", default=DEFAULT_EXPERIMENT_NAME)
     parser.add_argument("--results-root", "--results-dir", dest="results_root", type=Path, default=DEFAULT_RESULTS_ROOT)
     parser.add_argument("--checkpoint-root", "--checkpoint-dir", dest="checkpoint_root", type=Path, default=DEFAULT_CHECKPOINT_ROOT)
+    parser.add_argument("--evaluation-results-dir", type=Path,
+                        help="Evaluation only: exact directory containing protocol.json; no experiment name is appended")
+    parser.add_argument("--evaluation-checkpoint-dir", type=Path,
+                        help="Evaluation only: exact directory containing checkpoint run folders; no experiment name is appended")
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--smoke-only", action="store_true", help="Check training subset only; do not create experiment artifacts or run full training")
     modes.add_argument("--evaluate-only", "--eval-only", action="store_true",
                        help="Evaluate saved checkpoints into a separate evaluations folder; never train or run smoke tests")
     parser.add_argument("--continue-on-error", action="store_true")
     args = parser.parse_args(argv)
+    if not args.evaluate_only and (args.evaluation_results_dir is not None or args.evaluation_checkpoint_dir is not None):
+        parser.error("--evaluation-results-dir and --evaluation-checkpoint-dir require --evaluate-only")
     if not args.evaluate_only:
         if args.data is None:
             args.data = DEFAULT_DATA_PATH
@@ -1364,6 +1404,26 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return args
 
 
+def resolve_evaluation_roots(args: argparse.Namespace) -> tuple[Path, Path]:
+    result_root = (args.evaluation_results_dir.resolve() if args.evaluation_results_dir is not None
+                   else args.results_root.resolve() / args.experiment_name)
+    checkpoint_root = (args.evaluation_checkpoint_dir.resolve() if args.evaluation_checkpoint_dir is not None
+                       else args.checkpoint_root.resolve() / args.experiment_name)
+    if args.evaluation_results_dir is None and not (result_root / "protocol.json").is_file() and len(args.seeds) == 1:
+        # A result folder may have been split/renamed by seed while models stayed put.
+        candidate = args.results_root.resolve() / f"{args.experiment_name}_seed{args.seeds[0]}"
+        if (candidate / "protocol.json").is_file():
+            result_root = candidate
+            print(f"Using seed-specific results directory: {result_root}", flush=True)
+    if not (result_root / "protocol.json").is_file():
+        raise FileNotFoundError(f"Evaluation requires protocol.json: {result_root}; "
+                                "use --evaluation-results-dir to select its exact directory; no training will run")
+    if not checkpoint_root.is_dir():
+        raise FileNotFoundError(f"Evaluation checkpoint directory not found: {checkpoint_root}; "
+                                "use --evaluation-checkpoint-dir to select its exact directory; no training will run")
+    return result_root, checkpoint_root
+
+
 def run_evaluation_matrix(
     *, args: argparse.Namespace, result_root: Path, checkpoint_root: Path, device: torch.device,
 ) -> Path:
@@ -1381,11 +1441,15 @@ def run_evaluation_matrix(
         "batch_size": args.batch_size if args.batch_size is not None else protocol["training"]["batch_size"],
         "source_sha256": {"ModelExperiment9.py": file_sha256(Path(__file__)),
                           "NewLearning9.py": file_sha256(Path(physics.__file__))},
+        "source_compatibility": validate_evaluation_source(protocol),
         "environment": runtime_environment(device),
     }
     atomic_write_json(output_root / "evaluation.json", context)
     print(f"Evaluation only | device={device} | saved test samples={len(split.test)}", flush=True)
+    if context["source_compatibility"]["verification"] == "identical_executable_ast":
+        print("NewLearning9.py executable code matches training; documentation/formatting changes accepted.", flush=True)
     print("Using saved normalization, split, loss weights and training settings; no smoke tests or training.", flush=True)
+    print(f"Checkpoints: {checkpoint_root}", flush=True)
     print(f"Evaluation output: {output_root}", flush=True)
     completed = failed = 0
     for fraction in args.fractions:
@@ -1470,8 +1534,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     result_root = args.results_root.resolve() / args.experiment_name
     checkpoint_root = args.checkpoint_root.resolve() / args.experiment_name
     if args.evaluate_only:
-        if not (result_root / "protocol.json").is_file():
-            raise FileNotFoundError(f"Evaluation requires an existing protocol.json: {result_root}; no training will run")
+        result_root, checkpoint_root = resolve_evaluation_roots(args)
         with experiment_locks(result_root, checkpoint_root):
             run_evaluation_matrix(args=args, result_root=result_root, checkpoint_root=checkpoint_root, device=device)
         return

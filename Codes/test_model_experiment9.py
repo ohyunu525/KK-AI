@@ -649,7 +649,8 @@ class FiveChargeExperimentTests(unittest.TestCase):
         with contextlib.redirect_stderr(io.StringIO()):
             for invalid in (("--fractions", "nan"), ("--seeds", "42,42"), ("--models", "unknown"),
                             ("--experiment-name", "../escape"), ("--learning-rate", "inf"),
-                            ("--smoke-only", "--evaluate-only"), ("--evaluate-only", "--batch-size", "0")):
+                            ("--smoke-only", "--evaluate-only"), ("--evaluate-only", "--batch-size", "0"),
+                            ("--evaluation-results-dir", "saved"), ("--evaluation-checkpoint-dir", "saved")):
                 with self.assertRaises(SystemExit):
                     experiment.parse_args(list(invalid))
 
@@ -721,6 +722,80 @@ class FiveChargeExperimentTests(unittest.TestCase):
         for path, (contents, modified) in preserved.items():
             self.assertEqual(path.read_bytes(), contents)
             self.assertEqual(path.stat().st_mtime_ns, modified)
+
+    def test_evaluate_only_accepts_moved_seed_results_and_documented_legacy_source(self) -> None:
+        protocol = self.protocol(epochs=1)
+        protocol.pop("source_ast_sha256")  # Original v1 protocols stored only the raw source hash.
+        protocol["source_sha256"]["NewLearning9.py"] = "4768dd7dd514605d62642c39943d4a0655dc8058ccf8414c3efc1600f5df16cd"
+        results = self.case_root / "results" / "trial_seed42"
+        checkpoints = self.case_root / "checkpoints" / "trial"
+        experiment.initialize_experiment_artifacts(experiment_results_dir=results, experiment_checkpoint_dir=checkpoints,
+                                                  protocol=protocol, split=self.split)
+        config = experiment.run_configuration(protocol, model_name="g05_full_reconstruction", fraction=0.75, seed=42)
+        with contextlib.redirect_stdout(io.StringIO()):
+            original, _ = experiment.train_and_evaluate_run(run_config=config, datasets=self.datasets[0.75],
+                                                           experiment_results_dir=results, experiment_checkpoint_dir=checkpoints,
+                                                           device=torch.device("cpu"))
+        before = {path: (path.read_bytes(), path.stat().st_mtime_ns)
+                  for root in (results, checkpoints) for path in root.rglob("*") if path.is_file()}
+        args = ["--evaluate-only", "--device", "cpu", "--experiment-name", "trial", "--models", "g05_full_reconstruction",
+                "--results-root", str(results.parent), "--checkpoint-root", str(checkpoints.parent)]
+        with mock.patch.object(experiment, "run_smoke_tests", side_effect=AssertionError("unexpected smoke test")), mock.patch.object(
+            experiment, "train_and_evaluate_run", side_effect=AssertionError("unexpected training"),
+        ), mock.patch.object(torch.optim, "AdamW", side_effect=AssertionError("unexpected optimizer")), contextlib.redirect_stdout(io.StringIO()) as output:
+            experiment.main(args)
+            # Explicit directories must override the name independently, without appending it.
+            experiment.main([*args, "--experiment-name", "irrelevant", "--evaluation-results-dir", str(results),
+                             "--evaluation-checkpoint-dir", str(checkpoints)])
+        self.assertIn("Using seed-specific results directory", output.getvalue())
+        self.assertIn("documentation/formatting changes accepted", output.getvalue())
+        self.assertFalse((results.parent / "trial").exists())
+        evaluation_paths = list((results / "evaluations").glob("*/runs/*/result.json"))
+        self.assertEqual(len(evaluation_paths), 2)
+        for path in evaluation_paths:
+            evaluated = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(evaluated["configuration"], original["configuration"])
+            context = evaluated["evaluation_context"]
+            self.assertEqual(context["source_protocol_path"], str((results / "protocol.json").resolve()))
+            self.assertEqual(context["checkpoint_root"], str(checkpoints.resolve()))
+            self.assertEqual(context["source_compatibility"]["verification"], "identical_executable_ast")
+            for selection in experiment.CHECKPOINT_SELECTIONS:
+                self.assertEqual(evaluated["evaluations"][selection]["test_metrics"], original["evaluations"][selection]["test_metrics"])
+        for path, (contents, modified) in before.items():
+            self.assertEqual(path.read_bytes(), contents)
+            self.assertEqual(path.stat().st_mtime_ns, modified)
+
+    def test_evaluation_source_allows_only_documentation_and_format_changes(self) -> None:
+        self.case_root.mkdir(parents=True)
+        original = self.case_root / "original.py"
+        documented = self.case_root / "documented.py"
+        changed = self.case_root / "changed.py"
+        original.write_text('"""Original docs."""\nthreshold = 1.0\nclass Model:\n    """Model docs."""\n    def predict(self):\n        """Predict docs."""\n        return threshold\n', encoding="utf-8")
+        documented.write_text('# New comment\n"""새 설명."""\nthreshold=1.0\n\nclass Model:\n    """새 모델 설명."""\n    def predict(self):\n        """새 예측 설명."""\n        return threshold\n', encoding="utf-8")
+        changed.write_text(documented.read_text(encoding="utf-8").replace("threshold=1.0", "threshold=2.0"), encoding="utf-8")
+        protocol = {"source_sha256": {"NewLearning9.py": experiment.file_sha256(original)},
+                    "source_ast_sha256": {"NewLearning9.py": experiment.source_ast_sha256(original)}}
+        with mock.patch.object(physics, "__file__", str(documented)):
+            self.assertEqual(experiment.validate_evaluation_source(protocol)["verification"], "identical_executable_ast")
+            unknown_legacy = {"source_sha256": {"NewLearning9.py": "unverified-source"}}
+            with self.assertRaisesRegex(RuntimeError, "compatibility cannot be verified"):
+                experiment.validate_evaluation_source(unknown_legacy)
+        with mock.patch.object(physics, "__file__", str(changed)):
+            with self.assertRaisesRegex(RuntimeError, "executable code differs"):
+                experiment.validate_evaluation_source(protocol)
+
+    def test_evaluation_path_resolution_does_not_override_explicit_or_multi_seed_requests(self) -> None:
+        protocol = self.protocol(epochs=1)
+        results, checkpoints, args = self.evaluation_trial(protocol)
+        candidate = results.with_name("trial_seed42")
+        experiment.initialize_experiment_artifacts(experiment_results_dir=candidate, experiment_checkpoint_dir=checkpoints,
+                                                  protocol=protocol, split=self.split)
+        self.assertEqual(experiment.resolve_evaluation_roots(experiment.parse_args(args)), (results, checkpoints))
+        (results / "protocol.json").unlink()
+        with self.assertRaisesRegex(FileNotFoundError, "evaluation-results-dir"):
+            experiment.resolve_evaluation_roots(experiment.parse_args([*args, "--seeds", "42,43"]))
+        with self.assertRaisesRegex(FileNotFoundError, "evaluation-results-dir"):
+            experiment.resolve_evaluation_roots(experiment.parse_args([*args, "--evaluation-results-dir", str(results)]))
 
     def test_evaluate_only_uses_latest_snapshots_without_repairing_missing_files(self) -> None:
         root, config = self.case_root, self.config(epochs=1, fraction=0.0)

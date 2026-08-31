@@ -192,15 +192,26 @@ Shape·capacity·initial state·batch order·120개 assignment·16개 sign patte
 `--evaluate-only`(별칭 `--eval-only`)를 사용한다. 학습 loop, optimizer 생성·step, smoke test를
 모두 건너뛰므로 파라미터 업데이트가 없다. 이미 완료된 run도 skip하지 않고 재평가한다.
 
-현재 저장된 `5point_routing_v1`의 75% / seed41 / 두 모델을 평가하는 예:
+현재 저장된 `5point_routing_v1`의 전체 관측률 / seed41 / 두 모델을 평가하는 예:
 
 ```powershell
 & "C:\Users\COM\Documents\KK-AI\.venv\Scripts\python.exe" `
   "C:\Users\COM\Documents\KK-AI\Codes\ModelExperiment9.py" `
   --experiment-name 5point_routing_v1 `
   --models "g05_sign_only,g05_full_reconstruction" `
-  --fractions 0.75 --seeds 41 --device cuda --evaluate-only
+  --fractions "0,0.10,0.25,0.50,0.75,1.0" --seeds 41 --device cuda --evaluate-only
 ```
+
+결과 폴더만 `5point_routing_v1_seed41`로 옮겨졌어도 위 명령을 그대로 사용할 수 있다.
+원래 결과 폴더에 `protocol.json`이 없고 seed를 하나만 지정한 경우,
+`<experiment_name>_seed<seed>` 폴더의 protocol을 찾아 사용하며 실제 경로를 출력한다.
+체크포인트는 기존 `Models/new_learning9_experiments/5point_routing_v1`에서 읽는다.
+원래 protocol이 있으면 우선 사용하며, 여러 seed 중 하나를 임의로 고르지는 않는다.
+
+그 밖의 폴더 구조에서는 `--evaluation-results-dir`에 `protocol.json`이 있는 폴더,
+`--evaluation-checkpoint-dir`에 모델별 run 폴더를 포함하는 폴더를 각각 지정한다.
+이 두 옵션은 **전달한 디렉터리 자체**를 사용하며 실험 이름을 덧붙이지 않는다.
+기존 `--results-root`/`--checkpoint-root`의 동작은 바뀌지 않는다.
 
 `--models`, `--fractions`, `--seeds`는 **이미 학습한 조건**을 지정한다. 생략 시 기존 CLI와 같이
 두 모델 / 0.75 / seed42를 사용한다. 여러 조건은 기존과 같이 쉼표로 구분한다.
@@ -212,7 +223,11 @@ Shape·capacity·initial state·batch order·120개 assignment·16개 sign patte
 `--data`도 생략하면 저장된 데이터 경로를 사용하고, 파일을 옮겼다면 SHA256이 같은 복사본을 지정할 수 있다.
 GPU에서 학습한 모델도 `--device cpu`로 평가할 수 있다. 실행한 코드의 hash와 평가 환경은 따로 기록한다.
 평가 모드 추가 전 `ModelExperiment9.py`의 hash를 가진 checkpoint도 사용할 수 있지만,
-물리 계산과 평가 함수를 제공하는 `NewLearning9.py`는 학습 당시 파일과 같아야 한다.
+물리 계산과 평가 함수를 제공하는 `NewLearning9.py`는 계산 코드가 같아야 한다.
+원본 SHA256이 달라도 주석·docstring·서식만 바뀌었고, 저장된 AST hash 또는 검증된 원본 v1의
+AST hash와 일치하면 평가를 허용한다. 계산식·상수 등 실행 구문이 다르거나 원본과 비교할 근거가
+없으면 계속 오류로 종료한다. 새 학습 protocol은 원본 SHA256과 AST hash를 함께 저장하며,
+기존 protocol과 checkpoint를 고치거나 hash 검사를 무조건 무시하지 않는다.
 
 원래 protocol의 “학습 종료 후 test 평가” 원칙을 유지한다. 완료된 `latest.pt`, 또는 완료된
 `result.json`과 두 best checkpoint가 필요하다. 학습이 끝났지만 test 평가가 중단된 경우도
@@ -225,7 +240,7 @@ GPU에서 학습한 모델도 `--device cpu`로 평가할 수 있다. 실행한 
 아래 경로를 콘솔에 출력한다. 원본 experiment와 같은 잠금을 사용하므로 동시에 학습을 실행할 수 없다.
 
 ```text
-Results/new_learning9_experiments/<experiment_name>/evaluations/<UTC-time>_<id>/
+<실제로 선택된 결과 폴더>/evaluations/<UTC-time>_<id>/
 ├── evaluation.json             # 원본 protocol 참조와 실제 평가 코드·환경
 ├── runs.csv
 ├── summary.csv
