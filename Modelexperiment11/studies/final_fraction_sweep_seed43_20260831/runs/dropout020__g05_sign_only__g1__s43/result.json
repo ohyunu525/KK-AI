@@ -1,0 +1,419 @@
+{
+  "completed_at": "2026-08-31T06:48:02.714750+00:00",
+  "configuration": {
+    "charge_count": 5,
+    "model": {
+      "input_policy": {
+        "global_sign": "masked G05 only; odd in V",
+        "magnitude": "G00 only",
+        "position": "G00 only",
+        "relative_sign": "G00 only"
+      },
+      "name": "g05_sign_only",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "state_shapes": {
+        "g00_cnn.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            16
+          ]
+        },
+        "g00_cnn.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            16,
+            1,
+            3,
+            3
+          ]
+        },
+        "g00_cnn.3.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            32
+          ]
+        },
+        "g00_cnn.3.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            32,
+            16,
+            3,
+            3
+          ]
+        },
+        "g00_cnn.6.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "g00_cnn.6.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            32,
+            3,
+            3
+          ]
+        },
+        "g00_encoder.1.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            256
+          ]
+        },
+        "g00_encoder.1.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            256,
+            1024
+          ]
+        },
+        "g05_encoder.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            32
+          ]
+        },
+        "g05_encoder.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            32,
+            3
+          ]
+        },
+        "g05_encoder.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            32
+          ]
+        },
+        "g05_encoder.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            32,
+            32
+          ]
+        },
+        "global_sign_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "global_sign_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            96
+          ]
+        },
+        "global_sign_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            1,
+            64
+          ]
+        },
+        "magnitude_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "magnitude_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            256
+          ]
+        },
+        "magnitude_head.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            5
+          ]
+        },
+        "magnitude_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            5,
+            64
+          ]
+        },
+        "position_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            128
+          ]
+        },
+        "position_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            128,
+            256
+          ]
+        },
+        "position_head.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            15
+          ]
+        },
+        "position_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            15,
+            128
+          ]
+        },
+        "relative_sign_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "relative_sign_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            256
+          ]
+        },
+        "relative_sign_head.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            5
+          ]
+        },
+        "relative_sign_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            5,
+            64
+          ]
+        },
+        "structure_context.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            128
+          ]
+        },
+        "structure_context.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            128,
+            96
+          ]
+        },
+        "structure_context.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            256
+          ]
+        },
+        "structure_context.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            256,
+            128
+          ]
+        }
+      }
+    },
+    "normalization": {
+      "charge_scale": 0.6794502589494028,
+      "g00_mean": 0.006332700330095314,
+      "g00_std": 0.011903275799601066,
+      "g05_value_scale": 0.07531177929884283,
+      "position_mean": [
+        0.0016500300262123346,
+        -0.0023164229933172464,
+        0.7972654104232788
+      ],
+      "position_std": [
+        0.867354691028595,
+        0.8655665516853333,
+        0.40409448742866516
+      ]
+    },
+    "observation": {
+      "candidate_count": 32,
+      "full_fraction_definition": "all stored candidate sensors, not the full 32x32 field",
+      "g05_count_per_sample": 32,
+      "g05_fraction": 1.0,
+      "selection": "fixed nested sensor prefix"
+    },
+    "protocol_fingerprint": "2f2a1ffddd5ce94651e8e637d4cc22537c8a8c289cb37358afc056ff96dd4aab",
+    "protocol_version": "new-learning10-g05-routing-v1",
+    "split_counts": {
+      "test": 1000,
+      "train": 8000,
+      "validation": 1000
+    },
+    "training": {
+      "batch_size": 128,
+      "checkpoint_selection": {
+        "structure": {
+          "checkpoint_selection": "structure",
+          "global_sign_in_selection_objective": false,
+          "global_sign_metrics_note": "Global-sign and absolute-sign metrics are secondary diagnostics: structure selection does not optimize global-sign performance; training still uses the unchanged total loss.",
+          "primary_metrics": [
+            "position_mae_x",
+            "position_mae_y",
+            "position_mae_z",
+            "mean_position_mae",
+            "mean_position_3d_error",
+            "charge_magnitude_mae",
+            "relative_sign_accuracy",
+            "relative_configuration_accuracy",
+            "pairwise_relative_sign_accuracy"
+          ],
+          "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+          "selection_objective": "validation_loss.structure"
+        },
+        "total": {
+          "checkpoint_selection": "total",
+          "global_sign_in_selection_objective": true,
+          "global_sign_metrics_note": "Total selection includes global-sign loss only with observed G05 and nonzero global-sign weight.",
+          "primary_metrics": [
+            "position_mae_x",
+            "position_mae_y",
+            "position_mae_z",
+            "mean_position_mae",
+            "mean_position_3d_error",
+            "charge_magnitude_mae",
+            "relative_sign_accuracy",
+            "relative_configuration_accuracy",
+            "pairwise_relative_sign_accuracy",
+            "global_sign_accuracy",
+            "global_sign_bce",
+            "absolute_sign_accuracy",
+            "absolute_sign_set_accuracy",
+            "charge_mae",
+            "global_invariant_charge_mae"
+          ],
+          "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+          "selection_objective": "validation_loss.total"
+        }
+      },
+      "learning_rate": 0.001,
+      "loss_weights": {
+        "global_sign": 1.0,
+        "magnitude": 1.0,
+        "position": 1.0,
+        "relative_sign": 1.0
+      },
+      "max_epochs": 150,
+      "optimizer": "AdamW",
+      "regularization": {
+        "early_stopping_min_delta": 0.0,
+        "early_stopping_min_epochs": 0,
+        "early_stopping_patience": 20,
+        "structure_dropout": 0.2
+      },
+      "seed": 43,
+      "weight_decay": 0.0001
+    },
+    "tuning": {
+      "candidate_id": "dropout020",
+      "phase": "train_validation_only",
+      "schema": "model-experiment11-validation-tuning-v1",
+      "study_fingerprint": "6f0e5056295c4d70434b887be1e77170db6849b68ad032878f169a661319e480"
+    }
+  },
+  "evaluations": {
+    "structure": {
+      "checkpoint_path": "runs/dropout020__g05_sign_only__g1__s43/best_structure.pt",
+      "checkpoint_sha256": "c3dbbc68b4cc09410a19c867e8ec6937e50674d93daba44e6ffdf7ce00acdc6f",
+      "selected_epoch": 41,
+      "selected_validation_loss": 0.5867026119232178,
+      "validation_losses": {
+        "global_sign": 0.34241537380218506,
+        "magnitude": 0.07426174825429917,
+        "position": 0.4482724978923798,
+        "relative_sign": 0.06416838043928147,
+        "structure": 0.5867026119232178,
+        "total": 0.9291179857254028
+      },
+      "validation_metrics": {
+        "absolute_sign_accuracy": 0.8681999893188477,
+        "absolute_sign_set_accuracy": 0.827,
+        "charge_mae": 0.3005759811401367,
+        "charge_magnitude_mae": 0.1560664348602295,
+        "global_invariant_charge_mae": 0.19148273849487304,
+        "global_sign_accuracy": 0.853,
+        "global_sign_bce": 0.3424153709411621,
+        "mean_position_3d_error": 0.7416982192993165,
+        "mean_position_mae": 0.36329375457763674,
+        "observations_per_sample": 32.0,
+        "observed_sample_fraction": 1.0,
+        "pairwise_relative_sign_accuracy": 0.9499999923706055,
+        "position_mae_x": 0.42525286483764646,
+        "position_mae_y": 0.44871265029907226,
+        "position_mae_z": 0.21591570091247558,
+        "relative_configuration_accuracy": 0.911,
+        "relative_sign_accuracy": 0.9575999755859375
+      }
+    },
+    "total": {
+      "checkpoint_path": "runs/dropout020__g05_sign_only__g1__s43/best_total.pt",
+      "checkpoint_sha256": "a00db2a82b102b6ee02a4bbb6e28228fb422fc59155a67b8e9fb1c6f0d45b197",
+      "selected_epoch": 66,
+      "selected_validation_loss": 0.9249988248348237,
+      "validation_losses": {
+        "global_sign": 0.33437660145759585,
+        "magnitude": 0.07536345899105072,
+        "position": 0.43758524250984193,
+        "relative_sign": 0.07767351621389389,
+        "structure": 0.5906222233772278,
+        "total": 0.9249988248348237
+      },
+      "validation_metrics": {
+        "absolute_sign_accuracy": 0.876,
+        "absolute_sign_set_accuracy": 0.837,
+        "charge_mae": 0.2921360626220703,
+        "charge_magnitude_mae": 0.15675094413757323,
+        "global_invariant_charge_mae": 0.18935529899597167,
+        "global_sign_accuracy": 0.862,
+        "global_sign_bce": 0.3343765983581543,
+        "mean_position_3d_error": 0.7300543060302734,
+        "mean_position_mae": 0.3565137825012207,
+        "observations_per_sample": 32.0,
+        "observed_sample_fraction": 1.0,
+        "pairwise_relative_sign_accuracy": 0.9534000015258789,
+        "position_mae_x": 0.41473725891113283,
+        "position_mae_y": 0.4426562232971191,
+        "position_mae_z": 0.2121478214263916,
+        "relative_configuration_accuracy": 0.917,
+        "relative_sign_accuracy": 0.9603999862670899
+      }
+    }
+  },
+  "fingerprint": "3ec51956a70c3518c423097a8883d432d841eca6308e94a183888d4d4b64c2ea",
+  "history_sha256": "956f43e2d93faacc639693acddf2297b9464a24c0d018fd28a1fafbd81ee7807",
+  "run_fingerprint": "12e06979763a502d181f9e6cb7e8b86cf249adb27cc3b696658a54f0792bbc59",
+  "schema": "model-experiment11-validation-tuning-v1",
+  "status": "validation_complete",
+  "test_evaluated": false,
+  "training_result": {
+    "early_stopping": {
+      "bad_epochs": 20,
+      "best_losses": {
+        "structure": 0.5867026119232178,
+        "total": 0.9249988248348237
+      },
+      "epoch": 86,
+      "last_improvement_epoch": 66,
+      "stopped": true
+    },
+    "elapsed_seconds": 65.04845419991761,
+    "epochs_completed": 86,
+    "resumed": false,
+    "stop_reason": "early_stopping"
+  }
+}

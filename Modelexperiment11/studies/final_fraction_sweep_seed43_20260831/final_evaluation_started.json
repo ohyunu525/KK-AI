@@ -1,0 +1,7 @@
+{
+  "schema": "model-experiment11-finalized-fraction-seed-v1",
+  "started_at": "2026-08-31T06:48:59.636757+00:00",
+  "test_used_for_model_or_checkpoint_selection": false,
+  "training_closed": true,
+  "validation_selection_fingerprint": "e1955521593a7f938d9b423bfa6c0d70381c4ec9541aeeb360dfc2ef8c3fc884"
+}

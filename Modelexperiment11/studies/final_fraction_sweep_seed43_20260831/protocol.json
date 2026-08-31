@@ -1,0 +1,129 @@
+{
+  "created_at": "2026-08-31T06:38:04.836429+00:00",
+  "fingerprint": "fc30abff7cc499f2969f0690894cd1961a6acf8eefc7c2fbda0cf19d8b5e2e0f",
+  "identity": {
+    "data": {
+      "array_hashes": {
+        "g00": "de8e4d669800e0a87d825368bffe0ab1f4d669fde7845df66e3a125c0555afd1",
+        "g05": "c9414695c34d262fb78fd3d91c761e069a7b91f449070ee53916242a9a0fa96f",
+        "grid_x": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+        "grid_y": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+        "target": "9cdbff9ffc7934e33fbf0c4aee467c9bfe74b9f5f36c09b7d8f41ee0933f0941"
+      },
+      "normalization_reproduced_from_train_only": true,
+      "path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\charge_dataset_5charges_v9.npz",
+      "sha256": "f90880bbbcd31c528c0603a2aa8043c0ddea567c393d83fc59ae3afd3ac24863",
+      "split_counts": {
+        "test": 1000,
+        "train": 8000,
+        "validation": 1000
+      },
+      "split_reproduced": true,
+      "split_seed": 42
+    },
+    "environment": {
+      "cublas_workspace_config": ":4096:8",
+      "cuda": "12.6",
+      "cuda_matmul_allow_tf32": false,
+      "cudnn": 91002,
+      "cudnn_allow_tf32": true,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": "enabled, warn_only=False",
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 3070",
+      "float32_matmul_precision": "highest",
+      "numpy": "2.5.2",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "python": "3.12.13",
+      "torch": "2.12.1+cu126",
+      "torch_num_interop_threads": 10,
+      "torch_num_threads": 10
+    },
+    "fractions": [
+      0.0,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "independence": {
+      "frozen_hyperparameter_authority": "parent selection metadata only",
+      "output_root_is_seed_specific": true,
+      "parent_checkpoints_loaded": false,
+      "parent_trial_results_loaded": false,
+      "prior_seed_metrics_used_for_model_or_checkpoint_selection": false,
+      "prior_seed_weights_reused": false
+    },
+    "models": [
+      "g05_sign_only",
+      "g05_full_reconstruction"
+    ],
+    "parent_selection_fingerprint": "9e8ba01bffb13d118f0c4e3dc5a82f477f590142da4ab06ba3f19c5bbf68e5fd",
+    "parent_study_fingerprint": "6f0e5056295c4d70434b887be1e77170db6849b68ad032878f169a661319e480",
+    "parent_study_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Modelexperiment11\\studies\\main",
+    "primary_checkpoint_selection": "structure",
+    "protocol": {
+      "checkpoint_selection": "validation minima of whole-epoch states; first epoch breaks ties",
+      "loss_and_matching": "inherited unchanged from sealed ModelExperiment11/10 configuration",
+      "test_gate": "all 12 validation trials and checkpoint hashes are sealed before test TensorDataset construction",
+      "test_used_for_model_selection": false,
+      "training_input": "frozen train split only",
+      "validation_primary": "best_structure.pt"
+    },
+    "run_configuration_fingerprints": [
+      "a6cf352ba2d5ee5773daa02938fe113baee1b100575ef8cccf8dd088103727e1",
+      "83a01fab4118dbb93da7625abb50e2c05997c31903bd068e7e6dd6a08bd7b0e3",
+      "74284f7e555bdf41d2a3a63df6c3b5d4fda85d2e3504662be8f457f9031e3a46",
+      "6f388451d038ac3672520f8413fbb3d918af19b6f645cc18f45d481a69bf1091",
+      "8383949b3506a6c77d9a1aacad62f47f80a5f80e3693b9fc4a5fb77dc1a9b866",
+      "c5a7b929f91d18568f941c211f260bcbf1c4e3752322a17556a1cbc35f6d825a",
+      "cab95d28ee3bd9bc8ea253f051d1c79a2f6f2eec55d9d8d2df41f75cdf3ca09d",
+      "bf981eb7e7d0fb4010ed3b693bbeaebce8a4daa5bf750bcf38a844ae0411cb49",
+      "38964cd217d99206c77d00291c930491bba8e8a52685d1b94087497ae6e4fd10",
+      "e032105f51ea5ae63ebee74c07e8080fdf24b89e6c3a9523aa426d10bd4c654c",
+      "12e06979763a502d181f9e6cb7e8b86cf249adb27cc3b696658a54f0792bbc59",
+      "490f8923c78a0d763315d98b4762eb0aaf578b325933f6de990ac8807a9c1539"
+    ],
+    "secondary_checkpoint_selection": "total (reported, never selected using test)",
+    "seed": 43,
+    "selected_candidate": {
+      "id": "dropout020",
+      "learning_rate": 0.001,
+      "structure_dropout": 0.2,
+      "weight_decay": 0.0001
+    },
+    "source_audit": {
+      "ModelExperiment10.py": {
+        "current_sha256": "20c2f9e26fee48187fa57e5a55750a9654a93724d11d8f83dfadedb3e598de38",
+        "current_vs_parent_snapshot": "exact",
+        "parent_recorded_sha256": "20c2f9e26fee48187fa57e5a55750a9654a93724d11d8f83dfadedb3e598de38",
+        "parent_snapshot_sha256": "20c2f9e26fee48187fa57e5a55750a9654a93724d11d8f83dfadedb3e598de38"
+      },
+      "ModelExperiment11.py": {
+        "current_sha256": "c76028f069ae5b6e48509db7db83a1dcd7876d85b22defbcda7fdd636d23b0dd",
+        "current_vs_parent_snapshot": "exact",
+        "parent_recorded_sha256": "ad841cf4eaa1afadea6df49924d358d5eaa3a7d833d62b98f0af61e11ec6af21",
+        "parent_snapshot_sha256": "c76028f069ae5b6e48509db7db83a1dcd7876d85b22defbcda7fdd636d23b0dd"
+      },
+      "NewLearning9.py": {
+        "current_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+        "current_vs_parent_snapshot": "exact",
+        "parent_recorded_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+        "parent_snapshot_sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307"
+      },
+      "generate_charge_dataset.py": {
+        "current_sha256": "7023aa2b50e7c3235661090b6ef4654480817a5f8fb33be8fd88452d45afb6f0",
+        "current_vs_parent_snapshot": "exact",
+        "parent_recorded_sha256": "67ef87aa64ef93e3811c600d74e30ce74a7d59e93574e6a94974db9c9da5ddc6",
+        "parent_snapshot_sha256": "7023aa2b50e7c3235661090b6ef4654480817a5f8fb33be8fd88452d45afb6f0"
+      },
+      "run_finalized_fraction_sweep.py": {
+        "current_sha256": "bee25dbae61ae31de73160fe4173a9216d6382fd236d19dbab78166868bea49e",
+        "current_vs_parent_snapshot": "new_seed_isolation_runner"
+      }
+    }
+  },
+  "schema": "model-experiment11-finalized-fraction-seed-v1"
+}
