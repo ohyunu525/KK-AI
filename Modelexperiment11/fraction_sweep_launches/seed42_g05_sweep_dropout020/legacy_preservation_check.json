@@ -1,0 +1,21 @@
+{
+  "seed": 42,
+  "command": ".venv/Scripts/python.exe Modelexperiment11/audit_existing.py --verify-preservation",
+  "exit_code": 1,
+  "checked_files": 1304,
+  "changed_or_missing_relative_to_old_manifest": ["Documents/보고서 파일.pptx"],
+  "classification": "pre-existing document difference; not a change from the seed42 execution",
+  "evidence": {
+    "working_tree_was_clean_at_start_of_task": true,
+    "working_tree_git_blob": "0c53b49895448eacfc9ff0fe42b11b5125ced60c",
+    "head_git_blob": "0c53b49895448eacfc9ff0fe42b11b5125ced60c",
+    "latest_document_commit": "50adfd0",
+    "latest_document_commit_time": "2026-08-31T15:00:17+09:00",
+    "document_last_write_utc": "2026-08-31T06:20:25Z",
+    "seed42_launch_utc": "2026-08-31T06:31:08.836Z",
+    "legacy_manifest_expected_sha256": "fd440d00d24fb63ff41e747c4f442b4a6b6aab98d00887202f691f015bf2158d",
+    "current_sha256": "9b4e69c3cdef53a935a9318a9ee83c2cceb648341483b0d441d851de3d2bb476"
+  },
+  "actions": "The document and legacy manifest were not changed. The historical preservation_check.json was restored to its exact pre-task contents; this new check is recorded here instead.",
+  "current_execution_preservation": {"checked_files": 521, "changed_files": []}
+}

@@ -1,0 +1,2095 @@
+{
+  "created_at_utc": "2026-08-31T06:30:43.7253835Z",
+  "protected_roots": [
+    "Modelexperiment11\\studies",
+    "Modelexperiment11\\fraction_sweep_results",
+    "Modelexperiment11\\fraction_sweep_checkpoints"
+  ],
+  "file_count": 521,
+  "files": [
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/sweep.json",
+      "sha256": "784abcda98741dabdaad057143bdbf068ebf1f5f838857e452bbb98d80b4870f"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/trials.csv",
+      "sha256": "ba928dabbbb0e781d50bde7adc708d0f5a965303a5698fd244f8148b5e9b3165"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.1__s43/config.json",
+      "sha256": "d46e6e138641299f557afc61a74a50d777edabe51ea87971c2b28da04a307d38"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.1__s43/history.csv",
+      "sha256": "8f27872861811d1516661dba978b92743b6c8017749e8ae0054094db744cb127"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.1__s43/history.json",
+      "sha256": "7796b5b82f04338a98c119380655760958175e1bc4214e22999291e971e87eed"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.1__s43/result.json",
+      "sha256": "521a8220cf9368957543e6a94522664ce15f3c4eabd3c29ecfe69eae492403de"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.1__s43/status.json",
+      "sha256": "9ed4178be5854a62b4bd2ffa73dc299a41b147cef68e2ef98603ed148c800fed"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.25__s43/config.json",
+      "sha256": "7e3376d26eb63b80d66c06f2d47844e79f715dca09937460c2974f7c769c9dce"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.25__s43/history.csv",
+      "sha256": "c7fedc42336ef5e66e0d011f1de5c1bac998f09831825090ed78bfd6971168f4"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.25__s43/history.json",
+      "sha256": "2cc7090ac88721773681673a380c31badd34750d5a01c29dc3c65f8a8cd2b323"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.25__s43/result.json",
+      "sha256": "cbca6398677bb50b81389d18bd19bfa3e9eb2148ca57f155fcf43ed1cdf3bdc4"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.25__s43/status.json",
+      "sha256": "85cbfee5e75054d6cb93a095d521ba92c01be38f84b8647057bd87b0eecd9a31"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.5__s43/config.json",
+      "sha256": "847d33bee652954d6e0fbf90511fc1b4f61eebb11e090e7a47a0dba56b8f8c81"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.5__s43/history.csv",
+      "sha256": "9eeffb85f7224c8d2a99e5a723aa7fc855fbb4cac13953ffbc8b06a270a1ecc9"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.5__s43/history.json",
+      "sha256": "592dc1ca3f56f72a7ed524c9661fc50329ab82d7e58d7d52b65827de23f82631"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.5__s43/result.json",
+      "sha256": "8f71da35e881d4d72473720320e710089e5fa5d10d48148469ad1819cba6cbcc"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.5__s43/status.json",
+      "sha256": "75933f33da3385195a2bf51322723844afad156a6ec925bff53c3f884d3733d5"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.75__s43/config.json",
+      "sha256": "c1d0f3acb0dabbaa26605447ea9129675319b61eca43e423eeb49b5b47fbcc56"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.75__s43/history.csv",
+      "sha256": "194674f92f00dc5f223700ed9abae90859e6e48df0bc0013c94e1937e372dbc9"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.75__s43/history.json",
+      "sha256": "cc1cc9a0bc30008ec7969c044f704c5bbdd3ffc15b0bfe3603aabea30b32cdc2"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.75__s43/result.json",
+      "sha256": "f8e4adb19c128f31f2b7290c8eb34cf9f69a81c6453faadeb9e79324e8cc1365"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0.75__s43/status.json",
+      "sha256": "2f4e47a549f60796936dd20ac08cf0c33fecc4aba555373a57f9335da2d3d62f"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0__s43/config.json",
+      "sha256": "bd15ea4f97e84a358b9560c3fe0f1543e401029466f1eb1164ed676859b0705f"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0__s43/history.csv",
+      "sha256": "5ab3cc94ce4753dea4cd6b69cc9ce334ef542a390ea22de679f90ce9a72fed6b"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0__s43/history.json",
+      "sha256": "c8bc3317067cf51131f6f45ff416d03f0183f781cb6b0a5f5a81b73458c6f719"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0__s43/result.json",
+      "sha256": "ef136128324679a2a1bbe7e290b69e88968ba032ca01e653df1359ee1bd5046c"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g0__s43/status.json",
+      "sha256": "e44619eb58fd6b6f157e9e323fff7246875944a48f951ad7064f986e46f823ff"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g1__s43/config.json",
+      "sha256": "b07c94d460fbf63c841bc70126e4ec992b71a8883d8ce12acf48c4ea0768f56f"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g1__s43/history.csv",
+      "sha256": "30853588d4c63040feb9cd09fd3cda9f7b403b1539d91da2108d4dd724623986"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g1__s43/history.json",
+      "sha256": "8eb1db342fd9c66780117ace4b02fb6a4df5991b66b6f7c2597ce9cfa86081c7"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g1__s43/result.json",
+      "sha256": "f5fa0e7e3d2878abb01a8d7ea37127f0c0beb757b41448f5db5324abc34658f7"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_full_reconstruction__g1__s43/status.json",
+      "sha256": "3d7abe45f5691964c8945e050308698ece14ea30c7b170ba812f4251d1001954"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.1__s43/config.json",
+      "sha256": "6b7cc4407d4500f0e3d3e15f578a999e0c14ea89c6c7fc23a29a1585669004a1"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.1__s43/history.csv",
+      "sha256": "dabea15944aa9658769a5587f41a5e48e40c4cadf44ed88aaab3d05a1098e468"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.1__s43/history.json",
+      "sha256": "4931de1ab60c6adffdc4c67698491b7b2c8dfcdc3ad6dd5254ddefc3d1820177"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.1__s43/result.json",
+      "sha256": "65fad6d211e05e35e9293edb9fc4dabf1477da78b4fd556a41f4403dd6650e86"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.1__s43/status.json",
+      "sha256": "e1eb22ff87283a38a723e23a8aba7bb0d8cc7fee146e9f5100163f84faa8f030"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.25__s43/config.json",
+      "sha256": "5d1b7ff4ecf10dbc2d3a86e91bd5660ee59153b324dbe7397e3433c2374fba2b"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.25__s43/history.csv",
+      "sha256": "ce2b01b9875ea65062c02dbc0068a5e7f28e44d948cbe5c84c19b621b4d21627"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.25__s43/history.json",
+      "sha256": "323da30b72b4c76fe4c8a4aec33c6df0f7b00231e29adee119014a41faa4b2c3"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.25__s43/result.json",
+      "sha256": "afdb893a2cf8d5da3becba0f4c38aa73d8e5cd7a9855fb93004e66b159ad2d8c"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.25__s43/status.json",
+      "sha256": "32c382a86aa98fe030d1171431f474fa854c099d5f3f2b4089844d5cbb4dcf10"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.5__s43/config.json",
+      "sha256": "cf94dc4c14b5203dbf28cda04ca280afccec95af938540ba32e25dd395e49592"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.5__s43/history.csv",
+      "sha256": "7225e3874f1b70b15a2624ef0ca9e96c6ff6075bf958b78d988b2d353c101094"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.5__s43/history.json",
+      "sha256": "f2bdf68d78a6aa21dd280293ad3bf05e15aa6777318cde32c4c4e2ae289e537e"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.5__s43/result.json",
+      "sha256": "219a72cb8f081b7ca31de1aeb95e241fcaf6f54699151b6490cb00428c6548fb"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.5__s43/status.json",
+      "sha256": "3e0c093a2439e2771aa30574b134ab9ff56e8b4b63ab781b8e347f54e6cf636d"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.75__s43/config.json",
+      "sha256": "a998856a5adf347572050224424e693dd071f32512a665c715482bb17a06ea2e"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.75__s43/history.csv",
+      "sha256": "b8400b44d43c09bbddd7fa99d256e75fd622a82ecde17358fc9a686caae288e7"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.75__s43/history.json",
+      "sha256": "24af0c2ac5537ee94b202cbb291799d71786df88bab647c80fc663b3a2aa8bcf"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.75__s43/result.json",
+      "sha256": "2a6114521577758409bfba5d901db916f551049271736fafe616d2a24d5b3404"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0.75__s43/status.json",
+      "sha256": "457974c04cc8044b1b8f9ac29140481a9c221547ea850241f8e35d7404082767"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0__s43/config.json",
+      "sha256": "2f6e83a2c8a7fadccbe09b87dd6bbdb3663fee6c3fb237951dec0dab964b8146"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0__s43/history.csv",
+      "sha256": "5ab3cc94ce4753dea4cd6b69cc9ce334ef542a390ea22de679f90ce9a72fed6b"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0__s43/history.json",
+      "sha256": "c8bc3317067cf51131f6f45ff416d03f0183f781cb6b0a5f5a81b73458c6f719"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0__s43/result.json",
+      "sha256": "ca5f84835c27766630f84ef4528f7448550f3bbddf44c1558d98b9b406580fb9"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g0__s43/status.json",
+      "sha256": "8c420c21b341cc1869bf8c9babd38874433dc9e636a2fc21733145971261366b"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g1__s43/config.json",
+      "sha256": "d10410ec40109f0a74179ad9293915de1f1a0a5aecc154d972094206fd6b4cfb"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g1__s43/history.csv",
+      "sha256": "983402251ab8e19aa357d06d3488030c3d18823a069d7e3d6cae113620298bea"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g1__s43/history.json",
+      "sha256": "f718d5040b5417c3b168cf0d789deb9ccaba20835d47950f570916befc0cbc47"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g1__s43/result.json",
+      "sha256": "6b6c16a911c38d9a7650af2f1a00584a7d8d64196800eb402e505fea654b44dd"
+    },
+    {
+      "path": "Modelexperiment11/studies/fraction_sweep_seed43/runs/dropout020__g05_sign_only__g1__s43/status.json",
+      "sha256": "6cccc1e39c9ff58af9ef229617440109443d93d15e498c687dd00fe9bc2bee98"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/candidates.csv",
+      "sha256": "1375520242d2dcff1259b629445374152546159e32b69edafaed8fcee81d0db1"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/comparison_summary.csv",
+      "sha256": "263670ef7a9bec7a2fab4fcdceece4acd6f4020cc02c4585fbfba48d4d00a3e9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/confirmation.csv",
+      "sha256": "2f4d04fa9de50faa278036c18ae38ab018196395a7db447cd0fbd38f59382299"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final_evaluation_started.json",
+      "sha256": "619624999b71c8c21e94061d3911bc4a52434bc07e1bbaea6c9eb63dcfd244b6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/independent_final_audit.json",
+      "sha256": "3b39989949914360913e1d7592d14813af155da735f6c15ad193715e78e97aa8"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/independent_selection_audit.json",
+      "sha256": "dec5a9b84b8fb827d8dbedbd61d726af70b53b6f8d7187b0c79e594cec00f1f9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/normalization.json",
+      "sha256": "fe25b425707841b0c35bea1863f7e52ac56b6b5e349834fc3e29755ee9977c1d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/paired_comparisons.csv",
+      "sha256": "a3ecf45f725d30c9ae2bfa5a0ed2d16c2898bd7b5f37eca8290e9f594d732ebe"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/promotion.json",
+      "sha256": "78f347bf22dbfcf64041ddc104c2b9d7c561fed196a8246f8702554ac5b7c058"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/report.md",
+      "sha256": "27fa438fd3f50022bbde5518dd560d15039f0cacd3d1ec3939fbe06d76fcf070"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/resolved_config.json",
+      "sha256": "aea18d1ab30a44a046e4b598a615874589277c69e284aaa10c0ad1732f3ac32a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/routing_comparisons.csv",
+      "sha256": "9686586b07e874d8653ab0305d349b1b28e737aba277755771f9b7619a58989d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/screening.csv",
+      "sha256": "3f73e7fc26f803e0c4e38ee8bc286ad156583a4a655125f201c2a41f5cd0115e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/selection.json",
+      "sha256": "d0f66e44fa3c237b7de2f19d6ae00236d7644d3bc682bd601676077f1cefa5c4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sign_only_branch_audit.json",
+      "sha256": "2c506079200966d1862005045d5d840cf1c409dccab457de31682e096789886f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/split_indices.npz",
+      "sha256": "a63dbc2f47a9f452860c3b235592787c856ac9d079dc33a628d7868afd85138f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/study.json",
+      "sha256": "474539aaada8bbff07bef807c3b3d7cf0596e9f66992c4f868f593070f5d674a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/trials.csv",
+      "sha256": "f1ebe69afbbca6f467516a362ec248701e0b91019876f8d2996abfd74bfb8803"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/figures/learning_curves.png",
+      "sha256": "c4a15fd0d4ba44f7c485bd2e3653c52e2fff3997b1e36ed22122103f5a74087c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/figures/learning_curves.svg",
+      "sha256": "2776fb566ec1d6d819d2beab763463b6142da9dbe9542883e5a7050a64eb5a4c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/figures/overview.png",
+      "sha256": "d8ed9e55aa2a6b964ab42bd982637d71e65f0cdb2b25b43999ae05974bc60ce9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/figures/overview.svg",
+      "sha256": "b42ba7282fb18b4b0e63cf261c511d3dc2799c92d012dcbf406ca072a2387e5c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/fresh_holdout.json",
+      "sha256": "9288b5a539a921599f83f1dcef4e08717ea9d4515c1657eaddf8d90d8772833f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/fresh_holdout.npz",
+      "sha256": "e875cb387d614aea8ce1cac9a8b5c09b3dcfb5a54ec55a7f7f03e166e1c497b0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/result.json",
+      "sha256": "82f820113afb769bdfc03064108b7905a65457f15d381f8f9cee20ca1431920e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_full_reconstruction__g1__s41__structure.json",
+      "sha256": "cbf2e0a240fb4dab64c99e76ed7da17bc93ff745bbeb1915dd4cee51c57a40a9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_full_reconstruction__g1__s41__total.json",
+      "sha256": "a15b96438dfa2cbb3698c0f704832e7460fe24685def8be5a76ab75d1fdc4f5f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_full_reconstruction__g1__s42__structure.json",
+      "sha256": "1dfaa488bc4adfabd96b3f6e77cb6a5e5a2a476e4f58e5a531aa53d6c91069dd"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_full_reconstruction__g1__s42__total.json",
+      "sha256": "80792f7bf12de521c97b6bd6e18ba5ffc2b61ad6b3592028777a06f23e19156b"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_full_reconstruction__g1__s43__structure.json",
+      "sha256": "40edc1a83377fe5ba54f4e891d215cc71be285eb8e44955c80b5dcdc7b7e33e9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_full_reconstruction__g1__s43__total.json",
+      "sha256": "2d253b025cb7dd8bf11be5e211b1fa3075581a6b4b3f36519ef81de0523cd7c4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_sign_only__g1__s41__structure.json",
+      "sha256": "d572c1a246c11c0ad00cbf85046fc18ce76039c83fe5d32f350b044272bed85d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_sign_only__g1__s41__total.json",
+      "sha256": "8eedbe769183bf03217c4a0d23841b264fa32004e864261526147df36a61438d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_sign_only__g1__s42__structure.json",
+      "sha256": "738ea6d0cdac53a9fff868561caab436fbe559f6dfcbda9f77a74e9a6e534efc"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_sign_only__g1__s42__total.json",
+      "sha256": "c3d279bbb13be4fd4fdbb0d091cb89296db556863952f8e86832f3ebcd827286"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_sign_only__g1__s43__structure.json",
+      "sha256": "598749e2093fa99f4ef1c58369fe87352e31023621e21a6072086582bfef3262"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__baseline__g05_sign_only__g1__s43__total.json",
+      "sha256": "c536a88ca75fefca3172d36426d030bec201117e24f64f090d153f0929ea33ea"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_full_reconstruction__g1__s41__structure.json",
+      "sha256": "0588fea731bdc60cd710a7874530585eabc2f3ef465a6149a46723c5c558bb71"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_full_reconstruction__g1__s41__total.json",
+      "sha256": "19a571fd0a72fcf1ecccf65bb62accac3f363b36424ca0e423c56d9a047548a2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_full_reconstruction__g1__s42__structure.json",
+      "sha256": "92e4ffdeabef6a164bc629344b32aff5affccdef92fa50c7dadc52407ee5125c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_full_reconstruction__g1__s42__total.json",
+      "sha256": "d3b257d4a17fe498c7f27d983bd797561f51f7a5aebba872039c3f34f143457a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_full_reconstruction__g1__s43__structure.json",
+      "sha256": "2a1e1a8128d426269dd5b2568372eb7e3fd6f521049b082699ba02e0ea38805d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_full_reconstruction__g1__s43__total.json",
+      "sha256": "89298906893017682363463b9c4f4c43ac9861ef0138a11d2d452f9f38079e7a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_sign_only__g1__s41__structure.json",
+      "sha256": "2fd24ac741385730c6cb173ec461967fa449509529cdcd389ea9381c74b75477"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_sign_only__g1__s41__total.json",
+      "sha256": "63023e2dbb2c01931c145c92d36dca3ef013c0eca89db6f0e280b7b662dec077"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_sign_only__g1__s42__structure.json",
+      "sha256": "72d18927a599343541e6f6d4491c49516a7f22807b2b8feb24f1e1ece480aaab"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_sign_only__g1__s42__total.json",
+      "sha256": "0f1a20f0aae5bff3660a045f1650bb7f15516d7ffb111662a6411beb255100a9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_sign_only__g1__s43__structure.json",
+      "sha256": "269d3d0297e08a5029eec3b3d574d06bc909a3f8c62c7a1b3f7791d8524cfd0a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/fresh_test__dropout020__g05_sign_only__g1__s43__total.json",
+      "sha256": "7c4c43d044ab6a94be156661001a0b834bb50d27251187cfb5aa9a0d8caf4150"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_full_reconstruction__g1__s41__structure.json",
+      "sha256": "6110efd1b31733e567db6d5c328eced114d5d31c3a5553f052b1ef4c0b567da6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_full_reconstruction__g1__s41__total.json",
+      "sha256": "2cce871633e48368e92b0a5807c9864c59036519294792f69c80991bb1829685"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_full_reconstruction__g1__s42__structure.json",
+      "sha256": "3e7e29de314870cd5da3832dee816dcda6c4b4ec591126aab8179eacbbdc9519"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_full_reconstruction__g1__s42__total.json",
+      "sha256": "c12968faf1c9916ccfe0ef070caab0073dfbd70d0cd05b36992a4f30f22824ef"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_full_reconstruction__g1__s43__structure.json",
+      "sha256": "f70efc5096ebb2e5dd2af6db70b49944f08b227cbcd59d16e3ce775aec86b26e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_full_reconstruction__g1__s43__total.json",
+      "sha256": "f05bd0cf9d6350932954daeb8d35f7dc7c0969267b5a2ae69a52cb09f214ffb1"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_sign_only__g1__s41__structure.json",
+      "sha256": "7e054c7f788fbc6c5d0081e6f88d0ed83a108b1c066c996bfe327d6b5f04d470"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_sign_only__g1__s41__total.json",
+      "sha256": "aa76039dfbfcfe701d490b888c3f0fdda093b464f437f4a8d797f4ba49b4bff9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_sign_only__g1__s42__structure.json",
+      "sha256": "fe80b860f4f7bb9e900eb50059562ade8a2941f53e6db36c7e79a82dfaeaf3a8"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_sign_only__g1__s42__total.json",
+      "sha256": "c3603b9d9ccc7323fc0ac60686da506b75ae0ada19827be2384aaff32ad5b577"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_sign_only__g1__s43__structure.json",
+      "sha256": "78d714a3187bf687e580dd83935b41168925577a51c0a56db6800bd85cdc0851"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__baseline__g05_sign_only__g1__s43__total.json",
+      "sha256": "112148407caa759a7f6e61e2eeaf38253db526a62a1cd23ea3b9dcafb30ee8a6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_full_reconstruction__g1__s41__structure.json",
+      "sha256": "df67c7f2ba412f397cebdacb80a4fff9612bc911f36f25c448bf316c29d82609"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_full_reconstruction__g1__s41__total.json",
+      "sha256": "017dabc3d13adf91f2c55fcb158a80584bee760bf481cd08a93649e375bae573"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_full_reconstruction__g1__s42__structure.json",
+      "sha256": "18ac4d69a9cdc86dafff0949b1a5570537197fa2ebde2c9c523ebe5266dfa320"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_full_reconstruction__g1__s42__total.json",
+      "sha256": "8feefbd5b8f9b2cbe585bc70d958e375af0647e4f01d5197645422dabbeebb5b"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_full_reconstruction__g1__s43__structure.json",
+      "sha256": "09c39cafded1631ef55d7a15a75df8bab0b1433f41165f5877f155f5915d6702"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_full_reconstruction__g1__s43__total.json",
+      "sha256": "876321fc50697a50011f8ceb2b14af2405cf69669ba0763f140bbe311845ce2a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_sign_only__g1__s41__structure.json",
+      "sha256": "77951d91afab27df6833bf49f70497a4edab420fa240f58115c4022d700c23a6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_sign_only__g1__s41__total.json",
+      "sha256": "e323af486f70584e61f0671a06ebcf087bf057d8b70e1500794b6cda0386e6bc"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_sign_only__g1__s42__structure.json",
+      "sha256": "55800df81ed2c0e004607b52e3bc8cc1943995c100eb6a7c5d0fed220d13c8fd"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_sign_only__g1__s42__total.json",
+      "sha256": "cf3319443e72c18239e960334ba8389d7ce6a0cd689c825157f642b1768ba3c0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_sign_only__g1__s43__structure.json",
+      "sha256": "8c6e9f307f9b453a43ab5e48aefffc9f83a043d3c649cb3d0ca942198d7019f1"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/final/evaluations/historical_test__dropout020__g05_sign_only__g1__s43__total.json",
+      "sha256": "269d2389b5af8aed9bd4a308122ab67d4d3a1bdad3c6d5f66a89e3ae248ec5f4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s41/best_structure.pt",
+      "sha256": "7abc65bda88eb73497bec6c96236e4bed5105eb3df42749064ad834c5783b2e2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s41/best_total.pt",
+      "sha256": "322facd75d7d740321f8631e0f54a297c94e7d8123612cbf85e4671bd5352acf"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s41/config.json",
+      "sha256": "aa8ae6dd570544563ce30bf9cfb908f7bacc3aded8c94ab3f8040da5172d43d8"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s41/history.csv",
+      "sha256": "9502a37e8fff20a489237dacd32b4397f650cb18fb9c7f9a896cd24b35e024c1"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s41/history.json",
+      "sha256": "b1ea0a68ba28821a54f4840c4eb655587f5bc2b1af6620dca46871a2a0ae7368"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s41/latest.pt",
+      "sha256": "8c69046873717ad812a2592df36c358dc8b8d141ffc27c2826b5cb0e7c5d5ff1"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s41/result.json",
+      "sha256": "f39dabdddbd893917560fb85505ceff8a74705d0a5cbe408a4a5115239256a5f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s41/status.json",
+      "sha256": "e72800a967aad3eea825beb75b0cb3cec4adfa4636e95adf2d5f54cec9697f96"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s42/best_structure.pt",
+      "sha256": "0e9656ad2d93f52376b9512b6c94e690d7871db04b52a7bb52d7e0eca1df9a95"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s42/best_total.pt",
+      "sha256": "55f760aeb9cf0a1f73fba746da86472899a3d5aeb95f8bf8bc57c055b3f03551"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s42/config.json",
+      "sha256": "7d5757877b51ffa450f888151402a8ec3622fc144238047e7883725118ae3b45"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s42/history.csv",
+      "sha256": "f9507ee36d621030c5e7f78d453c76c56d2244d6993ea858527a8a7c9980d457"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s42/history.json",
+      "sha256": "acb486c3281b5bc224ffde4edfd7f187b3dd9046fdbbc3a8aae655f326e39a14"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s42/latest.pt",
+      "sha256": "e8e4eae4632ff4b2ee723345a6a05bcee2731d95be34a2c2eebfe136c5fbf6da"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s42/result.json",
+      "sha256": "6505533cdcd774001bee9ad69d88093378f367952f0c83ecf14cac81a536efab"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s42/status.json",
+      "sha256": "fc0d0ad905ea5eabd7e0119ca98e1bcf5f9c2f9beb15032f6c695bc04e1a03cf"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s43/best_structure.pt",
+      "sha256": "ff6559b5b9c6d146a24907b863a5498492d44bd6896733afe40a51ac8839c8f5"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s43/best_total.pt",
+      "sha256": "32e697e901f00859244178b622505f6117f588da369dcce0506fd51e491593f4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s43/config.json",
+      "sha256": "4633c7f8eb0a486ea53c572f9aea0cceddfc57dc72226edee5020384604bd949"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s43/history.csv",
+      "sha256": "98efa77ae57f5cbe57d3c879f001ef1611963860d64c0cb091207f236e50011e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s43/history.json",
+      "sha256": "031aa5dcb1c48c137d641fd997b9fa7a1a141b38fd0cc9342c7b463859c703e0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s43/latest.pt",
+      "sha256": "2180f15b988d87c2295b91c25715365801b24706501429c4a7439d5503ad23d0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s43/result.json",
+      "sha256": "e499e55dd6fa4f7e4e6f9b302890c320f13a169b3c2e93f75541f2cd1f89b0c6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_full_reconstruction__g1__s43/status.json",
+      "sha256": "6dfd413f4efcf25ca140d1020e43b6a0387de10af0674f6316900f8554b6d83d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s41/best_structure.pt",
+      "sha256": "3278b7e6394983e59f347eae4a47e9cf7177ee47f9627d8d34514c1704ce9473"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s41/best_total.pt",
+      "sha256": "14c69f49774f0fb00075fc180a0621f5c001ffe73322a33fba06a5b572786ce7"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s41/config.json",
+      "sha256": "40809c40b7242e478bcfa718578b8c04bdb8e577122a393e104d1ff975837c10"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s41/history.csv",
+      "sha256": "4561657cbfb79d44ad83c3b7b1890e814a6895b43c4b46f8d2096865dd59df02"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s41/history.json",
+      "sha256": "27c00fc73ac8d4e0c381c58734c4ac8072cebff2a1e0fb1a8b3a26332d835632"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s41/latest.pt",
+      "sha256": "35235e37216575a2553731282dbf56086721ef4d1337c4de5d39451946d5ebe3"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s41/result.json",
+      "sha256": "13fbc317546d84949950439556f1d23f736e2b04aa8e3e00a9f893806ee9e094"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s41/status.json",
+      "sha256": "2229105de40f8d0fac176d6a66dc230058ec8b032a4ee13a635e3ccb2b245774"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s42/best_structure.pt",
+      "sha256": "024b711303b57134783018278b037ea1f9b446ac13e7b7a20503ca289022484f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s42/best_total.pt",
+      "sha256": "82ff0db4c648e9e5eebc1720ae47428aec0e889435f94fb3088b82735a3980e5"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s42/config.json",
+      "sha256": "7f90b11129efb6b856adf0f21f9821b816f5953a4271e681044eff64ebcfcc75"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s42/history.csv",
+      "sha256": "41643715947f3d116a137a278f50c9901f14bc674219c70ff50c815e395df04c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s42/history.json",
+      "sha256": "a7da6eea7f3a037dcede5df61a5c5b82f089d6e92b1db0244112d1e8a47deef3"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s42/latest.pt",
+      "sha256": "f57fad4624dd44d1a06ea9741402f936a1735b9910f10a15da5b66b0c719df9c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s42/result.json",
+      "sha256": "15b5644681b7ab71d173f6888442f5f76e2a96735e2f98092a3816d0f317996e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s42/status.json",
+      "sha256": "51c973411a41c33cf0a31611efb4d96b74affe76de9a280d110b1b1fa3f252ba"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s43/best_structure.pt",
+      "sha256": "f4d8a6bb1b469f902e87ed51de3d2b2dcd6d231abf4371b93061f0f00e760bf9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s43/best_total.pt",
+      "sha256": "b8109cbf68ca8c5f2ae2c2b00a0aa141e41afbb7a3df404b4a7119b27448defb"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s43/config.json",
+      "sha256": "d7f87205eb0db11f16bdb29e059db74b9f9a2d433d9fa00bd2e94722f8fc0673"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s43/history.csv",
+      "sha256": "dcb5e6aaf386323f6689cbb3586fc0688726c31364af5f47192a6a0b797eea53"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s43/history.json",
+      "sha256": "ebeaa97c8ec2f385d0f91373e66846cb3880a44b6fcbe992dad7b38710564a93"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s43/latest.pt",
+      "sha256": "961b80ab414e6f160b0733945e2e95034558a31b8e34c47148b47802c1fefe57"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s43/result.json",
+      "sha256": "5ef5ed5314418704d398d756f7f52787776f79e2f1205d4f78ce967b9e2e6996"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/baseline__g05_sign_only__g1__s43/status.json",
+      "sha256": "e1245d1869fe1b1135ada6772616398050ddfef5cb30b0c099b033c30e21c1d4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_full_reconstruction__g1__s41/best_structure.pt",
+      "sha256": "edbfcf127455488f3e5e8d133047a2c7385e00607462b5bd7f86627d058dc9d0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_full_reconstruction__g1__s41/best_total.pt",
+      "sha256": "5c6cbf42a29e43c7a14f870ec830acc4bdf71e907c5c5b575a026c1cca4b17f3"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_full_reconstruction__g1__s41/config.json",
+      "sha256": "a1337622695c47f7bab62f05d2afabfa912f49192570e96b1c5de03834559ee4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_full_reconstruction__g1__s41/history.csv",
+      "sha256": "1fef2596ea6d70767e964044f0e7aec65306136e6c542fd45b3de5daba66a508"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_full_reconstruction__g1__s41/history.json",
+      "sha256": "a223df279b324e5edaf8f271c0db05f2e78b5a59c6071f6de9ba01aa36146d56"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_full_reconstruction__g1__s41/latest.pt",
+      "sha256": "393eb2de7d2655b2cec6b03d7ea71b933c7a7a7f52f7a639a5cdb9e9a2bd17bf"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_full_reconstruction__g1__s41/result.json",
+      "sha256": "371fa66f3ee2b121e34f437102615540b90c60aa5f72c90d129d54bb71720b9f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_full_reconstruction__g1__s41/status.json",
+      "sha256": "6a7b507638f0c05c67ff40d5220783748824c09cbf94dea5b0b88194c47ffc16"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_sign_only__g1__s41/best_structure.pt",
+      "sha256": "4bd46c1cad6a9e164a8de7e33c2d42942b335328b2cc1e5f51f58a9638e902fd"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_sign_only__g1__s41/best_total.pt",
+      "sha256": "d855541a2e38be2d60c14b09f063a65e6c0243a17911dcdd763930098a7d5c3f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_sign_only__g1__s41/config.json",
+      "sha256": "499de211ca1f71381a1f2294e1f11158a5c6785a502d85fbe3dc4bb4832224c2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_sign_only__g1__s41/history.csv",
+      "sha256": "e3b2936d7bd63b69f72e801e7abb4c2e1f5f9b3de6187d4c157736fe9d99e80e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_sign_only__g1__s41/history.json",
+      "sha256": "6a6c6f9c0a1985b8e3e8a165edd1f12cd17886440cf82cedb72d7a8cb71c6fe2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_sign_only__g1__s41/latest.pt",
+      "sha256": "5f92625763010b1e629bbd79491810355d2786000904886f84686e5eb0906c87"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_sign_only__g1__s41/result.json",
+      "sha256": "e7fb8337a6eef1bc9d73f59b6b5395bbc7bfc306e986a26486edcb00dcfe0975"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/decay001__g05_sign_only__g1__s41/status.json",
+      "sha256": "bd091db1d155070ee4d774c74eebc5ac827a696d681c1a5554bf42492932cec4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_full_reconstruction__g1__s41/best_structure.pt",
+      "sha256": "6333aeabd8129545dc09a016f63aba541961508f9064bd42c544fe972942467f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_full_reconstruction__g1__s41/best_total.pt",
+      "sha256": "dfe4fc5e70d8d3b9782ff060e0fa5d45e44278428a4e2bcf486582a3cc0e6334"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_full_reconstruction__g1__s41/config.json",
+      "sha256": "a84fbfa7ddbc28619db33415ac3802ff986968b0f9a03285346e789f6d83c88c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_full_reconstruction__g1__s41/history.csv",
+      "sha256": "58264a403353a77e12b3052997f7e3d3adeef81d2fae0d04bef74fbaa8910b61"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_full_reconstruction__g1__s41/history.json",
+      "sha256": "ddbcf4e78493fb377070aaeb692bac0b3015afd0f10cf8c28fd1d3ccadb34dc3"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_full_reconstruction__g1__s41/latest.pt",
+      "sha256": "3922880d12835f919c3d53f46df55ca4edf0a3901c3b0c817b5e5fd6177be61a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_full_reconstruction__g1__s41/result.json",
+      "sha256": "46e04bf28dcb7df93aa824ec0c576ce321a06cd943a4b685b9fe10fa65d9498c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_full_reconstruction__g1__s41/status.json",
+      "sha256": "9fa29b7921725dcf54354e654acca17d165adda293c5e0ad79dc284efc304ae0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_sign_only__g1__s41/best_structure.pt",
+      "sha256": "1333945001a8719c723ad2f54f19fdcfeac73922c59568102d3f001eea480955"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_sign_only__g1__s41/best_total.pt",
+      "sha256": "b4c3938564f75e27134e2323c8cdb7c6c3fea1e6a3397bc593f2fa396a4af9ab"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_sign_only__g1__s41/config.json",
+      "sha256": "49ebaa657d18fa43d44b08a71cc9ed811f248027ab81914d74eca7b604bcb46c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_sign_only__g1__s41/history.csv",
+      "sha256": "0a3456c0042d3f5c3d75163aa264776413f8b8336620a410ea857f405d85ab55"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_sign_only__g1__s41/history.json",
+      "sha256": "e94720e7b622c3ef74dd3720519ac05f3ae87ec2666d1a0cc9d90173955e7ca1"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_sign_only__g1__s41/latest.pt",
+      "sha256": "5434b36437fa36e4797e023766b962631208675038795c9df559834e75012aec"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_sign_only__g1__s41/result.json",
+      "sha256": "8b3d6af1ca5329e38e95e15427e60f70c23b53f93a6baf733591d2ade79d5009"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout010__g05_sign_only__g1__s41/status.json",
+      "sha256": "008676ddc7f2a037da807d1ee54a896d0146a434cae81fc5f76dac41c82b4c8c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s41/best_structure.pt",
+      "sha256": "dfb30e6edaa6000b60d2e6742c8c18cc8bde5067e9739224cd5502717a83ac3d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s41/best_total.pt",
+      "sha256": "935c7d5020aca406097bd435514de88d03076e989a737c9611c392a67768e279"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s41/config.json",
+      "sha256": "e1ce49ebf902ea733a97355eb989f12da6bf21b2e87a9a77c25673a3119fab03"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s41/history.csv",
+      "sha256": "0ec58aec2a0992e183145b6e4789fcbc514621cb5cdfcd06f5e70e2fee769926"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s41/history.json",
+      "sha256": "2449638ef52aa85dbfa06b6a6aa1accc518b7c0fff7897528e1f9a80c9ff755d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s41/latest.pt",
+      "sha256": "db75d6563f5dcbed8db28f1f234e5ece132d9c96c3bdb88f6d7cd4495ed21e38"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s41/result.json",
+      "sha256": "9f295319e7fe21623f670e1f820e4430b85d2d2f3ee5b5359bbde1b82e0def2f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s41/status.json",
+      "sha256": "6447b0008a2b082176e28dc6e16643af869605953d67163cffccad0b0ea39d63"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s42/best_structure.pt",
+      "sha256": "df5f7459cf3869f5e9f4251f39100909de22b5ad52a4314f29104784993e509d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s42/best_total.pt",
+      "sha256": "ac20d6588c46bfab53f3aa89e5d4229c134b09537c41486fe41bacda81c84264"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s42/config.json",
+      "sha256": "f6b674c5f4143c8a1d657e03dfe3a06b4ce44010dc96fa2b92df4f621222ff8e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s42/history.csv",
+      "sha256": "70ff12ba5f90a14c41348c392d2689839d847ced2111f3dd43387c4a2bd59ef8"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s42/history.json",
+      "sha256": "2bcd5556c266c39e19e27affc4946d0df0b6e0ae519bb40e6489469c26278177"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s42/latest.pt",
+      "sha256": "eefeb5fe82cdadfe992892a6ae94e0b3be740e13c80704fa518b6899260934fc"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s42/result.json",
+      "sha256": "eb5803ce84040de9a112d4a949581effc7602f5fc3346295883fa72aef05f739"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s42/status.json",
+      "sha256": "720d62c7ac97b4e507dcbd8699a800fe036d05a06fcd0fe190f000086a0e63e6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s43/best_structure.pt",
+      "sha256": "5bbc655b3cb2a64013c0e903874c40f849100de43bc1364d4b16065f37b7083d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s43/best_total.pt",
+      "sha256": "f0c81bda88102132f7311a7d0ddf0cc4de015bc2344b1124d5b15833b4d1a0fd"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s43/config.json",
+      "sha256": "b3611cc051157d756b78f25c86b0cca5909d49c10666d3ae1df7270e1a087891"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s43/history.csv",
+      "sha256": "956d9f195d8985e7ff137446aeb238f63c43316a4edde44790ffc66d7898e118"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s43/history.json",
+      "sha256": "9d169a039bc169c06727ab8d2058d8b9c325d42ffc10179d1847c39a8aaa8562"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s43/latest.pt",
+      "sha256": "7f40f9dc6835c21579de73d17f5588f2e8be9137594c9454bb1035d23fef5f66"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s43/result.json",
+      "sha256": "73785b5b7fc85efb0d7b7acfd878f9bba4ac52113ac7b6b65cef9cd66f7d53ab"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_full_reconstruction__g1__s43/status.json",
+      "sha256": "dd6608b5d65cdcb68eb8e162017a13213c8568f928d625c194bf6d4657ce4e6a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s41/best_structure.pt",
+      "sha256": "4b1281ccb0308a6611c0c81299dfd677958ae204c9faacea2556d972413fa7a0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s41/best_total.pt",
+      "sha256": "5845c60be80283c9db70974f6374c35a622a047d6271d6c68d26dc6b2620b1c0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s41/config.json",
+      "sha256": "fc3b56a445f22ee385d1c58a247f7129a006b0eab89aa5b29631230f9f642015"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s41/history.csv",
+      "sha256": "7df8238dead52403dc1fb627682f07c31fa656056fd2a2aef5f887c0528eb2c2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s41/history.json",
+      "sha256": "0d0449c2c64e076a80877b173ace5826a5cf7f3eaff1a655931d518257098a50"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s41/latest.pt",
+      "sha256": "b94305cff55a33de4a935f35bf99c67061b4d77e8869a3619ae77e137b36d52c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s41/result.json",
+      "sha256": "ed37be24859e7d2e2966115c31bd158aacc9ef0981c68dbf972cbd916de3f683"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s41/status.json",
+      "sha256": "fcd9825bfbd7fceb11dd0f444e5b94d8c08b1611dcc0f1a6d93991cd7a19469b"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s42/best_structure.pt",
+      "sha256": "d76f4c3915ca68d9a31bfe30686a7942c9aaee74a07b4b79b6067b76a6faa4de"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s42/best_total.pt",
+      "sha256": "04fdf8e7c17d762db1a0ddf420a8b0532db4975c0d325ecf3b67f6eb1a3006f0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s42/config.json",
+      "sha256": "cad325276dbfc03faf545426cc61ea12afa33e3dcf9ccf418994efaa42382830"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s42/history.csv",
+      "sha256": "4d2f16fa57a399ae14b0911e4ded05d20424219676f3a3fd3b529af2b86a9429"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s42/history.json",
+      "sha256": "6716283937c667afdf0046f0af1442643b849e5f02a11db38219acd8017bbff9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s42/latest.pt",
+      "sha256": "03d3a185020190087c85e6f49f039eea451a810f8513a396a35f5974eb152eda"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s42/result.json",
+      "sha256": "82785347221c84610fa48527e0f28d5f2a5fdc710c03b756c4b18aad0fb9dda7"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s42/status.json",
+      "sha256": "68a8a85bd2ca9d2bb8fcd5872284fd4f31c1bc43631c492761e8b4aef1833566"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s43/best_structure.pt",
+      "sha256": "5783ef394ebdd8f484411f82ac380d69986083ab302a9aac9e2fd1e722c5a52a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s43/best_total.pt",
+      "sha256": "c0a9ebe7c930e34d00248b1ed370d6c25e1d687031b27a8d448b69972fb6d478"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s43/config.json",
+      "sha256": "1a02cc14fd5fd299d5d5689c149e0696344335ba277c38cc9b36d36456df96ff"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s43/history.csv",
+      "sha256": "ae07b04d08c57ad090eddfdb8fbc8930aa3a7ebfb76849555e9c9dac6e008036"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s43/history.json",
+      "sha256": "3085eb2e23b99b7e0e9a781e77188af2c34f0ca8d4121e4c3ae69b1f31a1610b"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s43/latest.pt",
+      "sha256": "a69d57034ea7e41493057a6d5d866c127f548d01a3bf78e39cfc554b79bf9e06"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s43/result.json",
+      "sha256": "e2820da54474745d4b31f2261ad8e7bd16aa9d6326df0b9b1d5ba50f4b024302"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/dropout020__g05_sign_only__g1__s43/status.json",
+      "sha256": "3d462eb9230b8864fd3a959870a85dfe09a8607c5df25c436c1cf06936ac7332"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_full_reconstruction__g1__s41/best_structure.pt",
+      "sha256": "ea6cbc3cb313e8fa9ecd46f5577b84230a8775888a4e31be55e1be9ee2d2fde4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_full_reconstruction__g1__s41/best_total.pt",
+      "sha256": "0c7a4826b2605aa5bb8d41ba4d455b9651c73a3915198323e31e07073185c250"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_full_reconstruction__g1__s41/config.json",
+      "sha256": "467f3090621d063947312bfc456e54151fe24d6bc9641554a3c1b1049a75be4c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_full_reconstruction__g1__s41/history.csv",
+      "sha256": "c7bac5d654053ed78951492ab6eb08f448d81a4761129499e36a9b1ed7a61e51"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_full_reconstruction__g1__s41/history.json",
+      "sha256": "f682df6c18a18a270e97b0b3a8b084f9cb780902dc80b778c7be0df77fdbc5b8"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_full_reconstruction__g1__s41/latest.pt",
+      "sha256": "ef22601813ce2f97633a9f77fcf62dc888b2047c9fa4cd38cf67eac2c35ae0f0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_full_reconstruction__g1__s41/result.json",
+      "sha256": "eeaf16e2275baf042b65b32f69b492147161d6be007b225bba403ebddecab729"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_full_reconstruction__g1__s41/status.json",
+      "sha256": "21bad02bb6bac82d66cfbbbf4d74d7f5ed0cc872dd3f1310d667f54846a6dd9a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_sign_only__g1__s41/best_structure.pt",
+      "sha256": "ea5edc0a4fe2f0034d96cb058c4ad2d676f3ba29b6ce930843836ac27a887082"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_sign_only__g1__s41/best_total.pt",
+      "sha256": "beff5a91558884d9b3a770f66af046d837e722bebc534992ec80d7d3b924f4f3"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_sign_only__g1__s41/config.json",
+      "sha256": "8e582fc437528b3b3e933d9593d5e74a470bfef2e0df5ea3ad42b6d0a6d7d4ec"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_sign_only__g1__s41/history.csv",
+      "sha256": "c14fc603a0e52ba63e1d8bc6861db6bfa40a1bd74b84645043a73fee52d87f26"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_sign_only__g1__s41/history.json",
+      "sha256": "20d4893b3bdafcdab5fe4c563ef9dc0f5aac0f96c5758987c4cbd11286e57425"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_sign_only__g1__s41/latest.pt",
+      "sha256": "7a25d70c26d9e3bc7820d458a027d3452f41606efcf02219094307f3d130d6b3"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_sign_only__g1__s41/result.json",
+      "sha256": "9275baabd9eeb8b94d5365649c0be4def539a84e469b54f847c76eb23057645e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr0005__g05_sign_only__g1__s41/status.json",
+      "sha256": "2aab43a1dfc9fb00e01f430a0097d675427682cb93631154815b2069f0039d7c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_full_reconstruction__g1__s41/best_structure.pt",
+      "sha256": "832657eee780404d91055ab15311fa4ca03afafb981bae6b07985b0ed311417a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_full_reconstruction__g1__s41/best_total.pt",
+      "sha256": "fdf975e889473a9aa11b030d29691c68e889430bfa9eee81e29a2cf8d9ec67d8"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_full_reconstruction__g1__s41/config.json",
+      "sha256": "0f31d8b36babbed218dc78e9ca5e2cb429c99016ab854b0110675d44cc0d90e3"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_full_reconstruction__g1__s41/history.csv",
+      "sha256": "b8304d4e5a994da281926e4f5e81c87ae14e127fcbe7b7bcbe1056d2a18b8ba4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_full_reconstruction__g1__s41/history.json",
+      "sha256": "461a29692f4c020fc07c177c34429d3fe19002a5ba17b815188b993d573f3e3f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_full_reconstruction__g1__s41/latest.pt",
+      "sha256": "50bb940d6024f53a8a9b77f7afe36f78cafa7e7015bd9c07fc7f9b24273b4aa0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_full_reconstruction__g1__s41/result.json",
+      "sha256": "10b177504d3750c4ee97aee6d834b71599b1086d3db019a2a0a426b1c03904e2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_full_reconstruction__g1__s41/status.json",
+      "sha256": "699ac1ded2e10404b9d1b751546c1b7f3ac9a924d458c4977406d2aa718ef878"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_sign_only__g1__s41/best_structure.pt",
+      "sha256": "75e6e83263b7168cff955eb114619ad9fb383e62b1cc9e4c203228108b996b7b"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_sign_only__g1__s41/best_total.pt",
+      "sha256": "452025ef406a724076cecc9a76e8f6f08f1d3e28002395e8dbffb10ed4a1eeac"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_sign_only__g1__s41/config.json",
+      "sha256": "66adf77e7952a5f6c19ba9a6d40a5eb6e3273b30fbf703346f430a0ce713c1e6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_sign_only__g1__s41/history.csv",
+      "sha256": "99d09c067f1d30e5f83ac004a2bd8baa5a9b24fdb673432ca1bc21cfe7485d2a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_sign_only__g1__s41/history.json",
+      "sha256": "680074adc9d70747fd9aad75b2383b7adbd1e602768d23d63f84a81e93e747ce"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_sign_only__g1__s41/latest.pt",
+      "sha256": "2dd22accf89969749b893fbdb44fded09c9d04d22512112e8d2246342fc043df"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_sign_only__g1__s41/result.json",
+      "sha256": "95772c2d10c4ba166406e133a31c2a0310f2ad81fa8fda0d842a263eb3eb00f7"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/lr002__g05_sign_only__g1__s41/status.json",
+      "sha256": "e645f6f5b4a55c96d8e14fa1a11afecee8bbe23ad7a1713c87c65c194e1c4b2d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_full_reconstruction__g1__s41/best_structure.pt",
+      "sha256": "67743c2f087e86619fd9d23a6ff4d7f42973082e146aa38c127b0a26146ad2c5"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_full_reconstruction__g1__s41/best_total.pt",
+      "sha256": "3cb2fdc709b7bc3064daf19e8eaf1d138e0de0657edb65c9809f8830cf8a1be1"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_full_reconstruction__g1__s41/config.json",
+      "sha256": "78f397074398cd6d2d307db7d2666501132dc1d6eed960d8cf056da68fb7e71c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_full_reconstruction__g1__s41/history.csv",
+      "sha256": "22f9986273dd9a705e69f1bbad41a449257aa9bde5601ac7d890dc02812abf49"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_full_reconstruction__g1__s41/history.json",
+      "sha256": "03f48acbf9d2796123669f74bdf6b517ed1fb8f5141697808251159b46bb1751"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_full_reconstruction__g1__s41/latest.pt",
+      "sha256": "6de4d630dd2eb606dd26e6539c913583c9f2fa384081a8155688073e6f63560f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_full_reconstruction__g1__s41/result.json",
+      "sha256": "372a7c4ad8cde76f550c71889bc3db67c04b1f9a842e8d7a8dd2895e1801488f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_full_reconstruction__g1__s41/status.json",
+      "sha256": "c8b6343e554727dd2271569484c5ad2d5e3bcef9c3c8f7c7b74e677cefdb0d9e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_sign_only__g1__s41/best_structure.pt",
+      "sha256": "75cef28b5c45864a06594f445a8590f251c5e42566ae5bd90cd4f6f193795d00"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_sign_only__g1__s41/best_total.pt",
+      "sha256": "d2739358efe1486766c3eb30c3176cf1d1a8b6770022d33148c1d34b49477d1e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_sign_only__g1__s41/config.json",
+      "sha256": "49b4568a4759a3ca65429603fda8e247298dd770b21a8d3116d59a92ff50ea5a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_sign_only__g1__s41/history.csv",
+      "sha256": "9ce75f62cc53cb43ec9db66044ebf27f2c70a3cd4c38aebf44b5886aca602b24"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_sign_only__g1__s41/history.json",
+      "sha256": "6ce8aaddc15c2f299b3896c3133b894b56ae7368d36a7b9fb32bf83734c296bf"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_sign_only__g1__s41/latest.pt",
+      "sha256": "2dca7da97acee94908435e00abf6a23d22ee63dfd792b245577f4bd23be16fbc"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_sign_only__g1__s41/result.json",
+      "sha256": "80f47404119867b4d741b450acc2eca47443ac2e8109f27345b898d18157928c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_01__g05_sign_only__g1__s41/status.json",
+      "sha256": "8ff1676c90f439771a03661ad9f0aacd9cc1f126406fc8bf5dbf6316e3d0e3b0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s41/best_structure.pt",
+      "sha256": "f110a4eaac6405b2a3dd2a0e342ebb14641faffec365c76fccc318175fb5a6e5"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s41/best_total.pt",
+      "sha256": "ab85740b775163e05be0f52c0f57075e308885e89e73569d8de0c62b545bc8e2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s41/config.json",
+      "sha256": "d3460f2d45155ddab4a8edad60bff94733098b81052f7800f5ba2aadbd7106e7"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s41/history.csv",
+      "sha256": "5e7520ec4a25ceb803811e71a1c2ee481e58dcb87f6e9fae25d6ef78c0c38366"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s41/history.json",
+      "sha256": "1d9bfbef29757a6a6086b90dd289573fd5df28069ea8822837b73666f72a629a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s41/latest.pt",
+      "sha256": "103bce9d740af9883742c34d87191a75cef00e1fa6b8406469c623832194895d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s41/result.json",
+      "sha256": "c40e360c0454796afa22f3721a84bab7d6415973ce6e26cb1cbcccef71b56534"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s41/status.json",
+      "sha256": "5ec498402722c305640067a8212802cf9aec98b20e69d8d6bbcf5b7b019a037c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s42/best_structure.pt",
+      "sha256": "8fd566c23b3eef3d39a6bc5c91e2e4a92dd92e1c94e6a27124fb1db26ff5075f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s42/best_total.pt",
+      "sha256": "bebf20c39fe4704633b43266cffa8da21b9ca98502317303e4d2a6e9776f3c60"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s42/config.json",
+      "sha256": "a3c2a004820871796a7e71eb892ec1e666d4cbb306da9546ec398184a3936085"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s42/history.csv",
+      "sha256": "779dcac922d435b3fd435415f9681102d0a60a24dfe37afbec9c6b053041fa43"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s42/history.json",
+      "sha256": "643b15abedfbd29b2651de33aa5760e0289bc52a9b7d41afc362a909354e8109"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s42/latest.pt",
+      "sha256": "a097f7fb69af8caad1d1e4f7637ff4002c1a96066c14d7992a85b1b127dc25a6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s42/result.json",
+      "sha256": "0d014c1b0958a6f91461386ad77002b305992b3d6f135dfee094212fbb2a9705"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s42/status.json",
+      "sha256": "94e9dcf599a1424941540c059bf6a8efa2ab47f600065da756c827b805961e97"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s43/best_structure.pt",
+      "sha256": "3e65bca25c39c96a9037547a00c22d4607fac1d5555a74c6217fd762d70f5f2d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s43/best_total.pt",
+      "sha256": "06fb2561e2fc298a0b2d1fffe386ff2f2bd704b755d58468bb9f4e5bd4f088ba"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s43/config.json",
+      "sha256": "cbe9c8014e21bb151414635367c3666ebe0999f4cd942f49a3f59258aee9a3d6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s43/history.csv",
+      "sha256": "4659c9035bf13723d8b8ed5c25af87b13126a775d366763ad47777717b4009f7"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s43/history.json",
+      "sha256": "6e383703d84640f532acbfcfd7c7c919ffaa8bf125e9d90dd2aced8eff7af684"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s43/latest.pt",
+      "sha256": "662c00d3560564b59fcd1dc199079b40fa5b47431ed2765a8b802feadad0ca56"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s43/result.json",
+      "sha256": "5eb22e3ed177bf94bcef1c5f91155d500fa6b9c0be6d3317eadc96230f4156d9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_full_reconstruction__g1__s43/status.json",
+      "sha256": "dac643ff777018ec1118125973ebd134fc1c37ebf8a93580987d684dd04e6fda"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s41/best_structure.pt",
+      "sha256": "ee6297c8c7087442f3688f3e18c1c7fe20465f8613f80c4131ccfc6fef3c1740"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s41/best_total.pt",
+      "sha256": "6822e29861ca0943236e84c34fbfba7c54acebedc954b5b2208f82dec8bbc837"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s41/config.json",
+      "sha256": "4744d555d24f64073fcc812ac5bf41106bf1a2d59cd385823f458e68b146798d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s41/history.csv",
+      "sha256": "3c64f6b03aec6744158cc7a5e09e9bffcf919ee67e8b57ad92c1084e243912e6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s41/history.json",
+      "sha256": "5c5eba980e6e6916136f81629e2e6d8be8968b54201d54fd263e746b37cf50b9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s41/latest.pt",
+      "sha256": "ec66d4f47d93bc4af1174aa99a0a3ddacc3ea538b7b358a03eb674a64e7d60ba"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s41/result.json",
+      "sha256": "0b594fb6c2ab5535f8af6f5a766b706f033d6f3404518a42b8fd7b9095455aca"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s41/status.json",
+      "sha256": "cc5bab897ffa7ea54c41bed1e9c5d5dbf55269879caf4317fe3ee9a58f2326c4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s42/best_structure.pt",
+      "sha256": "7be99ba875454d7b16bac6be6129d7a4b82007a243eebf8e32813c3c3a7c4f50"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s42/best_total.pt",
+      "sha256": "1552a3c25d3e081ae7088733e0f475ab2704931796aa3e6cd2fad902104f8f2f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s42/config.json",
+      "sha256": "b0e97a7ac62a2a8c2474ccd98482c264de3ea0ea4370af4d0bb0665f964dcb5e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s42/history.csv",
+      "sha256": "0e26301a2ce0548991dd9ca320a0d2cdc782eab7509b15baf812f1364aeaab0e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s42/history.json",
+      "sha256": "6d073266bd04afa59870038e3e6c8856006ed108989b57d8ec3d3663c64617f4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s42/latest.pt",
+      "sha256": "3a7eba1559b28d1e64ba854326d58ae5f838ce09f5bf123ae3f9553be37362c4"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s42/result.json",
+      "sha256": "bfaeefb7af298938f6c9564e6070877685373d46c385331ad83a5836c911495a"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s42/status.json",
+      "sha256": "adc72a7c10762a0f057cec7b287de7e7c54495be0473381371c23dd096ba0718"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s43/best_structure.pt",
+      "sha256": "4cda24f3c2460aa06cd8cf2023b57cbf881a0c9b40b26f168d16765fac0302a7"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s43/best_total.pt",
+      "sha256": "8f0224d68d1cc910247015321f419c5445d6123f5c2575f1deb4c4737deda7d9"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s43/config.json",
+      "sha256": "e9b02c102576c19f347933c5cccb9a89f54714c41ed449fb2f27955fcae456a0"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s43/history.csv",
+      "sha256": "15999c708f8b1fa16c7808bfa59bf6c50a8397e5def7aad766fed1e4c45140b2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s43/history.json",
+      "sha256": "6a5b5036e29fd8bf6a6b0d94a203e7d60f9d61588e19a3e2d3d7f5a8d0787f63"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s43/latest.pt",
+      "sha256": "3d2b7b471c2f65b5a284d26a22c370b5338af5bb78cf2af9bdf10c217415bf1e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s43/result.json",
+      "sha256": "71e17173e88a2737d9ba6188fe88ba97f3537f0418d8553d32697fb6be7cdcdb"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/runs/random_02__g05_sign_only__g1__s43/status.json",
+      "sha256": "ee59a6926d08115ee5a5ef346c26d3008d4e5ede502c4af14e1bc732373b2d11"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sources/generate_charge_dataset.py",
+      "sha256": "67ef87aa64ef93e3811c600d74e30ce74a7d59e93574e6a94974db9c9da5ddc6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sources/ModelExperiment10.py",
+      "sha256": "20c2f9e26fee48187fa57e5a55750a9654a93724d11d8f83dfadedb3e598de38"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sources/ModelExperiment11.py",
+      "sha256": "ad841cf4eaa1afadea6df49924d358d5eaa3a7d833d62b98f0af61e11ec6af21"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sources/NewLearning9.py",
+      "sha256": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/run_sweep.py",
+      "sha256": "bfece9e3c0dcfb542a3158ab5b2a8da1be7911cc86d412c6533a551042f65aae"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/summary.md",
+      "sha256": "07759f774aad6b9336386b7b9a0790c3c85bf0cf9351e1baf64d26a8ea901bd3"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/sweep_result.json",
+      "sha256": "f852b46492354ced8f5a1d972452cb5f99a9a7aef83c5bac0b40460cbd1b2d38"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/sweep.json",
+      "sha256": "f17377011a5fac20ae9d3a13e25dc9997f4e7a88a631589d56657f1ec67f7d6f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/training.log",
+      "sha256": "eaaef45c8b9ddf7703a84fe20233542ea7444d891866a44c83f992d47f3de490"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/trials.csv",
+      "sha256": "24276016ddd4000b9ba786084529a3c513978305523dc84a043091de9c598988"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/verification.json",
+      "sha256": "e1d3924e4e05a634c48e3f05668d0f4b563604c926191e9aec3002380938e3bb"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.1__s42/config.json",
+      "sha256": "7ddd93579b543b2cc9e1a0b209478f929d1154a10dfc7484d383de420be7b427"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.1__s42/history.csv",
+      "sha256": "211eec36123d30186c5e31a1fec92435463bcca314124604f7095e91fa094c1b"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.1__s42/history.json",
+      "sha256": "355e6974896d38654587773a95574e0b4291d2123053a9f58d55b5419b2046fd"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.1__s42/result.json",
+      "sha256": "cb5faeda4787adccd7b6bb3e115ef77f25aa9f931354517a07fcaf285911ddb8"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.1__s42/status.json",
+      "sha256": "e93e96a4f7ba1b2526d7a660e4b03c02c9cfc06586b49ccb01db0c5d6fe3cf15"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.25__s42/config.json",
+      "sha256": "5db79d4423ba8a4b211b0daaefb4c0843218adb53356468fbad2c4d4fad9a158"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.25__s42/history.csv",
+      "sha256": "60cc796de64d864a42d2fd41f742471034e68672259ce817c35da803c06a58e1"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.25__s42/history.json",
+      "sha256": "29f87abdfedb2ac0041d44bd61761529558710d6789c9ffb51fc715f1f3131b2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.25__s42/result.json",
+      "sha256": "c97cedd2f68f0f11f077712054cb205dfb606b220a4da07aeb8c37d61a6f8fa7"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.25__s42/status.json",
+      "sha256": "8901317c6840c00e5ea9d22f8ee529d761467baf5c737663012c710ba13c14bd"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.5__s42/config.json",
+      "sha256": "f4f35bbd1dcf689a968c2653d4f95ddc5d2b4a98b3cf1aa317e7e69574449231"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.5__s42/history.csv",
+      "sha256": "1f63cd53d91ddf690052952120978e70c445f734446772f1708ba71be3a26c8e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.5__s42/history.json",
+      "sha256": "473baa0a0f020425230c583b629ad0ada736bb263bb3475d43aa3950aa775134"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.5__s42/result.json",
+      "sha256": "be19ebda2bc8dd4db04e3a017b4a399b69ba3c7199c88ab1b4a2dfd2de40def6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.5__s42/status.json",
+      "sha256": "9c6600684be5cde85a8c19938ca23e7f96a610c7822f76c5c0f7cecc4ff65cb5"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.75__s42/config.json",
+      "sha256": "9126bfcf335c7c9a90125cfc392d039703e9f7a541ce65d03b4dcae91536f83d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.75__s42/history.csv",
+      "sha256": "174348e465d31d71078ff229c7699e61dd203cee744af4a26dcec90986eb50f6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.75__s42/history.json",
+      "sha256": "6fb8fe57e38f95185cd651e3f1d707f26315fc8b84afe1ce136c49d52ae0c440"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.75__s42/result.json",
+      "sha256": "a573683ee309672df489f3268ed3dbbd6a4965a4ac52a3916ed1e7d07d6a9c2b"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0.75__s42/status.json",
+      "sha256": "e2a2b5b550a6cc6ec62a9c578440908b1a64bc97d925fec04a6cd52a1d696508"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0__s42/config.json",
+      "sha256": "803c3868e41814d13dd7ff050435708416f25bbc73329799ae6f0dd052305458"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0__s42/history.csv",
+      "sha256": "d31dc530ba2006139d9e1fcda44245c6c23c7be53b8a15b47f7b1e48dade97ea"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0__s42/history.json",
+      "sha256": "5b66521f1ac7127d978d77f743128a8a1bc269ee6f5a3f32dac4e1e524e7bd41"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0__s42/result.json",
+      "sha256": "685b1f807e9e821bc87e420b66bb33d16f9c1faf7774235350b0dddd65b1b00b"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g0__s42/status.json",
+      "sha256": "a3122af5e3cd3a0e018b3037d4305398b4d6c59440bbe416fc967764ac834ec3"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g1__s42/config.json",
+      "sha256": "ca559862fda4c140406249c0c758781f9de4b1cf7e958d132f5da1894dc608cb"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g1__s42/history.csv",
+      "sha256": "70ff12ba5f90a14c41348c392d2689839d847ced2111f3dd43387c4a2bd59ef8"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g1__s42/history.json",
+      "sha256": "d19e2889f9af62e5b82a8521dfd8b1a0927dd1a17f855afd641ff94f41414a12"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g1__s42/result.json",
+      "sha256": "f307b661957675dccb42b22baa3ecf08c65f8e6f9c34361b8019528a8ee83ad2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_full_reconstruction__g1__s42/status.json",
+      "sha256": "80a419a8821ae5b4e76f7ae4d201d8fe906d8bf51d5f80ede1cf8aad3e2e528d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.1__s42/config.json",
+      "sha256": "5b5d92c7a67549a20b7b87571a87f7f0ad83b82cc46568cf1a3b2f142be824cd"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.1__s42/history.csv",
+      "sha256": "8f2c9139545619f159d66f1ac1770de40ba40f7bf67dec58daa6c7dacc454abd"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.1__s42/history.json",
+      "sha256": "a51969bc1e8aef278d0d78839ab3ff8dc3a4df40ea5b778418f76babb51d44b2"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.1__s42/result.json",
+      "sha256": "d5758215f9e296da82c28cd90ef0a19fdb0aae9978e065f569eaa90051f407e6"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.1__s42/status.json",
+      "sha256": "cd7cbd70d55132b9a4c9d1177b0463acfcc070e18036ff1a3f50a167e934c20d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.25__s42/config.json",
+      "sha256": "932adafbc497569e4cb262fb801b933b499ccdb589d460e1ce80f60ca2a2fe79"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.25__s42/history.csv",
+      "sha256": "816f94dc725a11fa828748a1c24bd07bf8e9de024ee3e5d4b9927e5959a6ff27"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.25__s42/history.json",
+      "sha256": "aae92609640e3adfd6b8fa7ee8ac5528233e70e1e75fe1646cd74b1749bcb386"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.25__s42/result.json",
+      "sha256": "7280a63df03a603cf72e79c953798ee597122c1b8a34dd0bb33523fe4dcf250e"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.25__s42/status.json",
+      "sha256": "281ff5b21ccdf20b5375758e520e2e06b438663df4e989e7912c21357bd599c1"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.5__s42/config.json",
+      "sha256": "2f126de224a0eb3f21817c73e4b3ae8d6cc031068fd6e47a12f5dcd779d428c7"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.5__s42/history.csv",
+      "sha256": "4da29e52dba1f3126d4892a6d15d4991d2f5587fb0d5431f54192eb990706721"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.5__s42/history.json",
+      "sha256": "bfbec5040a5bb0ec2957705cabe925f60cea378713a9b9588bbfc9ca4103837c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.5__s42/result.json",
+      "sha256": "4aa1c2852c42eb7fe69087a15f22ddfe91acb8a40eda47ee6b53e1b4e489234b"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.5__s42/status.json",
+      "sha256": "52fe67819ad924d4b8f70299742c06af47ee985634b3da51081881ccdfd157bc"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.75__s42/config.json",
+      "sha256": "afe3bc315c8adb790c7913db19a0a9f69aa5d57b0d1f402284280fc8e943608c"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.75__s42/history.csv",
+      "sha256": "f74da25e8e335ca483125b51c9c3cf302aa0a57f3aae2fd9aef8f25bf4401941"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.75__s42/history.json",
+      "sha256": "eb1262ffbad05094dbb4060a246ee30b95660792acf65a9242913682d2169154"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.75__s42/result.json",
+      "sha256": "de72301f1e1d296ea54304b07f5ca03243627b1b60dbc4d9adbab7ebb84d4c45"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0.75__s42/status.json",
+      "sha256": "9611cf1d311add88edbe35c4fdd0ab1585e8c61e9e2cf92678daa69348185227"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0__s42/config.json",
+      "sha256": "071388badab2ffd2bed7e7f11ab86af0872f3d33e349c1d077eb089044e35013"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0__s42/history.csv",
+      "sha256": "d31dc530ba2006139d9e1fcda44245c6c23c7be53b8a15b47f7b1e48dade97ea"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0__s42/history.json",
+      "sha256": "5b66521f1ac7127d978d77f743128a8a1bc269ee6f5a3f32dac4e1e524e7bd41"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0__s42/result.json",
+      "sha256": "22f9bb851a857c8b0447fa8d0d1745e3922371f02c0a48897cd26c1bcea249df"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g0__s42/status.json",
+      "sha256": "af051b9d84adf3cb898af238b762a1d8d52c760260462bd474c8921903e3af36"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g1__s42/config.json",
+      "sha256": "d2250a127f57a71ee738d37d62451d81fa50efbe6c19a59a53039229ac0ff03d"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g1__s42/history.csv",
+      "sha256": "4d2f16fa57a399ae14b0911e4ded05d20424219676f3a3fd3b529af2b86a9429"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g1__s42/history.json",
+      "sha256": "aa60cb3a6b4202b5acb2759a8219b5b453f4917c9d86648b4a8fc4a845f0486f"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g1__s42/result.json",
+      "sha256": "ab090ccc64e31a22a528d3f8dfe8fd92a92f0550a962e40353f728bd977e5fef"
+    },
+    {
+      "path": "Modelexperiment11/studies/main/sweeps/dropout020_seed42_6fractions/runs/dropout020__g05_sign_only__g1__s42/status.json",
+      "sha256": "21eac53c1ab806f105904baee96e75802bb0a0de678d12e7fdc7c9a1aee895fb"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/normalization.json",
+      "sha256": "fe25b425707841b0c35bea1863f7e52ac56b6b5e349834fc3e29755ee9977c1d"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/pairwise_comparisons.csv",
+      "sha256": "515bf2b60e1e1fa99b3f3580d236ce55fbf439d72a69a91c68606a72df7d5014"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/pairwise_summary.csv",
+      "sha256": "502bf7106019fe8f668218480591ad157241a945878dacc19bd47ce916e3c513"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/protocol.json",
+      "sha256": "eca1b7575b68287d77d62e64d5ed6879155446da3cc5dad7b470e643f807994c"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs.csv",
+      "sha256": "7d496adce072529bc0d626e6538ee7ab28fdf885cf1087240507020a9f7e5af5"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/split_indices.npz",
+      "sha256": "a63dbc2f47a9f452860c3b235592787c856ac9d079dc33a628d7868afd85138f"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/summary.csv",
+      "sha256": "bc27c46455a39eb41fa59d8d46f71b911832b33341e2721e581f9def08d005a3"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_000pct__seed_41__b2f26f6d305f/config.json",
+      "sha256": "8b6a8955699f96616e9141a23b4672c4715083dcf79f49f6add39fbfd733e76d"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_000pct__seed_41__b2f26f6d305f/history.json",
+      "sha256": "4f9f9c7436f9cda984a3a658a2a3eef980bb358ed1903bf545934dceecf2ee46"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_000pct__seed_41__b2f26f6d305f/result.json",
+      "sha256": "879561ca95aea3f9bbcf9eabe32ce46b364167af97889239c3a62fefea4aa5fe"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_000pct__seed_41__b2f26f6d305f/status.json",
+      "sha256": "2418125ab54955d5c5402a4f7b13fcd1d727dc53f0712fe08b74df975baa26a6"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_010pct__seed_41__7249abb18d3a/config.json",
+      "sha256": "897163f5e5fcc887807f77937d76237e54cc3c06a15b476f857dabe739293e23"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_010pct__seed_41__7249abb18d3a/history.json",
+      "sha256": "7924158bf9ac16a80ee838ea6b67d1e5542e926a30bedde863114cfdeb92cb86"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_010pct__seed_41__7249abb18d3a/result.json",
+      "sha256": "0da23f5839e6929c38ae06500e8fc20da20e734020e9a8941382a97c42e53f35"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_010pct__seed_41__7249abb18d3a/status.json",
+      "sha256": "108c7daecf5247781b87e98ea2d47011c266d4c518c6f85f2c99d3c6004d1a19"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_025pct__seed_41__de663562cf98/config.json",
+      "sha256": "a2736c86d0d0d07b0d9130764d1915411fe7009bf4c27797f7deeb9762a2a751"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_025pct__seed_41__de663562cf98/history.json",
+      "sha256": "5b14d77c8ad0129537138444b0d150e9d67933838e4e1c67b55497c91a03178f"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_025pct__seed_41__de663562cf98/result.json",
+      "sha256": "5e8bac4b732d7cebe884eb5b90542619f5089c27889b6882b092c206fca08112"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_025pct__seed_41__de663562cf98/status.json",
+      "sha256": "1ca7e9bb57523379ef698648836f20dc2e4ed7ab3e0a3d0f0244b83be269e3bc"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_050pct__seed_41__7e568cf9b973/config.json",
+      "sha256": "ac98d230c1b1a3d4abeac9768fb1cbb1998a34755dcf7f86097fdde4f5542ee7"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_050pct__seed_41__7e568cf9b973/history.json",
+      "sha256": "76dc82eb0a6a1b827a62d5b49bbefe549fd8dcfe903a6bce7437e999288a66b4"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_050pct__seed_41__7e568cf9b973/result.json",
+      "sha256": "8f2df26fa98e80b430b80efd83b7e7f4bcf21be5882905f9e9e87e4593ac8914"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_050pct__seed_41__7e568cf9b973/status.json",
+      "sha256": "8e0bcf45251cdaf143511991049922593819074ca9c0aa85eb4fd647bb7d802a"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_075pct__seed_41__83c66bcf4070/config.json",
+      "sha256": "7bb1566fafa46c414a55b0fbc6b32f2662c7c7458e6b6f61d00b4d18c7e83939"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_075pct__seed_41__83c66bcf4070/history.json",
+      "sha256": "a04051bbad77b29f8362acca9a46a552362a916fd25555e3f7eb38ed6244ac0a"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_075pct__seed_41__83c66bcf4070/result.json",
+      "sha256": "ffbd74aecd2f9b82736019136152f5921e372cdc896b6958ddc21608b7adfe64"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_075pct__seed_41__83c66bcf4070/status.json",
+      "sha256": "1b5379b022e7814cba3a2db14b0a85e017dd5a6da594ee8c01ea095047413700"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff/config.json",
+      "sha256": "a5e792358407c9e82714445dfd1166403bf6eb028fe4758266fb5c386078381f"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff/history.json",
+      "sha256": "2449638ef52aa85dbfa06b6a6aa1accc518b7c0fff7897528e1f9a80c9ff755d"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff/result.json",
+      "sha256": "279fc7ef4b741d4a5611927793e77413492c60453dc9964c0cfb79731df5b117"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff/status.json",
+      "sha256": "7c9ea663405359b358c3142c6a8b2e5273003883ce488c7c6ddf62e6693cbc6a"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_000pct__seed_41__ff48179f8a97/config.json",
+      "sha256": "b257de2f401dc48b0ce7557a91065578023f62638d47419bd1522857f84991e7"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_000pct__seed_41__ff48179f8a97/history.json",
+      "sha256": "4f9f9c7436f9cda984a3a658a2a3eef980bb358ed1903bf545934dceecf2ee46"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_000pct__seed_41__ff48179f8a97/result.json",
+      "sha256": "13aaf3de8af9f98c608c428f7e32b60e951dec112a17248ba87ef9799340671e"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_000pct__seed_41__ff48179f8a97/status.json",
+      "sha256": "a07eb466f202a92ac4b8a41ec4b140ac60fe51a67eb4b16d073c872a01c69b9e"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_010pct__seed_41__421f8389bef7/config.json",
+      "sha256": "97217d72d0d1ba8fcfe46bb7624ed8d7214366cf2ed0fd5ca04219efb8cbf160"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_010pct__seed_41__421f8389bef7/history.json",
+      "sha256": "80108a2d66aadfcfc34e423ea577872056cfe34d3e263d7f631922e99a9b9513"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_010pct__seed_41__421f8389bef7/result.json",
+      "sha256": "3593c33187c7ef64ce306c89ba7798e95b111278d6e646c46cef754009284d11"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_010pct__seed_41__421f8389bef7/status.json",
+      "sha256": "4b9a63b1732fd41c434723a9392a08968e47e033a28f7ec0add738146aff9187"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_025pct__seed_41__fae391c96c49/config.json",
+      "sha256": "a86c9a0f4890dbd68389355c90a76b31badff65de18726f8e5ee335c75741306"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_025pct__seed_41__fae391c96c49/history.json",
+      "sha256": "720f29353a8354195c7253130896c3082e61776693560e359fe14b72c4531146"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_025pct__seed_41__fae391c96c49/result.json",
+      "sha256": "cca8575da57d9c3f76bc00c73a8991ce9924dfced4d0a74e8ae32ca8f8a6d6d0"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_025pct__seed_41__fae391c96c49/status.json",
+      "sha256": "22c7c1e6ee7c05dabd384a95f7206dc06598664ec964a2e09a43931e95d211a6"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_050pct__seed_41__2b11687ea84b/config.json",
+      "sha256": "0d1e3446238c08f85b77ad3008156ffc74024494f331292d2c25238cb6c5cff9"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_050pct__seed_41__2b11687ea84b/history.json",
+      "sha256": "691187429c69cdcf9a1884b653756bb671b1d52f5abef983044fd60534cb5eac"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_050pct__seed_41__2b11687ea84b/result.json",
+      "sha256": "266255baf1f297681cfd9857ca95afdb6f70632c4bb3f1205bee0645c2becb8f"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_050pct__seed_41__2b11687ea84b/status.json",
+      "sha256": "975db35605a2fc7e85e791566c1ec6cbee5ed676ef23512e9b07078c7387a8cb"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_075pct__seed_41__ca088f12f469/config.json",
+      "sha256": "a4158df6062167eb1441fc778b3021e778cd436566a1807593d2b61c57a6d7fc"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_075pct__seed_41__ca088f12f469/history.json",
+      "sha256": "07a97d802598a4add2a541c6c8d2099d1cd4b8d737b9e5386811aa7ec5f91a9b"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_075pct__seed_41__ca088f12f469/result.json",
+      "sha256": "4583059c1255ab3b4fdca6212de875ed04022135dacffc578d3406de117ebae5"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_075pct__seed_41__ca088f12f469/status.json",
+      "sha256": "f576876c47bc09f9885feab74c821bc09f4049b25fd70ad49fd6fd2ce9eeba8f"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_100pct__seed_41__3ed7f2977479/config.json",
+      "sha256": "7d924ccccff4e1b40d73e93c4b7293b78050cc78a1c86ae4cab87be881c4f908"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_100pct__seed_41__3ed7f2977479/history.json",
+      "sha256": "0d0449c2c64e076a80877b173ace5826a5cf7f3eaff1a655931d518257098a50"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_100pct__seed_41__3ed7f2977479/result.json",
+      "sha256": "1fc3147be161f759f8aed82e458e7864498353fef3670ee8b9153cc7a34e3969"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_results/seed41_g05_sweep_dropout020/runs/g05_sign_only__g05_100pct__seed_41__3ed7f2977479/status.json",
+      "sha256": "f1e0f32c343e7e54eb9a073e7d83e6e994f21622c8d4f15d7426a9ace6bf837a"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_000pct__seed_41__b2f26f6d305f/best_structure.pt",
+      "sha256": "23a039484f7d26edb45100c54618fd042f194561e1359f3bfa3268f6cf64eb1d"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_000pct__seed_41__b2f26f6d305f/best_total.pt",
+      "sha256": "2d2315c434d98b1cf4241dca4319d4b83db72f049983f46c93cc82228706e8ae"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_000pct__seed_41__b2f26f6d305f/latest.pt",
+      "sha256": "5a50ef915b725673b98c518aadb9bc1943f7f1b7d83f29f12c234bda4a61857d"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_010pct__seed_41__7249abb18d3a/best_structure.pt",
+      "sha256": "aabdd62255f7d968988058c61e00f13f21c9f2328069cc64837d9bfbb6fe6b69"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_010pct__seed_41__7249abb18d3a/best_total.pt",
+      "sha256": "d4ccbe120b5070c24ced26e8540863e383b9e5bf1b3a195421feb871995d3e1f"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_010pct__seed_41__7249abb18d3a/latest.pt",
+      "sha256": "0be076c393818a129dd3291602695b078bdd09f29b347a38c68c6a1818c06d1e"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_025pct__seed_41__de663562cf98/best_structure.pt",
+      "sha256": "5230253c88ce5de67d21edf1ca2cea94fff32af377067966c909077ddc425f06"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_025pct__seed_41__de663562cf98/best_total.pt",
+      "sha256": "275eeea7c71003e6e0e13970a338a08eafb99f9e27d573ffcd49ebbc01cc7564"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_025pct__seed_41__de663562cf98/latest.pt",
+      "sha256": "96f983d6182ab9110a6daf6272ad161fff4675b7d0f3abf734a7a37345cefe58"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_050pct__seed_41__7e568cf9b973/best_structure.pt",
+      "sha256": "61fc6a9003e9f14199a501f80766ad4eab284ba64b9414dcac1c2c1f07f2dde1"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_050pct__seed_41__7e568cf9b973/best_total.pt",
+      "sha256": "8a29eab720ce43188abfafb3e6f404c8b2cc3019aa787564115ce0e4792e250c"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_050pct__seed_41__7e568cf9b973/latest.pt",
+      "sha256": "40be589476a6c5903afd989036112b5b94efc07a5db34928a3a0adf7b7df5887"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_075pct__seed_41__83c66bcf4070/best_structure.pt",
+      "sha256": "aa68c730c10210195abeb860d5b976f85cb6c8079b8dac6b1b8084ac63d5be5e"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_075pct__seed_41__83c66bcf4070/best_total.pt",
+      "sha256": "92d29ab3df19c2b15a06325557904ea40caa3f58cd2b9395aa4f11508767a361"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_075pct__seed_41__83c66bcf4070/latest.pt",
+      "sha256": "cc42946b4f1692d3116957752c3225481e8523243989e53a5a02d47f463a5807"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff/best_structure.pt",
+      "sha256": "0ef261a42b15e94d62ebb5737c96184bbdd9113ea2b1de4bdc306a7ee8d1c27a"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff/best_total.pt",
+      "sha256": "6d21333fa95f7429902f2f38aaab9082a8333721df8532e03360738431fede37"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff/latest.pt",
+      "sha256": "17c8334efe30802c047e3462bdd6e8c0080939ee9f119abcae262355cd0f432d"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_000pct__seed_41__ff48179f8a97/best_structure.pt",
+      "sha256": "ff105513e1c62061f44fe36be2bccbb4aa93ea02626fdce74183bd9a71fa4c54"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_000pct__seed_41__ff48179f8a97/best_total.pt",
+      "sha256": "ea3e192a3b012193bd8c5be34097f1091b13863cd8398b6751008082804213e3"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_000pct__seed_41__ff48179f8a97/latest.pt",
+      "sha256": "dd63deea44fd9c1f57c59ddbce7c810455c9bf36d3444c81ce7fd8ad3e03881a"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_010pct__seed_41__421f8389bef7/best_structure.pt",
+      "sha256": "437e39f16ff45080fecc8921725209cf9682cb0ef68921f39f420345911d0cf2"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_010pct__seed_41__421f8389bef7/best_total.pt",
+      "sha256": "198aa6f1fcc9773f424ded93787b62f1bac923726acbe721dffe822091e1371a"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_010pct__seed_41__421f8389bef7/latest.pt",
+      "sha256": "8a3ae6feff872d5230ee502c15ee434f8f89b5452f9f8c3a078c9f796f01b350"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_025pct__seed_41__fae391c96c49/best_structure.pt",
+      "sha256": "843fd3aed3243cbee30a7a87fc6798e2842de6ad76d63c4a4b73f5794593ea2c"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_025pct__seed_41__fae391c96c49/best_total.pt",
+      "sha256": "3da8f45334994972340d67ce89ed061aeb7a823b5c428fe23e13ce8caadfbe43"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_025pct__seed_41__fae391c96c49/latest.pt",
+      "sha256": "ba5b19b8b127481e168bc516d1e965d98febc0c77a38ca9d87f546370c96c584"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_050pct__seed_41__2b11687ea84b/best_structure.pt",
+      "sha256": "bd42a5480d1a0a8f10bf127de014034f1b23f30e513b52780319dad5b3989a75"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_050pct__seed_41__2b11687ea84b/best_total.pt",
+      "sha256": "eabb4bc5caaec432b3fc0e89b0c193de76e3c6cc3cf21bcfaea6403c1712acaf"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_050pct__seed_41__2b11687ea84b/latest.pt",
+      "sha256": "739565ed0063cb510221384482d03a979d8b56f892b0e209201994f09e61e69d"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_075pct__seed_41__ca088f12f469/best_structure.pt",
+      "sha256": "a9294efd8787c4fd17a83eb773377e86cd6c3d5be09535b7d784bf27877cef1f"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_075pct__seed_41__ca088f12f469/best_total.pt",
+      "sha256": "0e7eea7217a04263bbd93bdc5221a43112363756f7b8a80ea85d711bce9799be"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_075pct__seed_41__ca088f12f469/latest.pt",
+      "sha256": "4fdcce60e0415f4a54291c4064218b715acecf54a0794a701061b2a848e4a62a"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_100pct__seed_41__3ed7f2977479/best_structure.pt",
+      "sha256": "73ee1dcf6ec9774cfe5a07562c163adf65e9b0f71bbae3662d3bfea4c3b0d5c1"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_100pct__seed_41__3ed7f2977479/best_total.pt",
+      "sha256": "754862a0b6b39927849eed215ea9565693a6faa70248e346ee5b01c831d73f09"
+    },
+    {
+      "path": "Modelexperiment11/fraction_sweep_checkpoints/seed41_g05_sweep_dropout020/g05_sign_only__g05_100pct__seed_41__3ed7f2977479/latest.pt",
+      "sha256": "2ae7086db1dd4939ad8f26a17c07464beabbd947c241b77771b1ed1c95687a97"
+    }
+  ]
+}

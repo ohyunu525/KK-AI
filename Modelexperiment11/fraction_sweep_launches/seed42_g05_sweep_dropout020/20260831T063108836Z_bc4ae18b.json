@@ -1,0 +1,82 @@
+{
+  "started_at_utc": "2026-08-31T06:31:08.8416999Z",
+  "seed": 42,
+  "mode": "fresh",
+  "expected_runs": 12,
+  "models": [
+    "g05_sign_only",
+    "g05_full_reconstruction"
+  ],
+  "fractions": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "training": {
+    "structure_dropout": 0.2,
+    "optimizer": "AdamW",
+    "max_epochs": 150,
+    "early_stopping_min_epochs": 0,
+    "split_seed": 42,
+    "early_stopping_min_delta": 0.0,
+    "early_stopping_patience": 20,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 128
+  },
+  "checkpoint_selection": [
+    "validation_loss.structure",
+    "validation_loss.total"
+  ],
+  "primary_reporting_checkpoint": "best_structure.pt",
+  "test_policy": "Evaluate both validation-selected checkpoints after each run finishes; no tuning or selection from test metrics.",
+  "executable": "C:\\Users\\COM\\Documents\\KK-AI\\.venv\\Scripts\\python.exe",
+  "arguments": [
+    "-u",
+    "C:\\Users\\COM\\Documents\\KK-AI\\Codes\\ModelExperiment10.py",
+    "--data",
+    "C:\\Users\\COM\\Documents\\KK-AI\\Models\\charge_dataset_5charges_v9.npz",
+    "--models",
+    "g05_sign_only,g05_full_reconstruction",
+    "--fractions",
+    "0.0,0.1,0.25,0.5,0.75,1.0",
+    "--seeds",
+    "42",
+    "--epochs",
+    "150",
+    "--batch-size",
+    "128",
+    "--learning-rate",
+    "0.001",
+    "--weight-decay",
+    "0.0001",
+    "--structure-dropout",
+    "0.2",
+    "--early-stopping-patience",
+    "20",
+    "--early-stopping-min-delta",
+    "0",
+    "--early-stopping-min-epochs",
+    "0",
+    "--experiment-name",
+    "seed42_g05_sweep_dropout020",
+    "--results-root",
+    "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_results",
+    "--checkpoint-root",
+    "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_checkpoints",
+    "--device",
+    "cuda"
+  ],
+  "results": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_results\\seed42_g05_sweep_dropout020",
+  "checkpoints": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_checkpoints\\seed42_g05_sweep_dropout020",
+  "console_log": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_launches\\seed42_g05_sweep_dropout020\\20260831T063108836Z_bc4ae18b.log",
+  "required_sha256": {
+    "Codes/ModelExperiment10.py": "20c2f9e26fee48187fa57e5a55750a9654a93724d11d8f83dfadedb3e598de38",
+    "Codes/NewLearning9.py": "c026690468ff6e13d6e14534d33ddf6b66b8ab02e48288cb66d1817dacb8c307",
+    "Models/charge_dataset_5charges_v9.npz": "f90880bbbcd31c528c0603a2aa8043c0ddea567c393d83fc59ae3afd3ac24863"
+  },
+  "launcher_sha256": "5bcb1aca0d7fd3e8bcce437f8965c40838611a9fe82b4d6d18dc96c54c358054"
+}

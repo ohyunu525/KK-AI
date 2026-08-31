@@ -1,0 +1,22 @@
+{
+  "best_structure_epoch": 43,
+  "best_structure_loss": 0.5794908967018128,
+  "best_total_epoch": 57,
+  "best_total_loss": 0.9258239250183106,
+  "early_stopping": {
+    "bad_epochs": 20,
+    "best_losses": {
+      "structure": 0.5794908967018128,
+      "total": 0.9258239250183106
+    },
+    "epoch": 77,
+    "last_improvement_epoch": 57,
+    "stopped": true
+  },
+  "epochs_completed": 77,
+  "result_path": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_results\\seed42_g05_sweep_dropout020\\runs\\g05_full_reconstruction__g05_050pct__seed_42__8216c99f4e8a\\result.json",
+  "run_id": "g05_full_reconstruction__g05_050pct__seed_42__8216c99f4e8a",
+  "status": "completed",
+  "stop_reason": "early_stopping",
+  "updated_at": "2026-08-31T06:42:57.062500+00:00"
+}
