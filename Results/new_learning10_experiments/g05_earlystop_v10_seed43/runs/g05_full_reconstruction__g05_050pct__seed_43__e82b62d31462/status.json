@@ -1,0 +1,22 @@
+{
+  "best_structure_epoch": 33,
+  "best_structure_loss": 0.5948610897064209,
+  "best_total_epoch": 41,
+  "best_total_loss": 0.9489210312366486,
+  "early_stopping": {
+    "bad_epochs": 20,
+    "best_losses": {
+      "structure": 0.5948610897064209,
+      "total": 0.9489210312366486
+    },
+    "epoch": 61,
+    "last_improvement_epoch": 41,
+    "stopped": true
+  },
+  "epochs_completed": 61,
+  "result_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning10_experiments\\g05_earlystop_v10_seed43\\runs\\g05_full_reconstruction__g05_050pct__seed_43__e82b62d31462\\result.json",
+  "run_id": "g05_full_reconstruction__g05_050pct__seed_43__e82b62d31462",
+  "status": "completed",
+  "stop_reason": "early_stopping",
+  "updated_at": "2026-08-31T02:54:17.516357+00:00"
+}

@@ -1,0 +1,465 @@
+{
+  "artifacts": {
+    "config": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning10_experiments\\g05_earlystop_v10_seed43\\runs\\g05_sign_only__g05_025pct__seed_43__b9e9775e1b4e\\config.json",
+    "history": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Results\\new_learning10_experiments\\g05_earlystop_v10_seed43\\runs\\g05_sign_only__g05_025pct__seed_43__b9e9775e1b4e\\history.json",
+    "latest": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning10_experiments\\g05_earlystop_v10_seed43\\g05_sign_only__g05_025pct__seed_43__b9e9775e1b4e\\latest.pt",
+    "structure": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning10_experiments\\g05_earlystop_v10_seed43\\g05_sign_only__g05_025pct__seed_43__b9e9775e1b4e\\best_structure.pt",
+    "total": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning10_experiments\\g05_earlystop_v10_seed43\\g05_sign_only__g05_025pct__seed_43__b9e9775e1b4e\\best_total.pt"
+  },
+  "charge_count": 5,
+  "completed_at": "2026-08-31T02:51:41.515998+00:00",
+  "configuration": {
+    "charge_count": 5,
+    "model": {
+      "input_policy": {
+        "global_sign": "masked G05 only; odd in V",
+        "magnitude": "G00 only",
+        "position": "G00 only",
+        "relative_sign": "G00 only"
+      },
+      "name": "g05_sign_only",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "state_shapes": {
+        "g00_cnn.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            16
+          ]
+        },
+        "g00_cnn.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            16,
+            1,
+            3,
+            3
+          ]
+        },
+        "g00_cnn.3.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            32
+          ]
+        },
+        "g00_cnn.3.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            32,
+            16,
+            3,
+            3
+          ]
+        },
+        "g00_cnn.6.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "g00_cnn.6.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            32,
+            3,
+            3
+          ]
+        },
+        "g00_encoder.1.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            256
+          ]
+        },
+        "g00_encoder.1.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            256,
+            1024
+          ]
+        },
+        "g05_encoder.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            32
+          ]
+        },
+        "g05_encoder.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            32,
+            3
+          ]
+        },
+        "g05_encoder.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            32
+          ]
+        },
+        "g05_encoder.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            32,
+            32
+          ]
+        },
+        "global_sign_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "global_sign_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            96
+          ]
+        },
+        "global_sign_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            1,
+            64
+          ]
+        },
+        "magnitude_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "magnitude_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            256
+          ]
+        },
+        "magnitude_head.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            5
+          ]
+        },
+        "magnitude_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            5,
+            64
+          ]
+        },
+        "position_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            128
+          ]
+        },
+        "position_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            128,
+            256
+          ]
+        },
+        "position_head.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            15
+          ]
+        },
+        "position_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            15,
+            128
+          ]
+        },
+        "relative_sign_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "relative_sign_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            256
+          ]
+        },
+        "relative_sign_head.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            5
+          ]
+        },
+        "relative_sign_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            5,
+            64
+          ]
+        },
+        "structure_context.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            128
+          ]
+        },
+        "structure_context.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            128,
+            96
+          ]
+        },
+        "structure_context.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            256
+          ]
+        },
+        "structure_context.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            256,
+            128
+          ]
+        }
+      }
+    },
+    "normalization": {
+      "charge_scale": 0.6794502589494028,
+      "g00_mean": 0.006332700330095314,
+      "g00_std": 0.011903275799601066,
+      "g05_value_scale": 0.07531177929884283,
+      "position_mean": [
+        0.0016500300262123346,
+        -0.0023164229933172464,
+        0.7972654104232788
+      ],
+      "position_std": [
+        0.867354691028595,
+        0.8655665516853333,
+        0.40409448742866516
+      ]
+    },
+    "observation": {
+      "candidate_count": 32,
+      "full_fraction_definition": "all stored candidate sensors, not the full 32x32 field",
+      "g05_count_per_sample": 8,
+      "g05_fraction": 0.25,
+      "selection": "fixed nested sensor prefix"
+    },
+    "protocol_fingerprint": "27eeeaa89d739d150417e05407607bf3d367f9affa302e8be822737fc6047e45",
+    "protocol_version": "new-learning10-g05-routing-v1",
+    "split_counts": {
+      "test": 1000,
+      "train": 8000,
+      "validation": 1000
+    },
+    "training": {
+      "batch_size": 128,
+      "checkpoint_selection": {
+        "structure": {
+          "checkpoint_selection": "structure",
+          "global_sign_in_selection_objective": false,
+          "global_sign_metrics_note": "Global-sign and absolute-sign metrics are secondary diagnostics: structure selection does not optimize global-sign performance; training still uses the unchanged total loss.",
+          "primary_metrics": [
+            "position_mae_x",
+            "position_mae_y",
+            "position_mae_z",
+            "mean_position_mae",
+            "mean_position_3d_error",
+            "charge_magnitude_mae",
+            "relative_sign_accuracy",
+            "relative_configuration_accuracy",
+            "pairwise_relative_sign_accuracy"
+          ],
+          "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+          "selection_objective": "validation_loss.structure"
+        },
+        "total": {
+          "checkpoint_selection": "total",
+          "global_sign_in_selection_objective": true,
+          "global_sign_metrics_note": "Total selection includes global-sign loss only with observed G05 and nonzero global-sign weight.",
+          "primary_metrics": [
+            "position_mae_x",
+            "position_mae_y",
+            "position_mae_z",
+            "mean_position_mae",
+            "mean_position_3d_error",
+            "charge_magnitude_mae",
+            "relative_sign_accuracy",
+            "relative_configuration_accuracy",
+            "pairwise_relative_sign_accuracy",
+            "global_sign_accuracy",
+            "global_sign_bce",
+            "absolute_sign_accuracy",
+            "absolute_sign_set_accuracy",
+            "charge_mae",
+            "global_invariant_charge_mae"
+          ],
+          "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+          "selection_objective": "validation_loss.total"
+        }
+      },
+      "learning_rate": 0.001,
+      "loss_weights": {
+        "global_sign": 1.0,
+        "magnitude": 1.0,
+        "position": 1.0,
+        "relative_sign": 1.0
+      },
+      "max_epochs": 300,
+      "optimizer": "AdamW",
+      "regularization": {
+        "early_stopping_min_delta": 0.0,
+        "early_stopping_min_epochs": 0,
+        "early_stopping_patience": 20,
+        "structure_dropout": 0.0
+      },
+      "seed": 43,
+      "weight_decay": 0.0001
+    }
+  },
+  "evaluations": {
+    "structure": {
+      "checkpoint_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning10_experiments\\g05_earlystop_v10_seed43\\g05_sign_only__g05_025pct__seed_43__b9e9775e1b4e\\best_structure.pt",
+      "checkpoint_selection": "structure",
+      "global_sign_in_selection_objective": false,
+      "global_sign_metrics_note": "Global-sign and absolute-sign metrics are secondary diagnostics: structure selection does not optimize global-sign performance; training still uses the unchanged total loss.",
+      "primary_metrics": [
+        "position_mae_x",
+        "position_mae_y",
+        "position_mae_z",
+        "mean_position_mae",
+        "mean_position_3d_error",
+        "charge_magnitude_mae",
+        "relative_sign_accuracy",
+        "relative_configuration_accuracy",
+        "pairwise_relative_sign_accuracy"
+      ],
+      "selected_epoch": 31,
+      "selected_validation_loss": 0.5999058632850647,
+      "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+      "selection_objective": "validation_loss.structure",
+      "test_metrics": {
+        "absolute_sign_accuracy": 0.8804000015258789,
+        "absolute_sign_set_accuracy": 0.837,
+        "charge_mae": 0.2910685920715332,
+        "charge_magnitude_mae": 0.15873043632507325,
+        "global_invariant_charge_mae": 0.19724883460998535,
+        "global_sign_accuracy": 0.864,
+        "global_sign_bce": 0.3517534828186035,
+        "mean_position_3d_error": 0.7661625061035157,
+        "mean_position_mae": 0.3748277015686035,
+        "observations_per_sample": 8.0,
+        "observed_sample_fraction": 1.0,
+        "pairwise_relative_sign_accuracy": 0.9473999938964843,
+        "position_mae_x": 0.4418797950744629,
+        "position_mae_y": 0.45999319076538087,
+        "position_mae_z": 0.22261006546020506,
+        "relative_configuration_accuracy": 0.909,
+        "relative_sign_accuracy": 0.9596000137329102
+      },
+      "validation_losses": {
+        "global_sign": 0.3595487148761749,
+        "magnitude": 0.0743892343044281,
+        "position": 0.4678407955169678,
+        "relative_sign": 0.05767583599686622,
+        "structure": 0.5999058632850647,
+        "total": 0.9594545781612396
+      }
+    },
+    "total": {
+      "checkpoint_path": "C:\\Users\\COM\\Documents\\GitHub\\KK-AI\\Models\\new_learning10_experiments\\g05_earlystop_v10_seed43\\g05_sign_only__g05_025pct__seed_43__b9e9775e1b4e\\best_total.pt",
+      "checkpoint_selection": "total",
+      "global_sign_in_selection_objective": true,
+      "global_sign_metrics_note": "Total selection includes global-sign loss only with observed G05 and nonzero global-sign weight.",
+      "primary_metrics": [
+        "position_mae_x",
+        "position_mae_y",
+        "position_mae_z",
+        "mean_position_mae",
+        "mean_position_3d_error",
+        "charge_magnitude_mae",
+        "relative_sign_accuracy",
+        "relative_configuration_accuracy",
+        "pairwise_relative_sign_accuracy",
+        "global_sign_accuracy",
+        "global_sign_bce",
+        "absolute_sign_accuracy",
+        "absolute_sign_set_accuracy",
+        "charge_mae",
+        "global_invariant_charge_mae"
+      ],
+      "selected_epoch": 31,
+      "selected_validation_loss": 0.9594545781612396,
+      "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+      "selection_objective": "validation_loss.total",
+      "test_metrics": {
+        "absolute_sign_accuracy": 0.8804000015258789,
+        "absolute_sign_set_accuracy": 0.837,
+        "charge_mae": 0.2910685920715332,
+        "charge_magnitude_mae": 0.15873043632507325,
+        "global_invariant_charge_mae": 0.19724883460998535,
+        "global_sign_accuracy": 0.864,
+        "global_sign_bce": 0.3517534828186035,
+        "mean_position_3d_error": 0.7661625061035157,
+        "mean_position_mae": 0.3748277015686035,
+        "observations_per_sample": 8.0,
+        "observed_sample_fraction": 1.0,
+        "pairwise_relative_sign_accuracy": 0.9473999938964843,
+        "position_mae_x": 0.4418797950744629,
+        "position_mae_y": 0.45999319076538087,
+        "position_mae_z": 0.22261006546020506,
+        "relative_configuration_accuracy": 0.909,
+        "relative_sign_accuracy": 0.9596000137329102
+      },
+      "validation_losses": {
+        "global_sign": 0.3595487148761749,
+        "magnitude": 0.0743892343044281,
+        "position": 0.4678407955169678,
+        "relative_sign": 0.05767583599686622,
+        "structure": 0.5999058632850647,
+        "total": 0.9594545781612396
+      }
+    }
+  },
+  "g05_count_per_sample": 8,
+  "g05_fraction": 0.25,
+  "model_name": "g05_sign_only",
+  "protocol_fingerprint": "27eeeaa89d739d150417e05407607bf3d367f9affa302e8be822737fc6047e45",
+  "protocol_version": "new-learning10-g05-routing-v1",
+  "result_schema_version": 2,
+  "run_fingerprint": "b9e9775e1b4e99dcf33c46a472acc6a5069de1a66a37759a5a3d3fd1f77558d8",
+  "run_id": "g05_sign_only__g05_025pct__seed_43__b9e9775e1b4e",
+  "seed": 43,
+  "status": "completed",
+  "training_result": {
+    "best_structure_epoch": 31,
+    "best_structure_loss": 0.5999058632850647,
+    "best_total_epoch": 31,
+    "best_total_loss": 0.9594545781612396,
+    "early_stopping": {
+      "bad_epochs": 20,
+      "best_losses": {
+        "structure": 0.5999058632850647,
+        "total": 0.9594545781612396
+      },
+      "epoch": 51,
+      "last_improvement_epoch": 31,
+      "stopped": true
+    },
+    "elapsed_seconds": 42.18189760000678,
+    "epochs_completed": 51,
+    "resumed": false,
+    "stop_reason": "early_stopping"
+  }
+}
