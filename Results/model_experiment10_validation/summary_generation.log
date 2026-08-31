@@ -1,0 +1,37 @@
+{
+  "pilot_runs": 14,
+  "model_means": {
+    "g05_sign_only": {
+      "paired_seed_count": 3,
+      "baseline_mean_best_total_loss": 0.9427890702883402,
+      "baseline_mean_best_structure_loss": 0.5981941091219584,
+      "dropout010_mean_best_total_loss": 0.943867449204127,
+      "dropout010_mean_best_structure_loss": 0.6005905237197876,
+      "mean_paired_total_improvement_pct": -0.11126313514217472,
+      "mean_paired_structure_improvement_pct": -0.4009695170321564,
+      "structure_improved_seed_count": 1,
+      "structure_improvement_sample_std_pct": 2.3025336142845223
+    },
+    "g05_full_reconstruction": {
+      "paired_seed_count": 3,
+      "baseline_mean_best_total_loss": 0.9529202707608542,
+      "baseline_mean_best_structure_loss": 0.6049312752087911,
+      "dropout010_mean_best_total_loss": 0.9346223798592885,
+      "dropout010_mean_best_structure_loss": 0.5871854685147604,
+      "mean_paired_total_improvement_pct": 1.9232808857026416,
+      "mean_paired_structure_improvement_pct": 2.9412038641551503,
+      "structure_improved_seed_count": 3,
+      "structure_improvement_sample_std_pct": 1.144312466782749
+    }
+  },
+  "historical_replay": {
+    "runs": 36,
+    "both_best_preserved": 36,
+    "original_epochs": 10800,
+    "early_stopping_epochs": 1969,
+    "stop_epoch_min": 46,
+    "stop_epoch_max": 68,
+    "epoch_reduction_pct": 81.76851851851852
+  },
+  "removed_functions": []
+}

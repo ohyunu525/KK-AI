@@ -1,0 +1,170 @@
+[
+  {
+    "best_structure_epoch": 32,
+    "best_structure_loss": 0.5996894488334655,
+    "best_total_epoch": 32,
+    "best_total_loss": 0.9458713150024414,
+    "elapsed_seconds": 40.76532939996105,
+    "epochs_completed": 52,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_sign_only",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_sign_only__seed41__baseline",
+    "seed": 41,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.0,
+    "variant": "baseline",
+    "weight_decay": 0.0001
+  },
+  {
+    "best_structure_epoch": 33,
+    "best_structure_loss": 0.6158075246810913,
+    "best_total_epoch": 35,
+    "best_total_loss": 0.9634989786148072,
+    "elapsed_seconds": 43.62092010001652,
+    "epochs_completed": 55,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_sign_only",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_sign_only__seed41__dropout010",
+    "seed": 41,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.1,
+    "variant": "dropout010",
+    "weight_decay": 0.0001
+  },
+  {
+    "best_structure_epoch": 43,
+    "best_structure_loss": 0.594987015247345,
+    "best_total_epoch": 43,
+    "best_total_loss": 0.9418657929897308,
+    "elapsed_seconds": 47.98460849997355,
+    "epochs_completed": 63,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_sign_only",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_sign_only__seed42__baseline",
+    "seed": 42,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.0,
+    "variant": "baseline",
+    "weight_decay": 0.0001
+  },
+  {
+    "best_structure_epoch": 35,
+    "best_structure_loss": 0.597558454990387,
+    "best_total_epoch": 44,
+    "best_total_loss": 0.9401398575305939,
+    "elapsed_seconds": 49.60155270004179,
+    "epochs_completed": 64,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_sign_only",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_sign_only__seed42__dropout010",
+    "seed": 42,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.1,
+    "variant": "dropout010",
+    "weight_decay": 0.0001
+  },
+  {
+    "best_structure_epoch": 38,
+    "best_structure_loss": 0.6105242009162903,
+    "best_total_epoch": 38,
+    "best_total_loss": 0.9600613071918488,
+    "elapsed_seconds": 53.3031203999999,
+    "epochs_completed": 58,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_full_reconstruction",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_full_reconstruction__seed41__baseline",
+    "seed": 41,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.0,
+    "variant": "baseline",
+    "weight_decay": 0.0001
+  },
+  {
+    "best_structure_epoch": 34,
+    "best_structure_loss": 0.6001890206336975,
+    "best_total_epoch": 34,
+    "best_total_loss": 0.9491911022663116,
+    "elapsed_seconds": 49.9664119000081,
+    "epochs_completed": 54,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_full_reconstruction",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_full_reconstruction__seed41__dropout010",
+    "seed": 41,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.1,
+    "variant": "dropout010",
+    "weight_decay": 0.0001
+  },
+  {
+    "best_structure_epoch": 28,
+    "best_structure_loss": 0.6067527198791504,
+    "best_total_epoch": 35,
+    "best_total_loss": 0.9500554325580597,
+    "elapsed_seconds": 51.760772500012536,
+    "epochs_completed": 55,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_full_reconstruction",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_full_reconstruction__seed42__baseline",
+    "seed": 42,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.0,
+    "variant": "baseline",
+    "weight_decay": 0.0001
+  },
+  {
+    "best_structure_epoch": 37,
+    "best_structure_loss": 0.5873950505256653,
+    "best_total_epoch": 37,
+    "best_total_loss": 0.9304454171657562,
+    "elapsed_seconds": 55.2562555000186,
+    "epochs_completed": 57,
+    "fraction": 1.0,
+    "max_epochs": 100,
+    "model": "g05_full_reconstruction",
+    "parameter_count": {
+      "total": 406969,
+      "trainable": 406969
+    },
+    "run_name": "g05_full_reconstruction__seed42__dropout010",
+    "seed": 42,
+    "stop_reason": "early_stopping",
+    "structure_dropout": 0.1,
+    "variant": "dropout010",
+    "weight_decay": 0.0001
+  }
+]
