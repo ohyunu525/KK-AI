@@ -1,0 +1,465 @@
+{
+  "artifacts": {
+    "config": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_results\\seed41_g05_sweep_dropout020\\runs\\g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff\\config.json",
+    "history": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_results\\seed41_g05_sweep_dropout020\\runs\\g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff\\history.json",
+    "latest": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_checkpoints\\seed41_g05_sweep_dropout020\\g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff\\latest.pt",
+    "structure": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_checkpoints\\seed41_g05_sweep_dropout020\\g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff\\best_structure.pt",
+    "total": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_checkpoints\\seed41_g05_sweep_dropout020\\g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff\\best_total.pt"
+  },
+  "charge_count": 5,
+  "completed_at": "2026-08-31T04:18:59.230591+00:00",
+  "configuration": {
+    "charge_count": 5,
+    "model": {
+      "input_policy": {
+        "global_sign": "masked G05 only; odd in V",
+        "magnitude": "G00 + masked even G05 summary",
+        "position": "G00 + masked even G05 summary",
+        "relative_sign": "G00 + masked even G05 summary"
+      },
+      "name": "g05_full_reconstruction",
+      "parameter_count": {
+        "total": 406969,
+        "trainable": 406969
+      },
+      "state_shapes": {
+        "g00_cnn.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            16
+          ]
+        },
+        "g00_cnn.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            16,
+            1,
+            3,
+            3
+          ]
+        },
+        "g00_cnn.3.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            32
+          ]
+        },
+        "g00_cnn.3.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            32,
+            16,
+            3,
+            3
+          ]
+        },
+        "g00_cnn.6.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "g00_cnn.6.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            32,
+            3,
+            3
+          ]
+        },
+        "g00_encoder.1.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            256
+          ]
+        },
+        "g00_encoder.1.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            256,
+            1024
+          ]
+        },
+        "g05_encoder.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            32
+          ]
+        },
+        "g05_encoder.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            32,
+            3
+          ]
+        },
+        "g05_encoder.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            32
+          ]
+        },
+        "g05_encoder.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            32,
+            32
+          ]
+        },
+        "global_sign_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "global_sign_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            96
+          ]
+        },
+        "global_sign_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            1,
+            64
+          ]
+        },
+        "magnitude_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "magnitude_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            256
+          ]
+        },
+        "magnitude_head.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            5
+          ]
+        },
+        "magnitude_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            5,
+            64
+          ]
+        },
+        "position_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            128
+          ]
+        },
+        "position_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            128,
+            256
+          ]
+        },
+        "position_head.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            15
+          ]
+        },
+        "position_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            15,
+            128
+          ]
+        },
+        "relative_sign_head.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            64
+          ]
+        },
+        "relative_sign_head.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            64,
+            256
+          ]
+        },
+        "relative_sign_head.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            5
+          ]
+        },
+        "relative_sign_head.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            5,
+            64
+          ]
+        },
+        "structure_context.0.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            128
+          ]
+        },
+        "structure_context.0.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            128,
+            96
+          ]
+        },
+        "structure_context.2.bias": {
+          "dtype": "torch.float32",
+          "shape": [
+            256
+          ]
+        },
+        "structure_context.2.weight": {
+          "dtype": "torch.float32",
+          "shape": [
+            256,
+            128
+          ]
+        }
+      }
+    },
+    "normalization": {
+      "charge_scale": 0.6794502589494028,
+      "g00_mean": 0.006332700330095314,
+      "g00_std": 0.011903275799601066,
+      "g05_value_scale": 0.07531177929884283,
+      "position_mean": [
+        0.0016500300262123346,
+        -0.0023164229933172464,
+        0.7972654104232788
+      ],
+      "position_std": [
+        0.867354691028595,
+        0.8655665516853333,
+        0.40409448742866516
+      ]
+    },
+    "observation": {
+      "candidate_count": 32,
+      "full_fraction_definition": "all stored candidate sensors, not the full 32x32 field",
+      "g05_count_per_sample": 32,
+      "g05_fraction": 1.0,
+      "selection": "fixed nested sensor prefix"
+    },
+    "protocol_fingerprint": "36b558cd20008a7327a4d38992ee67cad6ef17e0621dd994265441fddb5aa397",
+    "protocol_version": "new-learning10-g05-routing-v1",
+    "split_counts": {
+      "test": 1000,
+      "train": 8000,
+      "validation": 1000
+    },
+    "training": {
+      "batch_size": 128,
+      "checkpoint_selection": {
+        "structure": {
+          "checkpoint_selection": "structure",
+          "global_sign_in_selection_objective": false,
+          "global_sign_metrics_note": "Global-sign and absolute-sign metrics are secondary diagnostics: structure selection does not optimize global-sign performance; training still uses the unchanged total loss.",
+          "primary_metrics": [
+            "position_mae_x",
+            "position_mae_y",
+            "position_mae_z",
+            "mean_position_mae",
+            "mean_position_3d_error",
+            "charge_magnitude_mae",
+            "relative_sign_accuracy",
+            "relative_configuration_accuracy",
+            "pairwise_relative_sign_accuracy"
+          ],
+          "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+          "selection_objective": "validation_loss.structure"
+        },
+        "total": {
+          "checkpoint_selection": "total",
+          "global_sign_in_selection_objective": true,
+          "global_sign_metrics_note": "Total selection includes global-sign loss only with observed G05 and nonzero global-sign weight.",
+          "primary_metrics": [
+            "position_mae_x",
+            "position_mae_y",
+            "position_mae_z",
+            "mean_position_mae",
+            "mean_position_3d_error",
+            "charge_magnitude_mae",
+            "relative_sign_accuracy",
+            "relative_configuration_accuracy",
+            "pairwise_relative_sign_accuracy",
+            "global_sign_accuracy",
+            "global_sign_bce",
+            "absolute_sign_accuracy",
+            "absolute_sign_set_accuracy",
+            "charge_mae",
+            "global_invariant_charge_mae"
+          ],
+          "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+          "selection_objective": "validation_loss.total"
+        }
+      },
+      "learning_rate": 0.001,
+      "loss_weights": {
+        "global_sign": 1.0,
+        "magnitude": 1.0,
+        "position": 1.0,
+        "relative_sign": 1.0
+      },
+      "max_epochs": 150,
+      "optimizer": "AdamW",
+      "regularization": {
+        "early_stopping_min_delta": 0.0,
+        "early_stopping_min_epochs": 0,
+        "early_stopping_patience": 20,
+        "structure_dropout": 0.2
+      },
+      "seed": 41,
+      "weight_decay": 0.0001
+    }
+  },
+  "evaluations": {
+    "structure": {
+      "checkpoint_path": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_checkpoints\\seed41_g05_sweep_dropout020\\g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff\\best_structure.pt",
+      "checkpoint_selection": "structure",
+      "global_sign_in_selection_objective": false,
+      "global_sign_metrics_note": "Global-sign and absolute-sign metrics are secondary diagnostics: structure selection does not optimize global-sign performance; training still uses the unchanged total loss.",
+      "primary_metrics": [
+        "position_mae_x",
+        "position_mae_y",
+        "position_mae_z",
+        "mean_position_mae",
+        "mean_position_3d_error",
+        "charge_magnitude_mae",
+        "relative_sign_accuracy",
+        "relative_configuration_accuracy",
+        "pairwise_relative_sign_accuracy"
+      ],
+      "selected_epoch": 46,
+      "selected_validation_loss": 0.5755271415710449,
+      "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+      "selection_objective": "validation_loss.structure",
+      "test_metrics": {
+        "absolute_sign_accuracy": 0.8749999923706054,
+        "absolute_sign_set_accuracy": 0.831,
+        "charge_mae": 0.2956435890197754,
+        "charge_magnitude_mae": 0.1568609619140625,
+        "global_invariant_charge_mae": 0.19639835357666016,
+        "global_sign_accuracy": 0.861,
+        "global_sign_bce": 0.35038222885131837,
+        "mean_position_3d_error": 0.7121461105346679,
+        "mean_position_mae": 0.34878254318237306,
+        "observations_per_sample": 32.0,
+        "observed_sample_fraction": 1.0,
+        "pairwise_relative_sign_accuracy": 0.9462000198364258,
+        "position_mae_x": 0.4217759475708008,
+        "position_mae_y": 0.4128770408630371,
+        "position_mae_z": 0.21169460105895996,
+        "relative_configuration_accuracy": 0.906,
+        "relative_sign_accuracy": 0.9571999969482422
+      },
+      "validation_losses": {
+        "global_sign": 0.350703661441803,
+        "magnitude": 0.07298920184373855,
+        "position": 0.4353865842819214,
+        "relative_sign": 0.06715135240554809,
+        "structure": 0.5755271415710449,
+        "total": 0.9262308030128479
+      }
+    },
+    "total": {
+      "checkpoint_path": "C:\\Users\\COM\\Documents\\KK-AI\\Modelexperiment11\\fraction_sweep_checkpoints\\seed41_g05_sweep_dropout020\\g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff\\best_total.pt",
+      "checkpoint_selection": "total",
+      "global_sign_in_selection_objective": true,
+      "global_sign_metrics_note": "Total selection includes global-sign loss only with observed G05 and nonzero global-sign weight.",
+      "primary_metrics": [
+        "position_mae_x",
+        "position_mae_y",
+        "position_mae_z",
+        "mean_position_mae",
+        "mean_position_3d_error",
+        "charge_magnitude_mae",
+        "relative_sign_accuracy",
+        "relative_configuration_accuracy",
+        "pairwise_relative_sign_accuracy",
+        "global_sign_accuracy",
+        "global_sign_bce",
+        "absolute_sign_accuracy",
+        "absolute_sign_set_accuracy",
+        "charge_mae",
+        "global_invariant_charge_mae"
+      ],
+      "selected_epoch": 45,
+      "selected_validation_loss": 0.9195337259769439,
+      "selection_note": "One complete epoch state; first epoch wins ties; no component composition",
+      "selection_objective": "validation_loss.total",
+      "test_metrics": {
+        "absolute_sign_accuracy": 0.8748000259399414,
+        "absolute_sign_set_accuracy": 0.833,
+        "charge_mae": 0.2956295738220215,
+        "charge_magnitude_mae": 0.157202787399292,
+        "global_invariant_charge_mae": 0.19536303901672364,
+        "global_sign_accuracy": 0.87,
+        "global_sign_bce": 0.3351615104675293,
+        "mean_position_3d_error": 0.7187159271240234,
+        "mean_position_mae": 0.3519064750671387,
+        "observations_per_sample": 32.0,
+        "observed_sample_fraction": 1.0,
+        "pairwise_relative_sign_accuracy": 0.9483999938964843,
+        "position_mae_x": 0.4206430587768555,
+        "position_mae_y": 0.4236053352355957,
+        "position_mae_z": 0.21147098922729493,
+        "relative_configuration_accuracy": 0.91,
+        "relative_sign_accuracy": 0.9592000122070312
+      },
+      "validation_losses": {
+        "global_sign": 0.3431125099658966,
+        "magnitude": 0.0736674787402153,
+        "position": 0.43699220776557923,
+        "relative_sign": 0.06576152718067169,
+        "structure": 0.5764212160110473,
+        "total": 0.9195337259769439
+      }
+    }
+  },
+  "g05_count_per_sample": 32,
+  "g05_fraction": 1.0,
+  "model_name": "g05_full_reconstruction",
+  "protocol_fingerprint": "36b558cd20008a7327a4d38992ee67cad6ef17e0621dd994265441fddb5aa397",
+  "protocol_version": "new-learning10-g05-routing-v1",
+  "result_schema_version": 2,
+  "run_fingerprint": "bd0d5e9687ff8a0fda63eceae95b3282122a62cc013f58f8afd2077441d741a8",
+  "run_id": "g05_full_reconstruction__g05_100pct__seed_41__bd0d5e9687ff",
+  "seed": 41,
+  "status": "completed",
+  "training_result": {
+    "best_structure_epoch": 46,
+    "best_structure_loss": 0.5755271415710449,
+    "best_total_epoch": 45,
+    "best_total_loss": 0.9195337259769439,
+    "early_stopping": {
+      "bad_epochs": 20,
+      "best_losses": {
+        "structure": 0.5755271415710449,
+        "total": 0.9195337259769439
+      },
+      "epoch": 66,
+      "last_improvement_epoch": 46,
+      "stopped": true
+    },
+    "elapsed_seconds": 48.09250279999105,
+    "epochs_completed": 66,
+    "resumed": false,
+    "stop_reason": "early_stopping"
+  }
+}
