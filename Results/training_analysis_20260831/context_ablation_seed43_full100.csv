@@ -1,0 +1,3 @@
+﻿intervention,mean_position_mae,mean_position_3d_error,charge_magnitude_mae,relative_configuration_accuracy,global_sign_accuracy,charge_mae
+original_full,0.3718314696699381,0.7598246365189553,0.15529882094077765,0.918,0.871,0.2787014518547803
+same_full_weights_context_removed,0.4457691548168659,0.8993930879533291,0.17281320213153958,0.78,0.871,0.3608314185999334
