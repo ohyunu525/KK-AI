@@ -1,0 +1,200 @@
+{
+  "last_completed_run": {
+    "run_id": "g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa",
+    "completed_at": "2026-08-28T08:31:37.042516+00:00",
+    "seed": 43,
+    "g05_fraction": 1.0,
+    "model_name": "g05_full_reconstruction",
+    "training_result": {
+      "best_structure_epoch": 26,
+      "best_structure_loss": 0.5975169048309327,
+      "best_total_epoch": 26,
+      "best_total_loss": 0.9486440725326539,
+      "elapsed_seconds": 285.7434227999911,
+      "epochs_completed": 300,
+      "resumed": false
+    }
+  },
+  "audit": {
+    "completed_runs": 36,
+    "history_epochs": 10800,
+    "csv_metric_checks": 1224,
+    "best_epoch_checks": 72,
+    "checkpoint_files_present": 36,
+    "checkpoint_files_missing": 72,
+    "sign_only_structure_history_identical_across_fractions": {
+      "41": true,
+      "42": true,
+      "43": true
+    },
+    "zero_sensor_ab_histories_and_test_metrics_identical": {
+      "41": true,
+      "42": true,
+      "43": true
+    },
+    "distinct_protocols": 3,
+    "split_indices_identical": true,
+    "normalization_identical": true,
+    "baseline_executable_ast_equal_to_training_version": true,
+    "baseline_training_hashes_match_lf_or_crlf": true,
+    "routing_source_hashes_match_lf_or_crlf": true
+  },
+  "dataset": {
+    "sha256": "12453caa0ec01dff00f6265ffe65724346b8ebd09bedb8c795f3cd6b45b255c4",
+    "matches_seed43": true,
+    "matches_seed41_42_file_hash": false,
+    "all_10000_examples_g00_physics_pass": true,
+    "all_10000_examples_g05_physics_pass": true,
+    "max_absolute_g00_physics_residual": 2.3319259911946943e-07,
+    "max_absolute_g05_physics_residual": 9.455397237401186e-08,
+    "target_duplicate_count": 0,
+    "train_normalization_recomputed_exactly": true,
+    "test_global_positive_fraction": 0.516,
+    "test_relative_negative_count_distribution": {
+      "0": 55,
+      "2": 618,
+      "4": 327
+    },
+    "test_coordinate_ranges": {
+      "x": [
+        -1.4999488592147827,
+        1.4999889135360718
+      ],
+      "y": [
+        -1.4998977184295654,
+        1.4979214668273926
+      ],
+      "z": [
+        0.1009664386510849,
+        1.4996486902236938
+      ]
+    }
+  },
+  "runtime": {
+    "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "device": "cuda"
+  },
+  "reevaluation_max_abs_metric_difference": 0.0,
+  "best_structure_epoch_range": [
+    25,
+    42
+  ],
+  "best_total_epoch_range": [
+    26,
+    48
+  ],
+  "sum_logged_training_elapsed_minutes": 144.47969013666005,
+  "early_stopping_replay": {
+    "10": {
+      "both_bests_preserved_run_count": 36,
+      "total_stop_epochs": 1609,
+      "epoch_reduction_percent": 85.10185185185185,
+      "stop_epoch_min": 36,
+      "stop_epoch_max": 58
+    },
+    "15": {
+      "both_bests_preserved_run_count": 36,
+      "total_stop_epochs": 1789,
+      "epoch_reduction_percent": 83.43518518518519,
+      "stop_epoch_min": 41,
+      "stop_epoch_max": 63
+    },
+    "20": {
+      "both_bests_preserved_run_count": 36,
+      "total_stop_epochs": 1969,
+      "epoch_reduction_percent": 81.76851851851852,
+      "stop_epoch_min": 46,
+      "stop_epoch_max": 68
+    },
+    "30": {
+      "both_bests_preserved_run_count": 36,
+      "total_stop_epochs": 2329,
+      "epoch_reduction_percent": 78.43518518518519,
+      "stop_epoch_min": 56,
+      "stop_epoch_max": 78
+    }
+  },
+  "last_run_history_selected": {
+    "epoch": 26,
+    "train": {
+      "global_sign": 0.3113430233001709,
+      "magnitude": 0.06963429224491119,
+      "position": 0.4087362780570984,
+      "relative_sign": 0.03786148577928543,
+      "structure": 0.5162320566177369,
+      "total": 0.8275750799179078
+    },
+    "validation": {
+      "global_sign": 0.3511271677017212,
+      "magnitude": 0.07336975514888763,
+      "position": 0.4670393805503845,
+      "relative_sign": 0.05710779157280922,
+      "structure": 0.5975169048309327,
+      "total": 0.9486440725326539
+    }
+  },
+  "last_run_history_final": {
+    "epoch": 300,
+    "train": {
+      "global_sign": 0.27821440196037295,
+      "magnitude": 0.021707228779792784,
+      "position": 0.0711808557510376,
+      "relative_sign": 4.4619544485613003e-05,
+      "structure": 0.09293270337581634,
+      "total": 0.3711471053361893
+    },
+    "validation": {
+      "global_sign": 0.33791594982147216,
+      "magnitude": 0.11738427972793579,
+      "position": 0.6513352289199829,
+      "relative_sign": 0.23418973064422607,
+      "structure": 1.0029092330932616,
+      "total": 1.3408251829147337
+    }
+  },
+  "interventions": {
+    "context_to_g00_feature_l2_ratio": {
+      "mean": 0.3510959139764309,
+      "median": 0.2989439517259598,
+      "p90": 0.5631871521472931,
+      "p95": 0.6620127975940704,
+      "max": 1.0799560546875
+    },
+    "max_sign_reversal_residual": {
+      "position": 0.0,
+      "magnitude": 0.0,
+      "relative_sign_logit": 0.0,
+      "global_sign_logit": 0.0
+    },
+    "interventions": [
+      {
+        "intervention": "original_full",
+        "mean_position_mae": 0.3718314696699381,
+        "mean_position_3d_error": 0.7598246365189553,
+        "charge_magnitude_mae": 0.15529882094077765,
+        "relative_configuration_accuracy": 0.918,
+        "global_sign_accuracy": 0.871,
+        "charge_mae": 0.2787014518547803
+      },
+      {
+        "intervention": "same_full_weights_context_removed",
+        "mean_position_mae": 0.4457691548168659,
+        "mean_position_3d_error": 0.8993930879533291,
+        "charge_magnitude_mae": 0.17281320213153958,
+        "relative_configuration_accuracy": 0.78,
+        "global_sign_accuracy": 0.871,
+        "charge_mae": 0.3608314185999334
+      }
+    ],
+    "caution": "Removing context after fitting is a distribution shift, not a retrained ablation."
+  },
+  "scope_limits": [
+    "Seed41 and seed42 checkpoints are not present locally.",
+    "Seed41/42 NPZ file hash differs from seed43; array identity cannot be verified without the old archive.",
+    "Runtime differs across seeds; cross-seed results are descriptive, not one controlled replicated protocol.",
+    "Bootstrap intervals condition on already fitted models; no multiple-comparison adjustment.",
+    "Latest checkpoint evaluation is a post-hoc diagnostic; it does not affect stored model selection."
+  ]
+}

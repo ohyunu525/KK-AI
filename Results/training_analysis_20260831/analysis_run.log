@@ -1,0 +1,255 @@
+Auditing saved records, histories, protocols and CSVs...
+Checking all 10,000 physical examples and split integrity...
+Reevaluating seed43 checkpoints with the original 1,000 test examples...
+Verified selected and latest checkpoints: g05_full_reconstruction__g05_000pct__seed_43__5677a97adc2f
+Verified selected and latest checkpoints: g05_full_reconstruction__g05_010pct__seed_43__b4e053f4082b
+Verified selected and latest checkpoints: g05_full_reconstruction__g05_025pct__seed_43__fe84a1df815e
+Verified selected and latest checkpoints: g05_full_reconstruction__g05_050pct__seed_43__fa2e48ef7502
+Verified selected and latest checkpoints: g05_full_reconstruction__g05_075pct__seed_43__d87f793ac782
+Verified selected and latest checkpoints: g05_full_reconstruction__g05_100pct__seed_43__dbf9e42ecafa
+Verified selected and latest checkpoints: g05_sign_only__g05_000pct__seed_43__e70a7bddfd5e
+Verified selected and latest checkpoints: g05_sign_only__g05_010pct__seed_43__569719e6de6c
+Verified selected and latest checkpoints: g05_sign_only__g05_025pct__seed_43__559b9cd8371e
+Verified selected and latest checkpoints: g05_sign_only__g05_050pct__seed_43__9763f0d66175
+Verified selected and latest checkpoints: g05_sign_only__g05_075pct__seed_43__b85b94b83477
+Verified selected and latest checkpoints: g05_sign_only__g05_100pct__seed_43__7eca43faabbb
+Computing whole-example paired bootstrap, assignment sensitivity and field reconstruction...
+{
+  "audit": {
+    "completed_runs": 36,
+    "history_epochs": 10800,
+    "csv_metric_checks": 1224,
+    "best_epoch_checks": 72,
+    "checkpoint_files_present": 36,
+    "checkpoint_files_missing": 72,
+    "sign_only_structure_history_identical_across_fractions": {
+      "41": true,
+      "42": true,
+      "43": true
+    },
+    "zero_sensor_ab_histories_and_test_metrics_identical": {
+      "41": true,
+      "42": true,
+      "43": true
+    },
+    "distinct_protocols": 3,
+    "split_indices_identical": true,
+    "normalization_identical": true,
+    "baseline_executable_ast_equal_to_training_version": true,
+    "baseline_training_hashes_match_lf_or_crlf": true,
+    "routing_source_hashes_match_lf_or_crlf": true
+  },
+  "maximum_saved_metric_difference": 0.0,
+  "latest_full_diagnostics": {
+    "mean_position_mae": {
+      "mean": 0.3718314696699381,
+      "median": 0.36077289283275604,
+      "p90": 0.5050025820732117,
+      "p95": 0.5557372093200683,
+      "max": 0.8516687154769897
+    },
+    "mean_position_3d_error": {
+      "mean": 0.7598246365189553,
+      "median": 0.740786075592041,
+      "p90": 1.0282438397407532,
+      "p95": 1.1333193182945251,
+      "max": 1.7324291467666626
+    },
+    "charge_magnitude_mae": {
+      "mean": 0.15529882094077765,
+      "median": 0.15416185557842255,
+      "p90": 0.21683661043643954,
+      "p95": 0.23231507018208503,
+      "max": 0.31599265336990356
+    },
+    "charge_mae": {
+      "mean": 0.2787014518547803,
+      "median": 0.16308433562517166,
+      "p90": 0.7788533568382264,
+      "p95": 1.207512259483337,
+      "max": 1.537537693977356
+    },
+    "global_invariant_charge_mae": {
+      "mean": 0.1893420330863446,
+      "median": 0.15805695950984955,
+      "p90": 0.24703837782144555,
+      "p95": 0.5663631051778794,
+      "max": 0.7973811030387878
+    },
+    "global_oracle_charge_mae": {
+      "mean": 0.19719630369357766,
+      "median": 0.15805695950984955,
+      "p90": 0.25022771060466764,
+      "p95": 0.5909435212612152,
+      "max": 1.3121461868286133
+    },
+    "relative_sign_accuracy": {
+      "mean": 0.9632000017464161,
+      "median": 1.0,
+      "p90": 1.0,
+      "p95": 1.0,
+      "max": 1.0
+    },
+    "relative_configuration_accuracy": {
+      "mean": 0.918,
+      "median": 1.0,
+      "p90": 1.0,
+      "p95": 1.0,
+      "max": 1.0
+    },
+    "global_sign_accuracy": {
+      "mean": 0.871,
+      "median": 1.0,
+      "p90": 1.0,
+      "p95": 1.0,
+      "max": 1.0
+    },
+    "absolute_sign_set_accuracy": {
+      "mean": 0.852,
+      "median": 1.0,
+      "p90": 1.0,
+      "p95": 1.0,
+      "max": 1.0
+    },
+    "geometric_relative_sign_accuracy": {
+      "mean": 0.7860000081509352,
+      "median": 1.0,
+      "p90": 1.0,
+      "p95": 1.0,
+      "max": 1.0
+    },
+    "geometric_relative_configuration_accuracy": {
+      "mean": 0.568,
+      "median": 1.0,
+      "p90": 1.0,
+      "p95": 1.0,
+      "max": 1.0
+    },
+    "geometric_mean_position_3d_error": {
+      "mean": 0.7172264913618565,
+      "median": 0.7120428085327148,
+      "p90": 0.9380065560340881,
+      "p95": 1.002943593263626,
+      "max": 1.3819011449813843
+    },
+    "relative_negative_count_accuracy": {
+      "mean": 0.918,
+      "median": 1.0,
+      "p90": 1.0,
+      "p95": 1.0,
+      "max": 1.0
+    },
+    "field_relative_l2": {
+      "mean": 0.4722559806666194,
+      "median": 0.33249333354463956,
+      "p90": 0.9822545590898515,
+      "p95": 1.3619960215762728,
+      "max": 2.6595339137147866
+    },
+    "magnitude_field_relative_l2": {
+      "mean": 0.3661752980584505,
+      "median": 0.3085268188762169,
+      "p90": 0.7047898574796662,
+      "p95": 0.796170854239692,
+      "max": 1.6916956228877524
+    },
+    "g00_relative_l2": {
+      "mean": 0.7537291160572267,
+      "median": 0.5944157143544728,
+      "p90": 0.9970153275766466,
+      "p95": 1.4490647226295603,
+      "max": 34.79052960566919
+    },
+    "per_charge_3d_error": {
+      "mean": 0.7598246229831129,
+      "median": 0.6755717396736145,
+      "p90": 1.3656043529510498,
+      "p95": 1.6037068009376525,
+      "max": 2.533820629119873
+    },
+    "fraction_charges_with_3d_error_below_0p25": 0.086,
+    "fraction_charges_with_3d_error_below_0p50": 0.329,
+    "fraction_all_five_3d_errors_below_0p50": 0.004,
+    "z_nonpositive_fraction": 0.004,
+    "position_outside_generation_support_fraction": 0.041,
+    "charge_magnitude_outside_generation_support_fraction": 0.0012,
+    "global_relative_correctness_counts": {
+      "global_0_relative_0": 63,
+      "global_0_relative_1": 66,
+      "global_1_relative_0": 19,
+      "global_1_relative_1": 852
+    },
+    "global_ece_10_confidence_bins": 0.034682315498590466,
+    "global_brier_score": 0.10081750154495239,
+    "relative_prediction_confidence_mean": 0.9248773455619812,
+    "relative_wrong_prediction_confidence_mean": 0.759361207485199,
+    "relative_configuration_equals_count_correct_for_all_samples": true
+  },
+  "early_stopping": {
+    "10": {
+      "both_bests_preserved_run_count": 36,
+      "total_stop_epochs": 1609,
+      "epoch_reduction_percent": 85.10185185185185,
+      "stop_epoch_min": 36,
+      "stop_epoch_max": 58
+    },
+    "15": {
+      "both_bests_preserved_run_count": 36,
+      "total_stop_epochs": 1789,
+      "epoch_reduction_percent": 83.43518518518519,
+      "stop_epoch_min": 41,
+      "stop_epoch_max": 63
+    },
+    "20": {
+      "both_bests_preserved_run_count": 36,
+      "total_stop_epochs": 1969,
+      "epoch_reduction_percent": 81.76851851851852,
+      "stop_epoch_min": 46,
+      "stop_epoch_max": 68
+    },
+    "30": {
+      "both_bests_preserved_run_count": 36,
+      "total_stop_epochs": 2329,
+      "epoch_reduction_percent": 78.43518518518519,
+      "stop_epoch_min": 56,
+      "stop_epoch_max": 78
+    }
+  },
+  "interventions": {
+    "context_to_g00_feature_l2_ratio": {
+      "mean": 0.3510959139764309,
+      "median": 0.2989439517259598,
+      "p90": 0.5631871521472931,
+      "p95": 0.6620127975940704,
+      "max": 1.0799560546875
+    },
+    "max_sign_reversal_residual": {
+      "position": 0.0,
+      "magnitude": 0.0,
+      "relative_sign_logit": 0.0,
+      "global_sign_logit": 0.0
+    },
+    "interventions": [
+      {
+        "intervention": "original_full",
+        "mean_position_mae": 0.3718314696699381,
+        "mean_position_3d_error": 0.7598246365189553,
+        "charge_magnitude_mae": 0.15529882094077765,
+        "relative_configuration_accuracy": 0.918,
+        "global_sign_accuracy": 0.871,
+        "charge_mae": 0.2787014518547803
+      },
+      {
+        "intervention": "same_full_weights_context_removed",
+        "mean_position_mae": 0.4457691548168659,
+        "mean_position_3d_error": 0.8993930879533291,
+        "charge_magnitude_mae": 0.17281320213153958,
+        "relative_configuration_accuracy": 0.78,
+        "global_sign_accuracy": 0.871,
+        "charge_mae": 0.3608314185999334
+      }
+    ],
+    "caution": "Removing context after fitting is a distribution shift, not a retrained ablation."
+  }
+}
+Analysis files: C:\Users\COM\Documents\GitHub\KK-AI\Results\training_analysis_20260831
