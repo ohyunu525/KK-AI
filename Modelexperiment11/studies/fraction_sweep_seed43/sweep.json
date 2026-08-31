@@ -1,0 +1,105 @@
+{
+  "batch_size": 128,
+  "created_at": "2026-08-31T04:19:34.984404+00:00",
+  "current_container_sha256": "12453caa0ec01dff00f6265ffe65724346b8ebd09bedb8c795f3cd6b45b255c4",
+  "data_array_hashes": {
+    "g00": "de8e4d669800e0a87d825368bffe0ab1f4d669fde7845df66e3a125c0555afd1",
+    "g05": "c9414695c34d262fb78fd3d91c761e069a7b91f449070ee53916242a9a0fa96f",
+    "grid_x": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+    "grid_y": "7d96a903c757ee1150029279bdcbf1818c55d8be8f044a2b32f06a131e5d74d7",
+    "target": "9cdbff9ffc7934e33fbf0c4aee467c9bfe74b9f5f36c09b7d8f41ee0933f0941"
+  },
+  "data_equivalence": "all loaded physics arrays match the frozen Experiment11 array hashes",
+  "early_stopping_patience": 20,
+  "environment_differences": {
+    "cuda": {
+      "parent": "12.6",
+      "sweep": "12.8"
+    },
+    "cudnn": {
+      "parent": 90701,
+      "sweep": 91900
+    },
+    "python": {
+      "parent": "3.12.13",
+      "sweep": "3.14.7"
+    },
+    "torch": {
+      "parent": "2.7.0+cu126",
+      "sweep": "2.11.0+cu128"
+    }
+  },
+  "fingerprint": "b87080c0f0c1498c22e748ca27ca900f9ca26edb95ee249824240a6bde6c0fb0",
+  "fractions": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "json_container_note": "promotion/data byte hashes changed with checkout/container serialization; sealed JSON and loaded arrays were verified",
+  "max_epochs": 150,
+  "missing_parent_binaries": "parent split_indices.npz and checkpoints are Git-ignored and absent; sealed JSON authorities were verified",
+  "models": [
+    "g05_sign_only",
+    "g05_full_reconstruction"
+  ],
+  "parent_environment": {
+    "cublas_workspace_config": ":4096:8",
+    "cuda": "12.6",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn": 90701,
+    "cudnn_allow_tf32": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "deterministic_algorithms": "enabled, warn_only=False",
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 3070",
+    "float32_matmul_precision": "highest",
+    "numpy": "2.5.2",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.12.13",
+    "torch": "2.7.0+cu126",
+    "torch_num_interop_threads": 10,
+    "torch_num_threads": 10
+  },
+  "parent_promotion_fingerprint": "db7789ca6a1cdf367c0800fd4bc0b9ab285368e9a4606b8a8b8d4e9b307be6e6",
+  "parent_selection_fingerprint": "9e8ba01bffb13d118f0c4e3dc5a82f477f590142da4ab06ba3f19c5bbf68e5fd",
+  "parent_study": "C:/Users/COM/Documents/GitHub/KK-AI/Modelexperiment11/studies/main",
+  "parent_study_fingerprint": "6f0e5056295c4d70434b887be1e77170db6849b68ad032878f169a661319e480",
+  "recorded_data_sha256": "f90880bbbcd31c528c0603a2aa8043c0ddea567c393d83fc59ae3afd3ac24863",
+  "schema": "model-experiment11-selected-fraction-sweep-v1",
+  "seeds": [
+    43
+  ],
+  "selected_candidate_id": "dropout020",
+  "selected_hyperparameters": {
+    "id": "dropout020",
+    "learning_rate": 0.001,
+    "structure_dropout": 0.2,
+    "weight_decay": 0.0001
+  },
+  "source_equivalence": "current and frozen Experiment11 sources are identical after CRLF/LF normalization",
+  "split_equivalence": "split seed 42 replay exactly matches the frozen train/validation/test indices",
+  "sweep_environment": {
+    "cublas_workspace_config": ":4096:8",
+    "cuda": "12.8",
+    "cuda_matmul_allow_tf32": false,
+    "cudnn": 91900,
+    "cudnn_allow_tf32": true,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "deterministic_algorithms": "enabled, warn_only=False",
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 3070",
+    "float32_matmul_precision": "highest",
+    "numpy": "2.5.2",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.14.7",
+    "torch": "2.11.0+cu128",
+    "torch_num_interop_threads": 10,
+    "torch_num_threads": 10
+  },
+  "test_policy": "validation-only training; test split is never prepared or evaluated"
+}
